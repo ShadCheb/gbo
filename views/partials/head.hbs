@@ -6,11 +6,18 @@
     <meta name="keywords" content="" />
 	  <meta name="description" content="" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gazoved</title>
-    <link rel="stylesheet" href="style/antd.min.css" />
-    <link rel="stylesheet" href="style/style.css" />
-    <link rel="stylesheet" href="style/main.css" />
+    <title>{{title}}</title>
 
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    {{#if isHome}}
+      <link rel="stylesheet" href="style/lightgallery.min.css" />    
+      <link rel="stylesheet" href="style/main.css" />
+    {{/if}}
+    <link rel="stylesheet" href="style/antd.min.css" />    
+    <link rel="stylesheet" href="style/style.css" />
+    
+
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+    <script src="https://api-maps.yandex.ru/2.1.74/?lang=ru_RU&amp;coordorder=longlat&amp;apikey=8ea707eb-f2a1-47d2-a099-c60dd9f6228c" type="text/javascript"></script>
 </head>
 <body>

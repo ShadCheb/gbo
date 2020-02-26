@@ -1,6 +1,8 @@
 import React from 'react';
 import { Modal } from 'antd';
 
+import InputMask from 'react-input-mask'
+
 
 function ModalRecord(props) {
   const afterClose = () => {
@@ -27,7 +29,8 @@ function ModalRecord(props) {
               <span>Имя</span>
             </label>
             <label class="form__input">
-              <input type="text" name="phone" required />
+              {/* <input type="text" name="phone" required /> */}
+              <InputMask mask="+7 (999) 999-99-999" type="text" name="phone" required />
               <span>Телефон</span>
             </label>
             <label class="input__check license">
@@ -35,6 +38,7 @@ function ModalRecord(props) {
               <span></span>
               <p>Я даю свое согласие на обработку персональных данных</p>
             </label>
+            <input type="hidden" name="_csrf" value={props.csrf} />
             <div class="install__btn">
               <button class="btn-1 btn--blue" 
                 aria-label="Отправить заявку"

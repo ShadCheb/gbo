@@ -1,5 +1,6 @@
 import React from 'react';
 import {Slider} from 'antd';
+import InputMask from 'react-input-mask';
 
 
 function Benefit(props) {
@@ -80,22 +81,30 @@ function Benefit(props) {
         <div class="benefit__body">
           <div class="benefit__input">
             <div class="benefit__slider">
-              <p class="benefit__label">Расход топлива (литров на 100 км)</p>
-              <Slider
-                min={4}
-                max={25}
-                onChange={onSelctConsumption}
-                value={consumption}
-              />
+              <p class="benefit__label">Расход топлива (<span>{consumption}</span> литров на 100 км)</p>
+              <div class="benefit__slider__container">
+                <span>4</span>
+                <Slider
+                  min={4}
+                  max={25}
+                  onChange={onSelctConsumption}
+                  value={consumption}
+                />
+                <span>25</span>
+              </div>
             </div>
             <div class="benefit__slider">
-              <p class="benefit__label">Пробег в год (тыс. км)</p>
-              <Slider
-                min={0}
-                max={150}
-                onChange={onSelctMileage}
-                value={mileage}
-              />
+              <p class="benefit__label">Пробег в год (<span>{mileage}</span> тыс. км)</p>
+              <div class="benefit__slider__container">
+                <p>0</p>
+                <Slider
+                  min={0}
+                  max={150}
+                  onChange={onSelctMileage}
+                  value={mileage}
+                />
+                <p>150</p>
+              </div>
             </div>
             <div class="benefit__checks">
               <p class="benefit__label">Тип бензина</p>
@@ -129,10 +138,16 @@ function Benefit(props) {
           </div>
         </div>
         <div class="benefit__result__btn">
-          <button class="btn-1" 
-            aria-label="Открыть модальное окно"
-            onClick={openModal}
-          >Начать экономить</button>
+          <form class="benefit__btn__form">
+            <label class="form__input">
+              <InputMask mask="+7 (999) 999-99-999" type="text" name="phone" required />
+              <span>Телефон</span>
+            </label>
+            <button class="btn-1" 
+              aria-label="Открыть модальное окно"
+              onClick={openModal}
+            >Начать экономить</button>
+          </form>
         </div>
       </div>
     </section>

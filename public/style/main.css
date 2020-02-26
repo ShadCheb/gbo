@@ -127,7 +127,19 @@
   margin-top: -20px;
 }
 .main__btn {
+  position: relative;
   margin-top: 80px;
+  z-index: 2;
+}
+.main__btn__form {
+  display: flex;
+}
+.main__btn__form > .form__input {
+  margin-bottom: 0;
+}
+.main__btn__form > .btn-1 {
+  padding-left: 0;
+  padding-right: 0;
 }
 .main__img {
   width: 40%;
@@ -239,6 +251,16 @@
   }
   .main__img > img {
     margin-bottom: -40px;
+  }
+  .main__btn__form {
+    flex-direction: column;
+    max-width: 320px;
+  }
+  .main__btn__form > .form__input {
+    margin-bottom: 0;
+  }
+  .main__btn__form > .btn-1 {
+    width: auto;
   }
 }
 @media (max-width: 576px) {
@@ -419,10 +441,21 @@
   padding-right: 20px;
   width: 50%;
 }
+.benefit__btn__form {
+  display: flex;
+  justify-content: center;
+}
+.benefit__btn__form > .form__input {
+  margin-bottom: 0;
+}
+.benefit__btn__form > .btn-1 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
 .benefit__slider {
   position: relative;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 .benefit__slider::after {
   content: '';
@@ -434,13 +467,32 @@
   background-color: #dddedf;
 }
 .benefit__label {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-size: 21px;
   line-height: 1.2em;
   color: #002632;
 }
+.benefit__label > span {
+  color: #00c2ff;
+}
+.ant-slider {
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 100%;
+}
+.ant-tooltip-inner {
+  min-height: 20px;
+}
+.benefit__slider__container {
+  display: flex;
+  align-items: center;
+}
+.benefit__slider__container > p {
+  font-size: 21px;
+  line-height: 1.2em;
+}
 .benefit__checks {
-  padding-top: 30px;
+  padding-top: 15px;
 }
 .benefit__checks__list {
   display: flex;
@@ -494,7 +546,7 @@
 
 .benefit__result-1 {
   position: relative;
-  padding-bottom: 26px;
+  padding-bottom: 10px;
 }
 .benefit__result-1::after {
   content: '';
@@ -520,12 +572,12 @@
   font-size: 42px;
   font-weight: 600;
 }
-.benefit__result-2 {
+/* .benefit__result-2 {
   padding-top: 10px;
-}
+} */
 .benefit__result__name-2 {
   font-size: 62px;
-  line-height: 1.2em;
+  line-height: 1.0em;
   color: #b8e8ff;
 }
 .benefit__result__value-2 {
@@ -538,7 +590,7 @@
   font-weight: 600;
 }
 .benefit__result__btn {
-  margin-top: 90px;
+  margin-top: 50px;
   text-align: center;
 }
 
@@ -577,6 +629,9 @@
   .benefit__label {
     font-size: 18px;
   }
+  .benefit__slider__container > p {
+    font-size: 18px;
+  }
   .benefit__check > p {
     font-size: 18px;
   }
@@ -604,6 +659,12 @@
   }
   .benefit__caption {
     width: 250px;
+  }
+  .benefit__btn__form {
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: column;
+    max-width: 320px;
   }
 }
 @media (max-width: 576px) {
@@ -722,10 +783,6 @@
 }
 .adv-item--reg {
   background: url(../img/icon-advantages/terms-and-conditions.png) no-repeat center;
-  background-size: 100%;
-}
-.adv-item--warranty {
-  background: url(../img/icon-advantages/authentic.png) no-repeat center;
   background-size: 100%;
 }
 .adv-item--install {
@@ -1250,7 +1307,8 @@
     width: 30px;
     height: 30px;
   }
-  .price__body__block .price--close {
+  .price__body__block .price--close,
+  .price__body__block.active .price--close {
     display: none;
   }
 }
@@ -1864,130 +1922,6 @@
 }
 
 
-.text__ul {
-  list-style: none;
-}
-.text__ul > li {
-  position: relative;
-  padding-left: 24px;
-}
-.text__ul > li::before {
-  content: '';
-  position: absolute;
-  top: 14px;
-  left: 6px;
-  width: 12px;
-  height: 1px;
-  background-color: #00c2ff;
-}
-
-
-.form__input {
-  position: relative;
-  display: block;
-  margin-bottom: 35px;
-}
-.form__input span {
-	position: absolute;
-	bottom: 20px;
-	left: 28px;
-	font-size: 20px;
-  line-height: 24px;
-	font-family: 'Futura PT', sans-serif;
-  color: #002632;
-  transition: all .3s ease;
-}
-.form__input > input {
-	padding: 19px 28px;
-	font-size: 20px;
-  line-height: 24px;
-	font-family: 'Futura PT', sans-serif;
-	color: #00c2ff;
-	background-color: rgba(255,255,255,.8);
-	border: 1px solid #193b46;
-  width: calc(100% - 58px);
-  transition: all .3s ease;
-}
-.form__input > input:focus, 
-.form__input > input:valid {
-	outline: 0;
-  border-color: #fff;
-  background-color: #fff;
-  box-shadow: 0 10px 30px 0 rgba(0,194,255,.3);
-}
-.form__input > input:focus ~ span, 
-.form__input > input:valid ~ span {
-  left: 10px;
-	bottom: 68px;
-	color: #00c2ff;
-}
-input::placeholder {
-	font-size: 20px;
-  line-height: 24px;
-	font-family: 'Futura PT', sans-serif;
-	color: #002632;
-}
-
-.license {
-  display: flex;
-  margin-top: -20px;
-  align-items: center;
-  cursor: pointer;
-}
-.license > input {
-  display: none;
-}
-.license > p {
-  margin-left: 10px;
-  font-size: 14px;
-  line-height: 1.15em;
-  font-weight: 300;
-  color: #002632;
-}
-.license > span {
-  border-color: #002632;
-}
-.license > span::after {
-  background-color: #002632;
-}
-.license input:checked~span::after{
-  opacity: 1;
-}
-
-@media (max-width: 1140px) {
-  .license > p {
-    font-weight: 500;
-  }
-}
-@media (max-width: 768px) {
-  .form__input {
-    margin-bottom: 30px; 
-  }
-  .form__input > input {
-    padding: 14px 16px;
-    font-size: 18px;
-    line-height: 22px;
-    width: calc(100% - 34px);
-  }
-  .form__input span {
-    bottom: 14px;
-    left: 16px;
-    font-size: 18px;
-    line-height: 22px;
-  }
-  .form__input > input:focus ~ span, 
-  .form__input > input:valid ~ span {
-    left: 14px;
-    bottom: 54px;
-    font-size: 14px;
-  }
-  .license > p {
-    font-size: 13px;
-    line-height: 1.10em;
-  }
-}
-
-
 .install {
   padding-top: 70px;
   padding-bottom: 70px;
@@ -2521,8 +2455,19 @@ input::placeholder {
 
 
 .map__body {
-  height: 600px;
+  margin-top: 200px;
+  height: 560px;
   background-color: #dddedf;
+}
+.map__body {
+  position: relative;
+}
+.map__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 .map__body .container {
   position: relative;
@@ -2530,14 +2475,15 @@ input::placeholder {
 }
 .map__label {
   position: absolute;
-  top: 50%;
+  top: -200px;
   right: 20px;
-  padding: 60px 50px;
+  padding: 40px 40px;
   color: #00c2ff;
   background-color: #fff;
   width: 50%;
-  transform: translateY(-50%);
   box-shadow: 7px 7px 40px 0 rgba(28, 28, 28, .2);
+  opacity: .7;
+  z-index: 1;
 }
 .map__label__phone {
   margin-bottom: 30px;
@@ -2650,5 +2596,6 @@ input::placeholder {
     height: 30px;
   }
 }
+
 
 

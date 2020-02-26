@@ -7,11 +7,46 @@ import Benefit from './components/Benefit';
 import Question from './components/Question';
 import Price from './components/Price';
 import ModalRecord from './components/ModalRecord';
+import Footer from './components/Footer';
+
+import { LightgalleryProvider, LightgalleryItem } from 'react-lightgallery';
+import InputMask from 'react-input-mask';
 
 
+const container = document.getElementById('page-main');
+const csrf = container.dataset.csrf;
+const city = container.dataset.city;
+
+const certificates1 = [
+  'img/certificates/certif_1.jpg',
+  'img/certificates/certif_2.jpg',
+  'img/certificates/certif_3.jpg',
+];
+const certificates2 = [
+  'img/certificates/certif_4_1.jpg',
+  'img/certificates/certif_4_2.jpg',
+];
+
+const PhotoItem = ({image, group, id}) => {
+  if (id === 0)
+    return (
+      <LightgalleryItem group={group} src={image}>
+        <button class="btn-1 btn--blue">Просмотреть</button>
+      </LightgalleryItem>
+    );
+  else
+    return (
+      <div>
+        <LightgalleryItem group={group} src={image} />
+      </div>
+    ); 
+};
 
 class Main extends Component {
   state = {
+    csrf,
+    cityData: null,
+
     benefit: {
       consumption: 10,
       mileage: 30,
@@ -22,13 +57,17 @@ class Main extends Component {
     activeCity: {
       id: 0,
       name: 'Чебоксары',
-      addresses: ['ул. Лесная, д.3 (Лакреевский лес)'],
+      addresses: ['ул. Лесная, д.3 (Лакреевский лес)', 'ул. Пристанционная, 3'],
+      coords: [[47.253127, 56.117577]],
       social: {
         vk: 'vklink',
         instagram: 'instagramlink',
         youtube: ''
       },
-      time: 'с 09:00 до 18:00',
+      time: {
+        from: '09:00',
+        before: '19:00',
+      },
       phone: {
         kod: '+7(8352)',
         number: '70-91-44',
@@ -39,29 +78,36 @@ class Main extends Component {
       {
         id: 0,
         name: 'Чебоксары',
-        addresses: ['ул. Лесная, д.3 (Лакреевский лес)'],
+        brief: 'cheboksary'
       },
       {
         id: 1,
         name: 'Казань',
-        addresses: ['ул. Лесная, д.3 (Лакреевский лес)']
+        brief: 'kazan'
       },
       {
         id: 2,
         name: 'Йошкар-ола',
-        addresses: ['ул. Лесная, д.3 (Лакреевский лес)']
+        brief: 'yoshkar-ola'
       },
       {
         id: 3,
         name: 'Нижний Новгорд',
-        addresses: ['ул. Лесная, д.3 (Лакреевский лес)']
+        brief: 'nizhny-novgorod'
       }
+    ],
+
+    certificates: [
+      certificates1,
+      certificates2
     ],
 
     modalRecord: {
       visible: false,
       title: 'Форма'
-    }
+    },
+
+    map: null
   };
 
   componentWillMount = () => {
@@ -69,6 +115,23 @@ class Main extends Component {
 
     benefit.petrol = this.state.benefit.petrolList[0];
     this.setState({benefit});
+
+    this.state.cityList.some(c => {
+      if (c.brief == city){
+        let activeCity = this.state.activeCity;
+
+        activeCity.id = c.id;
+        activeCity.name = c.name;
+
+        this.setState({activeCity});
+
+        return true;
+      }
+    });
+  }
+
+  componentDidMount = () => {
+    ymaps.ready(this.initMap);
   }
 
   changeDatabenefit = (data) => {
@@ -81,11 +144,21 @@ class Main extends Component {
   }
 
   // Меняем город в шапке
-  handleChange(value) {
-    console.log('Перезагрузка страницы на новый город');
+  handleChange = (value) => {
+    let brief = '';
+
+    this.state.cityList.some(c => {
+      if (c.id == value){
+        brief = c.brief;
+
+        return true;
+      }
+    });
+
+    location.href = '/?city=' + brief;
   }
 
-  openModalRecord(e) {
+  openModalRecord = (e) => {
     let target = e.target;
     let title = target.closest('button').textContent;
     let modalRecord = {
@@ -96,13 +169,90 @@ class Main extends Component {
     this.setState({modalRecord});
   }
 
-  closeModalRecord() {
+  closeModalRecord = () => {
     let modalRecord = {
       visible: false,
       title: 'Форма'
     };
 
     this.setState({modalRecord});
+  }
+
+  /*Отправка сообщений*/
+  sendRequest = (e) => {
+    let data = {}; // Данные для отправки
+    let form = e.target;
+    let csrf = '';
+
+    console.log(form);
+
+    let inputList = form.querySelectorAll('input, textarea');
+
+    console.log('input ', inputList);
+
+    for(let item in inputList) {
+      console.log();
+    }
+    if (!csrf) {
+      console.log('csrf error');
+    }
+
+    fetch('/card/remove/' + id, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        'X-XSRF_TOKEN': csrf
+      },
+      body: JSON.stringify(data)
+    }).then(response  => response .json())
+      .then(result => {
+        console.log(result);
+      })
+  }
+
+  /*
+  // string | number | integer | date | regexp | boolean
+  requirementType: 'string',
+
+  // validateString | validateDate | validateMultiple
+  validateString: function (value, requirement) {
+      let regexp = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+      
+      return  regexp.test(value) 
+  },
+
+  messages: {
+      ru: 'ÐÐµÐ²ÐµÑ€Ð½Ñ‹Ð¹ Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚ Ð½Ð¾Ð¼ÐµÑ€Ð°',
+      en: 'Invalid number format'
+  } */
+
+  /*
+   * рендер карты
+  */
+  initMap = () => {
+    let points = this.state.activeCity.coords;
+    let map = new ymaps.Map('map', {
+      center: points[0],
+      zoom: 15,
+      controls: ['zoomControl']
+    });
+
+    points.forEach(function(p) {
+      // balloonContentHeader: row.name,
+      // balloonContent: row.address,
+      // balloonContentFooter: row.text
+      let placemark = new ymaps.Placemark(p, {
+        preset: 'islands#blueDotIcon',
+        iconColor: '#00c2ff'
+      });
+
+      map.geoObjects.add(placemark);
+    });
+    
+    if (points.length > 1)
+      map.setBounds(map.geoObjects.getBounds());
+
+    this.setState({map});
   }
 
 
@@ -119,8 +269,9 @@ class Main extends Component {
               activeCity={this.state.activeCity}
               handleChange={this.handleChange}
             />
-
-            <Nav />
+            <Nav 
+              social={this.state.activeCity.social}
+            />
 
             <div class="main__body">
               <p class="main__bcg">Gazoved</p>
@@ -133,9 +284,17 @@ class Main extends Component {
                   <h2 class="main__caption-under">в Чебоксарах<span></span></h2>
                 </div>  
                 <div class="main__btn">
-                  <button class="btn-1" 
-                    aria-label="Узнать цену"
-                    onClick={this.openModalRecord.bind(this)}>Узнать цену</button>
+                  <form class="main__btn__form">
+                    <label class="form__input">
+                      <InputMask mask="+7 (999) 999-99-999" type="text" name="phone" required />
+                      <span>Телефон</span>
+                    </label>
+                    <button 
+                      type=""
+                      class="btn-1" 
+                      aria-label="Узнать цену"
+                    >Узнать цену</button>
+                  </form>
                 </div>
               </div>
               <div class="main__img">
@@ -174,14 +333,6 @@ class Main extends Component {
                   </div>
                 </div>
                 <div class="advantages__item">
-                  <div class="advantages__item__img adv-item--bonus"></div>
-                  <div class="advantages__item__text">
-                    <h2 class="caption__h2">Бонусные карты</h2>
-                    <p>Бонусные карты предоставляются для АЗС наших партнеров. Скидки до 
-                      5 % на газовое топливо</p>
-                  </div>
-                </div>
-                <div class="advantages__item">
                   <div class="advantages__item__img adv-item--reg"></div>
                   <div class="advantages__item__text">
                     <h2 class="caption__h2">Регистрация</h2>
@@ -189,26 +340,24 @@ class Main extends Component {
                   </div>
                 </div>
                 <div class="advantages__item">
-                  <div class="advantages__item__img adv-item--warranty"></div>
+                  <div class="advantages__item__img adv-item--bonus"></div>
                   <div class="advantages__item__text">
-                    <h2 class="caption__h2">Гарантия</h2>
-                    <p>Гарантия на оборудование от 1 года до 5 лет в зависимости 
-                      от выбранного вами комплекта</p>
+                    <h2 class="caption__h2">Электронный мультиклапан</h2>
+                    <p>Последнее поколение клапана с двойной защитой от утечки газа</p>
                   </div>
                 </div>
                 <div class="advantages__item">
                   <div class="advantages__item__img adv-item--install"></div>
                   <div class="advantages__item__text">
-                    <h2 class="caption__h2">Быстрая установка</h2>
-                    <p>Надежная установка ГБО за 1 день в день обращения</p>
+                    <h2 class="caption__h2">Фильтр Ultra 360</h2>
+                    <p>В комплект входит фильтр ultra 360</p>
                   </div>
                 </div>
                 <div class="advantages__item">
                   <div class="advantages__item__img adv-item--program"></div>
                   <div class="advantages__item__text">
-                    <h2 class="caption__h2">Бонусные программы</h2>
-                    <p>Даем вам возможность заработать вместе с нами. Подробнее у наших 
-                      менеджеров</p>
+                    <h2 class="caption__h2">Неубиваемые форсунки</h2>
+                    <p>Устанавливаем неубиваемые форсунки</p>
                   </div>
                 </div>
               </div>
@@ -252,50 +401,66 @@ class Main extends Component {
             <div class="caption__container">
               <h2 class="caption__section">Сертификаты</h2>
             </div>
-            <div class="certificates__body">
-              <div class="certificates__bcg bcg--2" />
-              <div class="certificates__text">
-                <h2 class="caption__h2">Сертифицированные мастера</h2>
-                <p class="text__p">	Более 1 000 установленных систем ГБО на автомобили 
-                  в регионах: Чебоксары, Йошкар-Ола и Казань. Наши мастера прошли обучении 
-                  в учебных центрах Digitronic, OMVL и в компании «мир газа». Обратитесь 
-                  к нам, даже если у вас автомобиль редкой марки – в компании работают 
-                  мастера с опытом от 5 лет, прошедшие курсы повешения квалификации!
-                </p>
-                <div class="certificates__btn">
-                  <button class="btn-1 btn--blue">Просмотреть</button>
+            <LightgalleryProvider>
+              <div class="certificates__body">
+                <div class="certificates__bcg bcg--2" />
+                <div class="certificates__text">
+                  <h2 class="caption__h2">Сертифицированные мастера</h2>
+                  <p class="text__p">	Более 1 000 установленных систем ГБО на автомобили 
+                    в регионах: Чебоксары, Йошкар-Ола и Казань. Наши мастера прошли обучении 
+                    в учебных центрах Digitronic, OMVL и в компании «мир газа». Обратитесь 
+                    к нам, даже если у вас автомобиль редкой марки – в компании работают 
+                    мастера с опытом от 5 лет, прошедшие курсы повешения квалификации!
+                  </p>
+                  <div class="certificates__btn">
+                    { this.state.certificates[0].map((img, idx) => (
+                      <PhotoItem 
+                        image={img} 
+                        group="group1" 
+                        id={idx} 
+                        key={idx}
+                      />
+                    )) }
+                  </div>
+                </div>
+                <div class="certificates__img certificates__bcg--1">
+                  <img src="img/certificates-1.png" alt="Сертифицированные мастера" />
                 </div>
               </div>
-              <div class="certificates__img certificates__bcg--1">
-                <img src="img/certificates-1.png" alt="Сертифицированные мастера" />
-              </div>
-            </div>
-            <div class="certificates__body">
-              <div class="certificates__img certificates__bcg--2">
-                <img src="img/certificates-2.png" alt="Сертифицированный сервис" />
-              </div>
-              <div class="certificates__text">
-                <h2 class="caption__h2">Сертифицированный сервис</h2>
-                <p class="text__p">У нас сертифицированная станция по установке ГБО. Все 
-                  документы, все экспертизы на газовое оборудование вы получаете в одном 
-                  месте, у нас в автосервисе.
-                </p>
-                <p class="text__p">Наш центр установки ГБО - аккредитованный партнер 
-                  "ГАЗПРОМ-газомоторное топливо" У нас вы можете официально установить газобаллонное 
-                  оборудование пропан и метан, на легковые и грузовые автомобили и на разные типы 
-                  двигателя и системы впрыска (на дизель, инжектор, моновпрыск, непосредственный 
-                  прямой впрыск, распределенный впрыск, двигатели tsi, fsi и др.).
-                </p>
-                <p class="text__p">GAZOVED - официальный дилер ГБО BRC (БРС), LOVATO (ЛОВАТО), 
-                  ZAVOLI (ЗАВОЛИ), DIGITRONIC (ДИДЖИТРОНИК), OMVL (ОМВЛ) в Чебоксарах, Йошкар-Оле 
-                  и Казани. Посмотрите сертификаты и ознакомьтесь с отзывами тех, кто поставил газ 
-                  в машину у нас.
-                </p>
-                <div class="certificates__btn">
-                  <button class="btn-1 btn--blue">Просмотреть</button>
+              <div class="certificates__body">
+                <div class="certificates__img certificates__bcg--2">
+                  <img src="img/certificates-2.png" alt="Сертифицированный сервис" />
+                </div>
+                <div class="certificates__text">
+                  <h2 class="caption__h2">Сертифицированный сервис</h2>
+                  <p class="text__p">У нас сертифицированная станция по установке ГБО. Все 
+                    документы, все экспертизы на газовое оборудование вы получаете в одном 
+                    месте, у нас в автосервисе.
+                  </p>
+                  <p class="text__p">Наш центр установки ГБО - аккредитованный партнер 
+                    "ГАЗПРОМ-газомоторное топливо" У нас вы можете официально установить газобаллонное 
+                    оборудование пропан и метан, на легковые и грузовые автомобили и на разные типы 
+                    двигателя и системы впрыска (на дизель, инжектор, моновпрыск, непосредственный 
+                    прямой впрыск, распределенный впрыск, двигатели tsi, fsi и др.).
+                  </p>
+                  <p class="text__p">GAZOVED - официальный дилер ГБО BRC (БРС), LOVATO (ЛОВАТО), 
+                    ZAVOLI (ЗАВОЛИ), DIGITRONIC (ДИДЖИТРОНИК), OMVL (ОМВЛ) в Чебоксарах, Йошкар-Оле 
+                    и Казани. Посмотрите сертификаты и ознакомьтесь с отзывами тех, кто поставил газ 
+                    в машину у нас.
+                  </p>
+                  <div class="certificates__btn">
+                  { this.state.certificates[1].map((img, idx) => (
+                      <PhotoItem 
+                        image={img} 
+                        group="group2" 
+                        id={idx} 
+                        key={idx}
+                      />
+                    )) }
+                  </div>
                 </div>
               </div>
-            </div>
+            </LightgalleryProvider>
           </div>
         </section>
 
@@ -424,7 +589,7 @@ class Main extends Component {
                     <span>Имя</span>
                   </label>
                   <label class="form__input">
-                    <input type="text" name="phone" required />
+                    <InputMask mask="+7 (999) 999-99-999" type="text" name="phone" required />
                     <span>Телефон</span>
                   </label>
                   <label class="input__check license">
@@ -432,6 +597,7 @@ class Main extends Component {
                     <span></span>
                     <p>Я даю свое согласие на обработку персональных данных</p>
                   </label>
+                  <input type="hidden" name="_csrf" value={csrf} />
                   <div class="install__btn">
                     <button class="btn-1 btn--blue" 
                       aria-label="Отправить заявку"
@@ -461,7 +627,8 @@ class Main extends Component {
                     <span>Имя</span>
                   </label>
                   <label class="form__input">
-                    <input type="text" name="phone" required />
+                    {/* <input type="text" name="phone" required /> */}
+                    <InputMask mask="+7 (999) 999-99-999" type="text" name="phone" required />
                     <span>Телефон</span>
                   </label>
                   <label class="input__check license">
@@ -469,6 +636,7 @@ class Main extends Component {
                     <span></span>
                     <p>Я даю свое согласие на обработку персональных данных</p>
                   </label>
+                  <input type="hidden" name="_csrf" value={csrf} />
                   <div class="gibdd__btn">
                     <button class="btn-1 btn--blue" 
                       aria-label="Отправить заявку"
@@ -498,98 +666,47 @@ class Main extends Component {
 
         <section class="map">
           <div class="map__body">
-            {/* <!--Карта--> */}
             <div class="container">
               <div class="map__label">
                 <div class="map__label__phone">
-                  <a href="tel:+78352709144">+7(8352) <strong>70-91-44</strong></a>
+                  <a 
+                    href={'tel:' + this.state.activeCity.phone.link}
+                  >{this.state.activeCity.phone.kod}<strong>{this.state.activeCity.phone.number}</strong></a>
                 </div>
                 <div class="map__label__address">
-                  <strong>г. Чебоксары,</strong> ул. Лесная, д.3 (Лакреевский лес)
+                  <strong>г. {this.state.activeCity.name},</strong> 
+                  {
+                    this.state.activeCity.addresses.map(a => {
+                      return (<p>{a}</p>);
+                    })
+                  }
                 </div>
                 <div class="map__label__social">
-                  <a class="map__icon map--vk" href="" target="_blank">
+                  <a class="map__icon map--vk" 
+                    href={this.state.activeCity.social.vk} target="_blank">
                     <svg>
                       <use xlinkHref="img/sprite-icon.svg#icon-vk"/>
                     </svg>VK</a>
-                  <a class="map__icon map--inst" href="" target="_blank">
+                  <a class="map__icon map--inst" 
+                    href={this.state.activeCity.social.instagram} target="_blank">
                     <svg>
                       <use xlinkHref="img/sprite-icon.svg#icon-inst" />
                     </svg>Instagram</a>
                 </div>
               </div>
             </div>
+            <div class="map__container" id="map"></div>
           </div>
         </section>
 
-        <footer class="footer">
-          <div class="container">
-            <div class="footer__body">
-              <div class="footer__col">
-                <div class="footer__logo">
-                  <a href="" class="footer__logo__link">
-                    <img src="img/logo-white.png" alt="Gazoved" />
-                  </a>
-                  <p class="footer__logo__text">Качественная и надежная установка ГБО с Газовед</p>
-                </div>
-                <div class="footer__contact">
-                  <p><a href={'tel:' + this.state.activeCity.phone.link} class="footer__contact__phone">
-                    {this.state.activeCity.phone.kod} <strong>{this.state.activeCity.phone.number}</strong></a></p>
-                  <p class="footer__contact__address">г. {this.state.activeCity.name}, {this.state.activeCity.addresses.join('; ')}</p>
-                </div>
-              </div>
-              <div class="footer__col foter__space">
-                <div class="footer__pay">
-                  <a href="" class="footer__pay__type"><img src="img/visa-mk-1.png" alt="Visa MasterCard" /></a>
-                  <button class="btn-1 btn--white">Оплата онлайн</button>
-                </div>
-                <div class="footer__social">
-                  <a class="footer__icon map--vk" href={this.state.activeCity.social.vk} target="_blank">
-                    <svg>
-                      <use xlinkHref="img/sprite-icon.svg#icon-vk" />
-                    </svg>VK</a>
-                  <a class="footer__icon map--inst" href={this.state.activeCity.social.instagram} target="_blank">
-                    <svg>
-                      <use xlinkHref="img/sprite-icon.svg#icon-inst" />
-                    </svg>Instagram</a>
-                </div>
-              </div>
-            </div>
-            <div class="footer__copy">© Газовед | 2018</div>
-          </div>
-        </footer>
-
-        {/* <section class="modal modal__call">
-            <div class="modal__content">
-                <div class="modal__header">
-                  <h4 class="modal__caption">Организовать питание</h4>
-                  <button class="modal__close"><span></span><span></span></button>
-                </div>
-                <p class="modal__p">Заплните форму и наш сотрудник свяжется с вами:</p>
-                <form class="form modal__form">
-                  <label class="form__input">
-                    <input type="text" name="name" required />
-                    <span>Имя</span>
-                  </label>
-                  <label class="form__input">
-                    <input type="text" name="phone" required />
-                    <span>Телефон</span>
-                  </label>
-                  <label class="input__check license">
-                    <input type="checkbox" data-valid="check" class="input__required" />
-                    <span></span>
-                    <p>Я даю свое согласие на обработку персональных данных</p>
-                  </label>
-                  <div class="modal__btn">
-                      <button class="btn-1">Отправить</button>
-                  </div>
-                </form>
-            </div>
-        </section> */}
+        <Footer 
+          activeCity={this.state.activeCity}          
+        />
 
         <ModalRecord 
           data={this.state.modalRecord}
           close={this.closeModalRecord.bind(this)}
+          csrf={csrf}
         />
 
         <button class="btn-menu">

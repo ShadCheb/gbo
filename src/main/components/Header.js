@@ -5,6 +5,7 @@ const { Option } = Select;
 
 function Header(props) {
   let phone = props.activeCity.phone;
+  let time = props.activeCity.time;
 
   const handleChange = value => {
     props.handleChange(value);
@@ -25,12 +26,20 @@ function Header(props) {
             {props.city.map((city) => {
               return <Option key={city.id} value={city.id}>{city.name}</Option>
             })}
-          </Select><span>{props.activeCity.addresses.join('; ')}</span></div>
+          </Select>
+          <div>
+            {
+              props.activeCity.addresses.map(a => {
+                return (<p>{a}</p>);
+              })
+            }
+          </div>          
+        </div>
       </div>
       <div class="header__right">
           <a class="header__phone" href={'tel:' + phone.link}>
             {phone.kod} <strong>{phone.number}</strong></a>
-        <p class="header__clock">{props.activeCity.time}</p>
+        <p class="header__clock">с {time.from} до {time.before}</p>
       </div>
     </header>
   );
