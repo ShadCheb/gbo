@@ -3,7 +3,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session')
 const csrf = require('csurf');
-const sequelize = require('./utils/database');
+// const sequelize = require('./utils/database');
 
 const varMiddleware = require('./middleware/variables');
 const error404 = require('./middleware/404');
@@ -44,7 +44,7 @@ app.use(error404);
 
 async function start() {
   try {
-    await sequelize.sync();
+    // await sequelize.sync();
     app.listen(PORT, () => {
       console.log(`Server is running in port ${PORT}`);
     });
