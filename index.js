@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session')
-const csrf = require('csurf');
+// const csrf = require('csurf');
 // const sequelize = require('./utils/database');
 
 const varMiddleware = require('./middleware/variables');
@@ -36,7 +36,7 @@ app.use(session({
   saveUninitialized: false,
 }));
 app.use(fileMiddleware.single('employee'));
-app.use(csrf());
+// app.use(csrf());
 app.use(varMiddleware);
 
 app.use('/', mainRoutes);

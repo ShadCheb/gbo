@@ -12,6 +12,8 @@ const Employee = require('../models/employee');
 const User = require('../models/user');
 const auth = require('../middleware/auth');
 
+var fs = require("fs");
+
 const Api = require('../models/apifile');
 
 router.post('/api/test', async(req, res) => {
@@ -37,6 +39,14 @@ router.put('/api/test', async(req, res) => {
   } catch (e) {
     res.status(500).json({error: 'Произошла ошибка' + e});
   }
+});
+
+
+router.get('/test', async(req, res) => {
+  // res.render('../test/index');
+  const index = fs.readFileSync('./test/index.html');
+
+  res.end(index);
 });
 
 
