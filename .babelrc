@@ -1,7 +1,18 @@
 {
   "plugins": [
-    ["import", { "libraryName": "antd" , "libraryDirectory": "es" }], //, "style": "css" }] // `style: true` for less
-    "@babel/plugin-proposal-class-properties"
+    ["import", { "libraryName": "antd" , "libraryDirectory": "es"}], // "style": "css" }], // `style: true` for less
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-syntax-dynamic-import",
+    ["@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
   ],
   "presets": ["@babel/preset-env", "@babel/preset-react"]
+  // "presets": [["@babel/preset-env", {
+  //     "useBuiltIns": "entry",
+  //     "modules": false
+  // }], 
+  // "@babel/preset-react"]
 }

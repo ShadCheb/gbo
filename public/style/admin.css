@@ -1,0 +1,127 @@
+p {
+  margin: 0;
+}
+.a-container {
+  padding: 50px 40px;
+  margin: 40px auto;
+  max-width: 1140px;
+  min-width: 1040px;
+  border-radius: 4px;
+  box-shadow: 0 0 40px 0 rgba(24,144,255,.2);
+  overflow: auto;
+}
+.a-header {
+  display: flex;
+  padding-bottom: 24px;
+  align-items: center;
+  border-bottom: 1px solid rgba(24,144,255,.2);
+}
+.a-header__add-btn {
+  margin-left: 20px;
+}
+.a-body {
+  display: flex;
+  padding-top: 24px;
+}
+.a-body__left {
+  padding-right: 20px;
+  width: 200px;
+  min-width: 200px;
+  border-right: 1px solid rgba(24,144,255,.2);
+}
+.a-body__left > button {
+  margin-bottom: 5px;
+}
+.a-body__left button:last-child {
+  margin-bottom: 0;
+}
+.a-body__right {
+  padding-left: 20px;
+  flex-grow: 1;
+}
+.a-header__p {
+  margin-right: 10px;
+}
+
+.a-row {
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  align-items: center;
+}
+.a-row--border {
+  border-bottom: 1px solid #d9d9d9;
+}
+.a-row--border:last-child {
+  border-bottom: none;
+}
+.a-col__1 {
+  width: 25%;
+  min-width: 25%;
+  text-align: right;
+}
+.a-col__1 > p,
+.a-col__2 > p {
+  margin: 0 10px;
+}
+.a-col__2 {
+  width: 58.33%;
+  min-width: 58.33%;
+}
+.a-modal__map {
+  padding-top: 10px;
+  height: 300px;
+  width: 100%;
+}
+.a-modal__address .ant-form-item-control {
+  width: 100%;
+}
+.text__p--blue {
+  color: #1890ff;
+}
+.a-row button {
+  margin-right: 10px;
+}
+.a-btn {
+  margin-top: 10px;
+}
+
+.a-card__employee {
+  display: flex;
+  align-items: flex-start;
+}
+.a-card__employee__img {
+  max-width: 120px;
+  max-height: 200px;
+}
+.a-card__employee__img > img {
+  width: 100%;  
+}
+.a-card__employee__text {
+  margin-left: 10px;
+}
+.text__p--2 {
+  margin-top: 10px;
+  font-size: .8rem;
+  line-height: 1.2em;
+}
+.text__p--3 {
+  font-size: .8rem;
+  line-height: 1.2em;
+  color: #c6c6c6;
+}
+
+.a-form__label {
+  margin-bottom: 5px;
+}
+.a-form__label-name {
+  display: inline-block;
+  width: 100%;
+}
+.a-form__required {
+  display: inline-block;
+  height: 14px;
+  width: 100%;
+  color: red;
+  opacity: 0;
+}

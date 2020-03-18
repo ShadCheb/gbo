@@ -12,16 +12,16 @@ function Header(props) {
   }
 
   return (
-    <header class="header">
-      <div class="header__left">
-        <div class="header__logo">
-          <a href="/" class="header__logo__link">
+    <header className="header">
+      <div className="header__left">
+        <div className="header__logo">
+          <a href="/" className="header__logo__link">
             <img src="img/logo-blue.png" alt="Gazoved" />
           </a>
           <p><span>установка</span> газоболонного оборудования</p>
         </div>
         
-        <div class="header__select">
+        <div className="header__select">
           <Select defaultValue={props.activeCity.id} style={{width: 200}} onChange={handleChange}>
             {props.city.map((city) => {
               return <Option key={city.id} value={city.id}>{city.name}</Option>
@@ -29,17 +29,17 @@ function Header(props) {
           </Select>
           <div>
             {
-              props.activeCity.addresses.map(a => {
-                return (<p>{a}</p>);
+              props.activeCity.addresses.map((a, idx) => {
+                return (<p key={idx}>{a}</p>);
               })
             }
           </div>          
         </div>
       </div>
-      <div class="header__right">
-          <a class="header__phone" href={'tel:' + phone.link}>
+      <div className="header__right">
+          <a className="header__phone" href={'tel:' + phone.link}>
             {phone.kod} <strong>{phone.number}</strong></a>
-        <p class="header__clock">с {time.from} до {time.before}</p>
+        <p className="header__clock">с {time.from} до {time.before}</p>
       </div>
     </header>
   );

@@ -1,10 +1,17 @@
 
 const path = require('path');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
+// const TerserJsPlugin = require('terser-webpack-plugin');
+// const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: {
     main: './src/main/main.js',
+    auth: './src/auth/auth.js',
+    admin: './src/admin/admin.js',
   },
   output: {
     filename: '[name].js',    
@@ -14,7 +21,7 @@ module.exports = {
     rules: [
       {
           test: /\.js$/,
-          loader: 'babel-loader'
+          loader: 'babel-loader',
       },
       {
           test: /\.css$/,
@@ -32,10 +39,15 @@ module.exports = {
     dns: 'empty',
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    // new HardSourceWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    // new HtmlWebpackPlugin({
+    //   title: 'Development',
+    // }),
+    // new CleanWebpackPlugin(),
   ],
   devServer: {
     hot: true,
     historyApiFallback: true
-  }
+  },
 };

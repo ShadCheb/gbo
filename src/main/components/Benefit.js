@@ -72,17 +72,17 @@ function Benefit(props) {
 
 
   return(
-    <section class="benefit">
-      <div class="container">
-        <div class="benefit__bcg bcg--1"></div>
-        <div class="caption__container">
-          <h2 class="caption__section benefit__caption">Рассчитай <strong>свою выгоду</strong></h2>
+    <section className="benefit">
+      <div className="container">
+        <div className="benefit__bcg bcg--1"></div>
+        <div className="caption__container">
+          <h2 className="caption__section benefit__caption">Рассчитай <strong>свою выгоду</strong></h2>
         </div>
-        <div class="benefit__body">
-          <div class="benefit__input">
-            <div class="benefit__slider">
-              <p class="benefit__label">Расход топлива (<span>{consumption}</span> литров на 100 км)</p>
-              <div class="benefit__slider__container">
+        <div className="benefit__body">
+          <div className="benefit__input">
+            <div className="benefit__slider">
+              <p className="benefit__label">Расход топлива (<span>{consumption}</span> литров на 100 км)</p>
+              <div className="benefit__slider__container">
                 <span>4</span>
                 <Slider
                   min={4}
@@ -93,9 +93,9 @@ function Benefit(props) {
                 <span>25</span>
               </div>
             </div>
-            <div class="benefit__slider">
-              <p class="benefit__label">Пробег в год (<span>{mileage}</span> тыс. км)</p>
-              <div class="benefit__slider__container">
+            <div className="benefit__slider">
+              <p className="benefit__label">Пробег в год (<span>{mileage}</span> тыс. км)</p>
+              <div className="benefit__slider__container">
                 <p>0</p>
                 <Slider
                   min={0}
@@ -106,15 +106,15 @@ function Benefit(props) {
                 <p>150</p>
               </div>
             </div>
-            <div class="benefit__checks">
-              <p class="benefit__label">Тип бензина</p>
-              <div class="benefit__checks__list">
-                <label class="input__check benefit__check" onClick={onSelctPetrol}>
+            <div className="benefit__checks">
+              <p className="benefit__label">Тип бензина</p>
+              <div className="benefit__checks__list">
+                <label className="input__check benefit__check" onClick={onSelctPetrol}>
                   <p>АИ-92</p><input type="radio" name="check" value={petrolList[0]}
                     checked={petrol==petrolList[0]} />
                   <span />
                 </label>
-                <label class="input__check benefit__check" onClick={onSelctPetrol}>
+                <label className="input__check benefit__check" onClick={onSelctPetrol}>
                   <p>АИ-95</p><input type="radio" name="check" value={petrolList[1]} 
                     checked={petrol==petrolList[1]} />
                   <span />
@@ -122,28 +122,29 @@ function Benefit(props) {
               </div>
             </div>
           </div>
-          <div class="benefit__result">
-            <div class="benefit__result-1">
-              <p class="benefit__result__name-1">Расход на бензине</p>
-              <p class="benefit__result__value-1"><span>{benefit.petrol}</span> руб/год</p>
+          <div className="benefit__result">
+            <div className="benefit__result-1">
+              <p className="benefit__result__name-1">Расход на бензине</p>
+              <p className="benefit__result__value-1"><span>{benefit.petrol}</span> руб/год</p>
             </div>
-            <div class="benefit__result-1">
-              <p class="benefit__result__name-1">Расход на газу</p>
-              <p class="benefit__result__value-1"><span>{benefit.gas}</span> руб/год</p>
+            <div className="benefit__result-1">
+              <p className="benefit__result__name-1">Расход на газу</p>
+              <p className="benefit__result__value-1"><span>{benefit.gas}</span> руб/год</p>
             </div>
-            <div class="benefit__result-2">
-              <p class="benefit__result__name-2">Экономия</p>
-              <p class="benefit__result__value-2"><span>{benefit.result}</span> руб/год</p>
+            <div className="benefit__result-2">
+              <p className="benefit__result__name-2">Экономия</p>
+              <p className="benefit__result__value-2"><span>{benefit.result}</span> руб/год</p>
             </div>
           </div>
         </div>
-        <div class="benefit__result__btn">
-          <form class="benefit__btn__form">
-            <label class="form__input">
+        <div className="benefit__result__btn">
+          <form className="benefit__btn__form">
+            <label className="form__input">
               <InputMask mask="+7 (999) 999-99-999" type="text" name="phone" required />
               <span>Телефон</span>
             </label>
-            <button class="btn-1" 
+            <input type="hidden" name="_csrf" value={props.csrf} />
+            <button className="btn-1" 
               aria-label="Открыть модальное окно"
               onClick={openModal}
             >Начать экономить</button>

@@ -6,6 +6,9 @@ const PASSWORD = 'yd4D59sp!W';
 const sequelize = new Sequelize(DB_NAME, USER_NAME, PASSWORD, {
   host: 'localhost',
   dialect: 'postgres',
+  define: {
+    freezeTableName: true,
+  }
 });
 
 module.exports = sequelize;

@@ -8,12 +8,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
 
+    <link rel="stylesheet" href="style/antd.min.css" />
     {{#if isHome}}
       <link rel="stylesheet" href="style/lightgallery.min.css" />    
       <link rel="stylesheet" href="style/main.css" />
+    {{!-- {{else if isAuth}} --}}
+      
     {{/if}}
-    <link rel="stylesheet" href="style/antd.min.css" />    
-    <link rel="stylesheet" href="style/style.css" />
+
+    {{#if isAuth}}
+      <link rel="stylesheet" href="style/auth.css" />
+    {{else if isAdmin}}
+      <link rel="stylesheet" href="style/admin.css" />
+    {{else}}
+      <link rel="stylesheet" href="style/style.css" />  
+    {{/if}}
     
 
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
