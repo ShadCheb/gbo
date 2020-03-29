@@ -1,6 +1,7 @@
 const {Router} = require('express');
 const router = Router();
 const nodemailer = require('nodemailer');
+const fs = require("fs");
 
 const CityList = require('../models/cityList');
 
@@ -20,36 +21,8 @@ const transporter = nodemailer.createTransport({
 
 const auth = require('../middleware/auth');
 
-var fs = require("fs");
-
-const Api = require('../models/apifile');
-
-router.post('/api/test', async(req, res) => {
-  try {
-    const result = await Api.read();
-
-    res.status(201).json({result});
-  } catch (e) {
-    res.status(500).json({error: 'Произошла ошибка' + e});
-  }
-});
-
-router.put('/api/test', async(req, res) => {
-  try {
-    let data = req.body;
-    const api = new Api(data);
-
-    await api.save(data);
-
-    res.status(201).json({});
-  } catch (e) {
-    res.status(500).json({error: 'Произошла ошибка' + e});
-  }
-});
-
 
 router.get('/test', async(req, res) => {
-  // res.render('../test/index');
   const index = fs.readFileSync('./test/index.html');
 
   res.end(index);

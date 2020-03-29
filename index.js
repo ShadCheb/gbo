@@ -13,6 +13,7 @@ const keys = require('./keys');
 const mainRoutes = require('./routes/main');
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
+const testRoutes = require('./routes/test');
 
 const PORT = 3000;
 
@@ -31,6 +32,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images', express.static(path.join(__dirname, 'images')))
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+
+// Для теста (времено)
+app.use('/', testRoutes);
 
 app.use(session({
   secret: keys.SESSION_SECRET,
