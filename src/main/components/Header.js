@@ -22,9 +22,9 @@ function Header(props) {
         </div>
         
         <div className="header__select">
-          <Select defaultValue={props.activeCity.id} style={{width: 200}} onChange={handleChange}>
+          <Select defaultValue={props.activeCity.name} style={{width: 200}} onChange={handleChange}>
             {props.city.map((city) => {
-              return <Option key={city.id} value={city.id}>{city.name}</Option>
+              return <Option key={city.id} value={city.name}>{city.name}</Option>
             })}
           </Select>
           <div>

@@ -7,6 +7,7 @@ const Social = require('./social');
 const Time = require('./time');
 const Phone = require('./phone');
 const Employee = require('./employee');
+const Equipment = require('./equipment');
 
 const City = sequelize.define('city', {
   id: {
@@ -31,6 +32,7 @@ CityList.hasOne(Social, { onDelete: "cascade" });
 CityList.hasOne(Time, { onDelete: "cascade" });
 CityList.hasOne(Phone, { onDelete: "cascade" });
 CityList.hasMany(Employee, { onDelete: "cascade" });
+CityList.hasMany(Equipment, { onDelete: "cascade" });
 
 
 module.exports = City;

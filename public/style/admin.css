@@ -125,3 +125,31 @@ p {
   color: red;
   opacity: 0;
 }
+
+.a-form__editor {
+  position: relative;
+  padding: 4px 40px 4px 11px;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+}
+.a-form__editor:focus {
+  border-color: #40a9ff;
+}
+.a-form__editor__toolbar {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+}
+.a-form__editor__toolbar > a {
+  margin-bottom: 4px;
+  width: 30px;
+  background-color: #d9d9d9;
+  border-radius: 2px;
+}
+.a-form__editor__toolbar > a:last-child {
+  margin-bottom: 4px;
+}

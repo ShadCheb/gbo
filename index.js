@@ -2,8 +2,8 @@ const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session')
-// const csrf = require('csurf');
-// const sequelize = require('./utils/database');
+const csrf = require('csurf');
+const sequelize = require('./utils/database');
 
 const varMiddleware = require('./middleware/variables');
 const error404 = require('./middleware/404');
@@ -11,6 +11,8 @@ const fileMiddleware = require('./middleware/file');
 const keys = require('./keys');
 
 const mainRoutes = require('./routes/main');
+const authRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/admin');
 
 const PORT = 3000;
 
@@ -36,15 +38,17 @@ app.use(session({
   saveUninitialized: false,
 }));
 app.use(fileMiddleware.single('employee'));
-// app.use(csrf());
+app.use(csrf());
 app.use(varMiddleware);
 
 app.use('/', mainRoutes);
+app.use('/auth', authRoutes);
+app.use('/admin', adminRoutes);
 app.use(error404);
 
 async function start() {
   try {
-    // await sequelize.sync();
+    await sequelize.sync();
     app.listen(PORT, () => {
       console.log(`Server is running in port ${PORT}`);
     });

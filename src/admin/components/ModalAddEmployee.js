@@ -7,19 +7,6 @@ import { InboxOutlined } from '@ant-design/icons';
 const { Dragger } = Upload;
 
 
-// class ModalAddEmployee extends Component {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     name: '',
-  //     post: '',
-  //     experience: '',
-  //     fileList: [],
-  //     uploading: false,
-  //   }
-  // }
-
 function ModalAddEmployee({
   csrf, data, handlerChangesData, cancelAddEmployee, 
   changeValue, visibleAddEmployee
@@ -96,9 +83,6 @@ function ModalAddEmployee({
 
     changeValue({[target.name]: target.value});
   }
-
-  
-  // const { uploading, fileList } = this.state;
 
   return (
     <Modal

@@ -20,6 +20,9 @@ function Benefit(props) {
     gas: 21
   };
 
+  if (!nextProps.petrol)
+    nextProps.petrol = petrolList[0];
+
   priceFuel[petrolList[0]] = 42;
   priceFuel[petrolList[1]] = 45;
 

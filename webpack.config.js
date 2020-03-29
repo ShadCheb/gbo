@@ -7,7 +7,7 @@ const webpack = require('webpack');
 // const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  // mode: 'development',
   entry: {
     main: './src/main/main.js',
     auth: './src/auth/auth.js',

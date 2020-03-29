@@ -14,7 +14,6 @@ import InputMask from 'react-input-mask';
 
 
 const container = document.getElementById('page-main');
-console.log(container);
 const csrf = container.dataset.csrf;
 const city = container.dataset.city;
 let cityList = container.dataset.city_list;
@@ -56,7 +55,7 @@ class Main extends Component {
       consumption: 10,
       mileage: 30,
       petrolList: ['ai92', 'ai95'],
-      petrol: null
+      petrol: 'ai92'
     },
 
     activeCity: {

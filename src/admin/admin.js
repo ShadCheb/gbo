@@ -8,6 +8,7 @@ import Social from './components/Social';
 import Time from './components/Time';
 import Phone from './components/Phone';
 import Employee from './components/Employee';
+import Equipment from './components/Equipment';
 
 import { 
   Button, 
@@ -45,6 +46,10 @@ const typeList = [
   {
     brief: 'employee',
     name: 'Сотрудники'
+  },
+  {
+    brief: 'equipment',
+    name: 'Оборудование'
   }
 ];
 
@@ -136,6 +141,16 @@ function BodyList({component, csrf, data, handlerChangesData}) {
       return (<Employee 
         csrf={csrf}
         data={dataEmployee}
+        handlerChangesData={handlerChangesData}
+      />);
+    case typeList[6].brief: // 'equipment'
+      let dataEquipment = data.equipment || {equipment: null};
+    
+      dataEquipment['cityListId'] = data.id;
+
+      return (<Equipment
+        csrf={csrf}
+        data={dataEquipment}
         handlerChangesData={handlerChangesData}
       />);
 

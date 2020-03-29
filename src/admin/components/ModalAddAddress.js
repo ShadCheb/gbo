@@ -22,19 +22,19 @@ function ModalAddAddress({
   changeValue, visibleAddAddress
 }) {
 
-  error = (msg) => {
+  const error = (msg) => {
     message.error(msg);
   };
-  success = (msg) => {
+  const success = (msg) => {
     message.success(msg);
   };
 
-  cancelAddAddress = () => {
+  const cancelAddress = () => {
     map.geoObjects.remove(placemark);
     cancelAddAddress();
   }
 
-  onOk = async() => {
+  const onOk = async() => {
     fetch('/admin/address', {
       method: 'post',
       headers: {
@@ -57,10 +57,10 @@ function ModalAddAddress({
         if (e.error)
           handlerChangesData(e.error);
       });
-    cancelAddAddress();
+    cancelAddress();
   }
 
-  setPoint = (c) => {
+  const setPoint = (c) => {
     let plcmark;
 
     if (!plcmark) {
@@ -97,12 +97,11 @@ function ModalAddAddress({
     });
   }
 
-  changeAddress = (value) => {
+  const changeAddress = (value) => {
     changeValue({nameAddress: value}, 'data');
     // this.setState({nameAddress: value});
   }
   
-
   
   return (
     <Modal
@@ -110,7 +109,7 @@ function ModalAddAddress({
       title={(data.coords) ? 'Редактировать адрес' : 'Добавить адрес'}
       okText="Сохранить"
       cancelText="Отмена"
-      onCancel={cancelAddAddress}
+      onCancel={cancelAddress}
       onOk={onOk}
     >
       <div className="a-modal__address">

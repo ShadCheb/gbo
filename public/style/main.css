@@ -781,7 +781,7 @@
   background-size: 100%;
 }
 .adv-item--bonus {
-  background: url(../img/icon-advantages/gift-card.png) no-repeat center;
+  background: url(../img/icon-advantages/cyber-security.png) no-repeat center;
   background-size: 100%;
 }
 .adv-item--reg {
@@ -789,11 +789,11 @@
   background-size: 100%;
 }
 .adv-item--install {
-  background: url(../img/icon-advantages/business-hours.png) no-repeat center;
+  background: url(../img/icon-advantages/hepa-filter.png) no-repeat center;
   background-size: 100%;
 }
 .adv-item--program {
-  background: url(../img/icon-advantages/business-and-finance.png) no-repeat center;
+  background: url(../img/icon-advantages/water.png) no-repeat center;
   background-size: 100%;
 }
 .advantages__item__img::after {
@@ -1934,10 +1934,22 @@
   right: -100px;
 }
 .install__body {
+  position: relative;
   display: flex;
   margin-left: auto;
   margin-right: auto;
   width: 80%;
+}
+.install__body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../img/install-bcg.jpg) no-repeat center;
+  background-size: 100% 100%;
+  z-index: -1;
 }
 .install__img {
   display: flex;
@@ -2202,10 +2214,22 @@
   left: -80px;
 }
 .gibdd__body {
+  position: relative;
   display: flex;
   margin-left: auto;
   margin-right: auto;
   width: 80%;
+}
+.gibdd__body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../img/install-bcg.jpg) no-repeat center;
+  background-size: 100% 100%;
+  z-index: -1;
 }
 .gibdd__img {
   display: flex;
