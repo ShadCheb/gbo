@@ -82,13 +82,16 @@ class Time extends Component {
   }
 
   render() {
+    let from = this.props.data.from;
+    let before = this.props.data.before;
+
     return (
       <section className="a-section__timer">
         <div className="a-row">
           <div className="a-col__1"><p>С:</p></div>
           <div className="a-col__2" id="a-timer__from">
             <TimePicker 
-              defaultValue={moment(this.props.data.from, this.state.format)}
+              defaultValue={from && moment(from, this.state.format)}
               format={this.state.format}
               minuteStep={10}
               onChange={this.onChangeFrom}
@@ -99,8 +102,9 @@ class Time extends Component {
         <div className="a-row">
           <div className="a-col__1"><p>До:</p></div>
           <div className="a-col__2" id="a-timer__before">
+            {/* 'HH:mm:ss' */}
             <TimePicker 
-              defaultValue={moment(this.props.data.before, 'HH:mm:ss')}
+              defaultValue={before && moment(before, this.state.format)}
               format={this.state.format}
               minuteStep={10}
               onChange={this.onChangeBefore}

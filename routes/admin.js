@@ -17,9 +17,6 @@ router.get('/', auth, async(req, res) => {
   try {
     const cityList = await CityList.findAll({raw:true});
 
-    // if (res.locals.isAuth)
-    //   delete res.locals.isAuth;
-
     res.render('admin', {
       isAdmin: true,
       page: 'isAdmin',
@@ -42,17 +39,17 @@ router.post('/', auth, async(req, res) => {
       {
         where: {brief: city},
         include: [
-          { model: City },  
+          { model: City },
           {
             model: Address,
             as: 'addresses'
           },
-          { model: Social }, 
-          { model: Time }, 
+          { model: Social },
+          { model: Time },
           { model: Phone },
         ]
       }
-    )
+    );
 
     if (!result)
       res.status(203).json({error: 'Город не найден'});
@@ -208,11 +205,9 @@ router.delete('/address/:id', auth, async(req, res) => {
       where: {id}
     });
 
-    console.log('result ', result);
     await result.destroy();
     res.status(204).json({});
   } catch (e) {
-    console.log('Error! ', e);
     res.status(500).json({error: 'Произошла ошибка' + e});
   }
 });
@@ -374,7 +369,6 @@ router.post('/employee/get', auth, async(req, res) => {
 });
 
 router.post('/employee', auth, async(req, res) => {
-  let {originalname} = req.file;
   let data = req.body;
 
   if (data.id) {
@@ -383,14 +377,14 @@ router.post('/employee', auth, async(req, res) => {
         name: data.name,
         post: data.post,
         experience: data.experience,
-        avatar: originalname
+        avatar: data.avatar
       },
       {
         where: {id: data.id}
       })
         .then(async () => {
-          const result = await Employee.findOne({
-            where: {id: data.id},
+          const result = await Employee.findAll({
+            cityListId: data.city_list_id
           });
 
           res.status(201).json({result});
@@ -405,16 +399,34 @@ router.post('/employee', auth, async(req, res) => {
         name: data.name,
         post: data.post,
         experience: data.experience,
-        avatar: originalname,
+        avatar: data.avatar,
         cityListId: data.city_list_id
       })
-        .then(async (result) => {
-          res.status(201).json({result: result.dataValues});
+        .then(async (data) => {
+          const result = await Employee.findAll({
+            cityListId: data.city_list_id
+          });
+
+          res.status(201).json({result});
         });
     } catch (e) {
       console.log('Error! ', e);
       res.status(500).json({error: 'Произошла ошибка' + e});
     }
+  }
+});
+
+router.delete('/employee/:id', auth, async(req, res) => {
+  try {
+    const id = +req.params.id;
+    const result = await Employee.findOne({
+      where: {id}
+    });
+
+    await result.destroy();
+    res.status(204).json({});
+  } catch (e) {
+    res.status(500).json({error: 'Произошла ошибка' + e});
   }
 });
 
@@ -441,16 +453,17 @@ router.post('/equipment', auth, async(req, res) => {
 
   if (data.id) {
     try {
-      Employee.update({
+      Equipment.update({
         name: data.name,
-        description: data.description
+        description: data.description,
+        cylinder: data.cylinder
       },
       {
         where: {id: data.id}
       })
         .then(async () => {
-          const result = await Equipment.findOne({
-            where: {id: data.id},
+          const result = await Equipment.findAll({
+            cityListId: data.city_list_id
           });
 
           res.status(201).json({result});
@@ -464,15 +477,34 @@ router.post('/equipment', auth, async(req, res) => {
       Equipment.create({
         name: data.name,
         description: data.description,
+        cylinder: data.cylinder,
         cityListId: data.city_list_id
       })
-        .then(async (result) => {
-          res.status(201).json({result: result.dataValues});
+        .then(async (data) => {
+          const result = await Equipment.findAll({
+            cityListId: data.city_list_id
+          });
+
+          res.status(201).json({result});
         });
     } catch (e) {
       console.log('Error! ', e);
       res.status(500).json({error: 'Произошла ошибка' + e});
     }
+  }
+});
+
+router.delete('/equipment/:id', auth, async(req, res) => {
+  try {
+    const id = +req.params.id;
+    const result = await Equipment.findOne({
+      where: {id}
+    });
+
+    await result.destroy();
+    res.status(204).json({});
+  } catch (e) {
+    res.status(500).json({error: 'Произошла ошибка' + e});
   }
 });
 

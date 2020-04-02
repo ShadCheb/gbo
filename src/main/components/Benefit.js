@@ -114,12 +114,12 @@ function Benefit(props) {
               <div className="benefit__checks__list">
                 <label className="input__check benefit__check" onClick={onSelctPetrol}>
                   <p>АИ-92</p><input type="radio" name="check" value={petrolList[0]}
-                    checked={petrol==petrolList[0]} />
+                    defaultChecked={petrol==petrolList[0]} />
                   <span />
                 </label>
                 <label className="input__check benefit__check" onClick={onSelctPetrol}>
                   <p>АИ-95</p><input type="radio" name="check" value={petrolList[1]} 
-                    checked={petrol==petrolList[1]} />
+                    defaultChecked={petrol==petrolList[1]} />
                   <span />
                 </label>
               </div>
@@ -139,19 +139,6 @@ function Benefit(props) {
               <p className="benefit__result__value-2"><span>{benefit.result}</span> руб/год</p>
             </div>
           </div>
-        </div>
-        <div className="benefit__result__btn">
-          <form className="benefit__btn__form">
-            <label className="form__input">
-              <InputMask mask="+7 (999) 999-99-999" type="text" name="phone" required />
-              <span>Телефон</span>
-            </label>
-            <input type="hidden" name="_csrf" value={props.csrf} />
-            <button className="btn-1" 
-              aria-label="Открыть модальное окно"
-              onClick={openModal}
-            >Начать экономить</button>
-          </form>
         </div>
       </div>
     </section>

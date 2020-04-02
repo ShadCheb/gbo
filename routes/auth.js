@@ -5,7 +5,7 @@ const crypto = require('crypto');
 
 const User = require('../models/user');
 
-router.get('/auth', (req, res) => {
+router.get('/', (req, res) => {
   let key = req.query.key;
 
   if (key !== '112')
@@ -20,7 +20,7 @@ router.get('/auth', (req, res) => {
   })
 });
 
-router.post('/auth', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const {login, password} = req.body;
 

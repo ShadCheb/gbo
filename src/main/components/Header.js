@@ -3,12 +3,12 @@ import { Select } from 'antd';
 
 const { Option } = Select;
 
-function Header(props) {
-  let phone = props.activeCity.phone;
-  let time = props.activeCity.time;
+function Header({activeCity, handleChange, cityList}) {
+  let phone = activeCity.phone;
+  let time = activeCity.time;
 
-  const handleChange = value => {
-    props.handleChange(value);
+  const selectCity = value => {
+    handleChange(value);
   }
 
   return (
@@ -16,30 +16,38 @@ function Header(props) {
       <div className="header__left">
         <div className="header__logo">
           <a href="/" className="header__logo__link">
-            <img src="img/logo-blue.png" alt="Gazoved" />
+            <img src="/img/logo-blue.png" alt="Gazoved" />
           </a>
           <p><span>установка</span> газоболонного оборудования</p>
         </div>
         
         <div className="header__select">
-          <Select defaultValue={props.activeCity.name} style={{width: 200}} onChange={handleChange}>
-            {props.city.map((city) => {
+          <Select defaultValue={activeCity.name} style={{width: 200}} onChange={selectCity}>
+            {cityList.map((city) => {
               return <Option key={city.id} value={city.name}>{city.name}</Option>
             })}
           </Select>
           <div>
             {
-              props.activeCity.addresses.map((a, idx) => {
-                return (<p key={idx}>{a}</p>);
+              activeCity.addresses && activeCity.addresses.map((address, idx) => {
+                return (<p key={idx}>{address.address}</p>);
               })
             }
           </div>          
         </div>
       </div>
       <div className="header__right">
-          <a className="header__phone" href={'tel:' + phone.link}>
-            {phone.kod} <strong>{phone.number}</strong></a>
-        <p className="header__clock">с {time.from} до {time.before}</p>
+        { 
+          (activeCity.phone)
+            ? (<a className="header__phone" href={'tel:' + activeCity.phone.link}>
+                {activeCity.phone.kod} <strong>{activeCity.phone.number}</strong></a>) 
+            : ('')  
+        }
+        {
+          (activeCity.time)
+            ? (<p className="header__clock">с {activeCity.time.from} до {activeCity.time.before}</p>) 
+            : ('')
+        }
       </div>
     </header>
   );

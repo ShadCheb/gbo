@@ -1,0 +1,13 @@
+<div class="body" id="page-service-item" data-csrf="{{csrf}}"  data-info="{{data}}" data-city_list="{{cityList}}">
+
+</div>
+
+{{#if isMetan}}
+  <script src="/metan.js"></script>
+{{else if isRegistration}}
+  <script src="/registration.js"></script>
+{{else if isDizel}}
+  <script src="/dizel.js"></script>
+{{else if isVariator}}
+  <script src="/variator.js"></script>
+{{/if}}

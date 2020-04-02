@@ -134,8 +134,11 @@ function BodyList({component, csrf, data, handlerChangesData}) {
         handlerChangesData={handlerChangesData}
       />);
     case typeList[5].brief: // 'employee'
-      let dataEmployee = data.employee || {employee: null};
-    
+      let dataEmployee = {};
+      
+      dataEmployee['employee'] = (data.employee) 
+        ? data.employee
+        : null;
       dataEmployee['cityListId'] = data.id;
     
       return (<Employee 
@@ -144,7 +147,11 @@ function BodyList({component, csrf, data, handlerChangesData}) {
         handlerChangesData={handlerChangesData}
       />);
     case typeList[6].brief: // 'equipment'
-      let dataEquipment = data.equipment || {equipment: null};
+      let dataEquipment = {};
+      
+      dataEquipment['equipment'] = (data.equipment) 
+        ? data.equipment
+        : null;
     
       dataEquipment['cityListId'] = data.id;
 
@@ -274,8 +281,9 @@ class Admin extends Component {
   }
 
   // Общий обработчик изменений
-  handlerChangesData = (values) => {
-    console.log('?', values);
+  // первый параметр объект обновленных данных(ключ значение), второй - нужно ли показывать уведомление
+  // :todo Нужно переделать на текст сообщения 
+  handlerChangesData = (values, notmessage) => {
     if (values.error) {
       this.error('Произошла ошибка. Попробуйте позже');
 
@@ -284,11 +292,12 @@ class Admin extends Component {
 
     let data = this.state.data;
 
-    this.success('Изменения успешно проведены');
+    if (!notmessage)
+      this.success('Изменения успешно проведены');
+
     for(let key in values) {
       data[key] = values[key];
     }
-    console.log('!', data);
     this.setState({data});
   }
 

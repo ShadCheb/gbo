@@ -12,7 +12,6 @@ class Employee extends Component {
     this.state = {
       visibleAddEmployee: false,
       openEmployeeData: {},
-      emloyeeList: [],
     }
   }
 
@@ -32,8 +31,7 @@ class Employee extends Component {
       })
         .then(res => res.json())
         .then(data => {
-          console.log('data ', data);
-          this.setState({emloyeeList: data.result})
+          this.props.handlerChangesData({employee: data.result}, true);
         })
         .catch(e => {
           if (e.error)
@@ -64,16 +62,30 @@ class Employee extends Component {
   }
 
 
-  openModalAddEmployee = (employee) => {
+  openModalAddEmployee = (employee, idx) => {
+    let openEmployee = {};
+
     if (!employee) {
-      employee = {
+      openEmployee = {
         cityListId: this.props.data.cityListId
       }
+    } else {
+      openEmployee = Object.assign({}, employee);
+      openEmployee['idx'] = idx;
+    }
+
+    if (openEmployee.avatar && !openEmployee['fileList']) {
+      openEmployee['fileList'] = [{
+        uid: '-1',
+        name: openEmployee.avatar,
+        status: 'done',
+        url: openEmployee.avatar,
+      }]; 
     }
 
     this.setState(() => {
       return ({
-        openEmployeeData: employee,
+        openEmployeeData: openEmployee,
         visibleAddEmployee: true
       });
     });
@@ -93,14 +105,14 @@ class Employee extends Component {
   }
 
   render() {
-    let {emloyeeList} = this.state;
+    let emloyeeList = this.props.data.employee || [];
     
     return (
       <section>
-        {emloyeeList.map((empl, idx) => {
-          return (
-            <div key={idx}>
-              <div className="a-row a-row--border">
+        <div>
+          {emloyeeList.map((empl, idx) => {
+            return (
+              <div className="a-row a-row--border" key={idx}>
                 <div className="a-col__1"><p>Сотрудник {idx + 1}:</p></div>
                 <div className="a-col__2">
                   <div className="a-card__employee">
@@ -116,7 +128,7 @@ class Employee extends Component {
                 </div>
                 <Button 
                   type="primary"
-                  onClick={this.openModalAddEmployee.bind(this, empl)}
+                  onClick={this.openModalAddEmployee.bind(this, empl, idx)}
                   icon={<FormOutlined />}
                 />
                 <Popconfirm title="Удалить?" 
@@ -131,9 +143,9 @@ class Employee extends Component {
                   />
                 </Popconfirm>  
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
         <div className="a-btn">
           <Button 
             type="primary"
@@ -149,6 +161,7 @@ class Employee extends Component {
           handlerChangesData={this.props.handlerChangesData}
           changeValue={this.changeValue}
         />
+        {/* changeEmployee={this.changeEmployee} */}
       </section>
     );
   }

@@ -6,6 +6,8 @@ import Nav from './components/Nav';
 import Benefit from './components/Benefit';
 import Question from './components/Question';
 import Price from './components/Price';
+import Employee from './components/Employee';
+import Map from './components/Map';
 import ModalRecord from './components/ModalRecord';
 import Footer from './components/Footer';
 
@@ -15,10 +17,9 @@ import InputMask from 'react-input-mask';
 
 const container = document.getElementById('page-main');
 const csrf = container.dataset.csrf;
-const city = container.dataset.city;
-let cityList = container.dataset.city_list;
+const infoCity = JSON.parse(container.dataset.info);
+const cityList = JSON.parse(container.dataset.city_list);
 
-cityList = JSON.parse(cityList);
 
 const certificates1 = [
   'img/certificates/certif_1.jpg',
@@ -58,49 +59,8 @@ class Main extends Component {
       petrol: 'ai92'
     },
 
-    activeCity: {
-      id: 0,
-      name: 'Чебоксары',
-      addresses: ['ул. Лесная, д.3 (Лакреевский лес)', 'ул. Пристанционная, 3'],
-      coords: [[47.253127, 56.117577]],
-      social: {
-        vk: 'vklink',
-        instagram: 'instagramlink',
-        youtube: ''
-      },
-      time: {
-        from: '09:00',
-        before: '19:00',
-      },
-      phone: {
-        kod: '+7(8352)',
-        number: '70-91-44',
-        link: '+78352709144'
-      },
-    },
-    cityList, 
-    // [
-    //   {
-    //     id: 0,
-    //     name: 'Чебоксары',
-    //     brief: 'cheboksary'
-    //   },
-    //   {
-    //     id: 1,
-    //     name: 'Казань',
-    //     brief: 'kazan'
-    //   },
-    //   {
-    //     id: 2,
-    //     name: 'Йошкар-ола',
-    //     brief: 'yoshkar-ola'
-    //   },
-    //   {
-    //     id: 3,
-    //     name: 'Нижний Новгорд',
-    //     brief: 'nizhny-novgorod'
-    //   }
-    // ],
+    cityList, // Список городов
+    infoCity, // информация про выбранный город
 
     certificates: [
       certificates1,
@@ -112,34 +72,21 @@ class Main extends Component {
       title: 'Форма'
     },
 
+    showMenu: false, // открытие меню
+
     map: null
   };
 
   componentDidMount = () => {
+    ymaps.ready(this.initMap);
+
     let benefit = this.state.benefit;
 
     benefit.petrol = this.state.benefit.petrolList[0];
     this.setState({benefit});
 
-    this.state.cityList.some(c => {
-      if (c.brief == city) {
-        let activeCity = this.state.activeCity;
-
-        activeCity.id = c.id;
-        activeCity.name = c.name;
-
-        this.setState({activeCity});
-
-        return true;
-      }
-    });
-
     if (!this.state.cityList.length)
       this.setState({data: false});
-  }
-
-  componentDidMount = () => {
-    ymaps.ready(this.initMap);
   }
 
   changeDatabenefit = (data) => {
@@ -241,21 +188,47 @@ class Main extends Component {
    * рендер карты
   */
   initMap = () => {
-    let points = this.state.activeCity.coords;
+    let {infoCity} = this.state;
+
+    if (!document.querySelector('#map') || !infoCity.addresses)
+      return;
+
+    let points = infoCity.addresses.map(address => (
+      {
+        coord: JSON.parse(address.coords),
+        address: address.address
+      }
+    ));
+
+    if (!points.length)
+      return;
+
     let map = new ymaps.Map('map', {
-      center: points[0],
+      center: points[0].coord,
       zoom: 17,
       controls: ['zoomControl']
     });
 
     points.forEach(function(p) {
-      // balloonContentHeader: row.name,
-      // balloonContent: row.address,
-      // balloonContentFooter: row.text
-      let placemark = new ymaps.Placemark(p, {
-        preset: 'islands#blueDotIcon',
-        iconColor: '#00c2ff'
-      });
+      let polygonLayout = ymaps.templateLayoutFactory.createClass(
+        `<div class="placemark__layout"><p>${p.address}</p></div>`
+      );
+      let placemark = new ymaps.Placemark(p.coord, {
+        hintContent: p.address
+      }, {
+          iconLayout: polygonLayout,
+          iconShape: {   
+              type: 'Polygon',
+              coordinates: [
+                [[0,0],[-6,-15],[-16,-15],[-16,-30],[140,-30],[140,-15],[6,-15]]
+              ]
+          }
+        }
+      );
+      // let placemark = new ymaps.Placemark(p, {
+      //   preset: 'islands#blueDotIcon',
+      //   iconColor: '#00c2ff'
+      // });
 
       map.geoObjects.add(placemark);
     });
@@ -266,8 +239,16 @@ class Main extends Component {
     this.setState({map});
   }
 
+  // Открытие/закрытие меню
+  toggleMenu = () => {
+    this.setState(function(prevValue) {
+      return ({showMenu: !prevValue.showMenu});
+    });
+  }
 
   render() {
+    let {infoCity} = this.state;
+
     if (this.state.data)
       return (
         <div>
@@ -277,12 +258,14 @@ class Main extends Component {
               <div className="container">
                 
                 <Header 
-                  city={this.state.cityList}
-                  activeCity={this.state.activeCity}
+                  cityList={this.state.cityList}
+                  activeCity={infoCity}
                   handleChange={this.handleChange}
                 />
                 <Nav 
-                  social={this.state.activeCity.social}
+                  showMenu={this.state.showMenu}
+                  social={infoCity.social}
+                  closeMenu={this.toggleMenu}
                 />
 
                 <div className="main__body">
@@ -292,9 +275,15 @@ class Main extends Component {
                       <span className="main__caption--first">Установка</span>
                       <span className="main__caption--last">и регистрация ГБО</span>
                     </h1>
-                    <div>
-                      <h2 className="main__caption-under">в Чебоксарах<span></span></h2>
-                    </div>  
+                    {
+                      (infoCity.city)
+                        ? (
+                            <div>
+                              <h2 className="main__caption-under">в {infoCity.city.name2 || 'городе N'}<span></span></h2>
+                            </div>
+                          ) 
+                        : ('')
+                    }
                     <div className="main__btn">
                       <form className="main__btn__form">
                         <label className="form__input">
@@ -310,7 +299,7 @@ class Main extends Component {
                     </div>
                   </div>
                   <div className="main__img">
-                    <img src="img/main-1.png" alt="" />
+                    <img src="/img/main-1.png" alt="" />
                   </div>
                 </div>
               </div>
@@ -334,7 +323,7 @@ class Main extends Component {
                       <span></span>
                       <span></span>
                     </div>
-                    <img src="img/advantages-1.png" alt="" />
+                    <img src="/img/advantages-1.png" alt="" />
                   </div>
                   <div className="advantages__list">
                     <div className="advantages__item">
@@ -342,7 +331,7 @@ class Main extends Component {
                       <div className="advantages__item__text">
                         <h2 className="caption__h2">Рассрочка без переплат</h2>
                         <p>Установка газового оборудования в рассрочку 
-                          до 12 месяцев под 0 % годовых</p>
+                          до 10 месяцев под 0 % годовых</p>
                       </div>
                     </div>
                     <div className="advantages__item">
@@ -356,21 +345,21 @@ class Main extends Component {
                       <div className="advantages__item__img adv-item--bonus"></div>
                       <div className="advantages__item__text">
                         <h2 className="caption__h2">Электронный мультиклапан</h2>
-                        <p>Последнее поколение клапана с двойной защитой от утечки газа</p>
+                        <p>Мультиклапан 5-ю степенями безопасности в любом комплекте</p>
                       </div>
                     </div>
                     <div className="advantages__item">
                       <div className="advantages__item__img adv-item--install"></div>
                       <div className="advantages__item__text">
                         <h2 className="caption__h2">Фильтр Ultra 360</h2>
-                        <p>В комплект входит фильтр ultra 360</p>
+                        <p>Используем фильтра против плохого газа</p>
                       </div>
                     </div>
                     <div className="advantages__item">
                       <div className="advantages__item__img adv-item--program"></div>
                       <div className="advantages__item__text">
                         <h2 className="caption__h2">Неубиваемые форсунки</h2>
-                        <p>Устанавливаем неубиваемые форсунки</p>
+                        <p>Ставим самые надёжные форсунки</p>
                       </div>
                     </div>
                   </div>
@@ -385,14 +374,14 @@ class Main extends Component {
                   <div className="installment__header">
                     <h2 className="installment__caption">Вы можете установить <strong>ГБО в рассрочку</strong></h2>
                     <div className="installment__label">
-                      <p>до <strong>12</strong> месяцев</p>
+                      <p>до <strong>10</strong> месяцев</p>
                       <p>под <strong>0 %</strong> годовых</p>
                     </div>
                   </div>
                   <ul className="installment__list">
                     <li>Рассрочка от компании: 50 % первоначальный взнос, 
                       оставшаяся сумма в течении 2 месяцев равными долями.</li>
-                    <li>Рассрочка от банка: до 12 месяцев, без первоначального 
+                    <li>Рассрочка от банка: до 10 месяцев, без первоначального 
                       взноса, без переплат. В обоих случаях нужен только паспорт</li>
                   </ul>
                   <div className="installment__btn">
@@ -405,9 +394,14 @@ class Main extends Component {
               </div>
             </section>
 
-            <Price 
-              openModal={this.openModalRecord.bind(this)}
-            />
+            {/* Оборудование */}
+            {
+              (infoCity.equipment)
+                ? (<Price 
+                    equipment={infoCity.equipment}
+                    openModal={this.openModalRecord.bind(this)}
+                />) : ('')
+            }
 
             <section className="certificates">
               <div className="container">
@@ -437,12 +431,12 @@ class Main extends Component {
                       </div>
                     </div>
                     <div className="certificates__img certificates__bcg--1">
-                      <img src="img/certificates-1.png" alt="Сертифицированные мастера" />
+                      <img src="/img/certificates-1.png" alt="Сертифицированные мастера" />
                     </div>
                   </div>
                   <div className="certificates__body">
                     <div className="certificates__img certificates__bcg--2">
-                      <img src="img/certificates-2.png" alt="Сертифицированный сервис" />
+                      <img src="/img/certificates-2.png" alt="Сертифицированный сервис" />
                     </div>
                     <div className="certificates__text">
                       <h2 className="caption__h2">Сертифицированный сервис</h2>
@@ -477,50 +471,13 @@ class Main extends Component {
               </div>
             </section>
 
-            <section className="staff">
-              <div className="staff__bcg-1" />
-              <div className="container">
-                <div className="staff__bcg-2 bcg--2" />
-                <div className="caption__container">
-                  <div className="staff__caption">
-                    <h2 className="caption__section">Наша <strong>команда</strong></h2>
-                    <h3 className="caption__section-under">ведущие эксперты по газовому оборудованию</h3>
-                  </div>
-                </div>
-                <div className="staff__body">
-                  <div className="staff__block">
-                    <div className="staff__img">
-                      <img src="img/staff/staff-1.jpg" alt="Иван Иванов" />
-                    </div>
-                    <div className="staff__label">
-                      <p className="staff__label__name">Иван Иванов</p>
-                      <p className="staff__label__post">мастер установки ГБО</p>
-                      <p className="staff__label__exp">опыт 5 лет</p>
-                    </div>
-                  </div>
-                  <div className="staff__block">
-                    <div className="staff__img">
-                      <img src="img/staff/staff-1.jpg" alt="Иван Иванов" />
-                    </div>
-                    <div className="staff__label">
-                      <p className="staff__label__name">Иван Иванов</p>
-                      <p className="staff__label__post">мастер установки ГБО</p>
-                      <p className="staff__label__exp">опыт 5 лет</p>
-                    </div>
-                  </div>
-                  <div className="staff__block">
-                    <div className="staff__img">
-                      <img src="img/staff/staff-1.jpg" alt="Иван Иванов" />
-                    </div>
-                    <div className="staff__label">
-                      <p className="staff__label__name">Иван Иванов</p>
-                      <p className="staff__label__post">мастер установки ГБО</p>
-                      <p className="staff__label__exp">опыт 5 лет</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+            {/* Сотрудники */}
+            {
+              (infoCity.employee) 
+                ? (<Employee
+                  employeeList={infoCity.employee}
+                />) : ('')
+            }
 
             {/* Вопросы */}
             <Question/>
@@ -557,7 +514,7 @@ class Main extends Component {
                         <span />
                         <span />
                       </div>
-                      <img src="img/registration-1.png" alt="" />
+                      <img src="/img/registration-1.png" alt="" />
                     </div>
                   </div>
                   <div className="registration__col">
@@ -591,7 +548,7 @@ class Main extends Component {
                 <div className="install__bcg bcg--2" />
                 <div className="install__body">
                   <div className="install__img">
-                    <img src="img/install-1.png" alt="" />
+                    <img src="/img/install-1.png" alt="" />
                   </div>
                   <div className="install__form">
                     <p className="install__p">Отправь заявку и Наш специалист 
@@ -640,7 +597,6 @@ class Main extends Component {
                         <span>Имя</span>
                       </label>
                       <label className="form__input">
-                        {/* <input type="text" name="phone" required /> */}
                         <InputMask mask="+7 (999) 999-99-999" type="text" name="phone" required />
                         <span>Телефон</span>
                       </label>
@@ -659,7 +615,7 @@ class Main extends Component {
                     </form>
                   </div>
                   <div className="gibdd__img">
-                    <img src="img/gibdd-1.png" alt="Регистрация в ГИБДД" />
+                    <img src="/img/gibdd-1.png" alt="Регистрация в ГИБДД" />
                   </div>
                 </div>
                 <div className="gibdd__caption__container">
@@ -677,43 +633,13 @@ class Main extends Component {
               </div>
             </section>
 
-            <section className="map">
-              <div className="map__body">
-                <div className="container">
-                  <div className="map__label">
-                    <div className="map__label__phone">
-                      <a 
-                        href={'tel:' + this.state.activeCity.phone.link}
-                      >{this.state.activeCity.phone.kod}<strong>{this.state.activeCity.phone.number}</strong></a>
-                    </div>
-                    <div className="map__label__address">
-                      <strong>г. {this.state.activeCity.name},</strong> 
-                      {
-                        this.state.activeCity.addresses.map((a, idx) => {
-                          return (<p key={idx}>{a}</p>);
-                        })
-                      }
-                    </div>
-                    <div className="map__label__social">
-                      <a className="map__icon map--vk" 
-                        href={this.state.activeCity.social.vk} target="_blank">
-                        <svg>
-                          <use xlinkHref="img/sprite-icon.svg#icon-vk"/>
-                        </svg>VK</a>
-                      <a className="map__icon map--inst" 
-                        href={this.state.activeCity.social.instagram} target="_blank">
-                        <svg>
-                          <use xlinkHref="img/sprite-icon.svg#icon-inst" />
-                        </svg>Instagram</a>
-                    </div>
-                  </div>
-                </div>
-                <div className="map__container" id="map"></div>
-              </div>
-            </section>
+            {/* Карта */}
+            <Map 
+              activeCity={infoCity}
+            />
 
             <Footer 
-              activeCity={this.state.activeCity}          
+              activeCity={infoCity}
             />
 
             <ModalRecord 
@@ -722,7 +648,9 @@ class Main extends Component {
               csrf={csrf}
             />
 
-            <button className="btn-menu">
+            <button className="btn-menu"
+              onClick={this.toggleMenu}
+            >
                 <span></span>
                 <span></span>
                 <span></span>

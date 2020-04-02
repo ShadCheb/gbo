@@ -13,9 +13,10 @@ const keys = require('./keys');
 const mainRoutes = require('./routes/main');
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
+const serviceRoutes = require('./routes/service');
 const testRoutes = require('./routes/test');
 
-const PORT = 3000;
+const PORT = 3010;
 
 const app = express();
 const hbs = exphbs.create({
@@ -29,6 +30,7 @@ app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')))
 app.use('/images', express.static(path.join(__dirname, 'images')))
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -41,11 +43,12 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
-app.use(fileMiddleware.single('employee'));
+app.use(fileMiddleware.single('filedata'));
 app.use(csrf());
 app.use(varMiddleware);
 
 app.use('/', mainRoutes);
+app.use('/services', serviceRoutes);
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
 app.use(error404);

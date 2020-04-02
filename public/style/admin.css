@@ -55,6 +55,9 @@ p {
 .a-row--border:last-child {
   border-bottom: none;
 }
+.a-row--start {
+  align-items: flex-start;
+}
 .a-col__1 {
   width: 25%;
   min-width: 25%;
@@ -128,12 +131,19 @@ p {
 
 .a-form__editor {
   position: relative;
+  margin-bottom: 6px;
+}
+.a-form__editor__area {
   padding: 4px 40px 4px 11px;
+  min-height: 120px;
   border: 1px solid #d9d9d9;
   border-radius: 2px;
+  white-space: pre-wrap;
+	tab-size: 3;
 }
-.a-form__editor:focus {
+.a-form__editor__area:focus {
   border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgba(24,144,255,.2);
 }
 .a-form__editor__toolbar {
   position: absolute;
@@ -141,15 +151,48 @@ p {
   right: 4px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #d9d9d9;
-  border-radius: 2px;
 }
 .a-form__editor__toolbar > a {
   margin-bottom: 4px;
-  width: 30px;
-  background-color: #d9d9d9;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 800;
+  text-align: center;
+  border: 1px solid #d9d9d9;
   border-radius: 2px;
+  transition: all .3s ease;
 }
-.a-form__editor__toolbar > a:last-child {
+.a-form__editor__toolbar > a.active,
+.a-form__editor__toolbar > a:hover {
+  color: #fff;
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+.a-form__editor__toolbar a:last-child {
   margin-bottom: 4px;
 }
+.a-form__editor__view {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.a-card__equipment__text {
+  font-size: 14px;
+  line-height: 1.2em;
+}
+.a-card__equipment__text > h3 {
+  font-size: 18px;
+  line-height: 1.2em;
+  font-weight: 500;
+}
+.a-card__equipment__text > p {
+  margin-bottom: 6px;
+  text-indent: 10px;
+}
+.a-card__equipment__text b {
+  color: #1890ff;
+}
+

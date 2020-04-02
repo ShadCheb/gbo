@@ -1,6 +1,57 @@
 import React from 'react';
 
-function Price(props) {
+const cylinderList = ['4', '6', '8'];
+
+function BlockCheck({cylinders, cylinder}) {
+  return (cylinders.indexOf(cylinder) > -1)
+    ? (
+      <div className="price__body__value">
+        <label className="input__check price__check">
+          <input type="radio" name="check-gbo" /><span></span></label>
+      </div>
+    )
+    : (
+      <div className="price__body__value"></div>
+    );
+}
+
+function PriceBlock({equipment, openDescription}) {
+  let cylinderArray = (equipment.cylinder) 
+    ? equipment.cylinder.split(',')
+    : [];
+
+  return (
+    <div className="price__body__block">
+      <div className="price__body__row">
+        <div className="price__body__name">{equipment.name || 'Без названия'}</div>
+        {
+          cylinderList.map((cylinder, i) => (
+            <BlockCheck cylinders={cylinderArray} cylinder={cylinder} key={i}/>
+          ))
+        }
+        <div className="price__body__btn"><button className="btn-1 btn--blue"
+            onClick={openDescription}
+          ><span className="price--open">Описание</span><span className="price--close">Закрыть</span>
+            <svg><use xlinkHref="img/sprite-icon.svg#icon-description" /></svg></button></div>
+      </div>
+      <div className="price__container">
+        <div className="price__description">
+          <p className="price__description__bcg">Gazoved</p>
+          <div className="price__description__text" 
+            dangerouslySetInnerHTML={{__html: equipment.description}}>
+          </div>
+        </div>
+        <button className="price__description__btn" onClick={openDescription}>
+          <svg>
+            <use xlinkHref="img/sprite-icon.svg#icon-arrow-up" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function Price({openModal, equipment}) {
   let activePrice = null;
 
   const openDescription = e => {
@@ -21,15 +72,15 @@ function Price(props) {
     activePrice = price;
   };
 
-  const openModal = (e) => {
-    props.openModal(e);
+  const onOpenModal = (e) => {
+    openModal(e);
   };
 
   return (
     <section className="price">
       <div className="container">
         <div className="caption__container">
-          <h2 className="caption__section">Цены на ГБО</h2>
+          <h2 className="caption__section">Оборудование ГБО</h2>
         </div>
         <div className="price__body">
           <div className="price__body__header-mobile">
@@ -44,7 +95,18 @@ function Price(props) {
             <div className="price__body__value name--header"><p>8 <span>цилиндров</span></p></div>
             <div className="price__body__btn" />
           </div>
-          <div className="price__body__block">
+          {
+            equipment.map((item, idx) =>
+              (<PriceBlock 
+                equipment={item}
+                openDescription={openDescription}
+                key={idx}
+              />)
+            )
+          }          
+
+
+          {/* <div className="price__body__block">
             <div className="price__body__row">
               <div className="price__body__name">OMVL</div>
               <div className="price__body__value">
@@ -132,11 +194,11 @@ function Price(props) {
                 </svg>
               </button>
             </div>
-          </div>
+          </div> */}
           <div className="price__btn">
             <button className="btn-1"
               aria-label="заказать"
-              onClick={openModal}
+              onClick={onOpenModal}
             >Заказать</button>
           </div>
         </div>

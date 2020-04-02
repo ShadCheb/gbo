@@ -8,24 +8,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
 
-    <link rel="stylesheet" href="style/antd.min.css" />
+    <link rel="stylesheet" href="/style/antd.min.css" />
     {{#if isHome}}
-      <link rel="stylesheet" href="style/lightgallery.min.css" />    
-      <link rel="stylesheet" href="style/main.css" />
-    {{!-- {{else if isAuth}} --}}
-      
+      <link rel="stylesheet" href="/style/lightgallery.min.css" />
+      <link rel="stylesheet" href="/style/main.css" />
+      <link rel="stylesheet" href="/style/style.css" />
+    {{else if isServices}}
+      <link rel="stylesheet" href="/style/service.css" />
+      <link rel="stylesheet" href="/style/style.css" />
+    {{else if isDizel}}
+      <link rel="stylesheet" href="/style/service.css" />
+      <link rel="stylesheet" href="/style/style.css" />
     {{/if}}
 
     {{#if isAuth}}
-      <link rel="stylesheet" href="style/auth.css" />
-    {{else if isAdmin}}
-      <link rel="stylesheet" href="style/admin.css" />
-    {{else}}
-      <link rel="stylesheet" href="style/style.css" />  
+      <link rel="stylesheet" href="/style/auth.css" />
     {{/if}}
-    
+    {{#if isAdmin}}
+      <link rel="stylesheet" href="/style/admin.css" />
+    {{/if}}
 
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
     <script src="https://api-maps.yandex.ru/2.1.74/?lang=ru_RU&amp;coordorder=longlat&amp;apikey=8ea707eb-f2a1-47d2-a099-c60dd9f6228c" type="text/javascript"></script>
 </head>

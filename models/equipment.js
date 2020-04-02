@@ -14,6 +14,9 @@ const equipment = sequelize.define('equipment', {
   description: {
     type: Sequelize.TEXT
   },
+  cylinder: {
+    type: Sequelize.STRING
+  },
 }, {
   timestamps: false
 })

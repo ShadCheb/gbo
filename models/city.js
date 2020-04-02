@@ -1,13 +1,13 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../utils/database');
 
-const CityList = require('./cityList');
-const Address = require('./address');
-const Social = require('./social');
-const Time = require('./time');
-const Phone = require('./phone');
-const Employee = require('./employee');
-const Equipment = require('./equipment');
+// const CityList = require('./cityList');
+// const Address = require('./address');
+// const Social = require('./social');
+// const Time = require('./time');
+// const Phone = require('./phone');
+// const Employee = require('./employee');
+// const Equipment = require('./equipment');
 
 const City = sequelize.define('city', {
   id: {
@@ -26,13 +26,13 @@ const City = sequelize.define('city', {
   }
 });
 
-CityList.hasOne(City, { onDelete: "cascade" });
-CityList.hasMany(Address, { onDelete: "cascade" });
-CityList.hasOne(Social, { onDelete: "cascade" });
-CityList.hasOne(Time, { onDelete: "cascade" });
-CityList.hasOne(Phone, { onDelete: "cascade" });
-CityList.hasMany(Employee, { onDelete: "cascade" });
-CityList.hasMany(Equipment, { onDelete: "cascade" });
+// CityList.hasOne(City, { onDelete: "cascade" });
+// CityList.hasMany(Address, { onDelete: "cascade" });
+// CityList.hasOne(Social, { onDelete: "cascade" });
+// CityList.hasOne(Time, { onDelete: "cascade" });
+// CityList.hasOne(Phone, { onDelete: "cascade" });
+// CityList.hasMany(Employee, { onDelete: "cascade" });
+// CityList.hasMany(Equipment, { onDelete: "cascade" });
 
 
 module.exports = City;

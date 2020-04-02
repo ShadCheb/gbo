@@ -12,10 +12,37 @@ function ModalAddEmployee({
   changeValue, visibleAddEmployee
 }) {
 
-  const onOk = () => {
-    // this.setState({
-    //   uploading: true,
-    // });
+  const onOk = async () => {
+    let avatar = data.fileList[0].name;
+
+    // сначала загружаем картинку, если она есть
+    if (data.file) {
+      let sendForm = new FormData();
+  
+      sendForm.append('filedata', data.file);
+  
+      await fetch('/upload', {
+        method: 'post',
+        headers: {
+          'X-XSRF-TOKEN': csrf
+        },
+        body: sendForm
+      })
+        .then(res => res.json())
+        .then(data => { 
+          if (data.success)
+            avatar = data.success.filename;
+        })
+        .catch(e => {
+          if (e.error) {
+            handlerChangesData(e.error);
+  
+            return;
+          }
+        });  
+    }
+
+    // Теперь сохраняем данный в БД
     let sendForm = new FormData();
 
     if (data.id) {
@@ -24,7 +51,7 @@ function ModalAddEmployee({
     sendForm.append('name', data.name);
     sendForm.append('post', data.post);
     sendForm.append('experience', data.experience);
-    sendForm.append('employee', data.fileList[0]);
+    sendForm.append('avatar', avatar);
     sendForm.append('city_list_id', data.cityListId);
 
     fetch('/admin/employee', {
@@ -46,48 +73,42 @@ function ModalAddEmployee({
     cancelAddEmployee();
   }
 
-  /* beforeUpload = (file, fileList) => {
-    this.setState(() => ({fileList}));
+  const beforeUpload = (file) => {
+    let fileList = [{
+      uid: '-1',
+      name: file.name,
+      status: 'done',
+      url: file.name,
+    }];
 
-    return false;
-  } */
-  const beforeUpload = (file, fileList) => {
     changeValue({fileList});
   }
-  /* onRemove = file => {
-    this.setState(state => {
-      const index = state.fileList.indexOf(file);
-      const newFileList = state.fileList.slice();
-      newFileList.splice(index, 1);
-
-      return {
-        fileList: newFileList,
-      };
-    });
-  } */
   const onRemove = file => {
-    const index = state.fileList.indexOf(file);
-    const newFileList = state.fileList.slice();
+    const index = data.fileList.indexOf(file);
+    const newFileList = data.fileList.slice();
 
     newFileList.splice(index, 1);
 
-    changeValue({fileList: newFileList});
+    changeValue({fileList: newFileList}); 
   }
-  /* handleChange = (e) => {
-    let target = e.target;
-
-    this.setState({[target.name]: target.value});
-  } */
-  const handleChange = (e) => {
+  const onChange = () => {
+    return;
+  }
+  const handleChange = e => {
     let target = e.target;
 
     changeValue({[target.name]: target.value});
   }
 
+  // Если добавили новый файл
+  const customRequest = data => {
+    changeValue({file: data.file});
+  }
+
   return (
     <Modal
       visible={visibleAddEmployee}
-      title={(data.employee) ? 'Редактирование сотрудника' : 'Добавление сотрудника'}
+      title={(data.id) ? 'Редактирование сотрудника' : 'Добавление сотрудника'}
       okText="Сохранить"
       cancelText="Отмена"
       onCancel={cancelAddEmployee}
@@ -129,10 +150,12 @@ function ModalAddEmployee({
         </label>
 
         <Dragger 
-          name='employee'
+          name='filedata'
           fileList={data.fileList}
           onRemove={onRemove}
+          onChange={onChange}
           beforeUpload={beforeUpload}
+          customRequest={customRequest}
         >
           <p className="ant-upload-drag-icon"><InboxOutlined /></p>
           <p className="ant-upload-text">Фотография</p>
