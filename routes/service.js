@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
   );
 
   res.render('service', {
-    title: 'Услуги | Gazoved ' + data.name,
+    title: 'Услуги | Gazoved ' + (data.name || ''),
     isServices: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)
@@ -61,7 +61,7 @@ router.get('/metan', async (req, res) => {
   );
 
   res.render('service-item', {
-    title: 'ГБО Метан | Gazoved ' + data.name,
+    title: 'ГБО Метан | Gazoved ' + (data.name || ''),
     isMetan: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)
@@ -91,7 +91,7 @@ router.get('/dizel', async (req, res) => {
   );
 
   res.render('service-item', {
-    title: 'Газодизель | Gazoved ' + data.name,
+    title: 'Газодизель | Gazoved ' + (data.name || ''),
     isDizel: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)
@@ -121,7 +121,7 @@ router.get('/registration', async (req, res) => {
   );
 
   res.render('service-item', {
-    title: 'Регистрация ГБО | Gazoved ' + data.name,
+    title: 'Регистрация ГБО | Gazoved ' + (data.name || ''),
     isRegister: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)
@@ -151,7 +151,7 @@ router.get('/variator', async (req, res) => {
   );
 
   res.render('service-item', {
-    title: 'Вариатор | Gazoved ' + data.name,
+    title: 'Вариатор | Gazoved ' + (data.name || ''),
     isVariator: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)

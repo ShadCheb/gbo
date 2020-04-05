@@ -30,7 +30,7 @@ router.get('/stock', async (req, res) => {
   );
 
   res.render('page', {
-    title: 'Акции | Gazoved ' + data.name,
+    title: 'Акции | Gazoved ' + (data.name || ''),
     isStock: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)
@@ -60,7 +60,7 @@ router.get('/contact', async (req, res) => {
   );
 
   res.render('page', {
-    title: 'Контакты | Gazoved ' + data.name,
+    title: 'Контакты | Gazoved ' + (data.name || ''),
     isContact: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)
@@ -90,7 +90,7 @@ router.get('/work', async (req, res) => {
   );
 
   res.render('page', {
-    title: 'Наши работы | Gazoved ' + data.name,
+    title: 'Наши работы | Gazoved ' + (data.name || ''),
     isWork: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)
@@ -120,7 +120,7 @@ router.get('/work/:id', async (req, res) => {
   );
 
   res.render('page', {
-    title: 'Наши работы | Gazoved ' + data.name, // Подставить название машины
+    title: 'Наши работы | Gazoved ' + (data.name || ''), // Подставить название машины
     isWorkItem: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)
