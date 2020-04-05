@@ -1,0 +1,134 @@
+.stock {
+  position: relative;
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+.stock__bcg-1 {
+  top: -20px;
+  right: -120px;
+}
+.stock__bcg-2 {
+  bottom: -50px;
+  left: -140px;
+}
+.stock__body {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+.stock__block {
+  position: relative;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 30px;
+  width: calc(50% - 40px);
+  height: 400px;
+  background-color: #00c2ff;
+  box-shadow: 7px 7px 20px 0 rgba(28,28,28,.1);
+}
+.stock__block::after {
+  content: '';
+  position: absolute;
+  top: -23px;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 23px);
+  background: url(../img/stock/bcg-1.png) no-repeat left center;
+  background-size: auto 100%;
+}
+.stock__block > div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  z-index: 1;
+}
+.stock__block__img {
+  position: absolute;
+  top: calc(50% - 110px);
+  left: -30px;
+  width: 220px;
+  height: 220px;
+}
+.stock__block__text {
+  padding-left: 180px;
+  padding-right: 20px;
+  width: calc(100% - 110px);
+  text-align: right;
+}
+.stock__header {
+  position: relative;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  font-size: 42px;
+  line-height: 1.2em;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+}
+.stock__header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 1px;
+  width: 40%;
+  background-color: #fff;
+}
+.stock__caption {
+  font-size: 30px;
+  line-height: 1.2em;
+  color: #193b46;
+}
+.stock__caption > strong {
+  color: #fff;
+  font-weight: 500;
+}
+
+@media (max-width: 992px) {
+  .stock__block__img {
+    top: calc(50% - 60px);
+    left: -20px;
+    width: 120px;
+    height: 120px;
+  }
+  .stock__block__text {
+    padding-left: 90px;
+  }
+  .stock__header {
+    font-size: 36px;
+  }
+  .stock__caption {
+    font-size: 24px;
+  }
+  .stock__block {
+    height: 300px;
+  }
+  .stock__block::after {
+    top: -18px;
+    height: calc(100% + 18px);
+  }
+}
+@media (max-width: 768px) {
+  .stock {
+    padding-top: 20px;
+  }
+  .stock__block {
+    width: calc(100% - 40px);
+    height: 230px;
+  }
+  .stock__block::after {
+    top: -14px;
+    height: calc(100% + 14px);
+  }
+}
+@media (max-width: 576px) {
+  .stock__header {
+    font-size: 27px;
+  }
+  .stock__caption {
+    font-size: 18px;
+  }
+}
+

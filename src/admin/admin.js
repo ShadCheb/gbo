@@ -9,6 +9,7 @@ import Time from './components/Time';
 import Phone from './components/Phone';
 import Employee from './components/Employee';
 import Equipment from './components/Equipment';
+import Review from './components/Review';
 
 import { 
   Button, 
@@ -50,7 +51,11 @@ const typeList = [
   {
     brief: 'equipment',
     name: 'Оборудование'
-  }
+  },
+  {
+    brief: 'review',
+    name: 'Отзывы'
+  },
 ];
 
 cityList = JSON.parse(cityList);
@@ -158,6 +163,21 @@ function BodyList({component, csrf, data, handlerChangesData}) {
       return (<Equipment
         csrf={csrf}
         data={dataEquipment}
+        handlerChangesData={handlerChangesData}
+      />);
+
+    case typeList[7].brief: // 'review'
+      let dataReview = {};
+      
+      dataReview['review'] = (data.review) 
+        ? data.review
+        : null;
+    
+      dataReview['cityListId'] = data.id;
+
+      return (<Review
+        csrf={csrf}
+        data={dataReview}
         handlerChangesData={handlerChangesData}
       />);
 

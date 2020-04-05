@@ -1,5 +1,6 @@
 const {Router} = require('express');
 const router = Router();
+const axios = require('axios');
 
 const CityList = require('../models/cityList');
 const City = require('../models/city');
@@ -9,9 +10,12 @@ const Time = require('../models/time');
 const Phone = require('../models/phone');
 const Employee = require('../models/employee');
 const Equipment = require('../models/equipment');
+const Review = require('../models/review');
+const ReviewVk = require('../models/review_vk');
+
+const {TOKEN_VK} = require('../keys/index');
 
 const auth = require('../middleware/auth');
-
 
 router.get('/', auth, async(req, res) => {
   try {
@@ -507,5 +511,89 @@ router.delete('/equipment/:id', auth, async(req, res) => {
     res.status(500).json({error: 'Произошла ошибка' + e});
   }
 });
+
+router.post('/review_vk', auth, async(req, res) => {
+  let {groupId, topicId} = req.body;
+
+  if (!groupId || !topicId)
+    res.status(201).json({error: 'Введены не все данные'});
+
+  try {
+    // let groupId = groupId; // '147953602'
+    // let topicId = topicId; // '37109092';
+    const count = '30';
+    const extended = 1;
+    const sort = 'desc';
+    const version = '5.87';
+    const query = `https://api.vk.com/method/board.getComments?group_id=${groupId}&topic_id=${topicId}&count=${count}&sort=${sort}&extended=${extended}&access_token=${TOKEN_VK}&v=${version}`;
+
+    axios.post(query)
+      .then(result => {
+        res.status(201).json({result: result.data});
+      })
+      .catch(e => {
+        console.log('Error! ', e);
+        res.status(500).json({error: 'Произошла ошибка ' + e});
+      });
+  } catch(e) {
+    console.log('Error! ', e);
+    res.status(500).json({error: 'Произошла ошибка ' + e});
+  }
+});
+
+router.post('/review/get', auth, async(req, res) => {  
+  try {
+    const cityId = req.body.cityId;
+
+    const result = await CityList.findAll({
+      where: {id: cityId},
+      include: [
+        { model: ReviewVk },
+        {
+          model: Review,
+          order: [ [ 'id', 'DESC' ] ],
+          limit: 5
+        }
+      ]
+    });
+
+    if (!result)
+      result = [];
+
+    res.status(201).json({result});
+  } catch(e) {
+    console.log('Error! ', e);
+    res.status(500).json({error: 'Произошла ошибка' + e});
+  }
+});
+
+
+router.post('/review', auth, async(req, res) => {
+  let data = req.body;
+
+  try {
+    Review.create({
+      name: data.name,
+      review: data.review,
+      date: data.date,
+      avatar: data.avatar,
+      id_com: data.id_com,
+      cityListId: data.city_list_id
+    })    
+      .then(async (data) => {
+        const result = await Review.findAll({
+          where: {cityListId: data.city_list_id},
+          order: [ [ 'date', 'DESC ' ] ],
+          limit: 5
+        });
+
+        res.status(201).json({result});
+      });
+  } catch (e) {
+    console.log('Error! ', e);
+    res.status(500).json({error: 'Произошла ошибка' + e});
+  }
+});
+
 
 module.exports = router;

@@ -1,0 +1,131 @@
+.map__body > .container {
+  z-index: 1;
+}
+.map__container {
+  width: 100%;
+  height: 560px;
+}
+.map__label {
+  padding: 40px 40px;
+  margin-left: auto;
+  margin-bottom: -40px;
+  color: #00c2ff;
+  background-color: #fff;
+  width: 50%;
+  box-shadow: 7px 7px 40px 0 rgba(28, 28, 28, .2);
+  opacity: .7;
+}
+.map__label__phone {
+  margin-bottom: 30px;
+  font-size: 32px;
+  line-height: 1.2em;
+}
+.map__label__phone strong {
+  font-weight: 800;
+}
+.map__label__phone > a {
+  transition: color .3s ease;
+}
+.map__label__phone > a:hover {
+  color: #da002d;
+}
+.map__label__address {
+  font-size: 27px;
+  line-height: 1.2em;
+}
+.map__label__address > strong {
+  display: block;
+  font-weight: 800;
+}
+.map__label__address > p {
+  margin-left: 30px;
+}
+.map__label__social {
+  display: flex;
+  margin-bottom: 50px;
+  justify-content: flex-end;
+}
+.map__icon {
+  margin-left: 20px;
+  width: 50px;
+  height: 50px;
+  font-size: 0;
+  color: transparent;
+  background-color: transparent;
+}
+.map__icon > svg {
+  fill: #00c2ff;
+  width: 100%;
+  height: 100%;
+  transition: all .3s ease;
+}
+.map__icon:hover > svg {
+  fill: #da002d;
+}
+
+@media (max-width: 1140px) {
+  .map__label {
+    padding: 40px 20px;
+  }
+  .map__label__phone {
+    font-size: 28px;
+  }
+  .map__label__address {
+    font-size: 24px;
+  }
+  .map__icon {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 992px) {
+  .map__label {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .map__label__phone {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  .map__label__phone strong {
+    font-weight: 600;
+  }
+  .map__label__address {
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+  .map__label__address > strong {
+    font-weight: 600;
+  } 
+}
+@media (max-width: 768px) {
+  .map__container {
+    height: 500px;
+  }
+}
+@media (max-width: 576px) {
+  /* .map {
+    margin-top: 120px;
+  } */
+  .map__container {
+    height: 400px;
+  }
+  .map__label {
+    top: -100px;
+    width: calc(100% - 80px);
+    transform: translateY(0);
+  }
+  .map__label__phone {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  .map__label__address {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  .map__icon {
+    width: 30px;
+    height: 30px;
+  }
+}

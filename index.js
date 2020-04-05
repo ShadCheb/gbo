@@ -14,9 +14,10 @@ const mainRoutes = require('./routes/main');
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
 const serviceRoutes = require('./routes/service');
+const otherRoutes = require('./routes/other');
 const testRoutes = require('./routes/test');
 
-const PORT = 3010;
+const PORT = 3005;
 
 const app = express();
 const hbs = exphbs.create({
@@ -48,6 +49,7 @@ app.use(csrf());
 app.use(varMiddleware);
 
 app.use('/', mainRoutes);
+app.use('/', otherRoutes);
 app.use('/services', serviceRoutes);
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);

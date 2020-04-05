@@ -18,8 +18,12 @@ module.exports = {
     service: './src/service/service.js',
     metan: './src/service/service-metan.js',
     dizel: './src/service/service-dizel.js',
-    registr: './src/service/service-register.js',
-    variator: './src/service/service-variator.js'
+    register: './src/service/service-register.js',
+    variator: './src/service/service-variator.js',
+    stock: './src/stock/stock.js',
+    contact: './src/contact/contact.js',
+    work: './src/work/work.js',
+    'work-item': './src/work/work-item.js',
   },
   output: {
     filename: '[name].js',

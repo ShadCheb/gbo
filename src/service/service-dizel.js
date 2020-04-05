@@ -160,7 +160,7 @@ class Dizel extends Component {
                   <h2 className="caption2__caption"> 
                     <strong>Рассрочка</strong> на 12 месяцев</h2>
                 </div>
-                <p className="sd-installment__p">Устанавливаем ГБО на все виды автомобилей в рассрочку 
+                <p className="sd-installment__p text__p2">Устанавливаем ГБО на все виды автомобилей в рассрочку 
                   до 12 месяцев! Просто введите свою контактную информацию и оставьте заявку. Мы 
                   свяжемся с вами для уточнения деталей.
                 </p>
@@ -257,7 +257,7 @@ class Dizel extends Component {
         <section className="sd-sequence">
           <div className="container">
             <div className="caption__container">
-              <h2 className="caption__section sd-sequence__caption">Последовательность <strong>переоборудования</strong></h2>
+              <h2 className="caption__section benefit__caption">Последовательность <strong>переоборудования</strong></h2>
             </div>
             <div className="sd-sequence__body">
               <div className="sd-sequence__col-1">
@@ -444,7 +444,7 @@ class Dizel extends Component {
                 <div>
                   <h2 className="sd-conclusion__caption">Таким образом, <strong>модификация</strong> дизельного 
                     двигателя в газодизель <strong>позволяет одновременно решить следующие задачи:</strong></h2>
-                  <ul className="sd-conclusion__list">
+                  <ul className="text__list">
                     <li>Снизить расходы <strong>на 10-30%</strong></li>
                     <li>Увеличить мощность и крутящий момент <strong>на 20-30%</strong></li>
                     <li>Увеличить <strong>срок службы</strong> элементов системы подачи 

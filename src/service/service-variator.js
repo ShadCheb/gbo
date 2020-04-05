@@ -5,11 +5,11 @@ import Header from '../main/components/Header';
 import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
 
-const container = document.getElementById('page-service');
+const container = document.getElementById('page-service-item');
 const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
 
-class Services extends Component {
+class Variator extends Component {
   state = {
     cityList,
     infoCity,
@@ -59,44 +59,163 @@ class Services extends Component {
           </div>
         </main>
         
-        <div className="services">
+        <div className="s-header s-header--grey">
           <div className="container">
-            <div className="services__body">
-              <article className="services__block">
-                <div className="service__block__bcg"></div>
-                <div className="service__block__content">
-                  <img className="services__block__img" src="/img/metan/metan-1.png" alt="ГБО Метан" />
-                  <h2 className="services__block__caption">ГБО Метан</h2>
+            <div className="s-header__body">
+              <div className="s-header__text">
+                <h1 className="s-caption-h1">
+                  <span className="s-caption-h1--i1">Установка</span>Вариатора
+                  <span className="s-caption-h1--i2">в Чебоксарах</span>
+                </h1>
+                <ul className="s-header__list">
+                  <li><strong>Уменьшение расхода</strong> газа во всех режимах</li>
+                  <li><strong>Исключение</strong> появления <strong>бедной смеси</strong></li>
+                  <li><strong>Корректное сгорание</strong> газо-воздушной смеси</li>
+                </ul>
+                <div className="s-header__btns">
+                  <button className="btn-1 btn--white" aria-label="Заказать установку">Заказать установку</button>
                 </div>
-                <a className="link__block" href="#0" />
-              </article>
-              <article className="services__block">
-                <div className="service__block__bcg"></div>
-                <div className="service__block__content">
-                  <img className="services__block__img" src="/img/registration/registration-1.png" alt="Регистрация ГБО" />
-                  <h2 className="services__block__caption">Регистрация ГБО</h2>
-                </div>
-                <a className="link__block" href="#0" />
-              </article>
-              <article className="services__block">
-                <div className="service__block__bcg"></div>
-                <div className="service__block__content">
-                  <img className="services__block__img" src="/img/dizel/dizel-1.png" alt="Газодизель" />
-                  <h2 className="services__block__caption">Газодизель</h2>
-                </div>
-                <a className="link__block" href="#0" />
-              </article>
-              <article className="services__block">
-                <div className="service__block__bcg"></div>
-                <div className="service__block__content">
-                  <img className="services__block__img" src="/img/variator/variator-1.png" alt="Вариатор" />
-                  <h2 className="services__block__caption">Вариатор</h2>
-                </div>
-                <a className="link__block" href="#0" />
-              </article>
+              </div>
+              <div className="s-header__img sm-header__img">
+                <img src="/img/variator/engine-1.png" alt="Установка вариатора" />
+              </div>
             </div>
           </div>
         </div>
+
+        <section className="sr-services">
+          <div className="container">
+            <div className="sr-services__body">
+              <div className="sr-services__text services__text--sv">
+                <div>
+                  <p class="text__p"><strong>Вариатор УОЗ (угла опережения зажигания)</strong> – 
+                    электронный прибор, который <strong>регулирует момент поджигания 
+                    топливной смеси.</strong></p>
+                  <p class="text__p"><strong>Стандартный электронный блок управления 
+                    в машине рассчитан на бензин</strong>, поэтому газовая смесь не успевает 
+                    прогореть на 100%.</p>
+                  <p class="text__p">Октан-контроллер нужен для того, чтобы <strong>подстроить 
+                    угол зажигания под газовую смесь</strong> и дать команду на опережение 
+                    электронному управляющему блоку автомобиля.</p>
+                </div>
+              </div>
+              <div className="sr-services__img">
+                <img src="/img/variator/variator-2.png" alt="Установка вариатора" />
+              </div>
+            </div>
+            <div className="sv-description__bcg bcg--2"></div>
+          </div>
+        </section>
+
+        <section className="sd-advantages">
+          <div className="container">
+            <div className="caption__container">
+              <h2 className="caption__section benefit__caption">Зачем нужен <strong>вариатор?</strong></h2>
+            </div>
+            <div className="sm-advantages__body">
+              <div className="sm-advantages__list">
+                <div className="sm-advantages__item">
+                  <div className="advantages__item__img adv-item--price"></div>
+                  <div className="advantages__item__text">
+                    <h2 className="caption__h2">Экономия</h2>
+                    <p> На автомобиле объемом 2 литра вариатор экономит 1 литр газа 
+                      на каждые 100 км пробега.</p>
+                  </div>
+                </div>
+                <div className="sm-advantages__item">
+                  <div className="advantages__item__img adv-item--turn"></div>
+                  <div className="advantages__item__text">
+                    <h2 className="caption__h2">Легкий старт</h2>
+                    <p>Педаль будет реагировать на малейшее прикосновение, машина будет 
+                      стартовать быстрее.</p>
+                  </div>
+                </div>
+                <div className="sm-advantages__item">
+                  <div className="advantages__item__img adv-item--fast"></div>
+                  <div className="advantages__item__text">
+                    <h2 className="caption__h2">Увеличение мощности</h2>
+                    <p>Установка вариатора позволяет повысить мощность до 12%.</p>
+                  </div>
+                </div>
+                <div className="sm-advantages__item">
+                  <div className="advantages__item__img adv-item--resource"></div>
+                  <div className="advantages__item__text">
+                    <h2 className="caption__h2">Увеличение ресурса</h2>
+                    <p> Практикой доказано, что ресурс работы двигателя увеличивается в разы.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="sm-advantages__img sm-advantages__img--variator">
+                <div className="advantages__bcg advantages__bcg--sm">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <img src="/img/variator/speedometer.png" alt="Преимущества метана" />
+              </div>
+            </div>
+            <div className="sm-advantages__btn">
+              <button className="btn-1 btn--blue" aria-label="Заказать установку">Заказать установку</button>
+            </div>
+          </div>
+        </section>
+
+        <section className="sv-comparison">
+          <div className="container">
+            <div className="caption__container">
+              <h2 className="caption__section benefit__caption">Особенности <strong>вариатора</strong></h2>
+            </div>
+            <div className="sd-conclusion__body conclusion__body--sv">
+              <div className="sd-conclusion__text">
+                <div>
+                  <ul className="text__list">
+                    <li><strong>Настраивается</strong> с помощью компьютерной программы</li>
+                    <li>Позволяет <strong>смоделировать график движения</strong> транспортного 
+                      средства и <strong>выставить угол опережения зажигания</strong> с 
+                      точностью до градуса</li>
+                    <li>Работает с коленвалом и распредвалом</li>
+                    <li><strong>Встроен осциллограф</strong>, который подает 
+                      устройству сигналы на входе и выходе</li>
+                    <li>Трансформатор позволяет сделать <strong>взаимодействие с ЭБУ более 
+                      слаженным</strong>. Особенно, на машинах с дифференциальным входом</li>
+                  </ul>
+                  <div className="sd-conclusion__btn">
+                    <button className="btn-1" aria-label="Заказать установку">Заказать установку</button>
+                  </div>
+                </div>
+              </div>
+              <div className="sd-conclusion__img conclusion__img--sv">
+                <img src="/img/variator/variator-1.png" alt="Установка вариатора в Газовед" />
+              </div>
+            </div>
+            <div className="sv-description__bcg bcg--2"></div>
+          </div>
+        </section>
+
+        <section className="sv-conclusion">
+          <div className="container">
+            <div className="sd-advantages__block sd-block--left">
+              <div className="sd-advantages__block__img">
+                <img src="/img/variator/car-niva.png" alt="Вариатор опережения зажигания" />
+              </div>
+              <div className="sd-advantages__block__text sv-conclusion__block">
+                <div>
+                  <p className="text__p2"><strong>Вариатор опережения зажигания</strong> – не 
+                    просто кусок пластика, начиненный электроникой. 
+                    Это миниатюрное устройство <strong>помогает сделать работу 
+                    газобаллонного оборудования</strong> и двигателя слаженной, 
+                    как симфонический оркестр.</p>
+                  <p className="text__p2">Если у вас 4 поколение ГБО, 
+                    <strong>установка вариатора – выгодное решение</strong>. Узнайте о том, 
+                    следует ли вам в вашем конкретном случае устанавливать 
+                    вариатор, позвонив нашим менеджерам.</p>
+                  <div class="sv-conclusion__btn">
+                    <button className="btn-1 btn--blue" aria-label="Заказать установку">Заказать установку</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <Footer 
           activeCity={infoCity}
         />
@@ -105,4 +224,4 @@ class Services extends Component {
   }
 }
 
-ReactDOM.render(<Services/>, document.getElementById('page-service'));
+ReactDOM.render(<Variator/>, document.getElementById('page-service-item'));

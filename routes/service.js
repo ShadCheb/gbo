@@ -122,7 +122,7 @@ router.get('/registration', async (req, res) => {
 
   res.render('service-item', {
     title: 'Регистрация ГБО | Gazoved ' + data.name,
-    isRegistration: true,
+    isRegister: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)
   });

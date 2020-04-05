@@ -14,12 +14,12 @@ export default ({showMenu, closeMenu, social}) => {
           <li className="main__nav__notlink">
             <button className="main__nav__close" onClick={closeMenu}><span /><span /></button>
           </li>
-          <li><a href="#0">Главная</a></li>
-          <li><a href="#0">Услуги</a></li>
-          <li><a href="#0">Фотогалерея</a></li>
-          <li><a href="#0">Акции</a></li>
-          <li><a href="#0">Контакты</a></li>
-          <li><a href="#0">Наши работы</a></li>
+          <li><a href="/">Главная</a></li>
+          <li><a href="/services">Услуги</a></li>
+          {/* <li><a href="#0">Фотогалерея</a></li> */}
+          <li><a href="/stock">Акции</a></li>
+          <li><a href="/contact">Контакты</a></li>
+          <li><a href="/work">Наши работы</a></li>
           {
             (social && social.youtube) 
               ? (<li><a href={social.youtube} 

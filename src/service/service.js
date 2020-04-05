@@ -68,7 +68,7 @@ class Services extends Component {
                   <img className="services__block__img" src="/img/metan/metan-1.png" alt="ГБО Метан" />
                   <h2 className="services__block__caption">ГБО Метан</h2>
                 </div>
-                <a className="link__block" href="#0" />
+                <a className="link__block" href="/services/metan" />
               </article>
               <article className="services__block">
                 <div className="service__block__bcg"></div>
@@ -76,7 +76,7 @@ class Services extends Component {
                   <img className="services__block__img" src="/img/registration/registration-1.png" alt="Регистрация ГБО" />
                   <h2 className="services__block__caption">Регистрация ГБО</h2>
                 </div>
-                <a className="link__block" href="#0" />
+                <a className="link__block" href="/services/registration" />
               </article>
               <article className="services__block">
                 <div className="service__block__bcg"></div>
@@ -84,7 +84,7 @@ class Services extends Component {
                   <img className="services__block__img" src="/img/dizel/dizel-1.png" alt="Газодизель" />
                   <h2 className="services__block__caption">Газодизель</h2>
                 </div>
-                <a className="link__block" href="#0" />
+                <a className="link__block" href="/services/dizel" />
               </article>
               <article className="services__block">
                 <div className="service__block__bcg"></div>
@@ -92,7 +92,7 @@ class Services extends Component {
                   <img className="services__block__img" src="/img/variator/variator-1.png" alt="Вариатор" />
                   <h2 className="services__block__caption">Вариатор</h2>
                 </div>
-                <a className="link__block" href="#0" />
+                <a className="link__block" href="/services/variator" />
               </article>
             </div>
           </div>

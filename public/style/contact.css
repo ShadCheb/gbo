@@ -1,0 +1,104 @@
+.contact {
+  position: relative;
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+.contact__body {
+  display: flex;
+  align-items: center;
+}
+.contact__body__text {
+  width: 60%;
+}
+.contact__body__text > div {
+  padding: 50px;
+  color: #002632;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 20px 60px 0 rgba(28,28,28,.07);
+}
+.contact__row {
+  margin-bottom: 10px;
+}
+.contact__row__caption {
+  font-size: 27px;
+  line-height: 1.2em;
+  font-weight: 500;
+}
+.contact__row__value {
+  margin-left: 40px;
+  margin-bottom: 14px;
+  font-size: 21px;
+  line-height: 1.2em;
+  font-weight: 500;
+  color: #00c2ff;
+}
+.contact__body__img {
+  width: 40%;
+}
+.contact__body__img > img {
+  width: 120%;
+}
+.contact__bcg {
+  top: -40px;
+  right: 0;
+}
+.contact__caption {
+  margin-bottom: 20px;
+  font-size: 42px;
+  line-height: 1.2em;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+@media (max-width: 992px) {
+  .contact__row__caption {
+    font-size: 24px;
+  }
+}
+@media (max-width: 768px) {
+  .contact {
+    padding-top: 20px;
+  }
+  .installment__caption {
+    margin-bottom: 10px;
+    font-size: 20px;
+    line-height: 1.2em;
+  }
+  .contact__row__caption {
+    font-size: 18px;
+  }
+  .contact__row__value {
+    font-size: 18px;
+  }
+  .contact__caption {
+    font-size: 30px;
+  }
+  .contact__body {
+    flex-direction: column-reverse;
+  }
+  .contact__body__img {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  .contact__body__img > img {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    max-width: 280px;
+  }
+  .contact__body__text {
+    width: 100%;
+  }
+  .contact__body__text > div {
+    padding: 40px 30px 50px 30px;
+  }
+}
+@media (max-width: 418px) {
+  .contact__caption {
+    font-size: 24px;
+  }
+  .contact__body__text > div {
+    padding: 30px 20px 40px 20px;
+  }
+}
+

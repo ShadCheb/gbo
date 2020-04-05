@@ -8,6 +8,8 @@ const Time = require('../models/time');
 const Phone = require('../models/phone');
 const Employee = require('../models/employee');
 const Equipment = require('../models/equipment');
+const Review = require('../models/review');
+const ReviewVk = require('../models/review_vk');
 
 const cityList = sequelize.define('city_list', {
   id: {
@@ -33,5 +35,7 @@ cityList.hasOne(Time);
 cityList.hasOne(Phone);
 cityList.hasMany(Employee);
 cityList.hasMany(Equipment);
+cityList.hasOne(ReviewVk);
+cityList.hasMany(Review);
 
 module.exports = cityList;

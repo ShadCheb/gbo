@@ -1,0 +1,13 @@
+<div class="body" id="page-other" data-csrf="{{csrf}}"  data-info="{{data}}" data-city_list="{{cityList}}">
+
+</div>
+
+{{#if isStock}}
+  <script src="/stock.js"></script>
+{{else if isContact}}
+  <script src="/contact.js"></script>
+{{else if isWork}}
+  <script src="/work.js"></script>
+{{else if isWorkItem}}
+  <script src="/work-item.js"></script>
+{{/if}}

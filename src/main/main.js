@@ -225,10 +225,6 @@ class Main extends Component {
           }
         }
       );
-      // let placemark = new ymaps.Placemark(p, {
-      //   preset: 'islands#blueDotIcon',
-      //   iconColor: '#00c2ff'
-      // });
 
       map.geoObjects.add(placemark);
     });
@@ -629,6 +625,57 @@ class Main extends Component {
               <div className="container">
                 <div className="caption__container">
                   <h2 className="caption__section">Отзывы</h2>
+                </div>
+                <div class="review__body">
+                  <div class="review__bcg-1 bcg--1"></div>
+                  <div class="review__bcg-2 bcg--2"></div>
+                  <div class="review__body__mask">
+                    <article class="review__block">
+                      <div class="review__img">
+                        <img src="https://sun9-16.userapi.com/c855016/v855016226/1cf2fe/ro_GQypuZ48.jpg?ava=1" />
+                      </div>
+                      <div class="review__text">
+                        <p class="review__text__caption">Лёня Власов</p>
+                        <p class="review__text__p">Быстро сделали очередное то, качество на высшем уровне, хорошее отношение к клиентам, быстро и качественно работают. Дальнейших успехов</p>
+                        <p class="review__text__date">27 марта 2020 в 18:36</p>
+                      </div>
+                    </article>
+                    <article class="review__block">
+                      <div class="review__img">
+                        <img src="https://sun9-16.userapi.com/c855016/v855016226/1cf2fe/ro_GQypuZ48.jpg?ava=1" />
+                      </div>
+                      <div class="review__text">
+                        <p class="review__text__caption">Лёня Власов</p>
+                        <p class="review__text__p">Быстро сделали очередное то, качество на высшем уровне, хорошее отношение к клиентам, быстро и качественно работают. Дальнейших успехов</p>
+                        <p class="review__text__date">27 марта 2020 в 18:36</p>
+                      </div>
+                    </article>
+                    <article class="review__block">
+                      <div class="review__img">
+                        <img src="https://sun9-16.userapi.com/c855016/v855016226/1cf2fe/ro_GQypuZ48.jpg?ava=1" />
+                      </div>
+                      <div class="review__text">
+                        <p class="review__text__caption">Лёня Власов</p>
+                        <p class="review__text__p">Быстро сделали очередное то, качество на высшем уровне, хорошее отношение к клиентам, быстро и качественно работают. Дальнейших успехов</p>
+                        <p class="review__text__date">27 марта 2020 в 18:36</p>
+                      </div>
+                    </article>
+                    <article class="review__block">
+                      <div class="review__img">
+                        <img src="https://sun9-16.userapi.com/c855016/v855016226/1cf2fe/ro_GQypuZ48.jpg?ava=1" />
+                      </div>
+                      <div class="review__text">
+                        <p class="review__text__caption">Лёня Власов</p>
+                        <p class="review__text__p">Быстро сделали очередное то, качество на высшем уровне, хорошее отношение к клиентам, быстро и качественно работают. Дальнейших успехов</p>
+                        <p class="review__text__date">27 марта 2020 в 18:36</p>
+                      </div>
+                    </article>
+                    <div class="review__btn">
+                      <a className="btn-1 btn--blue" 
+                        aria-label="Смотреть отзывы"
+                      >Больше отзывов</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
