@@ -60,7 +60,7 @@ router.get('/', async (req, res) => {
     );
 
     res.render('main', {
-      title: 'Главная страница | Gazoved ' + (data.name || ''),
+      title: 'Главная страница | Gazoved ' + (data && data.name || ''),
       isHome: true,
       page: 'isHome',
       cityList: JSON.stringify(cityList),
