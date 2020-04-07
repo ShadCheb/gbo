@@ -1279,6 +1279,8 @@
   display: flex;
   margin-left: 35px;
   margin-right: 35px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .staff__block {
   padding-left: 35px;
@@ -1949,7 +1951,7 @@
 
 .gibdd {
   padding-top: 100px;
-  padding-bottom: 70px;
+  padding-bottom: 110px;
 }
 .gibdd__bcg {
   bottom: 50px;

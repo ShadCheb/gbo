@@ -48,9 +48,8 @@ class Review extends Component {
 
     this.state = {
       reviewListVk: [],
-      reviewListDb: [],
-      groupId: '147953602',
-      topicId: '37109092',
+      groupId: '',
+      topicId: '',
 
       infoGroup: null
     }
@@ -68,9 +67,11 @@ class Review extends Component {
       })
         .then(res => res.json())
         .then(data => {
-          console.log('data', data);
           if (data.result) {
-            this.props.handlerChangesData({review: data.result}, true);
+            this.props.handlerChangesData({
+              review: data.result.reviews,
+              reviewVk: data.result.review_vk
+            }, true);
           }
         })
         .catch(e => {
@@ -97,10 +98,23 @@ class Review extends Component {
 
     dateFormat = dateFormat.getDate() + ' ' + MONTHS[dateFormat.getMonth()] + ' ' + dateFormat.getFullYear() + ' в ' + hours + ':' + minutes;
 
-    return date;
+    return dateFormat;
   }
 
   getReviewVk = () => {
+    let groupId = document.querySelector('#a-review__group').value;
+    let topicId = document.querySelector('#a-review__token').value;
+    let id = (this.props.data.reviewVk)
+      ? this.props.data.reviewVk.id
+      : null;
+
+    if (!groupId || !topicId) {
+      this.error('Введите данные группы и обсуждения');
+
+      return;
+    }
+
+    // Запись группы и токена
     fetch('/admin/review_vk', {
       method: 'post',
       headers: {
@@ -108,8 +122,23 @@ class Review extends Component {
         'X-XSRF-TOKEN': this.props.csrf
       },
       body: JSON.stringify({
-        groupId: this.state.groupId,
-        topicId: this.state.topicId,
+        id,
+        groupId,
+        topicId,
+        cityListId: this.props.data.cityListId
+      })
+    });
+
+    // Загрузить отзывы с группы ВК
+    fetch('/admin/review/vk', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        'X-XSRF-TOKEN': this.props.csrf
+      },
+      body: JSON.stringify({
+        groupId,
+        topicId,
       })
     })
       .then(res => res.json())
@@ -131,7 +160,7 @@ class Review extends Component {
               id_com: item.id,
               text: item.text,
               date: this.validationDate(item.date),
-              profile: profiles[item.from_id]
+              profile: profiles[item.from_id] || {}
             });
           });
 
@@ -147,12 +176,15 @@ class Review extends Component {
           });
       })
       .catch(e => {
-        if (e.error)
-          this.props.handlerChangesData(e.error);
+        this.error('Данные группы введены не верно');
+        // if (e.error)
+        //   this.props.handlerChangesData(e.error);
       })
 	}
 
   addReview = (review) => {
+    review['city_list_id'] = this.props.data.cityListId;
+
     fetch('/admin/review', {
       method: 'post',
       headers: {
@@ -174,23 +206,36 @@ class Review extends Component {
 
 
   render() {
-    let {reviewListVk, reviewListDb, infoGroup} = this.state;
+    let {reviewListVk, infoGroup} = this.state;
+    let reviewListDb = this.props.data.review || [];
+    let reviewVk = this.props.data.reviewVk;
+    let reviewGroup = (reviewVk)
+      ? reviewVk.id_group : null;
+    let reviewToken = (reviewVk) 
+      ? reviewVk.id_token : null;
 
     return (
       <section className="a-section__review">
         { infoGroup && getInfoGroup(infoGroup)}
         <div className="a-row">
           <div className="a-col__1"><p>id группы (147953602):</p></div>
-          <div className="a-col__2" id="a-timer__from">
-            <Input placeholder="id группы" defaultValue={this.state.groupId} />
+          <div className="a-col__2">
+            <Input placeholder="id группы" 
+              id="a-review__group"
+              value={reviewGroup} 
+            />
           </div>
         </div>
         <div className="a-row">
           <div className="a-col__1"><p>id топик (37109092):</p></div>
-          <div className="a-col__2" id="a-timer__from">
-            <Input placeholder="id топик" defaultValue={this.state.topicId} />
+          <div className="a-col__2">
+            <Input placeholder="id топик" 
+              id="a-review__token"
+              value={reviewToken} 
+            />
           </div>
         </div>
+        <div className="a-row">На сайте будут отображаться последние 5 отзывов!</div>
         <div className="a-row">
           <div className="a-col__1"></div>
           <div className="a-col__2">
@@ -203,43 +248,47 @@ class Review extends Component {
         <div className="a-row a-row--start">
           <div className="a-col__1"><p>Отзывы с группы:</p></div>
           <div className="a-col__2">
+            <div className="review__container">
             {
-              reviewListVk && reviewListVk.map(reviw => {
+              reviewListVk && reviewListVk.map(review => {
                 return (
-                  <article className="review__block" key={reviw.id_com}>
-                    <div className="review__img">
-                      <img src={reviw.profile.avatar} />
-                    </div>
-                    <div className="review__text">
-                      <p className="review__text__caption">{reviw.profile.name}</p>
-                      <p className="review__text__p">{reviw.text}</p>
-                      <p className="review__text__date">{reviw.date}</p>
-                    </div>
+                  <div className="review__row" key={review.id_com}>
+                    <article className="review__block">
+                      <div className="review__img">
+                        <img src={review.profile && review.profile.avatar || ''} />
+                      </div>
+                      <div className="review__text">
+                        <p className="review__text__caption">{review.profile && review.profile.name || '-'}</p>
+                        <p className="review__text__p">{review.text}</p>
+                        <p className="review__text__date">{review.date}</p>
+                      </div>
+                    </article>
                     <Button 
                       type="primary"
-                      onClick={this.addReview.bind(this, reviw)}
+                      onClick={this.addReview.bind(this, review)}
                       icon={<PlusOutlined />}
                     />
-                  </article>
+                  </div>
                 )
               })
             }
+            </div>
           </div>
         </div>
-        <div className="a-row">
+        <div className="a-row a-row--start">
           <div className="a-col__1"><p>Отзывы в базе данных:</p></div>
           <div className="a-col__2">
             {
-              reviewListDb.map((reviw, idx) => {
+              reviewListDb.map((review, idx) => {
                 return (
                   <article className="review__block" key={idx}>
                     <div className="review__img">
-                      <img src="https://sun9-16.userapi.com/c855016/v855016226/1cf2fe/ro_GQypuZ48.jpg?ava=1" />
+                      <img src={review.avatar || ''} />
                     </div>
                     <div className="review__text">
-                      <p className="review__text__caption">Лёня Власов</p>
-                      <p className="review__text__p">Быстро сделали очередное то, качество на высшем уровне, хорошее отношение к клиентам, быстро и качественно работают. Дальнейших успехов</p>
-                      <p className="review__text__date">27 марта 2020 в 18:36</p>
+                      <p className="review__text__caption">{review.name}</p>
+                      <p className="review__text__p">{review.review}</p>
+                      <p className="review__text__date">{review.date}</p>
                     </div>
                   </article>
                 )
@@ -247,10 +296,6 @@ class Review extends Component {
             }
           </div>
         </div>
-        {/* <div className="a-row">
-          <div className="a-col__1"></div>
-          <div className="a-col__2"><Button type="primary" onClick={this.onSave}>Сохранить</Button></div>
-        </div> */}
       </section>
     );
   }

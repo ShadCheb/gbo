@@ -169,9 +169,11 @@ function BodyList({component, csrf, data, handlerChangesData}) {
     case typeList[7].brief: // 'review'
       let dataReview = {};
       
-      dataReview['review'] = (data.review) 
+      /* dataReview['review'] = (data.review) 
         ? data.review
-        : null;
+        : null; */
+      dataReview['review'] = data.review;
+      dataReview['reviewVk'] = data.reviewVk;
     
       dataReview['cityListId'] = data.id;
 

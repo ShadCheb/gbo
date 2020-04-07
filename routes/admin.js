@@ -512,7 +512,7 @@ router.delete('/equipment/:id', auth, async(req, res) => {
   }
 });
 
-router.post('/review_vk', auth, async(req, res) => {
+router.post('/review/vk', auth, async(req, res) => {
   let {groupId, topicId} = req.body;
 
   if (!groupId || !topicId)
@@ -544,8 +544,7 @@ router.post('/review_vk', auth, async(req, res) => {
 router.post('/review/get', auth, async(req, res) => {  
   try {
     const cityId = req.body.cityId;
-
-    const result = await CityList.findAll({
+    const result = await CityList.findOne({
       where: {id: cityId},
       include: [
         { model: ReviewVk },
@@ -558,7 +557,10 @@ router.post('/review/get', auth, async(req, res) => {
     });
 
     if (!result)
-      result = [];
+      result = {
+        review_vk: null,
+        reviews: []
+      };
 
     res.status(201).json({result});
   } catch(e) {
@@ -567,23 +569,57 @@ router.post('/review/get', auth, async(req, res) => {
   }
 });
 
+router.post('/review_vk', auth, async(req, res) => {
+  let data = req.body;
+
+  if (data.id) {
+    try {  
+      ReviewVk.update({
+        id_group: data.groupId,
+        id_token: data.topicId,
+      },
+      { where: {id: data.id} })    
+        .then(() => {
+          res.status(203).json({});
+        });
+    } catch (e) {
+      console.log('Error! ', e);
+      res.status(500).json({error: 'Произошла ошибка' + e});
+    }
+  } else {
+    try {  
+      ReviewVk.create({
+        id_group: data.groupId,
+        id_token: data.topicId,
+        cityListId: data.cityListId
+      })    
+        .then(() => {
+          res.status(203).json({});
+        });
+    } catch (e) {
+      console.log('Error! ', e);
+      res.status(500).json({error: 'Произошла ошибка' + e});
+    }
+  }
+});
 
 router.post('/review', auth, async(req, res) => {
   let data = req.body;
+  let result = {}
 
   try {
     Review.create({
-      name: data.name,
-      review: data.review,
+      name: data.profile.name,
+      review: data.text,
       date: data.date,
-      avatar: data.avatar,
+      avatar: data.profile.avatar,
       id_com: data.id_com,
       cityListId: data.city_list_id
     })    
-      .then(async (data) => {
-        const result = await Review.findAll({
+      .then(async () => {
+        result = await Review.findAll({
           where: {cityListId: data.city_list_id},
-          order: [ [ 'date', 'DESC ' ] ],
+          order: [[ 'id', 'DESC']],
           limit: 5
         });
 

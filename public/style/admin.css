@@ -204,22 +204,36 @@ p {
   margin-right: 10px;
   width: 50px;
 }
+.review__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.review__row > button {
+  margin-right: 0;
+  min-width: 32px;
+}
 .review__block {
   display: flex;
   align-items: flex-start;
   padding: 10px 10px;
   margin-bottom: 2px;
+  margin-right: 4px;
   border: 1px solid #e9e9e9;
   border-radius: 4px;
   background: #fff;
+  width: 100%;
 }
 .review__img {
   margin-right: 16px;
-  width: 50px;
-  height: 50px;
-  min-width: 50px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
   border-radius: 50%;
   overflow: hidden;
+}
+.review__img > img {
+  width: 100%;
 }
 .review__text__caption {
   margin-bottom: 5px;
@@ -238,5 +252,9 @@ p {
   font-size: 10px;
   line-height: 1.2em;
   color: #938e8a;
+}
+.review__container {
+  max-height: 400px;
+  overflow: auto;
 }
 

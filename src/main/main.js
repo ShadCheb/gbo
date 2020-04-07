@@ -7,6 +7,7 @@ import Benefit from './components/Benefit';
 import Question from './components/Question';
 import Price from './components/Price';
 import Employee from './components/Employee';
+import Review from './components/Review';
 import Map from './components/Map';
 import ModalRecord from './components/ModalRecord';
 import Footer from './components/Footer';
@@ -20,7 +21,6 @@ const csrf = container.dataset.csrf;
 const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
 
-
 const certificates1 = [
   'img/certificates/certif_1.jpg',
   'img/certificates/certif_2.jpg',
@@ -30,6 +30,8 @@ const certificates2 = [
   'img/certificates/certif_4_1.jpg',
   'img/certificates/certif_4_2.jpg',
 ];
+
+console.log('data', infoCity);
 
 
 const PhotoItem = ({image, group, id}) => {
@@ -211,7 +213,7 @@ class Main extends Component {
 
     points.forEach(function(p) {
       let polygonLayout = ymaps.templateLayoutFactory.createClass(
-        `<div class="placemark__layout"><p>${p.address}</p></div>`
+        `<div className="placemark__layout"><p>${p.address}</p></div>`
       );
       let placemark = new ymaps.Placemark(p.coord, {
         hintContent: p.address
@@ -469,9 +471,9 @@ class Main extends Component {
 
             {/* Сотрудники */}
             {
-              (infoCity.employee) 
+              (infoCity.employees) 
                 ? (<Employee
-                  employeeList={infoCity.employee}
+                  employeeList={infoCity.employees}
                 />) : ('')
             }
 
@@ -621,64 +623,14 @@ class Main extends Component {
               </div>
             </section>
 
-            <section className="review">
-              <div className="container">
-                <div className="caption__container">
-                  <h2 className="caption__section">Отзывы</h2>
-                </div>
-                <div class="review__body">
-                  <div class="review__bcg-1 bcg--1"></div>
-                  <div class="review__bcg-2 bcg--2"></div>
-                  <div class="review__body__mask">
-                    <article class="review__block">
-                      <div class="review__img">
-                        <img src="https://sun9-16.userapi.com/c855016/v855016226/1cf2fe/ro_GQypuZ48.jpg?ava=1" />
-                      </div>
-                      <div class="review__text">
-                        <p class="review__text__caption">Лёня Власов</p>
-                        <p class="review__text__p">Быстро сделали очередное то, качество на высшем уровне, хорошее отношение к клиентам, быстро и качественно работают. Дальнейших успехов</p>
-                        <p class="review__text__date">27 марта 2020 в 18:36</p>
-                      </div>
-                    </article>
-                    <article class="review__block">
-                      <div class="review__img">
-                        <img src="https://sun9-16.userapi.com/c855016/v855016226/1cf2fe/ro_GQypuZ48.jpg?ava=1" />
-                      </div>
-                      <div class="review__text">
-                        <p class="review__text__caption">Лёня Власов</p>
-                        <p class="review__text__p">Быстро сделали очередное то, качество на высшем уровне, хорошее отношение к клиентам, быстро и качественно работают. Дальнейших успехов</p>
-                        <p class="review__text__date">27 марта 2020 в 18:36</p>
-                      </div>
-                    </article>
-                    <article class="review__block">
-                      <div class="review__img">
-                        <img src="https://sun9-16.userapi.com/c855016/v855016226/1cf2fe/ro_GQypuZ48.jpg?ava=1" />
-                      </div>
-                      <div class="review__text">
-                        <p class="review__text__caption">Лёня Власов</p>
-                        <p class="review__text__p">Быстро сделали очередное то, качество на высшем уровне, хорошее отношение к клиентам, быстро и качественно работают. Дальнейших успехов</p>
-                        <p class="review__text__date">27 марта 2020 в 18:36</p>
-                      </div>
-                    </article>
-                    <article class="review__block">
-                      <div class="review__img">
-                        <img src="https://sun9-16.userapi.com/c855016/v855016226/1cf2fe/ro_GQypuZ48.jpg?ava=1" />
-                      </div>
-                      <div class="review__text">
-                        <p class="review__text__caption">Лёня Власов</p>
-                        <p class="review__text__p">Быстро сделали очередное то, качество на высшем уровне, хорошее отношение к клиентам, быстро и качественно работают. Дальнейших успехов</p>
-                        <p class="review__text__date">27 марта 2020 в 18:36</p>
-                      </div>
-                    </article>
-                    <div class="review__btn">
-                      <a className="btn-1 btn--blue" 
-                        aria-label="Смотреть отзывы"
-                      >Больше отзывов</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+            {/* Сотрудники */}
+            {
+              (infoCity.reviews) 
+                ? (<Review
+                  reviewList={infoCity.reviews}
+                  reviewVk={infoCity.review_vk}
+                />) : ('')
+            }
 
             {/* Карта */}
             <Map 

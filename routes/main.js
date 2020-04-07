@@ -3,17 +3,16 @@ const router = Router();
 const nodemailer = require('nodemailer');
 const fs = require("fs");
 
-const City = require('../models/city');
-const Address = require('../models/address');
-const Social = require('../models/social');
-const Time = require('../models/time');
-const Phone = require('../models/phone');
 const Employee = require('../models/employee');
 const Equipment = require('../models/equipment');
+const Review = require('../models/review');
+const ReviewVk = require('../models/review_vk');
 const CityList = require('../models/cityList');
 
 const reqEmail = require('../emails/request');
 const keys = require('../keys');
+
+const detaGeneral = require('../middleware/dataGeneral');
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.yandex.ru',
@@ -33,34 +32,30 @@ router.get('/test', async(req, res) => {
   res.end(index);
 });
 
-router.get('/', async (req, res) => {
+router.get('/', detaGeneral,  async (req, res) => {
   try {
-    let city = req.query.city;
-    const cityList = await CityList.findAll();
-
-    if (!city || cityList.indexOf(city.toLowerCase()) == -1)
-      city = 'cheboksary';
-    
-    let data = await CityList.findOne(
+    let {cityList, data} = res.locals.dataGeneral;
+    let dataPage = await CityList.findOne(
       {
-        where: {brief: city},
+        where: {brief: data.brief},
         include: [
-          { model: City },
-          {
-            model: Address,
-            as: 'addresses'
-          },
-          { model: Social }, 
-          { model: Time }, 
-          { model: Phone },
           { model: Employee },
-          { model: Equipment }
+          { model: Equipment },
+          { model: Review, 
+            order: [[ 'id', 'DESC']],
+            limit: 5 
+          },
+          { model: ReviewVk },
+          { model: Equipment },
         ]
       }
-    );
+    )
+      .then(result => result.get({plain:true}));
+
+    data = Object.assign(data, dataPage);
 
     res.render('main', {
-      title: 'Главная страница | Gazoved ' + (data && data.name || ''),
+      title: 'Главная страница | Gazoved ' + data.name,
       isHome: true,
       page: 'isHome',
       cityList: JSON.stringify(cityList),

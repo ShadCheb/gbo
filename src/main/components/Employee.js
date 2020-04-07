@@ -28,38 +28,6 @@ function Employee({employeeList}) {
               </div>
             ))
           }
-
-
-          {/* <div className="staff__block">
-            <div className="staff__img">
-              <img src="/img/staff/staff-1.jpg" alt="Иван Иванов" />
-            </div>
-            <div className="staff__label">
-              <p className="staff__label__name">Иван Иванов</p>
-              <p className="staff__label__post">мастер установки ГБО</p>
-              <p className="staff__label__exp">опыт 5 лет</p>
-            </div>
-          </div>
-          <div className="staff__block">
-            <div className="staff__img">
-              <img src="/img/staff/staff-1.jpg" alt="Иван Иванов" />
-            </div>
-            <div className="staff__label">
-              <p className="staff__label__name">Иван Иванов</p>
-              <p className="staff__label__post">мастер установки ГБО</p>
-              <p className="staff__label__exp">опыт 5 лет</p>
-            </div>
-          </div>
-          <div className="staff__block">
-            <div className="staff__img">
-              <img src="/img/staff/staff-1.jpg" alt="Иван Иванов" />
-            </div>
-            <div className="staff__label">
-              <p className="staff__label__name">Иван Иванов</p>
-              <p className="staff__label__post">мастер установки ГБО</p>
-              <p className="staff__label__exp">опыт 5 лет</p>
-            </div>
-          </div> */}
         </div>
       </div>
     </section>
