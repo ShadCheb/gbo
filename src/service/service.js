@@ -52,6 +52,7 @@ class Services extends Component {
               handleChange={this.handleChange}
             />
             <Nav 
+              page="isServices"
               showMenu={this.state.showMenu}
               social={infoCity.social}
               closeMenu={this.toggleMenu}

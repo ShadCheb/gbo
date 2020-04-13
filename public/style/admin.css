@@ -258,3 +258,56 @@ p {
   overflow: auto;
 }
 
+.a-card__work__hedaer {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+}
+.a-card__work__img {
+  display:  flex;
+  margin-right: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #1c1c1c;
+  overflow: hidden;
+}
+.a-card__work__img > img {
+  max-height: 100%;
+}
+.a-card__block {
+  margin-bottom: 10px;
+}
+.a-card__gallery {
+  display: flex;
+  margin-top: -2px;
+  margin-left: -2px;
+  margin-right: -2px;
+  margin-bottom: -2px;
+}
+.a-card__gallery > img {
+  margin: 2px;
+  max-width: 60px;
+}
+
+.form__shift {
+  margin-top: 7px;
+  margin-bottom: 7px;
+  border: none;
+}
+.a-form__row {
+  display: flex;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  justify-content: space-between;
+}
+.a-form__row > label {
+  margin-right: 4px;
+  width: 100%;
+}
+
+
+
+

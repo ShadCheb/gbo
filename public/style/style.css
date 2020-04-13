@@ -443,14 +443,17 @@ img {
 .main__nav li:last-child a:before {
   right: -44px;
 }
+.main__nav a.active,
 .main__nav a:hover {
   color: #002632;
   background-color: #00c2ff;
 }
+.main__nav a.active:after,
 .main__nav a:hover:after {
   border-bottom-color: #00c2ff;
   border-right-color: #00c2ff;
 }
+.main__nav a.active:before,
 .main__nav a:hover:before {
   border-top-color: #00c2ff;
   border-left-color: #00c2ff;
@@ -465,7 +468,7 @@ img {
 .main__nav a.nav--red::before {
   border-top-color: #da002d;
   border-left-color: #da002d;
-}
+} 
 .main__nav a.nav--red:hover {
   background-color: #00c2ff;
 }
@@ -764,6 +767,7 @@ img {
   padding-top: 40px;
 }
 .modal__btn > button {
+  box-sizing: border-box;
   width: 100%;
 }
 .ant-modal-header {
@@ -949,15 +953,49 @@ input::placeholder {
   font-weight: 300;
   color: #002632;
 }
-.license > span {
+.input__check.license > span {
   border-color: #002632;
 }
-.license > span::after {
+.input__check.license > span::after {
   background-color: #002632;
 }
 .license input:checked~span::after{
   opacity: 1;
 }
+.input__check > input {
+  display: none;
+}
+.input__check > span {
+  position: relative;
+  display: block;
+  width: 22px;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1px solid #00c2ff;
+}
+.input__check > span::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background-color: #00c2ff;
+  transform: scale(0);
+  opacity: 0;
+  transition: all .3s ease;
+}
+.input__check > input:checked~span::after {
+  transform: scale(1);
+  opacity: 1;
+}
+/* .modal__btn > button {
+  box-sizing: border-box;
+  margin-top: 40px;
+  width: 100%;
+} */
 
 @media (max-width: 1140px) {
   .license > p {
@@ -989,6 +1027,12 @@ input::placeholder {
   .license > p {
     font-size: 13px;
     line-height: 1.10em;
+  }
+}
+@media (max-width: 418px) {
+  .modal__btn > button {
+    margin-top: 30px;
+    min-width: 200px;
   }
 }
 
@@ -1586,5 +1630,9 @@ input::placeholder {
     width: 25px;
     height: 20px;
   }
+}
+
+.ant-select-item-option-content {
+  line-height: 34px;
 }
 

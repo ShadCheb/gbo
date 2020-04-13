@@ -71,7 +71,7 @@ class Contact extends Component {
 
     points.forEach(function(p) {
       let polygonLayout = ymaps.templateLayoutFactory.createClass(
-        `<div className="placemark__layout"><p>${p.address}</p></div>`
+        `<div class="placemark__layout"><p>${p.address}</p></div>`
       );
       let placemark = new ymaps.Placemark(p.coord, {
         hintContent: p.address
@@ -108,6 +108,7 @@ class Contact extends Component {
               handleChange={this.handleChange}
             />
             <Nav 
+              page="isContact"
               showMenu={this.state.showMenu}
               social={infoCity.social}
               closeMenu={this.toggleMenu}

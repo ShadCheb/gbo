@@ -57,7 +57,6 @@ router.get('/', detaGeneral,  async (req, res) => {
     res.render('main', {
       title: 'Главная страница | Gazoved ' + data.name,
       isHome: true,
-      page: 'isHome',
       cityList: JSON.stringify(cityList),
       data: JSON.stringify(data)
     });

@@ -12,16 +12,13 @@ function ModalAddEmployee({
   changeValue, visibleAddEmployee
 }) {
 
-  const onOk = async () => {
-    let avatar = data.fileList[0].name;
-
-    // сначала загружаем картинку, если она есть
-    if (data.file) {
+  const uploadAvatar = async (file) => {
+    let promise = new Promise((resolve, reject) => {
       let sendForm = new FormData();
   
-      sendForm.append('filedata', data.file);
+      sendForm.append('filedata', file);
   
-      await fetch('/upload', {
+      fetch('/upload', {
         method: 'post',
         headers: {
           'X-XSRF-TOKEN': csrf
@@ -30,17 +27,29 @@ function ModalAddEmployee({
       })
         .then(res => res.json())
         .then(data => { 
-          if (data.success)
-            avatar = data.success.filename;
+          handlerChangesData({file: null}, true); // проверить
+
+          if (data.success) 
+            resolve(data.success.filename);
         })
         .catch(e => {
           if (e.error) {
             handlerChangesData(e.error);
   
-            return;
+            reject();
           }
-        });  
-    }
+        });
+    });
+
+    return await promise;
+  }
+
+  const onOk = async () => {
+    let avatar = data.fileList[0].name;
+
+    // сначала загружаем картинку, если она есть
+    if (data.file) 
+      uploadAvatar(data.file);
 
     // Теперь сохраняем данный в БД
     let sendForm = new FormData();

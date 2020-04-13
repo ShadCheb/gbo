@@ -10,6 +10,7 @@ const Employee = require('../models/employee');
 const Equipment = require('../models/equipment');
 const Review = require('../models/review');
 const ReviewVk = require('../models/review_vk');
+const Work = require('../models/work');
 
 const cityList = sequelize.define('city_list', {
   id: {
@@ -37,5 +38,6 @@ cityList.hasMany(Employee);
 cityList.hasMany(Equipment);
 cityList.hasOne(ReviewVk);
 cityList.hasMany(Review);
+cityList.hasMany(Work);
 
 module.exports = cityList;

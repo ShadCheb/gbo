@@ -1,157 +1,58 @@
 const {Router} = require('express');
 const router = Router();
 
-const CityList = require('../models/cityList');
-const Address = require('../models/address');
-const Social = require('../models/social');
-const Time = require('../models/time');
-const Phone = require('../models/phone');
+const detaGeneral = require('../middleware/dataGeneral');
 
 
-router.get('/', async (req, res) => {
-  let city = req.query.city;
-  const cityList = await CityList.findAll();
-
-  if (!city || cityList.indexOf(city.toLowerCase()) == -1)
-    city = 'cheboksary';
-
-  const data = await CityList.findOne(
-    {
-      where: {brief: city},
-      include: [
-        {
-          model: Address,
-          as: 'addresses'
-        },
-        { model: Social }, 
-        { model: Time }, 
-        { model: Phone }
-      ]
-    }
-  );
+router.get('/', detaGeneral, (req, res) => {
+  let {cityList, data} = res.locals.dataGeneral;
 
   res.render('service', {
-    title: 'Услуги | Gazoved ' + (data && data.name || ''),
+    title: 'Услуги | Gazoved ' + data.name,
     isServices: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)
   });
 });
 
-router.get('/metan', async (req, res) => {
-  let city = req.query.city;
-  const cityList = await CityList.findAll();
-
-  if (!city || cityList.indexOf(city.toLowerCase()) == -1)
-    city = 'cheboksary';
-
-  const data = await CityList.findOne(
-    {
-      where: {brief: city},
-      include: [
-        {
-          model: Address,
-          as: 'addresses'
-        },
-        { model: Social }, 
-        { model: Time }, 
-        { model: Phone }
-      ]
-    }
-  );
+router.get('/metan', detaGeneral, (req, res) => {
+  let {cityList, data} = res.locals.dataGeneral;
 
   res.render('service-item', {
-    title: 'ГБО Метан | Gazoved ' + (data && data.name || ''),
+    title: 'ГБО Метан | Gazoved ' + data.name,
     isMetan: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)
   });
 });
 
-router.get('/dizel', async (req, res) => {
-  let city = req.query.city;
-  const cityList = await CityList.findAll();
-
-  if (!city || cityList.indexOf(city.toLowerCase()) == -1)
-    city = 'cheboksary';
-
-  const data = await CityList.findOne(
-    {
-      where: {brief: city},
-      include: [
-        {
-          model: Address,
-          as: 'addresses'
-        },
-        { model: Social }, 
-        { model: Time }, 
-        { model: Phone }
-      ]
-    }
-  );
+router.get('/dizel', detaGeneral, (req, res) => {
+  let {cityList, data} = res.locals.dataGeneral;
 
   res.render('service-item', {
-    title: 'Газодизель | Gazoved ' + (data && data.name || ''),
+    title: 'Газодизель | Gazoved ' + data.name,
     isDizel: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)
   });
 });
 
-router.get('/registration', async (req, res) => {
-  let city = req.query.city;
-  const cityList = await CityList.findAll();
-
-  if (!city || cityList.indexOf(city.toLowerCase()) == -1)
-    city = 'cheboksary';
-
-  const data = await CityList.findOne(
-    {
-      where: {brief: city},
-      include: [
-        {
-          model: Address,
-          as: 'addresses'
-        },
-        { model: Social }, 
-        { model: Time }, 
-        { model: Phone }
-      ]
-    }
-  );
+router.get('/registration', detaGeneral, (req, res) => {
+  let {cityList, data} = res.locals.dataGeneral;
 
   res.render('service-item', {
-    title: 'Регистрация ГБО | Gazoved ' + (data && data.name || ''),
+    title: 'Регистрация ГБО | Gazoved ' + data.name,
     isRegister: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)
   });
 });
 
-router.get('/variator', async (req, res) => {
-  let city = req.query.city;
-  const cityList = await CityList.findAll();
-
-  if (!city || cityList.indexOf(city.toLowerCase()) == -1)
-    city = 'cheboksary';
-
-  const data = await CityList.findOne(
-    {
-      where: {brief: city},
-      include: [
-        {
-          model: Address,
-          as: 'addresses'
-        },
-        { model: Social }, 
-        { model: Time }, 
-        { model: Phone }
-      ]
-    }
-  );
+router.get('/variator', detaGeneral, (req, res) => {
+  let {cityList, data} = res.locals.dataGeneral;
 
   res.render('service-item', {
-    title: 'Вариатор | Gazoved ' + (data && data.name || ''),
+    title: 'Вариатор | Gazoved ' + data.name,
     isVariator: true,
     cityList: JSON.stringify(cityList),
     data: JSON.stringify(data)

@@ -4,15 +4,24 @@ import ReactDOM from 'react-dom';
 import Header from '../main/components/Header';
 import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
+import ModalRecord from '../main/components/ModalRecord';
+
 
 const container = document.getElementById('page-service-item');
+const csrf = container.dataset.csrf;
 const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
+
 
 class Variator extends Component {
   state = {
     cityList,
     infoCity,
+
+    modalRecord: {
+      visible: false,
+      title: 'Форма'
+    },
 
     showMenu: false, // открытие меню
   }
@@ -30,6 +39,26 @@ class Variator extends Component {
     });
 
     location.href = '/?city=' + brief;
+  }
+
+  openModalRecord = (e) => {
+    let target = e.target;
+    let title = target.closest('button').textContent;
+    let modalRecord = {
+      visible: true,
+      title
+    };
+
+    this.setState({modalRecord});
+  }
+
+  closeModalRecord = () => {
+    let modalRecord = {
+      visible: false,
+      title: 'Форма'
+    };
+
+    this.setState({modalRecord});
   }
 
   // Открытие/закрытие меню
@@ -52,6 +81,7 @@ class Variator extends Component {
               handleChange={this.handleChange}
             />
             <Nav 
+              page="isServices"
               showMenu={this.state.showMenu}
               social={infoCity.social}
               closeMenu={this.toggleMenu}
@@ -65,7 +95,8 @@ class Variator extends Component {
               <div className="s-header__text">
                 <h1 className="s-caption-h1">
                   <span className="s-caption-h1--i1">Установка</span>Вариатора
-                  <span className="s-caption-h1--i2">в Чебоксарах</span>
+                  <span className="s-caption-h1--i2">в {infoCity.city && 
+                    infoCity.city.name2 || ''}</span>
                 </h1>
                 <ul className="s-header__list">
                   <li><strong>Уменьшение расхода</strong> газа во всех режимах</li>
@@ -73,7 +104,10 @@ class Variator extends Component {
                   <li><strong>Корректное сгорание</strong> газо-воздушной смеси</li>
                 </ul>
                 <div className="s-header__btns">
-                  <button className="btn-1 btn--white" aria-label="Заказать установку">Заказать установку</button>
+                  <button className="btn-1 btn--white" 
+                    aria-label="Заказать установку"
+                    onClick={this.openModalRecord.bind(this)}
+                  >Заказать установку</button>
                 </div>
               </div>
               <div className="s-header__img sm-header__img">
@@ -88,13 +122,13 @@ class Variator extends Component {
             <div className="sr-services__body">
               <div className="sr-services__text services__text--sv">
                 <div>
-                  <p class="text__p"><strong>Вариатор УОЗ (угла опережения зажигания)</strong> – 
+                  <p className="text__p"><strong>Вариатор УОЗ (угла опережения зажигания)</strong> – 
                     электронный прибор, который <strong>регулирует момент поджигания 
                     топливной смеси.</strong></p>
-                  <p class="text__p"><strong>Стандартный электронный блок управления 
+                  <p className="text__p"><strong>Стандартный электронный блок управления 
                     в машине рассчитан на бензин</strong>, поэтому газовая смесь не успевает 
                     прогореть на 100%.</p>
-                  <p class="text__p">Октан-контроллер нужен для того, чтобы <strong>подстроить 
+                  <p className="text__p">Октан-контроллер нужен для того, чтобы <strong>подстроить 
                     угол зажигания под газовую смесь</strong> и дать команду на опережение 
                     электронному управляющему блоку автомобиля.</p>
                 </div>
@@ -153,7 +187,10 @@ class Variator extends Component {
               </div>
             </div>
             <div className="sm-advantages__btn">
-              <button className="btn-1 btn--blue" aria-label="Заказать установку">Заказать установку</button>
+              <button className="btn-1 btn--blue" 
+                aria-label="Заказать установку"
+                onClick={this.openModalRecord.bind(this)}
+              >Заказать установку</button>
             </div>
           </div>
         </section>
@@ -178,7 +215,10 @@ class Variator extends Component {
                       слаженным</strong>. Особенно, на машинах с дифференциальным входом</li>
                   </ul>
                   <div className="sd-conclusion__btn">
-                    <button className="btn-1" aria-label="Заказать установку">Заказать установку</button>
+                    <button className="btn-1" 
+                      aria-label="Заказать установку"
+                      onClick={this.openModalRecord.bind(this)}
+                    >Заказать установку</button>
                   </div>
                 </div>
               </div>
@@ -207,8 +247,11 @@ class Variator extends Component {
                     <strong>установка вариатора – выгодное решение</strong>. Узнайте о том, 
                     следует ли вам в вашем конкретном случае устанавливать 
                     вариатор, позвонив нашим менеджерам.</p>
-                  <div class="sv-conclusion__btn">
-                    <button className="btn-1 btn--blue" aria-label="Заказать установку">Заказать установку</button>
+                  <div className="sv-conclusion__btn">
+                    <button className="btn-1 btn--blue" 
+                      aria-label="Заказать установку"
+                      onClick={this.openModalRecord.bind(this)}
+                    >Заказать установку</button>
                   </div>
                 </div>
               </div>
@@ -219,6 +262,20 @@ class Variator extends Component {
         <Footer 
           activeCity={infoCity}
         />
+
+        <ModalRecord 
+          data={this.state.modalRecord}
+          close={this.closeModalRecord.bind(this)}
+          csrf={csrf}
+        />
+
+        <button className="btn-menu"
+          onClick={this.toggleMenu}
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
       </div>
     );
   }

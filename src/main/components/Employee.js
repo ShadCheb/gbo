@@ -6,7 +6,7 @@ function Employee({employeeList}) {
     <section className="staff">
       <div className="staff__bcg-1" />
       <div className="container">
-        <div className="staff__bcg-2 bcg--2" />
+        <div className="staff__bcg-2 bcg--1" />
         <div className="caption__container">
           <div className="staff__caption">
             <h2 className="caption__section">Наша <strong>команда</strong></h2>

@@ -9,6 +9,7 @@ const container = document.getElementById('page-other');
 const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
 
+
 class Work extends Component {
   state = {
     cityList,
@@ -52,6 +53,7 @@ class Work extends Component {
               handleChange={this.handleChange}
             />
             <Nav 
+              page="isWork"
               showMenu={this.state.showMenu}
               social={infoCity.social}
               closeMenu={this.toggleMenu}
@@ -66,72 +68,47 @@ class Work extends Component {
             <div className="caption__container">
               <h2 className="caption__section ">Наши работы</h2>
             </div>
-            <div className="job__body">
-              <article className="job__item">
-                <div className="job__item__img">
-                  <div className="job__img__label">Подробнее</div>
-                  <img src="/img/not-car.jpg" alt="Hyundai solaris" />
-                </div>
-                <div className="job__item__body">
-                  <h2>Hyundai solaris</h2>
-                </div>
-                <a className="link__block" href="/work/1"></a>
-              </article>
-              <article className="job__item">
-                <div className="job__item__img">
-                  <div className="job__img__label">Подробнее</div>
-                  <img src="/img/not-car.jpg" alt="Hyundai solaris" />
-                </div>
-                <div className="job__item__body">
-                  <h2>Hyundai solaris</h2>
-                </div>
-                <a className="link__block" href="/work/1"></a>
-              </article>
-              <article className="job__item">
-                <div className="job__item__img">
-                  <div className="job__img__label">Подробнее</div>
-                  <img src="/img/not-car.jpg" alt="Hyundai solaris" />
-                </div>
-                <div className="job__item__body">
-                  <h2>Hyundai solaris</h2>
-                </div>
-                <a className="link__block" href="/work/1"></a>
-              </article>
-              <article className="job__item">
-                <div className="job__item__img">
-                  <div className="job__img__label">Подробнее</div>
-                  <img src="/img/not-car.jpg" alt="Hyundai solaris" />
-                </div>
-                <div className="job__item__body">
-                  <h2>Hyundai solaris</h2>
-                </div>
-                <a className="link__block" href="/work/1"></a>
-              </article>
-              <article className="job__item">
-                <div className="job__item__img">
-                  <div className="job__img__label">Подробнее</div>
-                  <img src="/img/not-car.jpg" alt="Hyundai solaris" />
-                </div>
-                <div className="job__item__body">
-                  <h2>Hyundai solaris</h2>
-                </div>
-                <a className="link__block" href="/work/1"></a>
-              </article>
-            </div>
+            {
+              (infoCity.works && infoCity.works.length)
+                ? (
+                <div className="job__body">
+                  { infoCity.works.map((item, idx) => (
+                      <article className="job__item" key={idx}>
+                        <div className="job__item__img">
+                          <div className="job__img__label">Подробнее</div>
+                          <img src={ '/images/' + (item.avatar || 'not-car.jpg') } alt={ item.name } />
+                        </div>
+                        <div className="job__item__body">
+                          <h2>{ item.name }</h2>
+                        </div>
+                        <a className="link__block" href={ '/work/' + item.id }></a>
+                      </article>
+                    ))
+                  }
+                </div>)
+              : (<p>Нет данных</p>)
+            }
             <div className="job__navigation">
-              <a href="#0" className="nav__arrow nav--right">
-                <svg>
-                  <use xlinkHref="img/sprite-icon.svg#icon-back"/>
-                </svg>
-              </a>
-              <a href="#0">2</a>
-              <a href="#0">3</a>
-              <a href="#0">4</a>
-              <a href="#0" className="nav__arrow nav--right">
-                <svg>
-                  <use xlinkHref="img/sprite-icon.svg#icon-next"/>
-                </svg>
-              </a>
+              {
+                (infoCity.page > 1)
+                  ? (<a href={ infoCity.page - 1 } className="nav__arrow nav--right">
+                        <svg>
+                          <use xlinkHref="img/sprite-icon.svg#icon-back"/>
+                        </svg>
+                    </a>) 
+                  : ('')
+              }
+              {
+                <a>{ infoCity.page }</a>
+              }
+              {
+                (infoCity.page < infoCity.pages)
+                  ? (<a href={ infoCity.page + 1 } className="nav__arrow nav--right">
+                    <svg>
+                      <use xlinkHref="img/sprite-icon.svg#icon-next"/>
+                    </svg>
+                  </a>) : ('')
+              }
             </div>
           </div>
         </section>

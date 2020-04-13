@@ -4,15 +4,26 @@ import ReactDOM from 'react-dom';
 import Header from '../main/components/Header';
 import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
+import ModalRecord from '../main/components/ModalRecord';
+
 
 const container = document.getElementById('page-other');
+const csrf = container.dataset.csrf;
 const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
+
+
+console.log('infoCity ', infoCity);
 
 class WorkItem extends Component {
   state = {
     cityList,
     infoCity,
+
+    modalRecord: {
+      visible: false,
+      title: 'Форма'
+    },
 
     showMenu: false, // открытие меню
   }
@@ -30,6 +41,26 @@ class WorkItem extends Component {
     });
 
     location.href = '/?city=' + brief;
+  }
+
+  openModalRecord = (e) => {
+    let target = e.target;
+    let title = target.closest('button').textContent;
+    let modalRecord = {
+      visible: true,
+      title
+    };
+
+    this.setState({modalRecord});
+  }
+
+  closeModalRecord = () => {
+    let modalRecord = {
+      visible: false,
+      title: 'Форма'
+    };
+
+    this.setState({modalRecord});
   }
 
   // Открытие/закрытие меню
@@ -52,6 +83,7 @@ class WorkItem extends Component {
               handleChange={this.handleChange}
             />
             <Nav 
+              page="isWork"
               showMenu={this.state.showMenu}
               social={infoCity.social}
               closeMenu={this.toggleMenu}
@@ -65,10 +97,10 @@ class WorkItem extends Component {
             <div className="wi__header__body">
               <div className="wi__header__img">
                 <div>
-                  <img src="/images/solaris.jpg" />
+                  <img src={'/images/' + (infoCity.avatar || 'not-car.jpg')} />
                 </div>
               </div>
-              <div className="wi__header__text">Hyunday Solaris</div>
+              <div className="wi__header__text">{ infoCity.nameWork || 'Без названия' }</div>
             </div>
           </div>
         </section>
@@ -78,31 +110,43 @@ class WorkItem extends Component {
             <div className="wi-description__body">
               <div className="wi-description__text">
                 <div>
-                  <h2 className="wi-description__caption">Пробег 22&nbsp;000&nbsp;км
-                    <strong> Экономия 41&nbsp;000&nbsp;рублей</strong>
+                  <h2 className="wi-description__caption">
+                    { (infoCity.mileage) ? ('Пробег' + infoCity.mileage + 'км') : ('') }
+                    { (infoCity.saving) ? (<strong> Экономия {infoCity.saving}рублей</strong>) : ('') }
                   </h2>
-                  <div className="wi-description__install">
-                    <p className="text__p2">Установлено газовое оборудование:</p>
-                    <ul className="text__list">
-                      <li>iQ</li>
-                      <li>Газовый редуктор <b>Nordic</b></li>
-                      <li>Форсунки <b>Dymco</b></li>
-                      <li>Фирменные шланги</li>
-                      <li>Термо-пластиковая трубка</li>
-                      <li>Фильтр тонкой очистки</li>
-                      <li>Тороидальный баллон на 54 литров вместо запасного колеса</li>
-                      <li>ВЗУ выведено под бампер</li>
-                    </ul>
-                  </div>
-                  <div className="wi-description__add">
-                    <p className="text__p2">Дополнительно:</p>
-                    <ul className="text__list">
-                      <li>Газовая расходная магистраль проложена по штатной топливной магистрали</li>
-                      <li>Все отверстия и крепёжные элементы обработаны антикором</li>
-                    </ul>
-                  </div>
+                  {
+                    (infoCity.established && infoCity.established.length) 
+                    ? (<div className="wi-description__install">
+                      <p className="text__p2">Установлено газовое оборудование:</p>
+                      <ul className="text__list">
+                        {
+                          infoCity.established.map((item,idx) => (
+                            <li key={ idx }>{ item }</li>
+                          ))
+                        }
+                      </ul>
+                    </div>)
+                    : ('')
+                  }
+                  {
+                    (infoCity.additionally && infoCity.additionally.length) 
+                    ? (<div className="wi-description__add">
+                        <p className="text__p2">Дополнительно:</p>
+                        <ul className="text__list">
+                          {
+                            infoCity.additionally.map((item,idx) => (
+                              <li key={ idx }>{ item }</li>
+                            ))
+                          }
+                        </ul>
+                      </div>)
+                    : ('')
+                  }
                   <div className="wi-description__btn">
-                    <button className="btn-1" aria-label="Заказать установку">Хочу также</button>
+                    <button className="btn-1" 
+                      aria-label="Заказать установку"
+                      onClick={this.openModalRecord.bind(this)}
+                    >Хочу также</button>
                   </div>
                 </div>
               </div>
@@ -111,19 +155,40 @@ class WorkItem extends Component {
                 <h2>Gazoved</h2>
               </div>
             </div>
-            <div className="wi-description__gallery">
-              <div className="wi-description__gallery__img"><img src="/images/solaris.jpg" /></div>
-              <div className="wi-description__gallery__img"><img src="/images/solaris.jpg" /></div>
-              <div className="wi-description__gallery__img"><img src="/images/solaris.jpg" /></div>
-              <div className="wi-description__gallery__img"><img src="/images/solaris.jpg" /></div>
-              <div className="wi-description__gallery__img"><img src="/images/solaris.jpg" /></div>
-            </div>
+            {
+              (infoCity.gallery && infoCity.gallery.length)
+              ? (
+              <div className="wi-description__gallery">
+                {
+                  infoCity.gallery.map((img, idx) => (
+                    <div className="wi-description__gallery__img" key={ idx }>
+                      <img src={ '/images/' + img } />
+                    </div>
+                  ))
+                }
+              </div>)
+              : ('')
+            }
           </div>
         </section>
 
         <Footer 
           activeCity={infoCity}
         />
+
+        <ModalRecord 
+          data={this.state.modalRecord}
+          close={this.closeModalRecord.bind(this)}
+          csrf={csrf}
+        />
+
+        <button className="btn-menu"
+          onClick={this.toggleMenu}
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
       </div>
     );
   }

@@ -13,11 +13,15 @@ router.get('/', (req, res) => {
       layout: 'empty',
       title: 'Страница не найдена'
     });
-  
-  res.render('auth', {
-    title: 'Авторизация',
-    isAuth: true,
-  })
+
+  if (req.session.isAuthenticated || (req.session.user && req.session.user.login)) {
+    res.redirect('/admin')
+  } else {
+    res.render('auth', {
+      title: 'Авторизация',
+      isAuth: true,
+    });
+  }
 });
 
 router.post('/', async (req, res) => {
@@ -45,6 +49,7 @@ router.post('/', async (req, res) => {
             res.status(203).json({error: 'Произошла ошибка. Попробуйе позже'});
             throw err
           }
+
           res.status(200).json({succes: 'Ok'});
         });
       }

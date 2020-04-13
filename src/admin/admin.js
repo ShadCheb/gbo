@@ -10,8 +10,10 @@ import Phone from './components/Phone';
 import Employee from './components/Employee';
 import Equipment from './components/Equipment';
 import Review from './components/Review';
+import Work from './components/Work';
 
 import { 
+  Spin,
   Button, 
   Radio,
   message 
@@ -56,12 +58,16 @@ const typeList = [
     brief: 'review',
     name: 'Отзывы'
   },
+  {
+    brief: 'work',
+    name: 'Работы (блог)'
+  },
 ];
 
 cityList = JSON.parse(cityList);
 
 
-function BodyList({component, csrf, data, handlerChangesData}) {
+function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
   switch(component) {
     case typeList[0].brief: // 'general'
       let {name2, email} = data.city || {name2: null, email: null};
@@ -169,9 +175,6 @@ function BodyList({component, csrf, data, handlerChangesData}) {
     case typeList[7].brief: // 'review'
       let dataReview = {};
       
-      /* dataReview['review'] = (data.review) 
-        ? data.review
-        : null; */
       dataReview['review'] = data.review;
       dataReview['reviewVk'] = data.reviewVk;
     
@@ -183,12 +186,25 @@ function BodyList({component, csrf, data, handlerChangesData}) {
         handlerChangesData={handlerChangesData}
       />);
 
+    case typeList[8].brief: // 'work'
+      let dataWork = {};
+      
+      dataWork['work'] = data.work;
+      dataWork['cityListId'] = data.id;
+
+      return (<Work
+        csrf={csrf}
+        data={dataWork}
+        handlerChangesData={handlerChangesData}
+        setLoading={setLoading}
+      />);
+
     default:
       return (<p>Ошибка при загрузке компонента</p>);
   }
 }
 
-function Body({data, typeList, type, activateType, handlerChangesData}) {
+function Body({data, typeList, type, activateType, handlerChangesData, setLoading}) {
   if (data)
     return (
       <div className="a-body">
@@ -209,6 +225,7 @@ function Body({data, typeList, type, activateType, handlerChangesData}) {
             csrf={csrf}
             data={data}
             handlerChangesData={handlerChangesData}
+            setLoading={setLoading}
           />
         </div>
       </div>
@@ -224,6 +241,8 @@ function Body({data, typeList, type, activateType, handlerChangesData}) {
 
 class Admin extends Component {
   state = {
+    loading: false, // загрузка
+
     csrf, // csrf для отправки post запроса на сервер
     change: false, // Были ли изменения
 
@@ -324,7 +343,11 @@ class Admin extends Component {
   }
 
   activateType = (value) => {
-    this.setState({type: value})
+    this.setState({type: value});
+  }
+
+  setLoading = (value) => {
+    this.setState({loading: value});
   }
 
   render() {
@@ -334,46 +357,49 @@ class Admin extends Component {
 
     return (
       <div>
-        <div className="a-container">
-          <div className="a-header">
-            <p className="a-header__p">{headerText}</p>
-            {
-              <Radio.Group value={this.state.city} onChange={this.selectCity}>
-                {this.state.cityList.map((city, idx) => (
-                  <Radio.Button
-                    key={idx}
-                    value={city.brief}
-                >{city.name}</Radio.Button>
-                ))}
-              </Radio.Group>
-            }
+        <Spin spinning={this.state.loading}>
+          <div className="a-container">
+            <div className="a-header">
+              <p className="a-header__p">{headerText}</p>
+              {
+                <Radio.Group value={this.state.city} onChange={this.selectCity}>
+                  {this.state.cityList.map((city, idx) => (
+                    <Radio.Button
+                      key={idx}
+                      value={city.brief}
+                  >{city.name}</Radio.Button>
+                  ))}
+                </Radio.Group>
+              }
 
-            <Button
-              type="primary"
-              shape="round"
-              className="a-header__add-btn"
-              onClick={() => {
-                this.setModalAddCity(true);
-              }}
-            >
-              <PlusOutlined twoToneColor="#1890ff"/>
-            </Button>
-            <ModalAddCity
-              visibleAddCity={this.state.visibleAddCity}
-              addCity={this.addCity}
-              cancelAddCity={() => {
-                this.setModalAddCity(false);
-              }}
+              <Button
+                type="primary"
+                shape="round"
+                className="a-header__add-btn"
+                onClick={() => {
+                  this.setModalAddCity(true);
+                }}
+              >
+                <PlusOutlined twoToneColor="#1890ff"/>
+              </Button>
+              <ModalAddCity
+                visibleAddCity={this.state.visibleAddCity}
+                addCity={this.addCity}
+                cancelAddCity={() => {
+                  this.setModalAddCity(false);
+                }}
+              />
+            </div>
+            <Body 
+              data={this.state.data}
+              typeList={this.state.typeList}
+              type={this.state.type}
+              activateType={this.activateType}
+              handlerChangesData={this.handlerChangesData}
+              setLoading={this.setLoading}
             />
           </div>
-          <Body 
-            data={this.state.data}
-            typeList={this.state.typeList}
-            type={this.state.type}
-            activateType={this.activateType}
-            handlerChangesData={this.handlerChangesData}
-          />
-        </div>
+        </Spin>
       </div>
     )
   };

@@ -4,15 +4,23 @@ import ReactDOM from 'react-dom';
 import Header from '../main/components/Header';
 import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
+import ModalRecord from '../main/components/ModalRecord';
 
 const container = document.getElementById('page-service-item');
+const csrf = container.dataset.csrf;
 const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
+
 
 class Dizel extends Component {
   state = {
     cityList,
     infoCity,
+
+    modalRecord: {
+      visible: false,
+      title: 'Форма'
+    },
 
     showMenu: false, // открытие меню
   }
@@ -30,6 +38,26 @@ class Dizel extends Component {
     });
 
     location.href = '/?city=' + brief;
+  }
+
+  openModalRecord = (e) => {
+    let target = e.target;
+    let title = target.closest('button').textContent;
+    let modalRecord = {
+      visible: true,
+      title
+    };
+
+    this.setState({modalRecord});
+  }
+
+  closeModalRecord = () => {
+    let modalRecord = {
+      visible: false,
+      title: 'Форма'
+    };
+
+    this.setState({modalRecord});
   }
 
   // Открытие/закрытие меню
@@ -52,6 +80,7 @@ class Dizel extends Component {
               handleChange={this.handleChange}
             />
             <Nav 
+              page="isServices"
               showMenu={this.state.showMenu}
               social={infoCity.social}
               closeMenu={this.toggleMenu}
@@ -65,7 +94,8 @@ class Dizel extends Component {
               <div className="s-header__text">
                 <h1 className="s-caption-h1">
                   <span className="s-caption-h1--i1">Установка</span>ГБО на дизельные машины 
-                  <span className="s-caption-h1--i2">в Чебоксарах</span>
+                  <span className="s-caption-h1--i2">в {infoCity.city && 
+                    infoCity.city.name2 || ''}</span>
                 </h1>
                 <ul className="s-header__list">
                   <li><strong>В рассрочку на 12 месяцев</strong> без первоначального взноса и переплаты</li>
@@ -73,8 +103,14 @@ class Dizel extends Component {
                     в год</strong> на дизельном топливе</li>
                 </ul>
                 <div className="s-header__btns">
-                  <button className="btn-1 btn--white-border" aria-label="Узнать стоимость">Узнать стоимость</button>
-                  <button className="btn-1 btn--white" aria-label="Заказать установку">Заказать установку</button>
+                  <button className="btn-1 btn--white-border" 
+                    aria-label="Узнать стоимость"
+                    onClick={this.openModalRecord.bind(this)}
+                  >Узнать стоимость</button>
+                  <button className="btn-1 btn--white" 
+                    aria-label="Заказать установку"
+                    onClick={this.openModalRecord.bind(this)}
+                  >Заказать установку</button>
                 </div>
               </div>
               <div className="s-header__img sd-header__img">
@@ -97,7 +133,10 @@ class Dizel extends Component {
                 <p className="sd-test__p-2">ГБО бесплатно</p>
                 <p className="sd-test__p-3">на 2 недели и тестируй его!</p>
                 <p className="sd-test__p-4">Если Вас не заинтересует ГБО мы демонтируем его бесплатно</p>
-                <button className="btn-1 sd-test__btn" aria-label="Заказать установку">Заказать установку</button>
+                <button className="btn-1 sd-test__btn" 
+                  aria-label="Заказать установку"
+                  onClick={this.openModalRecord.bind(this)}
+                >Заказать установку</button>
               </div>
             </div>
           </div>
@@ -167,7 +206,10 @@ class Dizel extends Component {
               </div>
               <div className="sd-installment__clock">
                 {/* Часы :todo найти готовые */}
-                <button className="btn-1" aria-label="Заказать установку">Заказать установку</button>
+                <button className="btn-1" 
+                  aria-label="Заказать установку"
+                  onClick={this.openModalRecord.bind(this)}
+                >Заказать установку</button>
               </div>
             </div>
           </div>
@@ -452,7 +494,10 @@ class Dizel extends Component {
                     <li>Снизить содержание СО, СН и твердых частиц в выхлопе</li>
                   </ul>
                   <div className="sd-conclusion__btn">
-                    <button className="btn-1" aria-label="Заказать установку">Заказать установку</button>
+                    <button className="btn-1" 
+                      aria-label="Заказать установку"
+                      onClick={this.openModalRecord.bind(this)}
+                    >Заказать установку</button>
                   </div>
                 </div>
               </div>
@@ -466,6 +511,20 @@ class Dizel extends Component {
         <Footer 
           activeCity={infoCity}
         />
+
+        <ModalRecord 
+          data={this.state.modalRecord}
+          close={this.closeModalRecord.bind(this)}
+          csrf={csrf}
+        />
+
+        <button className="btn-menu"
+          onClick={this.toggleMenu}
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
       </div>
     );
   }

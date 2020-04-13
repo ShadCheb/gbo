@@ -12,6 +12,7 @@ const Employee = require('../models/employee');
 const Equipment = require('../models/equipment');
 const Review = require('../models/review');
 const ReviewVk = require('../models/review_vk');
+const Work = require('../models/work');
 
 const {TOKEN_VK} = require('../keys/index');
 
@@ -627,6 +628,91 @@ router.post('/review', auth, async(req, res) => {
       });
   } catch (e) {
     console.log('Error! ', e);
+    res.status(500).json({error: 'Произошла ошибка' + e});
+  }
+});
+
+
+router.post('/work/get', auth, async(req, res) => {  
+  try {
+    const cityId = req.body.cityId;
+
+    const result = await Work.findAll({
+      where: {cityListId: cityId}
+    });
+
+    if (!result)
+      result = [];
+
+    res.status(201).json({result});
+  } catch(e) {
+    console.log('Error! ', e);
+    res.status(500).json({error: 'Произошла ошибка' + e});
+  }
+});
+
+router.post('/work', auth, async(req, res) => {
+  let data = req.body;
+
+  if (data.id) {
+    try {
+      Work.update({
+        name: data.name,
+        mileage: data.mileage,
+        saving: data.saving,
+        avatar: data.avatar,
+        established: data.established,
+        additionally: data.additionally,
+        gallery: data.gallery
+      },
+      {
+        where: {id: data.id}
+      })
+        .then(async () => {
+          const result = await Work.findAll({
+            cityListId: data.city_list_id
+          });
+
+          res.status(201).json({result});
+        });
+    } catch(e) {
+      console.log('Error! ', e);
+      res.status(500).json({error: 'Произошла ошибка' + e});
+    }
+  } else {
+    try {
+      Work.create({
+        name: data.name,
+        avatar: data.avatar,
+        established: data.established,
+        additionally: data.additionally,
+        gallery: data.gallery,
+        cityListId: data.city_list_id
+      })
+        .then(async (data) => {
+          const result = await Work.findAll({
+            cityListId: data.city_list_id
+          });
+
+          res.status(201).json({result});
+        });
+    } catch (e) {
+      console.log('Error! ', e);
+      res.status(500).json({error: 'Произошла ошибка' + e});
+    }
+  }
+});
+
+router.delete('/work/:id', auth, async(req, res) => {
+  try {
+    const id = +req.params.id;
+    const result = await Work.findOne({
+      where: {id}
+    });
+
+    await result.destroy();
+    res.status(204).json({});
+  } catch (e) {
     res.status(500).json({error: 'Произошла ошибка' + e});
   }
 });

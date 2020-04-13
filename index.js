@@ -17,14 +17,14 @@ const serviceRoutes = require('./routes/service');
 const otherRoutes = require('./routes/other');
 const testRoutes = require('./routes/test');
 
-const PORT = 3005;
+const PORT = 80;
 
 const app = express();
 const hbs = exphbs.create({
   defaultLayout: 'main',
   extname: 'hbs',
   helpers: require('./utils/hbs-helpers')
-})
+});
 
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs');

@@ -4,8 +4,10 @@ import ReactDOM from 'react-dom';
 import Header from '../main/components/Header';
 import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
+import ModalRecord from '../main/components/ModalRecord';
 
 const container = document.getElementById('page-service-item');
+const csrf = container.dataset.csrf;
 const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
 
@@ -13,6 +15,11 @@ class Metan extends Component {
   state = {
     cityList,
     infoCity,
+
+    modalRecord: {
+      visible: false,
+      title: 'Форма'
+    },
 
     showMenu: false, // открытие меню
   }
@@ -30,6 +37,26 @@ class Metan extends Component {
     });
 
     location.href = '/?city=' + brief;
+  }
+
+  openModalRecord = (e) => {
+    let target = e.target;
+    let title = target.closest('button').textContent;
+    let modalRecord = {
+      visible: true,
+      title
+    };
+
+    this.setState({modalRecord});
+  }
+
+  closeModalRecord = () => {
+    let modalRecord = {
+      visible: false,
+      title: 'Форма'
+    };
+
+    this.setState({modalRecord});
   }
 
   // Открытие/закрытие меню
@@ -52,6 +79,7 @@ class Metan extends Component {
               handleChange={this.handleChange}
             />
             <Nav 
+              page="isServices"
               showMenu={this.state.showMenu}
               social={infoCity.social}
               closeMenu={this.toggleMenu}
@@ -65,13 +93,17 @@ class Metan extends Component {
               <div className="s-header__text">
                 <h1 className="s-caption-h1">
                   <span className="s-caption-h1--i1">Установка</span>ГБО на метане
-                  <span className="s-caption-h1--i2">в Чебоксарах</span>
+                  <span className="s-caption-h1--i2">в {infoCity.city && 
+                    infoCity.city.name2 || ''}</span>
                 </h1>
                 <ul className="s-header__list">
                   <li><strong>Экономия до 70%</strong> с каждой заправкой</li>
                 </ul>
                 <div className="s-header__btns">
-                  <button className="btn-1 btn--white-border" aria-label="Заказать установку">Заказать установку</button>
+                  <button className="btn-1 btn--white-border" 
+                    aria-label="Заказать установку"
+                    onClick={this.openModalRecord.bind(this)}
+                  >Заказать установку</button>
                 </div>
               </div>
               <div className="s-header__img sm-header__img">
@@ -141,7 +173,10 @@ class Metan extends Component {
               </div>
             </div>
             <div className="sm-advantages__btn">
-              <button className="btn-1 btn--blue" aria-label="Заказать установку">Заказать установку</button>
+              <button className="btn-1 btn--blue" 
+                aria-label="Заказать установку"
+                onClick={this.openModalRecord.bind(this)}
+              >Заказать установку</button>
             </div>
           </div>
         </section>
@@ -149,6 +184,20 @@ class Metan extends Component {
         <Footer 
           activeCity={infoCity}
         />
+
+        <ModalRecord 
+          data={this.state.modalRecord}
+          close={this.closeModalRecord.bind(this)}
+          csrf={csrf}
+        />
+
+        <button className="btn-menu"
+          onClick={this.toggleMenu}
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
       </div>
     );
   }

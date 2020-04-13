@@ -4,8 +4,10 @@ import ReactDOM from 'react-dom';
 import Header from '../main/components/Header';
 import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
+import ModalRecord from '../main/components/ModalRecord';
 
 const container = document.getElementById('page-service-item');
+const csrf = container.dataset.csrf;
 const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
 
@@ -13,6 +15,11 @@ class Register extends Component {
   state = {
     cityList,
     infoCity,
+
+    modalRecord: {
+      visible: false,
+      title: 'Форма'
+    },
 
     showMenu: false, // открытие меню
   }
@@ -30,6 +37,26 @@ class Register extends Component {
     });
 
     location.href = '/?city=' + brief;
+  }
+
+  openModalRecord = (e) => {
+    let target = e.target;
+    let title = target.closest('button').textContent;
+    let modalRecord = {
+      visible: true,
+      title
+    };
+
+    this.setState({modalRecord});
+  }
+
+  closeModalRecord = () => {
+    let modalRecord = {
+      visible: false,
+      title: 'Форма'
+    };
+
+    this.setState({modalRecord});
   }
 
   // Открытие/закрытие меню
@@ -52,6 +79,7 @@ class Register extends Component {
               handleChange={this.handleChange}
             />
             <Nav 
+              page="isServices"
               showMenu={this.state.showMenu}
               social={infoCity.social}
               closeMenu={this.toggleMenu}
@@ -64,7 +92,8 @@ class Register extends Component {
             <div className="s-header__body">
               <div className="s-header__text">
                 <h1 className="s-caption-h1">
-                  Регистрация ГБО <span className="s-caption-h1--i2">в Чебоксарах</span>
+                  Регистрация ГБО <span className="s-caption-h1--i2">в {infoCity.city && 
+                    infoCity.city.name2 || ''}</span>
                 </h1>
                 <ul className="s-header__list">
                   <li><strong>Установка ГБО</strong> является внесением изменений в конструкцию 
@@ -72,7 +101,10 @@ class Register extends Component {
                     в ГИБДД </strong></li>
                 </ul>
                 <div className="s-header__btns">
-                  <button className="btn-1 btn--white" aria-label="Заказать услугу">Заказать услугу</button>
+                  <button className="btn-1 btn--white" 
+                    aria-label="Заказать услугу"
+                    onClick={this.openModalRecord.bind(this)}
+                  >Заказать услугу</button>
                 </div>
               </div>
               <div className="s-header__img sd-header__img">
@@ -179,7 +211,10 @@ class Register extends Component {
               </div>
             </div>
             <div className="sm-advantages__btn">
-              <button className="btn-1 btn--blue" aria-label="Заказать услугу">Заказать услугу</button>
+              <button className="btn-1 btn--blue" 
+                aria-label="Заказать услугу"
+                onClick={this.openModalRecord.bind(this)}
+              >Заказать услугу</button>
             </div>
           </div>
         </section>
@@ -218,14 +253,14 @@ class Register extends Component {
                   <li><a href="#0" className="text__a">Форма 2а и 2б</a></li>
                   <li><a href="#0" className="text__a">Протокол экспертизы безопасности ТС</a></li>
                 </ul>
-                <div className="sr-sequence__block__icon adv-item--gibdd"></div>
+                <div className="sr-sequence__block__icon adv-item--service"></div>
               </article>
               <article className="registration__block sr-sequence__block">
                 <div className="registration__block__num">4</div>
                 <p className="text__p">Получить в аккредитованной испытательной 
                 лаборатории <strong>Протокол технической экспертизы конструкции 
                 ТС после внесенных изменений.</strong></p>
-                <div className="sr-sequence__block__icon adv-item--gibdd"></div>
+                <div className="sr-sequence__block__icon adv-item--docs"></div>
               </article>
               <article className="registration__block sr-sequence__block">
                 <div className="registration__block__num">5</div>
@@ -240,7 +275,7 @@ class Register extends Component {
                   <li>Свидетельство о соответствии ТС с внесенным в его конструкцию 
                     изменениями требованиям безопасности</li>
                 </ul>
-                <div className="sr-sequence__block__icon adv-item--gibdd"></div>
+                <div className="sr-sequence__block__icon adv-item--reg"></div>
               </article>
             </div>
           </div>
@@ -260,9 +295,12 @@ class Register extends Component {
                     <h2 className="caption2__caption"><strong>Остались вопросы?</strong> 
                       задай нашему специалисту</h2>
                   </div>
-                  <p className="text__p2">Проведем консуультацию по телефону</p>
+                  <p className="text__p2">Проведем консультацию по телефону</p>
                   <div className="sr-question__btn">
-                    <button className="btn-1 btn--blue" aria-label="Задать вопрос">Задать вопрос</button>
+                    <button className="btn-1 btn--blue" 
+                      aria-label="Задать вопрос"
+                      onClick={this.openModalRecord.bind(this)}
+                    >Задать вопрос</button>
                   </div>
                 </div>
                 <div className="sr-question__img">
@@ -276,6 +314,20 @@ class Register extends Component {
         <Footer 
           activeCity={infoCity}
         />
+
+        <ModalRecord 
+          data={this.state.modalRecord}
+          close={this.closeModalRecord.bind(this)}
+          csrf={csrf}
+        />
+
+        <button className="btn-menu"
+          onClick={this.toggleMenu}
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
       </div>
     );
   }

@@ -134,7 +134,7 @@ function ModalRecord(props) {
               <p>Я даю свое согласие на обработку персональных данных</p>
             </label>
             <input type="hidden" name="_csrf" value={props.csrf} />
-            <div className="install__btn">
+            <div className="modal__btn">
               <button className="btn-1 btn--blue" 
                 aria-label="Отправить заявку"
                 type="submit"

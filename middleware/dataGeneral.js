@@ -3,8 +3,6 @@ const Address = require('../models/address');
 const Social = require('../models/social');
 const Time = require('../models/time');
 const Phone = require('../models/phone');
-const Employee = require('../models/employee');
-const Equipment = require('../models/equipment');
 const CityList = require('../models/cityList');
 
 module.exports = async function(req, res, next) {

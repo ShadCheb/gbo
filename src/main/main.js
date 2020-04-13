@@ -31,8 +31,6 @@ const certificates2 = [
   'img/certificates/certif_4_2.jpg',
 ];
 
-console.log('data', infoCity);
-
 
 const PhotoItem = ({image, group, id}) => {
   if (id === 0)
@@ -80,7 +78,7 @@ class Main extends Component {
   };
 
   componentDidMount = () => {
-    ymaps.ready(this.initMap);
+    window.ymaps && ymaps.ready(this.initMap);
 
     let benefit = this.state.benefit;
 
@@ -213,7 +211,7 @@ class Main extends Component {
 
     points.forEach(function(p) {
       let polygonLayout = ymaps.templateLayoutFactory.createClass(
-        `<div className="placemark__layout"><p>${p.address}</p></div>`
+        `<div class="placemark__layout"><p>${p.address}</p></div>`
       );
       let placemark = new ymaps.Placemark(p.coord, {
         hintContent: p.address
@@ -261,6 +259,7 @@ class Main extends Component {
                   handleChange={this.handleChange}
                 />
                 <Nav 
+                  page="isHome"
                   showMenu={this.state.showMenu}
                   social={infoCity.social}
                   closeMenu={this.toggleMenu}
@@ -394,7 +393,7 @@ class Main extends Component {
 
             {/* Оборудование */}
             {
-              (infoCity.equipment)
+              (infoCity.equipment && infoCity.equipment.length)
                 ? (<Price 
                     equipment={infoCity.equipment}
                     openModal={this.openModalRecord.bind(this)}
@@ -471,7 +470,7 @@ class Main extends Component {
 
             {/* Сотрудники */}
             {
-              (infoCity.employees) 
+              (infoCity.employees && infoCity.employees.length) 
                 ? (<Employee
                   employeeList={infoCity.employees}
                 />) : ('')
@@ -584,7 +583,7 @@ class Main extends Component {
 
             <section className="gibdd">
               <div className="container">
-                <div className="gibdd__bcg bcg--1" />
+                <div className="gibdd__bcg bcg--2" />
                 <div className="gibdd__body">
                   <div className="gibdd__form">
                     <p className="gibdd__p">Отправь заявку и Наш специалист 
@@ -623,9 +622,9 @@ class Main extends Component {
               </div>
             </section>
 
-            {/* Сотрудники */}
+            {/* Отзывы */}
             {
-              (infoCity.reviews) 
+              (infoCity.reviews && infoCity.reviews.length) 
                 ? (<Review
                   reviewList={infoCity.reviews}
                   reviewVk={infoCity.review_vk}
@@ -633,9 +632,12 @@ class Main extends Component {
             }
 
             {/* Карта */}
-            <Map 
-              activeCity={infoCity}
-            />
+            {
+              (infoCity.addresses && infoCity.addresses.length)
+                ? (<Map 
+                  activeCity={infoCity}
+                />) : ('')
+            }
 
             <Footer 
               activeCity={infoCity}
@@ -667,5 +669,5 @@ class Main extends Component {
   }
 }
 
-ReactDOM.render(<Main/>, document.getElementById('page-main'));
+ReactDOM.render(<Main/>, container);
 

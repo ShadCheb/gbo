@@ -52,6 +52,7 @@ class Stock extends Component {
               handleChange={this.handleChange}
             />
             <Nav 
+              page="isStok"
               showMenu={this.state.showMenu}
               social={infoCity.social}
               closeMenu={this.toggleMenu}

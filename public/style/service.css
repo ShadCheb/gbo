@@ -1361,6 +1361,19 @@
   background: url(../img/icon-advantages/calendar.png) no-repeat center;
   background-size: 100%;
 }
+.adv-item--reg {
+  background: url(../img/icon-advantages/terms-and-conditions.png) no-repeat center;
+  background-size: 100%;
+}
+.adv-item--service {
+  background: url(../img/icon-advantages/car-service.png) no-repeat center;
+  background-size: 100%;
+}
+.adv-item--docs {
+  background: url(../img/icon-advantages/set-docs.png) no-repeat center;
+  background-size: 100%;
+}
+
 
 .sm-advantages__list .sm-advantages__item {
   margin-bottom: 50px;
