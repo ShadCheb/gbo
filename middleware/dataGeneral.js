@@ -42,19 +42,17 @@ module.exports = async function(req, res, next) {
       res.status(201).render('not-data'), {
         title: 'Нет данных'
       }
-
-      return;
     }
 
     res.locals.dataGeneral = {
       data,
       cityList
     };
+
+    next();
   } catch (e) {
     res.status(201).render('not-data'), {
       title: 'Нет данных'
     }
   }
-
-  next();
 }
