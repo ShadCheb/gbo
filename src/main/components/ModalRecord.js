@@ -13,99 +13,105 @@ function ModalRecord(props) {
   const error = (msg) => {
     message.error(msg);
   };
+  
+  const success = (msg) => {
+    message.success(msg);
+  };
 
-  const generationMessage = (input) => {
-    let typeStr = input.dataset.valid;
-    let typeArr = typeStr.split(',');
-    let result = true;
-    let message = '';
+  // const generationMessage = (input) => {
+  const checkSend = (value, valid) => {
+    const validArr = valid.split(',');
+    let check = true;
 
     const checkFunctionList = (type, value) => {
       if (type == 'required') {
-        if (value !== '') {
-          message = 'Введены не все данные';
-          result = false;
-        };
-
-        return true;
+        return (value !== '')
+          ? {result: false, message: 'Введены не все данные'}
+          : {result: true}
+        
       } else if (type == 'phone') {
-        let phone = value.replace(/[^_0-9]/gim,'');
-
-        console.log('phone', phone);
-        if (phone.length < 6) {
-          message = 'Введите номер телефона правильно';
-          result = false;
+        let phone = value.match(/\d/g);
+        
+        if (!phone) {
+          return {result: false, message: 'Введите номер телефона'};
+        } else if (phone.length < 6) {
+          return {result: false, message: 'Введите номер телефона правильно'}
+        } else {
+          return {result: true};
         }
-
-        return true;
+      } else if (type == 'check') {
+        return (!value) 
+          ? {result: false, message: 'Вы не дали согласия на обработку персональных данных'}
+          : {result: true}
       } else {
-          console.log('Не известный тип проверки');
-          message = 'Произошла ошибка. попробуйте позже';
-          result = false;
+        console.log('Не известный тип проверки');
+        return {result: false, message: 'Произошла ошибка. Попробуйте позже'};
       }
     }
 
-    typeArr.map(type => {
-      message = '';
-      checkFunctionList(type, input.value);
+    validArr.map(type => {
+      let {result, message} = checkFunctionList(type, value);
 
       if (message)
         error(message);
+      if (!result)
+        check = false;
     });
 
-    return result;
+    return check;
   };
 
-  const getInputValue = (data) => {
-    let result = {};
-
-    data.forEach(input => {
-      if (input.dataset.valid) {
-        let check = generationMessage(input);
-
-        if (!check)
-          return {result: false};
-      }
-
-      result[input.name] = input.value;
-    });
-
-    result['result'] = true;
-
-    return result;
-  };
-
-  const send = () => {
-    console.log('Отправка сообщения');
+  const send = (e) => {
+    e.preventDefault();
 
     let formSend = formRecord.current;
     let inputList = formSend.querySelectorAll('input');
+    let dataSend = {};
+    let check = true;
 
-    console.log('dataSend', dataSend);
-    let dataList = getInputValue(inputList);
+    for (let i = 0; i < inputList.length; i++) {
+      let valid = inputList[i].dataset && inputList[i].dataset.valid;
+      let value = (inputList[i].type == 'checkbox')
+        ? inputList[i].checked
+        : inputList[i].value;
+      let result = (valid) 
+        ? checkSend(value, valid) : true;
 
-    return;
+      if (!result)
+        check = false;
 
-    fetch('/mail/request', {
+      dataSend[inputList[i].name] = value;
+    }
+    dataSend['city'] = localStorage.getItem('city');
+
+    // Прошла ли валидация
+    if (!check)
+      return;
+
+    // Дополнительные данные для отправки
+    if (props.dataSend)
+      Object.assign(dataSend, props.dataSend);
+
+    fetch('/mail', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        'X-XSRF-TOKEN': this.state.csrf
+        'X-XSRF-TOKEN': props.csrf
       },
       body: JSON.stringify({dataSend})
     })
       .then(res => res.json())
       .then(data => {
-        this.setState({data});
+        if (data.success) {
+          afterClose();
+          success(data.success);
+        }
       })
       .catch(e => {
         if (e.error)
-          this.error(e.error);
+          error(e.error);
       })
-  };
-
-  
-  
+  };  
 
 
   return (
@@ -124,12 +130,12 @@ function ModalRecord(props) {
               <span>Имя</span>
             </label>
             <label className="form__input">
-              <InputMask mask="+7 (999) 999-99-999" data-valid="required, phone" 
+              <InputMask mask="+7 (999) 999-99-999" data-valid="phone" 
                 type="text" name="phone" required />
               <span>Телефон</span>
             </label>
             <label className="input__check license">
-              <input type="checkbox" data-valid="check" className="input__required" />
+              <input type="checkbox" name="treatment" data-valid="check" className="input__required" />
               <span></span>
               <p>Я даю свое согласие на обработку персональных данных</p>
             </label>

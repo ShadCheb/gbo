@@ -47,7 +47,7 @@ module.exports = async function(req, res, next) {
     res.locals.dataGeneral = {
       data,
       cityList
-    };
+    };    
 
     next();
   } catch (e) {
