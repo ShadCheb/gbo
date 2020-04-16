@@ -10,10 +10,15 @@ class Address extends Component {
     super(props);
 
     this.state = {
+      // map: null,
       visibleAddAddress: false,
       openMapData: {},
       // modalAddAddress: React.createRef()
     }
+  }
+
+  componentDidMount = () => {
+    this.renderMap();
   }
 
   deleteAddress = (address) => {
@@ -39,7 +44,6 @@ class Address extends Component {
 
 
   openModalAddAddress = (address) => {
-    console.log('address', address);
     if (address) {
       address['city'] = this.props.data.city;
     } else {
@@ -65,9 +69,8 @@ class Address extends Component {
   }
 
   renderMap = () => {
-    console.log('render', this.state.openMapData);
     let {openMapData} = this.state;
-    let mapThis = map;
+    let mapThis = this.state.map;
     let timerId;
     let coordParse = (openMapData.coords)
       ? JSON.parse(openMapData.coords)
@@ -83,13 +86,14 @@ class Address extends Component {
           controls: ['zoomControl']
         });
 
-        changeValue({map: mapThis});
+        this.changeValue({map: mapThis});
+        // this.setState({map: mapThis});
       }
 
       if (!coordParse) {
         let coords;
 
-        ymaps.geocode(data.city, {
+        ymaps.geocode(this.props.data.city, {
           results: 1
         }).then((res) => {
           let firstGeoObject = res.geoObjects.get(0);
@@ -108,20 +112,21 @@ class Address extends Component {
               });
 
               if (names) 
-                changeValue({
+                this.changeValue({
                   nameAddress: names[0],
                   coord: newCoords
                 });
             });
 
-            this.setPoint(coords);
+            // this.setPoint(coords);
+            this.setPoint(newCoords);
           }
           
           mapThis.setCenter(coords, 17);
           mapThis.events.add('click', setCoordPoint);
 
-          changeValue({map: mapThis});
-          // this.setState({map});
+          this.changeValue({map: mapThis});
+          // this.setState({map: mapThis});
         });
       } else {
         this.setPoint(coordParse);
@@ -133,7 +138,59 @@ class Address extends Component {
         renderMapInternal();
     }, 400);
   }
+
+  setPoint = (c) => {
+    let plcmark = this.state.placemark;
+
+    console.log(this.state);
+
+    if (!plcmark) {
+      plcmark = new ymaps.Placemark(c, {
+        iconColor: '#00c2ff',
+      }, {
+        preset: 'islands#blueDotIcon',
+        draggable: true
+      });
+
+      this.changeValue({placemark: plcmark});
+    } else {
+      plcmark = placemark;
+      plcmark.geometry.setCoordinates(c);
+    }
+
+    this.state.map.geoObjects.add(plcmark);
+    plcmark.events.add('drag', () => {
+      let coordPopint = plcmark.geometry.getCoordinates();
+
+      ymaps.geocode(coordPopint).then((res) => {
+        let names = [];
+        
+        res.geoObjects.each((obj) => {
+          names.push(obj.properties.get('name'));
+        });
+
+        if (names) 
+          // this.changeValue({
+          //   nameAddress: names[0],
+          //   coord: coordPopint
+          // }, 'data');
+          this.changeValue({
+            nameAddress: names[0],
+            coord: coordPopint
+          });
+      });
+    });
+  }
   
+
+  changeValue = (obj) => {
+    let openMapData = this.state.openMapData;
+
+    for(let key in obj) {
+      Object.assign(openMapData, {[key]: obj[key]})
+    }
+    this.setState(openMapData);
+  }
 
   render() {
     return (

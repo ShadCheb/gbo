@@ -30,7 +30,7 @@ function ModalAddAddress({
   };
 
   const cancelAddress = () => {
-    map.geoObjects.remove(placemark);
+    map && map.geoObjects.remove(placemark);
     cancelAddAddress();
   }
 
@@ -60,42 +60,42 @@ function ModalAddAddress({
     cancelAddress();
   }
 
-  const setPoint = (c) => {
-    let plcmark;
+  // const setPoint = (c) => {
+  //   let plcmark;
 
-    if (!plcmark) {
-      plcmark = new ymaps.Placemark(c, {
-        iconColor: '#00c2ff',
-      }, {
-        preset: 'islands#blueDotIcon',
-        draggable: true
-      });
+  //   if (!plcmark) {
+  //     plcmark = new ymaps.Placemark(c, {
+  //       iconColor: '#00c2ff',
+  //     }, {
+  //       preset: 'islands#blueDotIcon',
+  //       draggable: true
+  //     });
 
-      changeValue({placemark: plcmark});
-    } else {
-      plcmark = placemark;
-      plcmark.geometry.setCoordinates(c);
-    }
+  //     changeValue({placemark: plcmark});
+  //   } else {
+  //     plcmark = placemark;
+  //     plcmark.geometry.setCoordinates(c);
+  //   }
 
-    map.geoObjects.add(plcmark);
-    plcmark.events.add('drag', () => {
-      let coordPopint = plcmark.geometry.getCoordinates();
+  //   map.geoObjects.add(plcmark);
+  //   plcmark.events.add('drag', () => {
+  //     let coordPopint = plcmark.geometry.getCoordinates();
 
-      ymaps.geocode(coordPopint).then((res) => {
-        let names = [];
+  //     ymaps.geocode(coordPopint).then((res) => {
+  //       let names = [];
         
-        res.geoObjects.each((obj) => {
-          names.push(obj.properties.get('name'));
-        });
+  //       res.geoObjects.each((obj) => {
+  //         names.push(obj.properties.get('name'));
+  //       });
 
-        if (names) 
-          changeValue({
-            nameAddress: names[0],
-            coord: coordPopint
-          }, 'data');
-      });
-    });
-  }
+  //       if (names) 
+  //         changeValue({
+  //           nameAddress: names[0],
+  //           coord: coordPopint
+  //         }, 'data');
+  //     });
+  //   });
+  // }
 
   const changeAddress = (value) => {
     changeValue({nameAddress: value}, 'data');
