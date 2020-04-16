@@ -64,6 +64,7 @@ function ModalRecord(props) {
   const send = (e) => {
     e.preventDefault();
 
+    let target = props.data.target;
     let formSend = formRecord.current;
     let inputList = formSend.querySelectorAll('input');
     let dataSend = {};
@@ -83,14 +84,20 @@ function ModalRecord(props) {
       dataSend[inputList[i].name] = value;
     }
     dataSend['city'] = localStorage.getItem('city');
+    dataSend['btn'] = props.data.title;
+    dataSend['page'] = props.data.page;
 
     // Прошла ли валидация
     if (!check)
       return;
 
     // Дополнительные данные для отправки
-    if (props.dataSend)
-      Object.assign(dataSend, props.dataSend);
+    if (target && target.dataset) {
+      if (target.dataset.type)
+        dataSend['type'] = target.dataset.type;
+      if (target.dataset.description)
+        dataSend['description'] = target.dataset.description;
+    }
 
     fetch('/mail', {
       method: 'post',
@@ -98,7 +105,7 @@ function ModalRecord(props) {
         'Content-Type': 'application/json;charset=utf-8',
         'X-XSRF-TOKEN': props.csrf
       },
-      body: JSON.stringify({dataSend})
+      body: JSON.stringify(dataSend)
     })
       .then(res => res.json())
       .then(data => {

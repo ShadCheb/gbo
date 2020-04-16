@@ -18,7 +18,8 @@ function Employee({employeeList}) {
             employeeList.map((employee, idx) => (
               <div className="staff__block" key={idx}>
                 <div className="staff__img">
-                  <img src={'/images/' + employee.avatar} alt={employee.name || 'Имя не указано'} />
+                  <img src={'/images/' + (employee.avatar || 'not-photo.jpg')} 
+                    alt={employee.name || 'Имя не указано'} />
                 </div>
                 <div className="staff__label">
                   <p className="staff__label__name">{employee.name || 'Имя не указано'}</p>

@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const cylinderList = ['4', '6', '8'];
 
-function BlockCheck({cylinders, cylinder}) {
+function BlockCheck({cylinders, cylinder, equipment, selectEquipment}) {
   return (cylinders.indexOf(cylinder) > -1)
     ? (
       <div className="price__body__value">
-        <label className="input__check price__check">
+        <label className="input__check price__check" 
+          onClick={selectEquipment.bind(this, {cylinder, equipment})}>
           <input type="radio" name="check-gbo" /><span></span></label>
       </div>
     )
@@ -15,7 +16,7 @@ function BlockCheck({cylinders, cylinder}) {
     );
 }
 
-function PriceBlock({equipment, openDescription}) {
+function PriceBlock({equipment, openDescription, selectEquipment}) {
   let cylinderArray = (equipment.cylinder) 
     ? equipment.cylinder.split(',')
     : [];
@@ -26,7 +27,13 @@ function PriceBlock({equipment, openDescription}) {
         <div className="price__body__name">{equipment.name || 'Без названия'}</div>
         {
           cylinderList.map((cylinder, i) => (
-            <BlockCheck cylinders={cylinderArray} cylinder={cylinder} key={i}/>
+            <BlockCheck 
+              selectEquipment={selectEquipment}
+              cylinders={cylinderArray} 
+              cylinder={cylinder}
+              equipment={equipment.name}
+              key={i}
+            />
           ))
         }
         <div className="price__body__btn"><button className="btn-1 btn--blue"
@@ -52,6 +59,7 @@ function PriceBlock({equipment, openDescription}) {
 }
 
 function Price({openModal, equipment}) {
+  const [sendData, setSendData] = useState('');
   let activePrice = null;
 
   const openDescription = e => {
@@ -75,6 +83,14 @@ function Price({openModal, equipment}) {
   const onOpenModal = (e) => {
     openModal(e);
   };
+
+  const selectEquipment = (data) => {
+    if (data && data.cylinder) {
+      let message = `Выбранное оборудование ${data.equipment || 'Без названия'}. Количество цилиндров ${data.cylinder}`;
+
+      setSendData(message);
+    }
+  }
 
   return (
     <section className="price">
@@ -100,103 +116,16 @@ function Price({openModal, equipment}) {
               (<PriceBlock 
                 equipment={item}
                 openDescription={openDescription}
+                selectEquipment={selectEquipment}
                 key={idx}
               />)
             )
           }          
 
-
-          {/* <div className="price__body__block">
-            <div className="price__body__row">
-              <div className="price__body__name">OMVL</div>
-              <div className="price__body__value">
-                <label className="input__check price__check"><input type="radio" name="check-gbo" /><span></span></label>
-              </div>
-              <div className="price__body__value">
-                <label className="input__check price__check"><input type="radio" name="check-gbo" /><span></span></label>
-              </div>
-              <div className="price__body__value">
-                <label className="input__check price__check"><input type="radio" name="check-gbo" /><span></span></label>
-              </div>
-              <div className="price__body__btn"><button className="btn-1 btn--blue"
-                  onClick={openDescription}
-                ><span className="price--open">Описание</span><span className="price--close">Закрыть</span>
-                  <svg><use xlinkHref="img/sprite-icon.svg#icon-description" /></svg></button></div>
-            </div>
-            <div className="price__container">
-              <div className="price__description">
-                <p className="price__description__bcg">Gazoved</p>
-                <div>
-                  <h3 className="price__description__caption">Описание:</h3>
-                  <p className="price__description__p">Качественное газобаллонное оборудование на авто – 
-                    это не только залог минимизации транспортных расходов, но и надежность, долговечность 
-                    топливной системы, увеличение ресурса двигателя, межсервисного интервала замены свечей 
-                    зажигания и фильтров, снижение износа узлов мотора. Чтобы воспользоваться всеми этими 
-                    преимуществами и гарантированно получить безотказное автогазовое оборудование, ГБО 
-                    итальянской марки OMVL</p>
-                  <h3 className="price__description__caption">Комплектация:</h3>
-                  <ul className="price__description__ul">
-                    <li>Редуктор Tomasetto Alaska до 140лс Италия</li>
-                    <li>Форсунки lpg tech 2Om</li>
-                    <li> Баллон 42 литра тор., либо 50 литров цилиндр</li>
-                    <li>Полный пакет документов для ГИБДД</li>
-                  </ul>
-                </div>
-              </div>
-              <button className="price__description__btn" onClick={openDescription}>
-                <svg>
-                  <use xlinkHref="img/sprite-icon.svg#icon-arrow-up" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div className="price__body__block">
-            <div className="price__body__row">
-              <div className="price__body__name">Digitronic maxi2</div>
-              <div className="price__body__value">
-                <label className="input__check price__check"><input type="radio" name="check-gbo" /><span></span></label>
-              </div>
-              <div className="price__body__value">
-                <label className="input__check price__check"><input type="radio" name="check-gbo" /><span></span></label>
-              </div>
-              <div className="price__body__value">
-                <label className="input__check price__check"><input type="radio" name="check-gbo" /><span></span></label>
-              </div>
-              <div className="price__body__btn"><button className="btn-1 btn--blue"
-                  onClick={openDescription}
-                ><span className="price--open">Описание</span><span className="price--close">Закрыть</span>
-                  <svg><use xlinkHref="img/sprite-icon.svg#icon-description" /></svg></button>
-              </div>
-            </div>
-            <div className="price__container">
-              <div className="price__description">
-                <p className="price__description__bcg">Gazoved</p>
-                <div>
-                  <h3 className="price__description__caption">Описание:</h3>
-                  <p className="price__description__p">Качественное газобаллонное оборудование на авто – 
-                    это не только залог минимизации транспортных расходов, но и надежность, долговечность 
-                    топливной системы, увеличение ресурса двигателя, межсервисного интервала замены свечей 
-                    зажигания и фильтров, снижение износа узлов мотора. Чтобы воспользоваться всеми этими 
-                    преимуществами и гарантированно получить безотказное автогазовое оборудование, ГБО 
-                    итальянской марки OMVL</p>
-                  <h3 className="price__description__caption">Комплектация:</h3>
-                  <ul className="price__description__ul">
-                    <li>Редуктор Tomasetto Alaska до 140лс Италия</li>
-                    <li>Форсунки lpg tech 2Om</li>
-                    <li> Баллон 42 литра тор., либо 50 литров цилиндр</li>
-                    <li>Полный пакет документов для ГИБДД</li>
-                  </ul>
-                </div>
-              </div>
-              <button className="price__description__btn" onClick={openDescription}>
-                <svg>
-                  <use xlinkHref="img/sprite-icon.svg#icon-arrow-up" />
-                </svg>
-              </button>
-            </div>
-          </div> */}
           <div className="price__btn">
             <button className="btn-1"
+              data-type="Заказать установку оборудования"
+              data-description={sendData}
               aria-label="заказать"
               onClick={onOpenModal}
             >Заказать</button>

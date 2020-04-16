@@ -96,6 +96,8 @@ router.post('/mail', async (req, res) => {
   const name = req.body.name;
   const phone = req.body.phone;
   const message = req.body.message;
+  const type = req.body.type;
+  const description = req.body.description;
   const city = req.body.city;
   const cityList = (city)
     ? await CityList.findAll({brief: city})
@@ -114,19 +116,24 @@ router.post('/mail', async (req, res) => {
 
 	let output = `
     <p>Пришла новая заявка.</p>
-    <br />
+    <hr />
   `;
 
   if (page)
-    output += `<p>Заявка отправлена со страницы: ${page}</p>`
+    output += `<p><b>Заявка отправлена со страницы:</b> ${page}</p>`
   if (btn)
-    output += `<p>Заявка отправлена со страницы: ${page}</p>`
+    output += `<p><b>При нажатии кнопки:/b> ${btn}</p>`
   if (message)
-    output += message;
+    output += `<p><b>Сообщение от посетителя сайта:</b> ${message}</p>`;
+  if (type)
+    output += `<p><b>Тип заявки:</b> ${type}</p>`;
+  if (description)
+    output += `<p><b>Описание заявки:</b> ${description}</p>`;
   if (name)
-    output += `<br /><p>Имя отправителя: ${name}</p>`
+    output += `<br /><p><b>Имя отправителя:</b> ${name}</p>`
   if (phone)
-    output += `<br /><p>Телефон отправителя: ${page}</p>`
+    output += `<p><b>Телефон отправителя:</b> ${phone}</p>`
+
 
   let transporter = nodemailer.createTransport({
     host: 'smtp.yandex.ru',
@@ -144,7 +151,6 @@ router.post('/mail', async (req, res) => {
   // setup email data with unicode symbols
   let mailOptions = {
     from: 't3.t3st@yandex.ru', // sender address
-    // to: 'dianova.1981@bk.ru', // list of receivers
     to: email,
     subject: 'Сообщение с сайта Gazoved', // Subject line
     // text: 'Hello world?', // plain text body

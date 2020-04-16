@@ -12,6 +12,7 @@ import Map from './components/Map';
 import ModalRecord from './components/ModalRecord';
 import Footer from './components/Footer';
 
+import { message } from 'antd';
 import { LightgalleryProvider, LightgalleryItem } from 'react-lightgallery';
 import InputMask from 'react-input-mask';
 
@@ -117,8 +118,10 @@ class Main extends Component {
     let target = e.target;
     let title = target.closest('button').textContent;
     let modalRecord = {
+      target,
       visible: true,
-      title
+      title,
+      page: 'Главная'
     };
 
     this.setState({modalRecord});
@@ -129,60 +132,117 @@ class Main extends Component {
       visible: false,
       title: 'Форма'
     };
-
     this.setState({modalRecord});
   }
 
   /*Отправка сообщений*/
-  sendRequest = (e) => {
-    let data = {}; // Данные для отправки
-    let form = e.target;
-    let csrf = '';
+  error = (msg) => {
+    message.error(msg);
+  };
+  
+  success = (msg) => {
+    message.success(msg);
+  };
 
-    console.log(form);
+  // const generationMessage = (input) => {
+  checkSend = (value, valid) => {
+    const validArr = valid.split(',');
+    let check = true;
 
-    let inputList = form.querySelectorAll('input, textarea');
-
-    console.log('input ', inputList);
-
-    for(let item in inputList) {
-      console.log();
+    const checkFunctionList = (type, value) => {
+      if (type == 'required') {
+        return (value !== '')
+          ? {result: false, message: 'Введены не все данные'}
+          : {result: true}
+        
+      } else if (type == 'phone') {
+        let phone = value.match(/\d/g);
+        
+        if (!phone) {
+          return {result: false, message: 'Введите номер телефона'};
+        } else if (phone.length < 6) {
+          return {result: false, message: 'Введите номер телефона правильно'}
+        } else {
+          return {result: true};
+        }
+      } else if (type == 'check') {
+        return (!value) 
+          ? {result: false, message: 'Вы не дали согласия на обработку персональных данных'}
+          : {result: true}
+      } else {
+        console.log('Не известный тип проверки');
+        return {result: false, message: 'Произошла ошибка. Попробуйте позже'};
+      }
     }
-    if (!csrf) {
-      console.log('csrf error');
+
+    validArr.map(type => {
+      let {result, message} = checkFunctionList(type, value);
+
+      if (message)
+        this.error(message);
+      if (!result)
+        check = false;
+    });
+
+    return check;
+  };
+
+  send = (e) => {
+    e.preventDefault();
+
+    let target = e.target;
+    let formSend = target.closest('form');
+    let inputList = formSend.querySelectorAll('input');
+    let dataSend = {};
+    let check = true;
+
+    for (let i = 0; i < inputList.length; i++) {
+      let valid = inputList[i].dataset && inputList[i].dataset.valid;
+      let value = (inputList[i].type == 'checkbox')
+        ? inputList[i].checked
+        : inputList[i].value;
+      let result = (valid) 
+        ? this.checkSend(value, valid) : true;
+
+      if (!result)
+        check = false;
+
+      dataSend[inputList[i].name] = value;
+    }
+    dataSend['city'] = localStorage.getItem('city');
+    dataSend['page'] = 'Главная';
+
+    // Прошла ли валидация
+    if (!check)
+      return;
+
+    // Дополнительные данные для отправки
+    if (target && target.dataset) {
+      if (target.dataset.type)
+        dataSend['type'] = target.dataset.type;
+      if (target.dataset.description)
+        dataSend['description'] = target.dataset.description;
     }
 
-    fetch('/card/remove/' + id, {
+    fetch('/mail', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        'X-XSRF-TOKEN': csrf
+        'X-XSRF-TOKEN': this.state.csrf
       },
-      body: JSON.stringify(data)
-    }).then(response => response .json())
-      .then(result => {
-        console.log(result);
+      body: JSON.stringify(dataSend)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          this.success(data.success);
+        }
       })
       .catch(e => {
-        console.log(e);
+        if (e.error)
+          this.error(e.error);
       })
-  }
-
-  /*
-  // string | number | integer | date | regexp | boolean
-  requirementType: 'string',
-
-  // validateString | validateDate | validateMultiple
-  validateString: function (value, requirement) {
-      let regexp = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
-      
-      return  regexp.test(value) 
-  },
-
-  messages: {
-      ru: 'ÐÐµÐ²ÐµÑ€Ð½Ñ‹Ð¹ Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚ Ð½Ð¾Ð¼ÐµÑ€Ð°',
-      en: 'Invalid number format'
-  } */
+  }; 
 
   /*
    * рендер карты
@@ -284,13 +344,16 @@ class Main extends Component {
                     <div className="main__btn">
                       <form className="main__btn__form">
                         <label className="form__input">
-                          <InputMask mask="+7 (999) 999-99-999" type="text" name="phone" required />
+                          <InputMask mask="+7 (999) 999-99-999" data-valid="phone" 
+                            type="text" name="phone" required />
                           <span>Телефон</span>
                         </label>
                         <input type="hidden" name="_csrf" value={this.state.csrf} />
                         <button 
+                          data-type="Узнать цену установки ГБО"
                           className="btn-1" 
                           aria-label="Узнать цену"
+                          onClick={this.send.bind(this)}
                         >Узнать цену</button>
                       </form>
                     </div>
@@ -382,7 +445,8 @@ class Main extends Component {
                       взноса, без переплат. В обоих случаях нужен только паспорт</li>
                   </ul>
                   <div className="installment__btn">
-                    <button className="btn-1" 
+                    <button className="btn-1"
+                      data-type="Консультация по рассрочке"
                       aria-label="Получить консультацию"
                       onClick={this.openModalRecord.bind(this)}
                     >Получить консультацию</button>
@@ -556,19 +620,23 @@ class Main extends Component {
                         <span>Имя</span>
                       </label>
                       <label className="form__input">
-                        <InputMask mask="+7 (999) 999-99-999" type="text" name="phone" required />
+                        <InputMask mask="+7 (999) 999-99-999" type="text" 
+                          name="phone"  data-valid="phone" required />
                         <span>Телефон</span>
                       </label>
                       <label className="input__check license">
-                        <input type="checkbox" data-valid="check" className="input__required" />
+                        <input type="checkbox" name="treatment" 
+                          data-valid="check" className="input__required" />
                         <span></span>
                         <p>Я даю свое согласие на обработку персональных данных</p>
                       </label>
                       <input type="hidden" name="_csrf" value={this.state.csrf} />
                       <div className="install__btn">
                         <button className="btn-1 btn--blue" 
+                          data-type="Установка ГБО"
                           aria-label="Отправить заявку"
                           type="submit"
+                          onClick={this.send.bind(this)}
                         >Отправить</button>
                       </div>
                     </form>
@@ -594,19 +662,23 @@ class Main extends Component {
                         <span>Имя</span>
                       </label>
                       <label className="form__input">
-                        <InputMask mask="+7 (999) 999-99-999" type="text" name="phone" required />
+                        <InputMask mask="+7 (999) 999-99-999" data-valid="phone" 
+                          type="text" name="phone" required />
                         <span>Телефон</span>
                       </label>
                       <label className="input__check license">
-                        <input type="checkbox" data-valid="check" className="input__required" />
+                        <input type="checkbox" name="treatment" 
+                          data-valid="check" className="input__required" />
                         <span></span>
                         <p>Я даю свое согласие на обработку персональных данных</p>
                       </label>
                       <input type="hidden" name="_csrf" value={this.state.csrf} />
                       <div className="gibdd__btn">
                         <button className="btn-1 btn--blue" 
+                          data-type="Регистрация в ГИБДД"
                           aria-label="Отправить заявку"
                           type="submit"
+                          onClick={this.send.bind(this)}
                         >Отправить</button>
                       </div>
                     </form>

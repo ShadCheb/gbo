@@ -357,6 +357,9 @@ img {
     display: block;
     margin-top: 7px;
   }
+  .header__select > .ant-select {
+    margin-bottom: 7px;
+  }
 }
 @media (max-width: 418px) {
   .header__logo__link {
@@ -411,7 +414,7 @@ img {
   content: '';
   position: absolute;
   bottom: 0;
-  left: -22px;
+  left: -23px;
   border-top: 29px solid transparent;
   border-left: 22px solid transparent;
   border-right: 22px solid #002632;
@@ -423,7 +426,7 @@ img {
   content: '';
   position: absolute;
   top: 0;
-  right: -22px;
+  right: -21px;
   border-top: 29px solid #002632;
   border-left: 22px solid #002632;
   border-right: 22px solid transparent;
@@ -435,13 +438,13 @@ img {
   padding-left: 0;
 }
 .main__nav li:nth-child(2) a:after {
-  left: -44px;
+  left: -43px;
 }
 .main__nav li:last-child a {
   padding-right: 0;
 }
 .main__nav li:last-child a:before {
-  right: -44px;
+  right: -43px;
 }
 .main__nav a.active,
 .main__nav a:hover {
@@ -510,24 +513,24 @@ img {
     font-size: 16px;
   }
   .main__nav a::after {
-    left: -16px;
+    left: -15px;
     border-top: 22px solid transparent;
     border-left: 16px solid transparent;
     border-right: 16px solid #002632;
     border-bottom: 22px solid #002632;
   }
   .main__nav a::before {
-    right: -16px;
+    right: -17px;
     border-top: 22px solid #002632;
     border-left: 16px solid #002632;
     border-right: 16px solid transparent;
     border-bottom: 22px solid transparent;
   }
   .main__nav li:last-child a:before {
-    right: -32px;
+    right: -31px;
   }
   .main__nav li:nth-child(2) a:after {
-    left: -32px;
+    left: -31px;
   }
   .main__nav::after {
     left: -20px;

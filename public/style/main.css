@@ -63,7 +63,7 @@
   content: '';
   position: absolute;
   top: 0;
-  left: -36px;
+  left: -35px;
   border-top: 44px solid #00c2ff;
   border-left: 18px solid transparent;
   border-right: 18px solid #00c2ff;
@@ -73,7 +73,7 @@
   content: '';
   position: absolute;
   bottom: 0;
-  right: -36px;
+  right: -35px;
   border-top: 44px solid transparent;
   border-left: 18px solid #00c2ff;
   border-right: 18px solid transparent;
@@ -96,7 +96,7 @@
   content: '';
   position: absolute;
   top: 0;
-  left: -30px;
+  left: -29px;
   border-top: 34px solid #002632;
   border-left: 15px solid transparent;
   border-right: 15px solid #002632;
@@ -106,7 +106,7 @@
   content: '';
   position: absolute;
   bottom: 0;
-  right: -30px;
+  right: -29px;
   border-top: 34px solid transparent;
   border-left: 15px solid #002632;
   border-right: 15px solid transparent;
@@ -164,14 +164,14 @@
     padding: 9px 10px;
   }
   .main__caption > span::before {
-    right: -30px;
+    right: -29px;
     border-top: 36px solid transparent;
     border-left: 15px solid #00c2ff;
     border-right: 15px solid transparent;
     border-bottom: 36px solid #00c2ff;
   }
   .main__caption > span::after {
-    left: -30px;
+    left: -29px;
     border-top: 36px solid #00c2ff;
     border-left: 15px solid transparent;
     border-right: 15px solid #00c2ff;
@@ -193,14 +193,14 @@
     line-height: 38px;
   }
   .main__caption-under::before {
-    right: -28px;
+    right: -27px;
     border-top: 30px solid transparent;
     border-left: 14px solid #002632;
     border-right: 14px solid transparent;
     border-bottom: 30px solid #002632;
   }
   .main__caption-under::after {
-    left: -28px;
+    left: -27px;
     border-top: 30px solid #002632;
     border-left: 14px solid transparent;
     border-right: 14px solid #002632;
@@ -231,7 +231,7 @@
     font-size: 36px;
   }
   .main__caption > span::after {
-    left: -20px;
+    left: -19px;
     border: none;
     width: 20px;
     height: 100%;
@@ -265,7 +265,7 @@
     line-height: 40px;
   }
   .main__caption > span::before {
-    right: -24px;
+    right: -23px;
     border-top: 29px solid transparent;
     border-left: 12px solid #00c2ff;
     border-right: 12px solid transparent;
@@ -281,14 +281,14 @@
     line-height: 26px;
   }
   .main__caption-under::before {
-    right: -20px;
+    right: -19px;
     border-top: 24px solid transparent;
     border-left: 10px solid #002632;
     border-right: 10px solid transparent;
     border-bottom: 24px solid #002632;
   }
   .main__caption-under::after {
-    left: -20px;
+    left: -19px;
     border-top: 24px solid #002632;
     border-left: 10px solid transparent;
     border-right: 10px solid #002632;
@@ -1248,6 +1248,7 @@
 }
 .staff__body {
   display: flex;
+  margin-top: 40px;
   margin-left: 35px;
   margin-right: 35px;
   flex-wrap: wrap;
@@ -1261,6 +1262,9 @@
 .staff__img {
   padding-right: 35px;
   min-height: 280px;
+  background-color: #b8e8ff;
+  border-radius: 4px;
+  overflow: hidden;
 }
 .staff__label {
   position: relative;
@@ -1290,7 +1294,8 @@
 @media (max-width: 1140px) {
   .staff__img {
     padding-right: 5px;
-    min-height: auto;
+    /* min-height: auto; */
+    min-height: 240px;
   }
   .staff__label {
     margin-left: 5%;
@@ -1352,6 +1357,7 @@
 @media (max-width: 418px) {
   .staff__img {
     width: 160px;
+    min-height: 170px;
   }
   .staff__label {
     margin-left: -30px;
