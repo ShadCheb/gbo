@@ -114,7 +114,7 @@ class Address extends Component {
               if (names) 
                 this.changeValue({
                   nameAddress: names[0],
-                  coord: newCoords
+                  coords: newCoords
                 });
             });
 
@@ -126,7 +126,6 @@ class Address extends Component {
           mapThis.events.add('click', setCoordPoint);
 
           this.changeValue({map: mapThis});
-          // this.setState({map: mapThis});
         });
       } else {
         this.setPoint(coordParse);
@@ -141,8 +140,6 @@ class Address extends Component {
 
   setPoint = (c) => {
     let plcmark = this.state.placemark;
-
-    console.log(this.state);
 
     if (!plcmark) {
       plcmark = new ymaps.Placemark(c, {
@@ -170,10 +167,6 @@ class Address extends Component {
         });
 
         if (names) 
-          // this.changeValue({
-          //   nameAddress: names[0],
-          //   coord: coordPopint
-          // }, 'data');
           this.changeValue({
             nameAddress: names[0],
             coord: coordPopint

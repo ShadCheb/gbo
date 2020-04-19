@@ -3,31 +3,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Modal, Form, Input, message } from 'antd';
 
-// class ModalAddAddress extends Component {
-
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     nameAddress:        '',
-  //     coord:              '',
-  //     map:                null,
-  //     placemark:          null,
-  //   }
-  // }
 
 function ModalAddAddress({
-  map, placemark, coord, 
+  map, placemark,  
   cancelAddAddress, csrf, data, handlerChangesData,
   changeValue, visibleAddAddress
 }) {
-
-  const error = (msg) => {
-    message.error(msg);
-  };
-  const success = (msg) => {
-    message.success(msg);
-  };
 
   const cancelAddress = () => {
     map && map.geoObjects.remove(placemark);
@@ -35,6 +16,8 @@ function ModalAddAddress({
   }
 
   const onOk = async() => {
+    console.log('data', data);
+
     fetch('/admin/address', {
       method: 'post',
       headers: {
@@ -44,7 +27,7 @@ function ModalAddAddress({
       body: JSON.stringify({
         id:         data.id,
         address:    data.nameAddress,
-        coords:     JSON.stringify(coord),
+        coords:     JSON.stringify(data.coords),
         cityListId: data.cityListId
       })
     })
@@ -60,46 +43,8 @@ function ModalAddAddress({
     cancelAddress();
   }
 
-  // const setPoint = (c) => {
-  //   let plcmark;
-
-  //   if (!plcmark) {
-  //     plcmark = new ymaps.Placemark(c, {
-  //       iconColor: '#00c2ff',
-  //     }, {
-  //       preset: 'islands#blueDotIcon',
-  //       draggable: true
-  //     });
-
-  //     changeValue({placemark: plcmark});
-  //   } else {
-  //     plcmark = placemark;
-  //     plcmark.geometry.setCoordinates(c);
-  //   }
-
-  //   map.geoObjects.add(plcmark);
-  //   plcmark.events.add('drag', () => {
-  //     let coordPopint = plcmark.geometry.getCoordinates();
-
-  //     ymaps.geocode(coordPopint).then((res) => {
-  //       let names = [];
-        
-  //       res.geoObjects.each((obj) => {
-  //         names.push(obj.properties.get('name'));
-  //       });
-
-  //       if (names) 
-  //         changeValue({
-  //           nameAddress: names[0],
-  //           coord: coordPopint
-  //         }, 'data');
-  //     });
-  //   });
-  // }
-
   const changeAddress = (value) => {
     changeValue({nameAddress: value}, 'data');
-    // this.setState({nameAddress: value});
   }
   
   

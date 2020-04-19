@@ -5,6 +5,7 @@ import Header from '../main/components/Header';
 import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
 import ModalRecord from '../main/components/ModalRecord';
+import Timer from '../main/components/Timer';
 
 const container = document.getElementById('page-service-item');
 const csrf = container.dataset.csrf;
@@ -44,8 +45,10 @@ class Dizel extends Component {
     let target = e.target;
     let title = target.closest('button').textContent;
     let modalRecord = {
+      target,
       visible: true,
-      title
+      title,
+      page: 'Газодизель'
     };
 
     this.setState({modalRecord});
@@ -66,6 +69,7 @@ class Dizel extends Component {
       return ({showMenu: !prevValue.showMenu});
     });
   }
+
 
   render() {
     let {infoCity} = this.state;
@@ -104,10 +108,12 @@ class Dizel extends Component {
                 </ul>
                 <div className="s-header__btns">
                   <button className="btn-1 btn--white-border" 
+                    data-type="Узнать цену установки ГБО на дизель"
                     aria-label="Узнать стоимость"
                     onClick={this.openModalRecord.bind(this)}
                   >Узнать стоимость</button>
                   <button className="btn-1 btn--white" 
+                    data-type="Заказать установку ГБО на дизель"
                     aria-label="Заказать установку"
                     onClick={this.openModalRecord.bind(this)}
                   >Заказать установку</button>
@@ -134,6 +140,7 @@ class Dizel extends Component {
                 <p className="sd-test__p-3">на 2 недели и тестируй его!</p>
                 <p className="sd-test__p-4">Если Вас не заинтересует ГБО мы демонтируем его бесплатно</p>
                 <button className="btn-1 sd-test__btn" 
+                  data-type="Заказать установку ГБО на дизель"
                   aria-label="Заказать установку"
                   onClick={this.openModalRecord.bind(this)}
                 >Заказать установку</button>
@@ -205,11 +212,15 @@ class Dizel extends Component {
                 </p>
               </div>
               <div className="sd-installment__clock">
-                {/* Часы :todo найти готовые */}
-                <button className="btn-1" 
-                  aria-label="Заказать установку"
-                  onClick={this.openModalRecord.bind(this)}
-                >Заказать установку</button>
+                <Timer id="timer"/>
+
+                <div className="sd-installment__btn">
+                  <button className="btn-1"
+                    data-type="Заказать установку ГБО на дизель"
+                    aria-label="Заказать установку"
+                    onClick={this.openModalRecord.bind(this)}
+                  >Заказать установку</button>
+                </div>
               </div>
             </div>
           </div>
@@ -495,6 +506,7 @@ class Dizel extends Component {
                   </ul>
                   <div className="sd-conclusion__btn">
                     <button className="btn-1" 
+                      data-type="Заказать установку ГБО на дизель"
                       aria-label="Заказать установку"
                       onClick={this.openModalRecord.bind(this)}
                     >Заказать установку</button>

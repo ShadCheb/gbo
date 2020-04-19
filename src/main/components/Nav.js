@@ -35,7 +35,7 @@ export default ({showMenu, closeMenu, social, page}) => {
                 (social.vk) 
                 ? (<a className="nav__icon" href={social.vk} target="_blank">
                   <svg>
-                    <use xlinkHref="img/sprite-icon.svg#icon-vk"></use>
+                    <use xlinkHref="/img/sprite-icon.svg#icon-vk"></use>
                   </svg>VK</a>)
                 : ('')
               }
@@ -43,7 +43,7 @@ export default ({showMenu, closeMenu, social, page}) => {
                 (social.instagram) 
                   ? (<a className="nav__icon" href={social.instagram} target="_blank">
                     <svg>
-                      <use xlinkHref="img/sprite-icon.svg#icon-inst"></use>
+                      <use xlinkHref="/img/sprite-icon.svg#icon-inst"></use>
                     </svg>
                     Instagram</a>)
                   : ('')

@@ -19,46 +19,46 @@ class Work extends Component {
     message.error(msg);
   };
 
-  componentDidMount = () => {
-    if (!this.props.data.work) {
-      this.props.setLoading(true);
+  // componentDidMount = () => {
+  //   if (!this.props.data.work) {
+  //     this.props.setLoading(true);
 
-      fetch('/admin/work/get', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-          'X-XSRF-TOKEN': this.props.csrf
-        },
-        body: JSON.stringify({cityId: this.props.data.cityListId})
-      })
-        .then(res => res.json())
-        .then(data => {
-          this.props.setLoading(false);
+  //     fetch('/admin/work/get', {
+  //       method: 'post',
+  //       headers: {
+  //         'Content-Type': 'application/json;charset=utf-8',
+  //         'X-XSRF-TOKEN': this.props.csrf
+  //       },
+  //       body: JSON.stringify({cityId: this.props.data.cityListId})
+  //     })
+  //       .then(res => res.json())
+  //       .then(data => {
+  //         this.props.setLoading(false);
 
-          if (data.result) {
-            data.result.map(work => {
-              work.established = (work.established)
-                ? work.established.split(',')
-                : [];
-              work.additionally = (work.additionally) 
-                ? work.additionally.split(',')
-                : [];
-              work.gallery = (work.gallery) 
-                ? work.gallery.split(',')
-                : [];
-            });
-          }
+  //         if (data.result) {
+  //           data.result.map(work => {
+  //             work.established = (work.established)
+  //               ? work.established.split(',')
+  //               : [];
+  //             work.additionally = (work.additionally) 
+  //               ? work.additionally.split(',')
+  //               : [];
+  //             work.gallery = (work.gallery) 
+  //               ? work.gallery.split(',')
+  //               : [];
+  //           });
+  //         }
 
-          this.props.handlerChangesData({work: data.result}, true);
-        })
-        .catch(e => {
-          this.props.setLoading(false);
+  //         this.props.handlerChangesData({work: data.result}, true);
+  //       })
+  //       .catch(e => {
+  //         this.props.setLoading(false);
 
-          if (e.error)
-            this.error(e.error);
-        });
-    }
-  }
+  //         if (e.error)
+  //           this.error(e.error);
+  //       });
+  //   }
+  // }
 
   deleteWork = (work) => {
     let id = work.id;

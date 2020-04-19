@@ -48,8 +48,9 @@ function ModalAddEmployee({
     let avatar = data.fileList[0].name;
 
     // сначала загружаем картинку, если она есть
-    if (data.file) 
-      uploadAvatar(data.file);
+    if (data.file) {
+      avatar = await uploadAvatar(data.file);
+    }
 
     // Теперь сохраняем данный в БД
     let sendForm = new FormData();

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Form, Input, Button } from 'antd';
 
 function Social({csrf, data, handlerChangesData}) {
-  const [form] = Form.useForm();
   const formItemLayout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 14 }
@@ -32,18 +31,12 @@ function Social({csrf, data, handlerChangesData}) {
       })
   }
 
-  form.setFieldsValue({
-    vk:  data.vk,
-    instagram: data.instagram,
-    youtube: data.youtube
-  });
-
   return (
     <section>
       <Form
-        form={form} 
         name="form-social"
         onFinish={onFinish}
+        fields={data.data}
       >
         <Form.Item 
           {...formItemLayout}
@@ -56,10 +49,7 @@ function Social({csrf, data, handlerChangesData}) {
             },
           ]}
         >
-          <Input 
-            placeholder="vk" 
-            className="required" 
-          />
+          <Input placeholder="vk" className="required" />
         </Form.Item>
         <Form.Item 
           {...formItemLayout}

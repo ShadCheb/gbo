@@ -389,7 +389,7 @@ router.post('/employee', auth, async(req, res) => {
       })
         .then(async () => {
           const result = await Employee.findAll({
-            cityListId: data.city_list_id
+            where: {cityListId: data.city_list_id}
           });
 
           res.status(201).json({result});
@@ -407,9 +407,9 @@ router.post('/employee', auth, async(req, res) => {
         avatar: data.avatar,
         cityListId: data.city_list_id
       })
-        .then(async (data) => {
+        .then(async () => {
           const result = await Employee.findAll({
-            cityListId: data.city_list_id
+            where: {cityListId: data.city_list_id}
           });
 
           res.status(201).json({result});
@@ -485,9 +485,9 @@ router.post('/equipment', auth, async(req, res) => {
         cylinder: data.cylinder,
         cityListId: data.city_list_id
       })
-        .then(async (data) => {
+        .then(async () => {
           const result = await Equipment.findAll({
-            cityListId: data.city_list_id
+            where: {cityListId: data.city_list_id}
           });
 
           res.status(201).json({result});
@@ -632,6 +632,20 @@ router.post('/review', auth, async(req, res) => {
   }
 });
 
+router.delete('/review/:id', auth, async(req, res) => {
+  try {
+    const id = +req.params.id;
+    const result = await Review.findOne({
+      where: {id}
+    });
+
+    await result.destroy();
+    res.status(204).json({});
+  } catch (e) {
+    res.status(500).json({error: 'Произошла ошибка' + e});
+  }
+});
+
 
 router.post('/work/get', auth, async(req, res) => {  
   try {
@@ -689,9 +703,9 @@ router.post('/work', auth, async(req, res) => {
         gallery: data.gallery,
         cityListId: data.city_list_id
       })
-        .then(async (data) => {
+        .then(async () => {
           const result = await Work.findAll({
-            cityListId: data.city_list_id
+            where: {cityListId: data.city_list_id}
           });
 
           res.status(201).json({result});

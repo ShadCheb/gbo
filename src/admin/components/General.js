@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button } from 'antd';
 
 
 function General({csrf, data, handlerChangesData}) {
-  const [form] = Form.useForm();
   const formItemLayout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 14 }
@@ -31,35 +30,22 @@ function General({csrf, data, handlerChangesData}) {
       })
   };
 
-  form.setFieldsValue({
-    city:  data.name,
-    brief: data.brief,
-    name2: data.name2,
-    email: data.email
-  });
 
   return (
     <section>
-      <Form
-        form={form} 
+      <Form 
         name="form-general"
+        initialValues={{ remember: true }}
         onFinish={onFinish}
+        fields={data.data}
       >
         <Form.Item 
           {...formItemLayout}
-          name="city"
+          name="name"
           label="Город:"
-          rules={[
-            {
-              required: true,
-              message: 'Заполните поле',
-            },
-          ]}
+          rules={[ { required: true, message: 'Заполните поле' } ]}
         >
-          <Input 
-            placeholder="Город" 
-            className="required" 
-          />
+          <Input placeholder="Город" className="required" />
         </Form.Item>
         <Form.Item 
           {...formItemLayout}

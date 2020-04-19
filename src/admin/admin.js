@@ -71,12 +71,15 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
   switch(component) {
     case typeList[0].brief: // 'general'
       let {name2, email} = data.city || {name2: null, email: null};
+      let dataGeneralFormat = [
+        {name: 'name', value: data.name},
+        {name: 'brief', value: data.brief},
+        {name: 'name2', value: name2},
+        {name: 'email', value: email},
+      ];
       let dataGeneral = {
         id:     data.id,
-        name:   data.name,
-        brief:  data.brief,
-        name2,
-        email
+        data:   dataGeneralFormat
       };
 
       return (
@@ -101,13 +104,17 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
         />
       );
     case typeList[2].brief: // 'social'
-      let socialId = (data.social) 
-        ? data.social.id 
-        : null;
-      let dataSocial = data.social || {};
-
-      dataSocial['id'] = data.id;
-      dataSocial['socialId'] = socialId;
+      let social = data.social || {};
+      let dataSocialFormat = [
+        {name: 'vk', value: social.vk},
+        {name: 'instagram', value: social.instagram},
+        {name: 'youtube', value: social.youtube}
+      ];
+      let dataSocial = {
+        id: data.id,
+        socialId: social.id,
+        data: dataSocialFormat
+      };
 
       return (
         <Social 
@@ -131,13 +138,18 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
         handlerChangesData={handlerChangesData}
       />);
     case typeList[4].brief: // 'phone'
-      let phoneId = (data.phone) 
-        ? data.phone.id 
-        : null;
-      let dataPhone = data.phone || {};
-
-      dataPhone['id'] = data.id;
-      dataPhone['phoneId'] = phoneId;
+      let phone = data.phone || {};
+      let phoneId = phone.id;
+      let dataPhoneFormat = [
+        {name: 'kod', value: phone.kod},
+        {name: 'number', value: phone.number},
+        {name: 'link', value: phone.link}
+      ];
+      let dataPhone = {
+        id: data.id,
+        phoneId: phoneId,
+        data: dataPhoneFormat
+      }
 
       return (<Phone 
         csrf={csrf}
@@ -147,10 +159,31 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
     case typeList[5].brief: // 'employee'
       let dataEmployee = {};
       
-      dataEmployee['employee'] = (data.employee) 
-        ? data.employee
-        : null;
       dataEmployee['cityListId'] = data.id;
+
+      if (!data.employee) {      
+        fetch('/admin/employee/get', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'X-XSRF-TOKEN': csrf
+          },
+          body: JSON.stringify({cityId: data.id})
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.result) {
+              handlerChangesData({employee: data.result}, true);
+              dataEmployee['employee'] = data.result;
+            }
+          })
+          .catch(e => {
+            if (e.error)
+              this.error(e.error);
+          });
+      } else {
+        dataEmployee['employee'] = data.employee;
+      }
     
       return (<Employee 
         csrf={csrf}
@@ -159,12 +192,37 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
       />);
     case typeList[6].brief: // 'equipment'
       let dataEquipment = {};
-      
-      dataEquipment['equipment'] = (data.equipment) 
-        ? data.equipment
-        : null;
     
       dataEquipment['cityListId'] = data.id;
+
+      if (!data.equipment) {
+        fetch('/admin/equipment/get', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'X-XSRF-TOKEN': csrf
+          },
+          body: JSON.stringify({cityId: data.id})
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.result) {
+              data.result = data.result.map(item => {
+                item.cylinder = item.cylinder.split(','); // Строку в массив
+  
+                return item;
+              });
+              handlerChangesData({equipment: data.result}, true);
+              dataEquipment['equipment'] = data.result;
+            }
+          })
+          .catch(e => {
+            if (e.error)
+              this.error(e.error);
+          });
+      } else {
+        dataEquipment['equipment'] = data.equipment;
+      }
 
       return (<Equipment
         csrf={csrf}
@@ -174,11 +232,37 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
 
     case typeList[7].brief: // 'review'
       let dataReview = {};
-      
-      dataReview['review'] = data.review;
-      dataReview['reviewVk'] = data.reviewVk;
     
       dataReview['cityListId'] = data.id;
+
+      if (!data.review) {
+        fetch('/admin/review/get', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'X-XSRF-TOKEN': csrf
+          },
+          body: JSON.stringify({cityId: data.id})
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.result) {
+              handlerChangesData({
+                review: data.result.reviews || [],
+                reviewVk: data.result.review_vk
+              }, true);
+              dataReview['review'] = data.result.reviews;
+              dataReview['reviewVk'] = data.result.review_vk;
+            }
+          })
+          .catch(e => {
+            if (e.error)
+              this.error(e.error);
+          });
+      } else {
+        dataReview['review'] = data.review;
+        dataReview['reviewVk'] = data.reviewVk;
+      }
 
       return (<Review
         csrf={csrf}
@@ -188,9 +272,44 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
 
     case typeList[8].brief: // 'work'
       let dataWork = {};
-      
-      dataWork['work'] = data.work;
+
       dataWork['cityListId'] = data.id;
+
+      if (!data.work) {  
+        fetch('/admin/work/get', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'X-XSRF-TOKEN': csrf
+          },
+          body: JSON.stringify({cityId: data.id})
+        })
+          .then(res => res.json())
+          .then(data => {  
+            if (data.result) {
+              data.result.map(work => {
+                work.established = (work.established)
+                  ? work.established.split(',')
+                  : [];
+                work.additionally = (work.additionally) 
+                  ? work.additionally.split(',')
+                  : [];
+                work.gallery = (work.gallery) 
+                  ? work.gallery.split(',')
+                  : [];
+              });
+            }
+  
+            handlerChangesData({work: data.result}, true);
+            dataWork['work'] = data.result;
+          })
+          .catch(e => {  
+            if (e.error)
+              this.error(e.error);
+          });
+      } else {
+        dataWork['work'] = data.work;
+      }
 
       return (<Work
         csrf={csrf}
@@ -314,8 +433,10 @@ class Admin extends Component {
       })
   }
   selectCity = (city) => {
-    if (city.target && city.target.value)
+    if (city.target && city.target.value) {
       this.getCity(city.target.value);
+      this.setState({city: city.target.value});
+    }
   }
   setModalAddCity(value) {
     this.setState({visibleAddCity: value});
@@ -351,16 +472,12 @@ class Admin extends Component {
   }
 
   render() {
-    let headerText = (this.state.data) 
-      ? 'Выберите город:'
-      : 'Добавьте город:';
-
     return (
       <div>
         <Spin spinning={this.state.loading}>
           <div className="a-container">
             <div className="a-header">
-              <p className="a-header__p">{headerText}</p>
+              <p className="a-header__p">{(this.state.data) ? 'Выберите город:' : 'Добавьте город:'}</p>
               {
                 <Radio.Group value={this.state.city} onChange={this.selectCity}>
                   {this.state.cityList.map((city, idx) => (

@@ -308,6 +308,14 @@ p {
   width: 100%;
 }
 
+.review__list {
+  display: flex;
+  align-items: flex-start;
+}
+.review__list button {
+  margin-left: 7px;
+}
+
 
 
 

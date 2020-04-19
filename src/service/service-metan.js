@@ -43,8 +43,10 @@ class Metan extends Component {
     let target = e.target;
     let title = target.closest('button').textContent;
     let modalRecord = {
+      target,
       visible: true,
-      title
+      title,
+      page: 'Метан'
     };
 
     this.setState({modalRecord});
@@ -100,14 +102,18 @@ class Metan extends Component {
                   <li><strong>Экономия до 70%</strong> с каждой заправкой</li>
                 </ul>
                 <div className="s-header__btns">
-                  <button className="btn-1 btn--white-border" 
+                  <button className="btn-1 btn--white-border"
+                    data-type="Заказать установку метана" 
                     aria-label="Заказать установку"
                     onClick={this.openModalRecord.bind(this)}
                   >Заказать установку</button>
                 </div>
               </div>
               <div className="s-header__img sm-header__img">
-                <img src="/img/metan/header-1.png" alt="Установка ГБО на метане" />
+                <picture>
+                  <source media="(min-width: 768px)" srcset="/img/metan/header-1.png" />
+                  <img src="/img/metan/header-1-m.png" alt="Установка ГБО на метане" />
+                </picture>
               </div>
             </div>
           </div>
@@ -126,7 +132,10 @@ class Metan extends Component {
                 </div>
               </div>
               <div className="sd-advantages__block__img">
-                <img src="/img/metan/murano_1.png" alt="Рост цен на дизельное топливо" />
+                <picture>
+                  <source media="(min-width: 768px)" srcset="/img/metan/murano_1.png" />
+                  <img src="/img/metan/murano_1-m.png" alt="Рост цен на дизельное топливо" />
+                </picture>
               </div>
             </div>
             <div className="sd-description__bcg bcg--2"></div>
@@ -174,6 +183,7 @@ class Metan extends Component {
             </div>
             <div className="sm-advantages__btn">
               <button className="btn-1 btn--blue" 
+                data-type="Заказать установку метана" 
                 aria-label="Заказать установку"
                 onClick={this.openModalRecord.bind(this)}
               >Заказать установку</button>

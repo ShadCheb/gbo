@@ -100,17 +100,7 @@ class Main extends Component {
   }
 
   // Меняем город в шапке
-  handleChange = (value) => {
-    let brief = '';
-
-    this.state.cityList.some(c => {
-      if (c.id == value){
-        brief = c.brief;
-
-        return true;
-      }
-    });
-
+  handleChange = (brief) => {
     location.href = '/?city=' + brief;
   }
 
@@ -196,6 +186,8 @@ class Main extends Component {
     let dataSend = {};
     let check = true;
 
+    target.disabled = true;
+
     for (let i = 0; i < inputList.length; i++) {
       let valid = inputList[i].dataset && inputList[i].dataset.valid;
       let value = (inputList[i].type == 'checkbox')
@@ -213,8 +205,11 @@ class Main extends Component {
     dataSend['page'] = 'Главная';
 
     // Прошла ли валидация
-    if (!check)
+    if (!check) {
+      target.disabled = false;
+
       return;
+    }
 
     // Дополнительные данные для отправки
     if (target && target.dataset) {
@@ -234,11 +229,14 @@ class Main extends Component {
     })
       .then(res => res.json())
       .then(data => {
+        target.disabled = false;
+
         if (data.success) {
           this.success(data.success);
         }
       })
       .catch(e => {
+        target.disabled = false;
         if (e.error)
           this.error(e.error);
       })
@@ -354,12 +352,17 @@ class Main extends Component {
                           className="btn-1" 
                           aria-label="Узнать цену"
                           onClick={this.send.bind(this)}
+                          id="test"
                         >Узнать цену</button>
                       </form>
                     </div>
                   </div>
                   <div className="main__img">
-                    <img src="/img/main-1.png" alt="" />
+                    <picture>
+                      <source media="(min-width: 768px)" srcset="/img/main-1.png" />
+                      <source media="(min-width: 420px)" srcset="/img/main-1-p.png" />
+                      <img src="/img/main-1-m.png" alt="Gazoved" />
+                    </picture>
                   </div>
                 </div>
               </div>
@@ -383,7 +386,10 @@ class Main extends Component {
                       <span></span>
                       <span></span>
                     </div>
-                    <img src="/img/advantages-1.png" alt="" />
+                    <picture>
+                      <source media="(min-width: 768px)" srcset="/img/advantages-1.png" />
+                      <img src="/img/advantages-1-m.png" alt="Gazoved" />
+                    </picture>
                   </div>
                   <div className="advantages__list">
                     <div className="advantages__item">
@@ -492,12 +498,18 @@ class Main extends Component {
                       </div>
                     </div>
                     <div className="certificates__img certificates__bcg--1">
-                      <img src="/img/certificates-1.png" alt="Сертифицированные мастера" />
+                      <picture>
+                        <source media="(min-width: 768px)" srcset="/img/certificates-1.png" />
+                        <img src="/img/certificates-1-m.png" alt="Сертифицированные мастера" />
+                      </picture>
                     </div>
                   </div>
                   <div className="certificates__body">
                     <div className="certificates__img certificates__bcg--2">
-                      <img src="/img/certificates-2.png" alt="Сертифицированный сервис" />
+                      <picture>
+                        <source media="(min-width: 768px)" srcset="/img/certificates-2.png" />
+                        <img src="/img/certificates-2-m.png" alt="Сертифицированный сервис" />
+                      </picture>
                     </div>
                     <div className="certificates__text">
                       <h2 className="caption__h2">Сертифицированный сервис</h2>
@@ -575,7 +587,10 @@ class Main extends Component {
                         <span />
                         <span />
                       </div>
-                      <img src="/img/registration-1.png" alt="" />
+                      <picture>
+                        <source media="(min-width: 768px)" srcset="/img/registration-1.png" />
+                        <img src="/img/registration-1-m.png" alt="Регистрация ГБО в Газовед" />
+                      </picture>
                     </div>
                   </div>
                   <div className="registration__col">
@@ -609,7 +624,10 @@ class Main extends Component {
                 <div className="install__bcg bcg--2" />
                 <div className="install__body">
                   <div className="install__img">
-                    <img src="/img/install-1.png" alt="" />
+                    <picture>
+                      <source media="(min-width: 768px)" srcset="/img/install-1.png" />
+                      <img src="/img/install-1-m.png" alt="Установка ГБО в Газовед" />
+                    </picture>
                   </div>
                   <div className="install__form">
                     <p className="install__p">Отправь заявку и Наш специалист 
@@ -684,7 +702,10 @@ class Main extends Component {
                     </form>
                   </div>
                   <div className="gibdd__img">
-                    <img src="/img/gibdd-1.png" alt="Регистрация в ГИБДД" />
+                    <picture>
+                      <source media="(min-width: 768px)" srcset="/img/gibdd-1.png" />
+                      <img src="/img/gibdd-1-m.png" alt="Регистрация ГБО в ГИБДД с Газовед" />
+                    </picture>
                   </div>
                 </div>
                 <div className="gibdd__caption__container">

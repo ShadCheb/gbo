@@ -9,21 +9,7 @@ const Review = require('../models/review');
 const ReviewVk = require('../models/review_vk');
 const CityList = require('../models/cityList');
 
-// const reqEmail = require('../emails/request');
-// const keys = require('../keys');
-
 const detaGeneral = require('../middleware/dataGeneral');
-
-// const transporter = nodemailer.createTransport({
-//   host: 'smtp.yandex.ru',
-//   port: 587,
-//   secure: false,
-//   auth: {
-//     user: keys.EMAIL_USER,
-//     pass: keys.EMAIL_PASSWORD
-//   }
-// });
-
 
 // Для тест-задания
 router.get('/test', async(req, res) => {
@@ -64,18 +50,6 @@ router.get('/', detaGeneral,  async (req, res) => {
     console.log(e);
   }
 });
-
-/* router.post('/mail/request', async (req, res) => {
-  try {
-    let data = req.body;
-
-    await transporter.sendMail(reqEmail(data));
-
-    res.status(201).json({success: 'Сообщение отправлено'});
-  } catch (e) {
-    res.status(403).json({error: 'Произошла ошибка. Попробуйте позже'});
-  }
-}); */
 
 router.post('/upload', async (req, res) => {
   try {
@@ -122,7 +96,7 @@ router.post('/mail', async (req, res) => {
   if (page)
     output += `<p><b>Заявка отправлена со страницы:</b> ${page}</p>`
   if (btn)
-    output += `<p><b>При нажатии кнопки:/b> ${btn}</p>`
+    output += `<p><b>При нажатии кнопки:</b> ${btn}</p>`
   if (message)
     output += `<p><b>Сообщение от посетителя сайта:</b> ${message}</p>`;
   if (type)
@@ -148,25 +122,20 @@ router.post('/mail', async (req, res) => {
     }
   });
 
-  // setup email data with unicode symbols
   let mailOptions = {
-    from: 't3.t3st@yandex.ru', // sender address
+    from: 't3.t3st@yandex.ru',
     to: email,
-    subject: 'Сообщение с сайта Gazoved', // Subject line
+    subject: 'Сообщение с сайта Gazoved',
     // text: 'Hello world?', // plain text body
     html: output // html body
   };
 
-  // send mail with defined transport object
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       res.status(500).json({error: 'Произошла ошибка. Попробуйте позже'}); 
 
       return;
     }
-
-    // console.log('Message sent: %s', info.messageId);
-    // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
     res.status(201).json({success: 'Сообщение отправлено. Ждите звонка'}); 
   });

@@ -1,7 +1,8 @@
 const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
-const session = require('express-session')
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
 const sequelize = require('./utils/database');
 
@@ -30,6 +31,7 @@ app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use('/images', express.static(path.join(__dirname, 'images')))

@@ -26,33 +26,33 @@ class Equipment extends Component {
     message.error(msg);
   };
 
-  componentDidMount = () => {
-    if (!this.props.data.equipment) {
-      fetch('/admin/equipment/get', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-          'X-XSRF-TOKEN': this.props.csrf
-        },
-        body: JSON.stringify({cityId: this.props.data.cityListId})
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.result) {
-            data.result = data.result.map(item => {
-              item.cylinder = item.cylinder.split(','); // Строку в массив
+  // componentDidMount = () => {
+  //   if (!this.props.data.equipment) {
+  //     fetch('/admin/equipment/get', {
+  //       method: 'post',
+  //       headers: {
+  //         'Content-Type': 'application/json;charset=utf-8',
+  //         'X-XSRF-TOKEN': this.props.csrf
+  //       },
+  //       body: JSON.stringify({cityId: this.props.data.cityListId})
+  //     })
+  //       .then(res => res.json())
+  //       .then(data => {
+  //         if (data.result) {
+  //           data.result = data.result.map(item => {
+  //             item.cylinder = item.cylinder.split(','); // Строку в массив
 
-              return item;
-            });
-            this.props.handlerChangesData({equipment: data.result}, true);
-          }
-        })
-        .catch(e => {
-          if (e.error)
-            this.error(e.error);
-        });
-    }
-  }
+  //             return item;
+  //           });
+  //           this.props.handlerChangesData({equipment: data.result}, true);
+  //         }
+  //       })
+  //       .catch(e => {
+  //         if (e.error)
+  //           this.error(e.error);
+  //       });
+  //   }
+  // }
 
   deleteEquipment = (equipment) => {
     let id = equipment.id;

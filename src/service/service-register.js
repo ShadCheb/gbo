@@ -43,8 +43,10 @@ class Register extends Component {
     let target = e.target;
     let title = target.closest('button').textContent;
     let modalRecord = {
+      target,
       visible: true,
-      title
+      title,
+      page: 'Регистрация в ГИБДД'
     };
 
     this.setState({modalRecord});
@@ -102,6 +104,7 @@ class Register extends Component {
                 </ul>
                 <div className="s-header__btns">
                   <button className="btn-1 btn--white" 
+                    data-type="Заказать услугу регистрация в ГИБДД" 
                     aria-label="Заказать услугу"
                     onClick={this.openModalRecord.bind(this)}
                   >Заказать услугу</button>
@@ -212,6 +215,7 @@ class Register extends Component {
             </div>
             <div className="sm-advantages__btn">
               <button className="btn-1 btn--blue" 
+                data-type="Заказать услугу регистрация в ГИБДД" 
                 aria-label="Заказать услугу"
                 onClick={this.openModalRecord.bind(this)}
               >Заказать услугу</button>
@@ -298,6 +302,7 @@ class Register extends Component {
                   <p className="text__p2">Проведем консультацию по телефону</p>
                   <div className="sr-question__btn">
                     <button className="btn-1 btn--blue" 
+                      data-type="Задать вопрос про регистрацию в ГИБДД" 
                       aria-label="Задать вопрос"
                       onClick={this.openModalRecord.bind(this)}
                     >Задать вопрос</button>

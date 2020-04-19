@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Input, Button, message } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Input, Button, message, Popconfirm } from 'antd';
+import { QuestionCircleOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 
 
 const MONTHS = [
@@ -52,32 +52,6 @@ class Review extends Component {
       topicId: '',
 
       infoGroup: null
-    }
-  }
-
-  componentDidMount = () => {
-    if (!this.props.data.review) {
-      fetch('/admin/review/get', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-          'X-XSRF-TOKEN': this.props.csrf
-        },
-        body: JSON.stringify({cityId: this.props.data.cityListId})
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.result) {
-            this.props.handlerChangesData({
-              review: data.result.reviews,
-              reviewVk: data.result.review_vk
-            }, true);
-          }
-        })
-        .catch(e => {
-          if (e.error)
-            this.error(e.error);
-        });
     }
   }
 
@@ -147,6 +121,9 @@ class Review extends Component {
           let response = data.result.response;
           let profiles = {};
           let filteredData = [];
+          let group = response.groups[0];
+
+          group['count'] = response.count;
 
           response.profiles.map(profile => {
             profiles[profile.id] = {
@@ -166,7 +143,7 @@ class Review extends Component {
 
           this.setState({
             reviewListVk: filteredData,
-            infoGroup: response.groups[0]
+            infoGroup: group
           });
         }
         else 
@@ -204,6 +181,30 @@ class Review extends Component {
       })
   }
 
+  deleteReview = (review) => {
+    let id = review.id;
+
+    if (!id)
+      return;
+
+    fetch('/admin/review/' + id, {
+      method: 'delete',
+      headers: {
+        'X-XSRF-TOKEN': this.props.csrf
+      }
+    })
+      .then(() => {
+        let review = this.props.data.review.slice();
+
+        review = review.filter(a => a.id !== id);
+        this.props.handlerChangesData({review});
+      })
+      .catch(e => {
+        if (e.error)
+          this.props.handlerChangesData(e.error);
+      })
+  }
+
 
   render() {
     let {reviewListVk, infoGroup} = this.state;
@@ -214,6 +215,8 @@ class Review extends Component {
     let reviewToken = (reviewVk) 
       ? reviewVk.id_token : null;
 
+    console.log('infoGroup', infoGroup);
+
     return (
       <section className="a-section__review">
         { infoGroup && getInfoGroup(infoGroup)}
@@ -222,7 +225,7 @@ class Review extends Component {
           <div className="a-col__2">
             <Input placeholder="id группы" 
               id="a-review__group"
-              value={reviewGroup} 
+              defaultValue={reviewGroup} 
             />
           </div>
         </div>
@@ -231,7 +234,7 @@ class Review extends Component {
           <div className="a-col__2">
             <Input placeholder="id топик" 
               id="a-review__token"
-              value={reviewToken} 
+              defaultValue={reviewToken} 
             />
           </div>
         </div>
@@ -281,16 +284,29 @@ class Review extends Component {
             {
               reviewListDb.map((review, idx) => {
                 return (
-                  <article className="review__block" key={idx}>
-                    <div className="review__img">
-                      <img src={review.avatar || ''} />
-                    </div>
-                    <div className="review__text">
-                      <p className="review__text__caption">{review.name}</p>
-                      <p className="review__text__p">{review.review}</p>
-                      <p className="review__text__date">{review.date}</p>
-                    </div>
-                  </article>
+                  <div className="review__list" key={idx}>
+                    <article className="review__block">
+                      <div className="review__img">
+                        <img src={review.avatar || ''} />
+                      </div>
+                      <div className="review__text">
+                        <p className="review__text__caption">{review.name}</p>
+                        <p className="review__text__p">{review.review}</p>
+                        <p className="review__text__date">{review.date}</p>
+                      </div>
+                    </article>
+                    <Popconfirm title="Удалить?" 
+                      icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
+                      okText="Да" 
+                      cancelText="Нет"
+                      onConfirm={this.deleteReview.bind(this, review)}
+                    >
+                      <Button 
+                        type="primary"
+                        icon={<DeleteOutlined />}
+                      />
+                    </Popconfirm>
+                  </div>
                 )
               })
             }

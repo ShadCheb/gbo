@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Form, Input, Button } from 'antd';
 
 function Phone({csrf, data, handlerChangesData}) {
-  const [form] = Form.useForm();
   const formItemLayout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 14 }
@@ -32,18 +31,12 @@ function Phone({csrf, data, handlerChangesData}) {
       })
   }
 
-  form.setFieldsValue({
-    kod:  data.kod,
-    number: data.number,
-    link: data.link
-  });
-
   return (
     <section>
       <Form
-        form={form} 
         name="form-phone"
         onFinish={onFinish}
+        fields={data.data}
       >
         
         <Form.Item 
@@ -57,10 +50,7 @@ function Phone({csrf, data, handlerChangesData}) {
             },
           ]}
         >
-          <Input 
-            placeholder="Код" 
-            className="required" 
-          />
+          <Input placeholder="Код" className="required" />
         </Form.Item>
         <Form.Item 
           {...formItemLayout}

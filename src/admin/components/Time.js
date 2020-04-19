@@ -33,7 +33,6 @@ class Time extends Component {
       return;
     }
 
-    let timeStrings = this.state.timeStrings;
     let values = {
       id: this.props.data.id,
       timeId: this.props.data.timeId,
@@ -91,7 +90,7 @@ class Time extends Component {
           <div className="a-col__1"><p>С:</p></div>
           <div className="a-col__2" id="a-timer__from">
             <TimePicker 
-              defaultValue={from && moment(from, this.state.format)}
+              value={from && moment(from, this.state.format) || ''}
               format={this.state.format}
               minuteStep={10}
               onChange={this.onChangeFrom}
@@ -102,9 +101,8 @@ class Time extends Component {
         <div className="a-row">
           <div className="a-col__1"><p>До:</p></div>
           <div className="a-col__2" id="a-timer__before">
-            {/* 'HH:mm:ss' */}
             <TimePicker 
-              defaultValue={before && moment(before, this.state.format)}
+              value={before && moment(before, this.state.format) || ''}
               format={this.state.format}
               minuteStep={10}
               onChange={this.onChangeBefore}

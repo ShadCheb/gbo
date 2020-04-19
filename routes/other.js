@@ -82,9 +82,10 @@ router.get('/work', detaGeneral, async (req, res) => {
 
 router.get('/work/:id', detaGeneral, async (req, res) => {
   let {cityList, data} = res.locals.dataGeneral;
+  let idWork = req.params.id;  
   let dataPage = await Work.findOne(
     {
-      where: {id: data.id}
+      where: {id: idWork}
     }
   )
     .then(result => {

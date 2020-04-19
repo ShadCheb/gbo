@@ -45,8 +45,10 @@ class Variator extends Component {
     let target = e.target;
     let title = target.closest('button').textContent;
     let modalRecord = {
+      target,
       visible: true,
-      title
+      title,
+      page: 'Вариатор'
     };
 
     this.setState({modalRecord});
@@ -105,6 +107,7 @@ class Variator extends Component {
                 </ul>
                 <div className="s-header__btns">
                   <button className="btn-1 btn--white" 
+                    data-type="Заказать установку вариатора" 
                     aria-label="Заказать установку"
                     onClick={this.openModalRecord.bind(this)}
                   >Заказать установку</button>
@@ -188,6 +191,7 @@ class Variator extends Component {
             </div>
             <div className="sm-advantages__btn">
               <button className="btn-1 btn--blue" 
+                data-type="Заказать установку вариатора" 
                 aria-label="Заказать установку"
                 onClick={this.openModalRecord.bind(this)}
               >Заказать установку</button>
@@ -216,6 +220,7 @@ class Variator extends Component {
                   </ul>
                   <div className="sd-conclusion__btn">
                     <button className="btn-1" 
+                      data-type="Заказать установку вариатора" 
                       aria-label="Заказать установку"
                       onClick={this.openModalRecord.bind(this)}
                     >Заказать установку</button>
@@ -249,6 +254,7 @@ class Variator extends Component {
                     вариатор, позвонив нашим менеджерам.</p>
                   <div className="sv-conclusion__btn">
                     <button className="btn-1 btn--blue" 
+                      data-type="Заказать установку вариатора" 
                       aria-label="Заказать установку"
                       onClick={this.openModalRecord.bind(this)}
                     >Заказать установку</button>

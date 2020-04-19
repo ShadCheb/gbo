@@ -19,27 +19,6 @@ class Employee extends Component {
     message.error(msg);
   };
 
-  componentDidMount = () => {
-    if (!this.props.data.employee) {
-      fetch('/admin/employee/get', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-          'X-XSRF-TOKEN': this.props.csrf
-        },
-        body: JSON.stringify({cityId: this.props.data.cityListId})
-      })
-        .then(res => res.json())
-        .then(data => {
-          this.props.handlerChangesData({employee: data.result}, true);
-        })
-        .catch(e => {
-          if (e.error)
-            this.error(e.error);
-        });
-    }
-  }
-
   deleteEmployee = (employee) => {
     let id = employee.id;
 
@@ -141,7 +120,7 @@ class Employee extends Component {
                     type="primary"
                     icon={<DeleteOutlined />}
                   />
-                </Popconfirm>  
+                </Popconfirm>
               </div>
             )
           })}

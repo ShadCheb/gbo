@@ -70,6 +70,8 @@ function ModalRecord(props) {
     let dataSend = {};
     let check = true;
 
+    target.disabled = true;
+
     for (let i = 0; i < inputList.length; i++) {
       let valid = inputList[i].dataset && inputList[i].dataset.valid;
       let value = (inputList[i].type == 'checkbox')
@@ -78,7 +80,7 @@ function ModalRecord(props) {
       let result = (valid) 
         ? checkSend(value, valid) : true;
 
-      if (!result)
+      if (!result) 
         check = false;
 
       dataSend[inputList[i].name] = value;
@@ -88,8 +90,11 @@ function ModalRecord(props) {
     dataSend['page'] = props.data.page;
 
     // Прошла ли валидация
-    if (!check)
+    if (!check) {
+      target.disabled = false;
+
       return;
+    }
 
     // Дополнительные данные для отправки
     if (target && target.dataset) {
@@ -109,12 +114,16 @@ function ModalRecord(props) {
     })
       .then(res => res.json())
       .then(data => {
+        target.disabled = false;
+
         if (data.success) {
           afterClose();
           success(data.success);
         }
       })
       .catch(e => {
+        target.disabled = false;
+
         if (e.error)
           error(e.error);
       })
@@ -148,7 +157,7 @@ function ModalRecord(props) {
             </label>
             <input type="hidden" name="_csrf" value={props.csrf} />
             <div className="modal__btn">
-              <button className="btn-1 btn--blue" 
+              <button className="btn-1 btn--blue"
                 aria-label="Отправить заявку"
                 type="submit"
                 onClick={send}

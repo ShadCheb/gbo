@@ -4,9 +4,6 @@ import { Select } from 'antd';
 const { Option } = Select;
 
 function Header({activeCity, handleChange, cityList}) {
-  let phone = activeCity.phone;
-  let time = activeCity.time;
-
   const selectCity = value => {
     handleChange(value);
   }
@@ -22,9 +19,9 @@ function Header({activeCity, handleChange, cityList}) {
         </div>
         
         <div className="header__select">
-          <Select defaultValue={activeCity.name} style={{width: 200}} onChange={selectCity}>
+          <Select defaultValue={activeCity.brief} style={{width: 200}} onChange={selectCity}>
             {cityList.map((city) => {
-              return <Option key={city.id} value={city.name}>{city.name}</Option>
+              return <Option key={city.id} value={city.brief}>{city.name}</Option>
             })}
           </Select>
           <div>

@@ -105,15 +105,14 @@
   }
 }
 @media (max-width: 576px) {
-  /* .map {
-    margin-top: 120px;
-  } */
   .map__container {
     height: 400px;
   }
   .map__label {
     top: -100px;
-    width: calc(100% - 80px);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: calc(100% - 40px);
     transform: translateY(0);
   }
   .map__label__phone {

@@ -36,7 +36,7 @@ function Question(props) {
               </button>
               <h2 className="question__name">Вредит ли газ двигателю?</h2>
             </div>
-            <div className="question__text">
+            <div className="question__text" onClick={(e) => {e.stopPropagation()}}>
               <div>
                 <p className="question__text__main">Газ не только не вредит двигателю автомобиля, а наоборот в некоторых 
                   случаях увеличивает ресурс его работы.</p>
@@ -63,7 +63,7 @@ function Question(props) {
               <h2 className="question__name">Заменит ли ГБО обычную систему питания, ее 
                 придется снимать?</h2>
             </div>
-            <div className="question__text">
+            <div className="question__text" onClick={(e) => {e.stopPropagation()}}>
               <div>
                 <p className="question__text__main">Штатная система питания не демонтируется.</p>
                 <p className="question__text__p">ГБО позволяет ехать на газе, не используя 
@@ -83,7 +83,7 @@ function Question(props) {
               <h2 className="question__name">Насколько опасно использование газа в 
                 качестве топлива?</h2>
             </div>
-            <div className="question__text">
+            <div className="question__text" onClick={(e) => {e.stopPropagation()}}>
               <div>
                 <p className="question__text__main">Сейчас машины с ГБО ничуть не 
                   опаснее бензиновых.</p>
@@ -106,7 +106,7 @@ function Question(props) {
               <h2 className="question__name">Нужно ли проходить специальное ТО 
                 для газового оборудования?</h2>
             </div>
-            <div className="question__text">
+            <div className="question__text" onClick={(e) => {e.stopPropagation()}}>
               <div>
                 <p className="question__text__main">Нужно.</p>
                 <p className="question__text__p">У автомобилей с ГБО раз в полгода на 

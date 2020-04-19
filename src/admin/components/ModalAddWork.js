@@ -82,7 +82,9 @@ function ModalAddWork({
   const onOk = async () => {
     setLoading(true);
 
-    let avatar = data.avatarFileList[0].name;
+    let avatar = (data.avatarFileList && data.avatarFileList.length) 
+      ? data.avatarFileList[0].name
+      : '';
     let gallery = data.gallery;
 
     // сначала загружаем картинку, если она есть
@@ -102,8 +104,6 @@ function ModalAddWork({
     let sendForm = new FormData();
     let established = (data.established) ? data.established : [];
     let additionally = (data.additionally) ? data.additionally : [];
-
-    console.log('data ', data);
 
     if (data.id) {
       sendForm.append('id', data.id);

@@ -13,8 +13,6 @@ const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
 
 
-console.log('infoCity ', infoCity);
-
 class WorkItem extends Component {
   state = {
     cityList,
@@ -70,6 +68,10 @@ class WorkItem extends Component {
     });
   }
 
+  separate = (value) => {
+    return ('' + value).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+  };
+
   render() {
     let {infoCity} = this.state;
 
@@ -111,8 +113,10 @@ class WorkItem extends Component {
               <div className="wi-description__text">
                 <div>
                   <h2 className="wi-description__caption">
-                    { (infoCity.mileage) ? ('Пробег' + infoCity.mileage + 'км') : ('') }
-                    { (infoCity.saving) ? (<strong> Экономия {infoCity.saving}рублей</strong>) : ('') }
+                    { (infoCity.mileage) ? ('Пробег' + this.separate(infoCity.mileage) + ' км') : ('') }
+                    { (infoCity.saving) 
+                      ? (<strong> Экономия {this.separate(infoCity.saving)} рублей</strong>) 
+                      : ('') }
                   </h2>
                   {
                     (infoCity.established && infoCity.established.length) 
