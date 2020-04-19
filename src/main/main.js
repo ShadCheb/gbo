@@ -258,7 +258,7 @@ class Main extends Component {
       }
     ));
 
-    if (!points.length)
+    if (!points || !points.length)
       return;
 
     let map = new ymaps.Map('map', {
@@ -359,8 +359,8 @@ class Main extends Component {
                   </div>
                   <div className="main__img">
                     <picture>
-                      <source media="(min-width: 768px)" srcset="/img/main-1.png" />
-                      <source media="(min-width: 420px)" srcset="/img/main-1-p.png" />
+                      <source media="(min-width: 768px)" srcSet="/img/main-1.png" />
+                      <source media="(min-width: 420px)" srcSet="/img/main-1-p.png" />
                       <img src="/img/main-1-m.png" alt="Gazoved" />
                     </picture>
                   </div>
@@ -387,7 +387,7 @@ class Main extends Component {
                       <span></span>
                     </div>
                     <picture>
-                      <source media="(min-width: 768px)" srcset="/img/advantages-1.png" />
+                      <source media="(min-width: 768px)" srcSet="/img/advantages-1.png" />
                       <img src="/img/advantages-1-m.png" alt="Gazoved" />
                     </picture>
                   </div>
@@ -499,7 +499,7 @@ class Main extends Component {
                     </div>
                     <div className="certificates__img certificates__bcg--1">
                       <picture>
-                        <source media="(min-width: 768px)" srcset="/img/certificates-1.png" />
+                        <source media="(min-width: 768px)" srcSet="/img/certificates-1.png" />
                         <img src="/img/certificates-1-m.png" alt="Сертифицированные мастера" />
                       </picture>
                     </div>
@@ -507,7 +507,7 @@ class Main extends Component {
                   <div className="certificates__body">
                     <div className="certificates__img certificates__bcg--2">
                       <picture>
-                        <source media="(min-width: 768px)" srcset="/img/certificates-2.png" />
+                        <source media="(min-width: 768px)" srcSet="/img/certificates-2.png" />
                         <img src="/img/certificates-2-m.png" alt="Сертифицированный сервис" />
                       </picture>
                     </div>
@@ -588,7 +588,7 @@ class Main extends Component {
                         <span />
                       </div>
                       <picture>
-                        <source media="(min-width: 768px)" srcset="/img/registration-1.png" />
+                        <source media="(min-width: 768px)" srcSet="/img/registration-1.png" />
                         <img src="/img/registration-1-m.png" alt="Регистрация ГБО в Газовед" />
                       </picture>
                     </div>
@@ -625,7 +625,7 @@ class Main extends Component {
                 <div className="install__body">
                   <div className="install__img">
                     <picture>
-                      <source media="(min-width: 768px)" srcset="/img/install-1.png" />
+                      <source media="(min-width: 768px)" srcSet="/img/install-1.png" />
                       <img src="/img/install-1-m.png" alt="Установка ГБО в Газовед" />
                     </picture>
                   </div>
@@ -703,7 +703,7 @@ class Main extends Component {
                   </div>
                   <div className="gibdd__img">
                     <picture>
-                      <source media="(min-width: 768px)" srcset="/img/gibdd-1.png" />
+                      <source media="(min-width: 768px)" srcSet="/img/gibdd-1.png" />
                       <img src="/img/gibdd-1-m.png" alt="Регистрация ГБО в ГИБДД с Газовед" />
                     </picture>
                   </div>
