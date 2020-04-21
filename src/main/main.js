@@ -13,9 +13,9 @@ import ModalRecord from './components/ModalRecord';
 import Footer from './components/Footer';
 
 import { message } from 'antd';
+import lozad from 'lozad';
 import { LightgalleryProvider, LightgalleryItem } from 'react-lightgallery';
 import InputMask from 'react-input-mask';
-
 
 const container = document.getElementById('page-main');
 const csrf = container.dataset.csrf;
@@ -75,11 +75,12 @@ class Main extends Component {
 
     showMenu: false, // открытие меню
 
-    map: null
+    map: null,
+    loadMap: false // загрузилась ли карта
   };
 
   componentDidMount = () => {
-    window.ymaps && ymaps.ready(this.initMap);
+    window.addEventListener('scroll', this.eventScrollToMap);
 
     let benefit = this.state.benefit;
 
@@ -88,6 +89,10 @@ class Main extends Component {
 
     if (!this.state.cityList.length)
       this.setState({data: false});
+
+    const observer = lozad();
+
+    observer.observe();
   }
 
   changeDatabenefit = (data) => {
@@ -242,6 +247,30 @@ class Main extends Component {
       })
   }; 
 
+  eventScrollToMap = () => {
+    // let topWindow = window.scrollTop;
+    let map = this.state.elemMap;
+    const h1 = 600;
+    const h2 = -600;
+
+    if (!map) {
+      let elemMap = document.querySelector('#map');
+
+      this.setState({elemMap});
+      map = elemMap;
+    }
+    
+    if (!this.state.loadMap) {
+      let aPos = map.scrollTop + map.getBoundingClientRect().top;
+
+      if (aPos < h1 && aPos > h2) { 
+        window.ymaps && ymaps.ready(this.initMap);
+        this.setState({loadMap: true});
+        window.removeEventListener('scroll', this.eventScrollToMap);
+      }
+    }
+  }
+
   /*
    * рендер карты
   */
@@ -358,10 +387,10 @@ class Main extends Component {
                     </div>
                   </div>
                   <div className="main__img">
-                    <picture>
+                    <picture className="lozad" data-iesrc="/img/main-1.png" data-alt="Gazoved">
                       <source media="(min-width: 768px)" srcSet="/img/main-1.png" />
                       <source media="(min-width: 420px)" srcSet="/img/main-1-p.png" />
-                      <img src="/img/main-1-m.png" alt="Gazoved" />
+                      <source media="(min-width: 300px)" srcSet="/img/main-1-m.png" />
                     </picture>
                   </div>
                 </div>
@@ -386,14 +415,17 @@ class Main extends Component {
                       <span></span>
                       <span></span>
                     </div>
-                    <picture>
+                    <picture className="lozad" data-iesrc="/img/main-1.png" 
+                      data-alt="Преимущества установки ГБО Gazoved">
                       <source media="(min-width: 768px)" srcSet="/img/advantages-1.png" />
-                      <img src="/img/advantages-1-m.png" alt="Gazoved" />
+                      <source media="(min-width: 300px)" srcSet="/img/advantages-1-m.png" />
                     </picture>
                   </div>
                   <div className="advantages__list">
                     <div className="advantages__item">
-                      <div className="advantages__item__img adv-item--plan"></div>
+                      <div className="advantages__item__img lozad"
+                        data-background-image-set="url('../img/icon-advantages/credit-card.png')"
+                      ></div>
                       <div className="advantages__item__text">
                         <h2 className="caption__h2">Рассрочка без переплат</h2>
                         <p>Установка газового оборудования в рассрочку 
@@ -401,28 +433,36 @@ class Main extends Component {
                       </div>
                     </div>
                     <div className="advantages__item">
-                      <div className="advantages__item__img adv-item--reg"></div>
+                      <div className="advantages__item__img lozad"
+                        data-background-image-set="url('../img/icon-advantages/terms-and-conditions.png')"
+                      ></div>
                       <div className="advantages__item__text">
                         <h2 className="caption__h2">Регистрация</h2>
                         <p>Полный пакет документов в ГИБДД за 3 000 руб</p>
                       </div>
                     </div>
                     <div className="advantages__item">
-                      <div className="advantages__item__img adv-item--bonus"></div>
+                      <div className="advantages__item__img lozad"
+                        data-background-image-set="url('../img/icon-advantages/cyber-security.png')"
+                      ></div>
                       <div className="advantages__item__text">
                         <h2 className="caption__h2">Электронный мультиклапан</h2>
                         <p>Мультиклапан 5-ю степенями безопасности в любом комплекте</p>
                       </div>
                     </div>
                     <div className="advantages__item">
-                      <div className="advantages__item__img adv-item--install"></div>
+                      <div className="advantages__item__img lozad"
+                        data-background-image-set="url('../img/icon-advantages/hepa-filter.png')"
+                      ></div>
                       <div className="advantages__item__text">
                         <h2 className="caption__h2">Фильтр Ultra 360</h2>
                         <p>Используем фильтра против плохого газа</p>
                       </div>
                     </div>
                     <div className="advantages__item">
-                      <div className="advantages__item__img adv-item--program"></div>
+                      <div className="advantages__item__img lozad"
+                        data-background-image-set="url('../img/icon-advantages/water.png')"
+                      ></div>
                       <div className="advantages__item__text">
                         <h2 className="caption__h2">Неубиваемые форсунки</h2>
                         <p>Ставим самые надёжные форсунки</p>
@@ -498,17 +538,19 @@ class Main extends Component {
                       </div>
                     </div>
                     <div className="certificates__img certificates__bcg--1">
-                      <picture>
+                      <picture className="lozad" data-iesrc="/img/certificates-1.png" 
+                        data-alt="Сертифицированные мастера">
                         <source media="(min-width: 768px)" srcSet="/img/certificates-1.png" />
-                        <img src="/img/certificates-1-m.png" alt="Сертифицированные мастера" />
+                        <source media="(min-width: 300px)" srcSet="/img/certificates-1-m.png" />
                       </picture>
                     </div>
                   </div>
                   <div className="certificates__body">
                     <div className="certificates__img certificates__bcg--2">
-                      <picture>
+                      <picture className="lozad" data-iesrc="/img/certificates-2.png" 
+                        data-alt="Сертифицированный сервис ГБО Газовед">
                         <source media="(min-width: 768px)" srcSet="/img/certificates-2.png" />
-                        <img src="/img/certificates-2-m.png" alt="Сертифицированный сервис" />
+                        <source media="(min-width: 300px)" srcSet="/img/certificates-2-m.png" />
                       </picture>
                     </div>
                     <div className="certificates__text">
@@ -587,9 +629,10 @@ class Main extends Component {
                         <span />
                         <span />
                       </div>
-                      <picture>
+                      <picture className="lozad" data-iesrc="/img/registration-1.png" 
+                        data-alt="Регистрация ГБО в Газовед">
                         <source media="(min-width: 768px)" srcSet="/img/registration-1.png" />
-                        <img src="/img/registration-1-m.png" alt="Регистрация ГБО в Газовед" />
+                        <source media="(min-width: 300px)" srcSet="/img/registration-1-m.png" />
                       </picture>
                     </div>
                   </div>
@@ -624,9 +667,10 @@ class Main extends Component {
                 <div className="install__bcg bcg--2" />
                 <div className="install__body">
                   <div className="install__img">
-                    <picture>
+                    <picture className="lozad" data-iesrc="/img/install-1.png" 
+                      data-alt="Установка ГБО в Газовед">
                       <source media="(min-width: 768px)" srcSet="/img/install-1.png" />
-                      <img src="/img/install-1-m.png" alt="Установка ГБО в Газовед" />
+                      <source media="(min-width: 300px)" srcSet="/img/install-1-m.png" />
                     </picture>
                   </div>
                   <div className="install__form">
@@ -702,9 +746,10 @@ class Main extends Component {
                     </form>
                   </div>
                   <div className="gibdd__img">
-                    <picture>
+                    <picture className="lozad" data-iesrc="/img/gibdd-1.png" 
+                      data-alt="Регистрация ГБО в ГИБДД с Газовед">
                       <source media="(min-width: 768px)" srcSet="/img/gibdd-1.png" />
-                      <img src="/img/gibdd-1-m.png" alt="Регистрация ГБО в ГИБДД с Газовед" />
+                      <source media="(min-width: 300px)" srcSet="/img/gibdd-1-m.png" />
                     </picture>
                   </div>
                 </div>

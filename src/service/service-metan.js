@@ -6,6 +6,8 @@ import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
 import ModalRecord from '../main/components/ModalRecord';
 
+import lozad from 'lozad';
+
 const container = document.getElementById('page-service-item');
 const csrf = container.dataset.csrf;
 const infoCity = JSON.parse(container.dataset.info);
@@ -22,6 +24,12 @@ class Metan extends Component {
     },
 
     showMenu: false, // открытие меню
+  }
+
+  componentDidMount = () => {
+    const observer = lozad();
+
+    observer.observe();
   }
 
   // Меняем город в шапке
@@ -110,9 +118,10 @@ class Metan extends Component {
                 </div>
               </div>
               <div className="s-header__img sm-header__img">
-                <picture>
-                  <source media="(min-width: 768px)" srcset="/img/metan/header-1.png" />
-                  <img src="/img/metan/header-1-m.png" alt="Установка ГБО на метане" />
+                <picture className="lozad" data-iesrc="/img/metan/header-1.png" 
+                  data-alt="Установка ГБО на метане">
+                  <source media="(min-width: 768px)" srcSet="/img/metan/header-1.png" />
+                  <source media="(min-width: 300px)" srcSet="/img/metan/header-1-m.png" />
                 </picture>
               </div>
             </div>
@@ -125,16 +134,16 @@ class Metan extends Component {
               <div className="sd-advantages__block__text">
                 <div>
                   <p className="sd-description__text text__p2"><span>Метан</span> - природный газ, 
-                  плотность которого 
-                  несравнима с плотностью бензина. Поэтому его заправляют 
+                  плотность которого несравнима с плотностью бензина. Поэтому его заправляют 
                   в баллоны высокого давления, сжимая до пары сотен атмосфер. 
                   Собственно, эти самые баллоны и монтируются в автомобили.</p>
                 </div>
               </div>
               <div className="sd-advantages__block__img">
-                <picture>
-                  <source media="(min-width: 768px)" srcset="/img/metan/murano_1.png" />
-                  <img src="/img/metan/murano_1-m.png" alt="Рост цен на дизельное топливо" />
+                <picture className="lozad" data-iesrc="/img/metan/murano_1.png" 
+                  data-alt="Установка метана в ГБО">
+                  <source media="(min-width: 768px)" srcSet="/img/metan/murano_1.png" />
+                  <source media="(min-width: 300px)" srcSet="/img/metan/murano_1-m.png" />
                 </picture>
               </div>
             </div>
@@ -150,7 +159,10 @@ class Metan extends Component {
             <div className="sm-advantages__body">
               <div className="sm-advantages__list">
                 <div className="sm-advantages__item">
-                  <div className="advantages__item__img adv-item--security"></div>
+                {/* adv-item--security */}
+                  <div className="advantages__item__img lozad"
+                    data-background-image-set="url('../img/icon-advantages/protection.png')"
+                  ></div>
                   <div className="advantages__item__text">
                     <h2 className="caption__h2">Безопасность</h2>
                     <p>Метан опрасен только при накоплении только в закрытом помещении. 
@@ -158,7 +170,10 @@ class Metan extends Component {
                   </div>
                 </div>
                 <div className="sm-advantages__item">
-                  <div className="advantages__item__img adv-item--ecology"></div>
+                {/* adv-item--ecology */}
+                  <div className="advantages__item__img lozad"
+                    data-background-image-set="url('../img/icon-advantages/terpenes.png')"
+                  ></div>
                   <div className="advantages__item__text">
                     <h2 className="caption__h2">Экологичность</h2>
                     <p>Выбросы углекислого газа, в сравнении с бензином, ниже 
@@ -166,7 +181,10 @@ class Metan extends Component {
                   </div>
                 </div>
                 <div className="sm-advantages__item">
-                  <div className="advantages__item__img adv-item--price"></div>
+                {/* adv-item--price */}
+                  <div className="advantages__item__img lozad"
+                    data-background-image-set="url('../img/icon-advantages/wallet.png')"
+                  ></div>
                   <div className="advantages__item__text">
                     <h2 className="caption__h2">Цена</h2>
                     <p>Октановое число у метана больше, чем у 98-го бензина (110), 
@@ -178,7 +196,8 @@ class Metan extends Component {
                 <div className="advantages__bcg advantages__bcg--sm">
                   <span></span><span></span><span></span><span></span><span></span>
                 </div>
-                <img src="/img/metan/metan-1.png" alt="Преимущества метана" />
+                <img className="lozad" data-src="/img/metan/metan-1.png" 
+                  data-alt="Преимущества метана" />
               </div>
             </div>
             <div className="sm-advantages__btn">

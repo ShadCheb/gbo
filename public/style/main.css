@@ -301,7 +301,7 @@
   .main__img {
     align-items: center;
   }
-  .main__img > img {
+  .main__img img {
     margin-left: -150px;
     margin-bottom: 0;
     width: 370px;
@@ -310,7 +310,7 @@
   .main__text {
     width: 100%;
   }
-  .main__img {
+  .main__img picture {
     width: 0;
   }
 }
@@ -540,9 +540,6 @@
   .benefit__caption {
     width: 220px;
   }
-  .benefit__bcg {
-    top: -10px;
-  }
 }
 
 
@@ -571,26 +568,6 @@
   display: flex;
   margin-bottom: 30px;
   align-items: center;
-}
-.adv-item--plan {
-  background: url(../img/icon-advantages/credit-card.png) no-repeat center;
-  background-size: 100%;
-}
-.adv-item--bonus {
-  background: url(../img/icon-advantages/cyber-security.png) no-repeat center;
-  background-size: 100%;
-}
-.adv-item--reg {
-  background: url(../img/icon-advantages/terms-and-conditions.png) no-repeat center;
-  background-size: 100%;
-}
-.adv-item--install {
-  background: url(../img/icon-advantages/hepa-filter.png) no-repeat center;
-  background-size: 100%;
-}
-.adv-item--program {
-  background: url(../img/icon-advantages/water.png) no-repeat center;
-  background-size: 100%;
 }
 .advantages__item:nth-child(2),
 .advantages__item:nth-child(5) {

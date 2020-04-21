@@ -6,6 +6,7 @@ import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
 import ModalRecord from '../main/components/ModalRecord';
 
+import lozad from 'lozad';
 
 const container = document.getElementById('page-service-item');
 const csrf = container.dataset.csrf;
@@ -24,6 +25,12 @@ class Variator extends Component {
     },
 
     showMenu: false, // открытие меню
+  }
+
+  componentDidMount = () => {
+    const observer = lozad();
+
+    observer.observe();
   }
 
   // Меняем город в шапке
@@ -114,7 +121,11 @@ class Variator extends Component {
                 </div>
               </div>
               <div className="s-header__img sm-header__img">
-                <img src="/img/variator/engine-1.png" alt="Установка вариатора" />
+                <picture className="lozad" data-iesrc="/img/variator/engine-1.png" 
+                  data-alt="Установка вариатора в Газовед">
+                  <source media="(min-width: 576px)" srcSet="/img/variator/engine-1.png" />
+                  <source media="(min-width: 300px)" srcSet="/img/variator/engine-1-m.png" />
+                </picture>
               </div>
             </div>
           </div>
@@ -137,7 +148,11 @@ class Variator extends Component {
                 </div>
               </div>
               <div className="sr-services__img">
-                <img src="/img/variator/variator-2.png" alt="Установка вариатора" />
+                <picture className="lozad" data-iesrc="/img/variator/variator-2.png" 
+                  data-alt="Установка вариатора в Газовед">
+                  <source media="(min-width: 576px)" srcSet="/img/variator/variator-2.png" />
+                  <source media="(min-width: 300px)" srcSet="/img/variator/variator-2-m.png" />
+                </picture>
               </div>
             </div>
             <div className="sv-description__bcg bcg--2"></div>
@@ -186,7 +201,11 @@ class Variator extends Component {
                 <div className="advantages__bcg advantages__bcg--sm">
                   <span></span><span></span><span></span><span></span><span></span>
                 </div>
-                <img src="/img/variator/speedometer.png" alt="Преимущества метана" />
+                <picture className="lozad" data-iesrc="/img/variator/speedometer.png" 
+                  data-alt="Преимущества установки вариатора в Газовед">
+                  <source media="(min-width: 768px)" srcSet="/img/variator/speedometer.png" />
+                  <source media="(min-width: 300px)" srcSet="/img/variator/speedometer-m.png" />
+                </picture>
               </div>
             </div>
             <div className="sm-advantages__btn">
@@ -228,7 +247,11 @@ class Variator extends Component {
                 </div>
               </div>
               <div className="sd-conclusion__img conclusion__img--sv">
-                <img src="/img/variator/variator-1.png" alt="Установка вариатора в Газовед" />
+                <picture className="lozad" data-iesrc="/img/variator/variator-1.png" 
+                  data-alt="Установка вариатора в Газовед">
+                  <source media="(min-width: 768px)" srcSet="/img/variator/variator-1.png" />
+                  <source media="(min-width: 300px)" srcSet="/img/variator/variator-1-m.png" />
+                </picture>
               </div>
             </div>
             <div className="sv-description__bcg bcg--2"></div>
@@ -239,7 +262,11 @@ class Variator extends Component {
           <div className="container">
             <div className="sd-advantages__block sd-block--left">
               <div className="sd-advantages__block__img">
-                <img src="/img/variator/car-niva.png" alt="Вариатор опережения зажигания" />
+                <picture className="lozad" data-iesrc="/img/variator/car-niva.png" 
+                  data-alt="Вариатор опережения зажигания">
+                  <source media="(min-width: 768px)" srcSet="/img/variator/car-niva.png" />
+                  <source media="(min-width: 300px)" srcSet="/img/variator/car-niva-m.png" />
+                </picture>
               </div>
               <div className="sd-advantages__block__text sv-conclusion__block">
                 <div>

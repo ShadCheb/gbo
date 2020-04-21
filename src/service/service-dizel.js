@@ -7,6 +7,8 @@ import Footer from '../main/components/Footer';
 import ModalRecord from '../main/components/ModalRecord';
 import Timer from '../main/components/Timer';
 
+import lozad from 'lozad';
+
 const container = document.getElementById('page-service-item');
 const csrf = container.dataset.csrf;
 const infoCity = JSON.parse(container.dataset.info);
@@ -24,6 +26,12 @@ class Dizel extends Component {
     },
 
     showMenu: false, // открытие меню
+  }
+
+  componentDidMount = () => {
+    const observer = lozad();
+
+    observer.observe();
   }
 
   // Меняем город в шапке
@@ -120,7 +128,12 @@ class Dizel extends Component {
                 </div>
               </div>
               <div className="s-header__img sd-header__img">
-                <img src="/img/dizel/header-1.png" alt="Установка ГБО на дизельные машины" />
+                <picture className="lozad" data-iesrc="/img/dizel/header-1.png" 
+                  data-alt="Установку ГБО на дизель в Gazoved">
+                  <source media="(min-width: 768px)" srcSet="/img/dizel/header-1.png" />
+                  <source media="(min-width: 576px)" srcSet="/img/dizel/header-1-p.png" />
+                  <source media="(min-width: 300px)" srcSet="/img/dizel/header-1-m.png" />
+                </picture>
               </div>
             </div>
           </div>
@@ -132,7 +145,11 @@ class Dizel extends Component {
             </div>
             <div className="sd-test__body">
               <div className="sd-test__img">
-                <img src="/img/dizel/stock__men.jpg" alt="Установи ГБО бесплатно"/>
+                <picture className="lozad" data-iesrc="/img/dizel/stock__men.jpg" 
+                  data-alt="Установи ГБО бесплатно в Gazoved">
+                  <source media="(min-width: 576px)" srcSet="/img/dizel/stock__men.jpg" />
+                  <source media="(min-width: 300px)" srcSet="/img/dizel/stock__men-m.jpg" />
+                </picture>
               </div>
               <div className="sd-test__text">
                 <p className="sd-test__p-1">Установи</p>
@@ -280,7 +297,11 @@ class Dizel extends Component {
             
             <div className="sd-advantages__block sd-block--left">
               <div className="sd-advantages__block__img">
-                <img src="/img/dizel/dizel-1.png" alt="Параллельная работа видов топлива" />
+                <picture className="lozad" data-iesrc="/img/dizel/dizel-1.png" 
+                  data-alt="Параллельная работа видов топлива">
+                  <source media="(min-width: 768px)" srcSet="/img/dizel/dizel-1.png" />
+                  <source media="(min-width: 300px)" srcSet="/img/dizel/dizel-1-m.png" />
+                </picture>
               </div>
               <div className="sd-advantages__block__text">
                 <div>
@@ -301,7 +322,11 @@ class Dizel extends Component {
                 </div>
               </div>
               <div className="sd-advantages__block__img">
-                <img src="/img/dizel/grafic-1.png" alt="Рост цен на дизельное топливо" />
+                <picture className="lozad" data-iesrc="/img/dizel/grafic-1.png" 
+                  data-alt="Рост цен на дизельное топливо">
+                  <source media="(min-width: 768px)" srcSet="/img/dizel/grafic-1.png" />
+                  <source media="(min-width: 300px)" srcSet="/img/dizel/grafic-1-m.png" />
+                </picture>
               </div>
             </div>
           </div>
@@ -345,7 +370,11 @@ class Dizel extends Component {
               </div>
               <div className="sd-sequence__col-2">
                 <div className="sd-sequence__img">
-                  <img src="/img/dizel/fura__bcg.jpg" alt=""/>
+                  <picture className="lozad" data-iesrc="/img/dizel/fura__bcg.jpg" 
+                    data-alt="Последовательность переоборудования">
+                    <source media="(min-width: 768px)" srcSet="/img/dizel/fura__bcg.jpg" />
+                    <source media="(min-width: 300px)" srcSet="/img/dizel/fura__bcg-m.jpg" />
+                  </picture>
                 </div>
               </div>
             </div>
@@ -465,21 +494,26 @@ class Dizel extends Component {
             <div className="sd-job__body">
               <div className="sd-job__col-1">
                 <div className="sd-job__img">
-                  <img src="/img/dizel/job-1.jpg" alt="" />
+                  <img className="lozad" data-src="/img/dizel/job-1.jpg" 
+                    data-alt="Преимущества метана" />
                 </div>
                 <div className="sd-job__img">
-                  <img src="/img/dizel/job-2.jpg" alt="" />
+                  <img className="lozad" data-src="/img/dizel/job-2.jpg" 
+                    data-alt="Преимущества метана" />
                 </div>
                 <div className="sd-job__img">
-                  <img src="/img/dizel/job-3.jpg" alt="" />
+                  <img className="lozad" data-src="/img/dizel/job-3.jpg" 
+                    data-alt="Преимущества метана" />
                 </div>
                 <div className="sd-job__img">
-                  <img src="/img/dizel/job-4.jpg" alt="" />
+                  <img className="lozad" data-src="/img/dizel/job-4.jpg" 
+                    data-alt="Преимущества метана" />
                 </div>
               </div>
               <div className="sd-job__col-2">
                 <div className="sd-job__img">
-                  <img src="/img/dizel/job-5.jpg" alt="" />
+                  <img className="lozad" data-src="/img/dizel/job-5.jpg" 
+                    data-alt="Преимущества метана" />
                 </div>
               </div>
             </div>
@@ -514,7 +548,11 @@ class Dizel extends Component {
                 </div>
               </div>
               <div className="sd-conclusion__img">
-                <img src="/img/dizel/men.png" alt="" />
+                <picture className="lozad" data-iesrc="/img/dizel/men.png" 
+                    data-alt="Снизить расходы на топливо">
+                  <source media="(min-width: 768px)" srcSet="/img/dizel/men.png" />
+                  <source media="(min-width: 300px)" srcSet="/img/dizel/men-m.png" />
+                </picture>
               </div>
             </div>
           </div>

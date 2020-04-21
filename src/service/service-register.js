@@ -6,6 +6,8 @@ import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
 import ModalRecord from '../main/components/ModalRecord';
 
+import lozad from 'lozad';
+
 const container = document.getElementById('page-service-item');
 const csrf = container.dataset.csrf;
 const infoCity = JSON.parse(container.dataset.info);
@@ -22,6 +24,12 @@ class Register extends Component {
     },
 
     showMenu: false, // открытие меню
+  }
+
+  componentDidMount = () => {
+    const observer = lozad();
+
+    observer.observe();
   }
 
   // Меняем город в шапке
@@ -111,7 +119,11 @@ class Register extends Component {
                 </div>
               </div>
               <div className="s-header__img sd-header__img">
-                <img src="/img/gibdd-1.png" alt="Регистрация ГБО в Газовед" />
+                <picture className="lozad" data-iesrc="/img/gibdd-1.png" 
+                  data-alt="Регистрация ГБО в Газовед">
+                  <source media="(min-width: 768px)" srcSet="/img/gibdd-1.png" />
+                  <source media="(min-width: 300px)" srcSet="/img/gibdd-1-m.png" />
+                </picture>
               </div>
             </div>
           </div>
@@ -131,7 +143,12 @@ class Register extends Component {
                 </div>
               </div>
               <div className="sr-services__img">
-                <img src="/img/registration/registration-1.png" alt="Регистрация ГБО" />
+                <picture  className="lozad" data-iesrc="/img/registration/registration-1.png" 
+                  data-alt="Регистрация ГБО в Газовед">
+                  <source media="(min-width: 768px)" srcSet="/img/registration/registration-1.png" />
+                  <source media="(min-width: 576px)" srcSet="/img/registration/registration-1-p.png" />
+                  <source media="(min-width: 300px)" srcSet="/img/registration/registration-1-m.png" />
+                </picture>
               </div>
             </div>
             <div className="sd-description__bcg bcg--2"></div>
@@ -145,7 +162,11 @@ class Register extends Component {
             </div>
             <div className="sr-causes__body">
               <div className="sr-causes__img">
-                <img src="/img/registration/causes-1.jpg" alt="Для чего нужна регистрация" />
+                <picture className="lozad" data-iesrc="/img/registration/causes-1.jpg" 
+                  data-alt="Для чего нужна регистрация ГБО">
+                  <source media="(min-width: 768px)" srcSet="/img/registration/causes-1.jpg" />
+                  <source media="(min-width: 300px)" srcSet="/img/registration/causes-1-m.jpg" />
+                </picture>
               </div>
               <div className="sr-causes__text">
                 <div className="sr-causes__block">
@@ -179,7 +200,10 @@ class Register extends Component {
             <div className="sm-advantages__body">
               <div className="sm-advantages__list">
                 <div className="sm-advantages__item">
-                  <div className="advantages__item__img adv-item--place"></div>
+                  {/* adv-item--place */}
+                  <div className="advantages__item__img lozad"
+                    data-background-image-set="url('../img/icon-advantages/map.png')"
+                  ></div>
                   <div className="advantages__item__text">
                     <h2 className="caption__h2">Все в одном месте</h2>
                     <p>Все необходимые документы для регистрации газового 
@@ -188,7 +212,10 @@ class Register extends Component {
                   </div>
                 </div>
                 <div className="sm-advantages__item">
-                  <div className="advantages__item__img adv-item--turn"></div>
+                {/* adv-item--turn */}
+                  <div className="advantages__item__img lozad"
+                    data-background-image-set="url('../img/icon-advantages/community.png')"
+                  ></div>
                   <div className="advantages__item__text">
                     <h2 className="caption__h2">Без очередей</h2>
                     <p>Все необходимые документы для регистрации газового 
@@ -197,7 +224,10 @@ class Register extends Component {
                   </div>
                 </div>
                 <div className="sm-advantages__item">
-                  <div className="advantages__item__img adv-item--fast"></div>
+                {/* adv-item--fast */}
+                  <div className="advantages__item__img lozad"
+                    data-background-image-set="url('../img/icon-advantages/clock.png')"
+                  ></div>
                   <div className="advantages__item__text">
                     <h2 className="caption__h2">Документы за 20 минут</h2>
                     <p>Подготовка комплекта документов на ГБО в офисе занимает 
@@ -210,7 +240,11 @@ class Register extends Component {
                 <div className="advantages__bcg advantages__bcg--sm">
                   <span></span><span></span><span></span><span></span><span></span>
                 </div>
-                <img src="/img/registration/girl-gibdd.png" alt="Преимущества метана" />
+                <picture className="lozad" data-iesrc="/img/registration/girl-gibdd.png" 
+                  data-alt="Преимущества регистрации ГБО в Gazoved">
+                  <source media="(min-width: 768px)" srcSet="/img/registration/girl-gibdd.png" />
+                  <source media="(min-width: 300px)" srcSet="/img/registration/girl-gibdd-m.png" />
+                </picture>
               </div>
             </div>
             <div className="sm-advantages__btn">
@@ -235,7 +269,10 @@ class Register extends Component {
                 <p className="text__p">Обратиться в аккредитованную испытательную 
                 лабораторию с соответствующим заявлением и оформить 
                 <strong> “Заключение предварительной технической экспертизы”</strong></p>
-                <div className="sr-sequence__block__icon adv-item--building"></div>
+                {/* adv-item--building */}
+                <div className="sr-sequence__block__icon lozad"
+                  data-background-image-set="url('../img/icon-advantages/building.png')"
+                ></div>
               </article>
               <article className="registration__block sr-sequence__block">
                 <div className="registration__block__num">2</div>
@@ -244,7 +281,10 @@ class Register extends Component {
                 <ul className="text__ul">
                   <li><a href="#0" className="text__a">Образец Заявления в ГИБДД (ГАИ)</a></li>
                 </ul>
-                <div className="sr-sequence__block__icon adv-item--gibdd"></div>
+                {/* adv-item--gibdd */}
+                <div className="sr-sequence__block__icon lozad"
+                  data-background-image-set="url('../img/icon-advantages/police-station.png')"
+                ></div>
               </article>
               <article className="registration__block sr-sequence__block">
                 <div className="registration__block__num">3</div>
@@ -257,20 +297,29 @@ class Register extends Component {
                   <li><a href="#0" className="text__a">Форма 2а и 2б</a></li>
                   <li><a href="#0" className="text__a">Протокол экспертизы безопасности ТС</a></li>
                 </ul>
-                <div className="sr-sequence__block__icon adv-item--service"></div>
+                {/* adv-item--service */}
+                <div className="sr-sequence__block__icon lozad"
+                  data-background-image-set="url('../img/icon-advantages/car-service.png')"
+                ></div>
               </article>
               <article className="registration__block sr-sequence__block">
                 <div className="registration__block__num">4</div>
                 <p className="text__p">Получить в аккредитованной испытательной 
                 лаборатории <strong>Протокол технической экспертизы конструкции 
                 ТС после внесенных изменений.</strong></p>
-                <div className="sr-sequence__block__icon adv-item--docs"></div>
+                {/* adv-item--docs */}
+                <div className="sr-sequence__block__icon lozad"
+                  data-background-image-set="url('../img/icon-advantages/set-docs.png')"
+                ></div>
               </article>
               <article className="registration__block sr-sequence__block">
                 <div className="registration__block__num">5</div>
                 <p>Обратиться в территориальное подразделение ГИБДД для 
                   регистрации внесенных изменений</p>
-                <div className="sr-sequence__block__icon adv-item--gibdd"></div>
+                  {/* adv-item--gibdd */}
+                <div className="sr-sequence__block__icon lozad"
+                  data-background-image-set="url('../img/icon-advantages/police-station.png')"
+                ></div>
               </article>
               <article className="registration__block sr-sequence__block">
                 <div className="registration__block__num">6</div>
@@ -279,7 +328,10 @@ class Register extends Component {
                   <li>Свидетельство о соответствии ТС с внесенным в его конструкцию 
                     изменениями требованиям безопасности</li>
                 </ul>
-                <div className="sr-sequence__block__icon adv-item--reg"></div>
+                {/* adv-item--reg */}
+                <div className="sr-sequence__block__icon lozad"
+                  data-background-image-set="url('../img/icon-advantages/terms-and-conditions.png')"
+                ></div>
               </article>
             </div>
           </div>
@@ -309,7 +361,11 @@ class Register extends Component {
                   </div>
                 </div>
                 <div className="sr-question__img">
-                  <img src="/img/registration/phone-012.png" alt="Задать вопрос у Газовед" />
+                  <picture className="lozad" data-iesrc="/img/registration/phone-012.png" 
+                    data-alt="Задать вопрос у Газовед">
+                    <source media="(min-width: 768px)" srcSet="/img/registration/phone-012.png" />
+                    <source media="(min-width: 300px)" srcSet="/img/registration/phone-012-m.png" />
+                  </picture>
                 </div>
               </div>
             </div>

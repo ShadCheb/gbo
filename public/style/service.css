@@ -236,7 +236,7 @@
   width: 200%;
 }
 .sd-header__img img {
-  margin-left: -40%;
+  margin-left: -20%;
 }
 .sm-header__img img {
   margin-left: -30%;
@@ -254,16 +254,16 @@
   .s-caption-h1--i2 {
     font-size: 27px;
   }
-  .sd-header__img > img {
-    margin-left: -30%;
+  .sd-header__img img {
+    margin-left: -20%;
   }
 }
 @media (max-width: 768px) {
   .s-header__list {
     width: calc(100% - 50px);
   }
-  .sd-header__img > img {
-    margin-left: -100px;
+  .sd-header__img img {
+    margin-left: -80px;
   }
   .s-header__list {
     font-size: 18px;
@@ -282,7 +282,7 @@
   }
 }
 @media (max-width: 576px) {
-  .sm-header__img > img {
+  .sm-header__img img {
     margin-left: -120px;
   }
   .s-header__text {
@@ -299,7 +299,7 @@
     margin-left: 40px;
   }
   .s-header__list {
-    width: calc(100% - 100px);
+    width: calc(100% - 124px);
   }
   .s-header__img {
     width: 0;
@@ -308,7 +308,7 @@
     width: 320px;
   }
   .sd-header__img img {
-    margin-left: -150px;
+    margin-left: -120px;
   }
 }
 @media (max-width: 418px) {
@@ -338,7 +338,7 @@
   position: relative;
   width: 40%;
 }
-.sd-test__img > img {
+.sd-test__img img {
   margin-left: auto;
   width: 70%;
 }
@@ -408,7 +408,7 @@
   .sd-test__bcg {
     top: -90px;
   }
-  .sd-test__img > img {
+  .sd-test__img img {
     width: 100%;
   }
   .sd-test__text {
@@ -443,7 +443,7 @@
   .sd-test__img {
     width: 0;
   }
-  .sd-test__img > img {
+  .sd-test__img img {
     margin-left: -80px;
     width: 200px;
   }
@@ -548,6 +548,7 @@
 @media (max-width: 768px) {
   .sd-save__body {
     padding: 40px 30px 50px 30px;
+    background-image: url(../img/bcg-3-m.png);
     background-size: 200px;
   }
   .sd-save__list__item {
@@ -741,7 +742,7 @@
   background-color: #e8faff;
   z-index: -1;
 }
-.sd-advantages__block__img > img {
+.sd-advantages__block__img img {
   position: relative;
 }
 @media (max-width: 992px) {
@@ -791,7 +792,7 @@
   }
 }
 @media (max-width: 576px) {
-  .sd-advantages__block__img > img {
+  .sd-advantages__block__img img {
     width: 140px;
   }
   .sd-block--left img {
@@ -815,7 +816,7 @@
   .sd-advantages__block__text {
     width: 100%;
   }
-  .sd-advantages__block__img > img {
+  .sd-advantages__block__img img {
     margin-left: auto;
     margin-right: auto;
   }
@@ -885,7 +886,7 @@
 .sd-sequence__img {
   margin-left: -150%;
 }
-.sd-sequence__img > img {
+.sd-sequence__img img {
   width: 180%;
 }
 @media (max-width: 768px) {
@@ -917,7 +918,7 @@
     margin-bottom: 30px;
     min-height: 80px;
   }
-  .sd-sequence__img > img {
+  .sd-sequence__img img {
     margin-left: -240px;
     width: 720px;
   }
@@ -929,7 +930,7 @@
   .sd-sequence__col-2 {
     width: 0;
   }
-  .sd-sequence__img > img {
+  .sd-sequence__img img {
     margin-left: -320px;
   }
 }
@@ -941,7 +942,7 @@
     left: -25px;
     font-size: 70px;
   }
-  .sd-sequence__img > img {
+  .sd-sequence__img img {
     margin-left: -260px;
   }
   .registration__block {
@@ -1180,7 +1181,7 @@
 .sd-conclusion__img {
   width: 30%;
 }
-.sd-conclusion__img > img {
+.sd-conclusion__img img {
   margin-left: -40%;
   width: 180%;
 }
@@ -1222,7 +1223,7 @@
   .sd-conclusion__img {
     width: 20%;
   }
-  .sd-conclusion__img > img {
+  .sd-conclusion__img img {
     margin-left: -100px;
     width: 390px;
   }
@@ -1249,7 +1250,7 @@
   .sd-conclusion__img {
     width: 100%;
   }
-  .sd-conclusion__img > img {
+  .sd-conclusion__img img {
     margin-left: auto;
     margin-right: -70px;
   }
@@ -1271,7 +1272,7 @@
   position: relative;
   width: 30%;
 }
-.sm-advantages__img > img {
+.sm-advantages__img img {
   position: relative;
   margin-left: -10%;
   width: 120%;
@@ -1281,7 +1282,7 @@
   text-align: center;
 }
 @media (max-width: 768px) {
-  .sm-advantages__img > img {
+  .sm-advantages__img img {
     margin-left: 0;
   }
   .sm-advantages__list .sm-advantages__item {
@@ -1299,7 +1300,7 @@
   .sm-advantages__img {
     width: 20%;
   }
-  .sm-advantages__img > img {
+  .sm-advantages__img img {
     position: relative;
     width: 220px;
     z-index: 0;
@@ -1315,44 +1316,44 @@
   .sm-advantages__img {
     width: 0;
   }
-  .sm-advantages__img > img {
+  .sm-advantages__img img {
     display: none;
   }
 }
 
 
-.adv-item--security {
+/* .adv-item--security {
   background: url(../img/icon-advantages/protection.png) no-repeat center;
   background-size: 100%;
-}
-.adv-item--ecology {
+} */
+/* .adv-item--ecology {
   background: url(../img/icon-advantages/terpenes.png) no-repeat center;
   background-size: 100%;
-}
-.adv-item--price {
+} */
+/* .adv-item--price {
   background: url(../img/icon-advantages/wallet.png) no-repeat center;
   background-size: 100%;
-}
-.adv-item--place {
+} */
+/* .adv-item--place {
   background: url(../img/icon-advantages/map.png) no-repeat center;
   background-size: 100%;
-}
-.adv-item--turn {
+} */
+/* .adv-item--turn {
   background: url(../img/icon-advantages/community.png) no-repeat center;
   background-size: 100%;
-}
-.adv-item--fast {
+} */
+/* .adv-item--fast {
   background: url(../img/icon-advantages/clock.png) no-repeat center;
   background-size: 100%;
-}
-.adv-item--building {
+} */
+/* .adv-item--building {
   background: url(../img/icon-advantages/building.png) no-repeat center;
   background-size: 100%;
-}
-.adv-item--gibdd {
+} */
+/* .adv-item--gibdd {
   background: url(../img/icon-advantages/police-station.png) no-repeat center;
   background-size: 100%;
-}
+} */
 .adv-item--fast {
   background: url(../img/icon-advantages/speed.png) no-repeat center;
   background-size: 100%;
@@ -1365,18 +1366,18 @@
   background: url(../img/icon-advantages/calendar.png) no-repeat center;
   background-size: 100%;
 }
-.adv-item--reg {
+/* .adv-item--reg {
   background: url(../img/icon-advantages/terms-and-conditions.png) no-repeat center;
   background-size: 100%;
-}
-.adv-item--service {
+} */
+/* .adv-item--service {
   background: url(../img/icon-advantages/car-service.png) no-repeat center;
   background-size: 100%;
-}
-.adv-item--docs {
+} */
+/* .adv-item--docs {
   background: url(../img/icon-advantages/set-docs.png) no-repeat center;
   background-size: 100%;
-}
+} */
 
 
 .sm-advantages__list .sm-advantages__item {
@@ -1405,7 +1406,7 @@
 .sr-services__img {
   width: 30%;
 }
-.sr-services__img > img {
+.sr-services__img img {
   margin-left: -20%;
 }
 
@@ -1413,7 +1414,7 @@
   .sr-services__img {
     width: 20%;
   }
-  .sr-services__img > img {
+  .sr-services__img img {
     margin-left: -30px;
     width: 220px;
   }
@@ -1434,7 +1435,7 @@
   .sr-services__img {
     width: 100%;
   }
-  .sr-services__img > img {
+  .sr-services__img img {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: -50px;
@@ -1456,7 +1457,7 @@
 .sr-causes__img {
   width: 30%;
 }
-.sr-causes__img > img {
+.sr-causes__img img {
   margin-right: -10%;
   width: 120%;
 }
@@ -1477,30 +1478,45 @@
   font-weight: 500;
 }
 
-.sm-advantages__img--register > img {
+.sm-advantages__img--register img {
   margin-left: auto;
   margin-right: auto;
   width: 60%;
 }
-.m-advantages__img--variator > img {
+.m-advantages__img--variator img {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
 }
 @media (max-width: 992px) {
-  .sm-advantages__img--register > img {
+  .sm-advantages__img--register img {
     width: 80%;
   }
 }
 @media (max-width: 768px) {
-  .sm-advantages__img--register > img {
+  .sm-advantages__img--register img {
     width: 100%;
   }
 }
 @media (max-width: 576px) {
-  .sm-advantages__img--register > img {
+  .sm-advantages__img--register img {
     margin-left: 0;
     width: 150px;
+  }
+  .sr-causes__body {
+    flex-wrap: wrap;
+  }
+  .sr-causes__img {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  .sr-causes__img img {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 200px;
+  }
+  .sr-causes__text {
+    width: 100%;
   }
 }
 
@@ -1725,7 +1741,7 @@
   .sr-question__img {
     width: 20%;
   }
-  .sr-question__img > img {
+  .sr-question__img img {
     margin-left: -20px;
     width: 320px;
   }
@@ -1782,7 +1798,7 @@
 .sv-conclusion__block > div {
   padding: 50px 50px 80px 50px;
 }
-.conclusion__img--sv > img {
+.conclusion__img--sv img {
   margin-left: -10%;
   width: 120%;
 }

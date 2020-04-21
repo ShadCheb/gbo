@@ -74,7 +74,8 @@ class Services extends Component {
               <article className="services__block">
                 <div className="service__block__bcg"></div>
                 <div className="service__block__content">
-                  <img className="services__block__img" src="/img/registration/registration-1.png" alt="Регистрация ГБО" />
+                  <img className="services__block__img" 
+                    src="/img/registration/registration-1-p.png" alt="Регистрация ГБО" />
                   <h2 className="services__block__caption">Регистрация ГБО</h2>
                 </div>
                 <a className="link__block" href="/services/registration" />

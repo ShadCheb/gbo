@@ -43,7 +43,7 @@ function Footer({activeCity}) {
                   (activeCity.social.vk) 
                   ? (<a className="footer__icon map--vk" href={activeCity.social.vk} target="_blank">
                     <svg>
-                      <use xlinkHref="img/sprite-icon.svg#icon-vk" />
+                      <use xlinkHref="/img/sprite-icon.svg#icon-vk" />
                     </svg>VK</a>)
                   : ('')
                 }
@@ -51,7 +51,7 @@ function Footer({activeCity}) {
                   (activeCity.social.instagram) 
                     ? (<a className="footer__icon map--inst" href={activeCity.social.instagram} target="_blank">
                       <svg>
-                        <use xlinkHref="img/sprite-icon.svg#icon-inst" />
+                        <use xlinkHref="/img/sprite-icon.svg#icon-inst" />
                       </svg>Instagram</a>)
                     : ('')
                 }
