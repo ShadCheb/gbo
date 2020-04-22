@@ -1322,68 +1322,9 @@
 }
 
 
-/* .adv-item--security {
-  background: url(../img/icon-advantages/protection.png) no-repeat center;
-  background-size: 100%;
-} */
-/* .adv-item--ecology {
-  background: url(../img/icon-advantages/terpenes.png) no-repeat center;
-  background-size: 100%;
-} */
-/* .adv-item--price {
-  background: url(../img/icon-advantages/wallet.png) no-repeat center;
-  background-size: 100%;
-} */
-/* .adv-item--place {
-  background: url(../img/icon-advantages/map.png) no-repeat center;
-  background-size: 100%;
-} */
-/* .adv-item--turn {
-  background: url(../img/icon-advantages/community.png) no-repeat center;
-  background-size: 100%;
-} */
-/* .adv-item--fast {
-  background: url(../img/icon-advantages/clock.png) no-repeat center;
-  background-size: 100%;
-} */
-/* .adv-item--building {
-  background: url(../img/icon-advantages/building.png) no-repeat center;
-  background-size: 100%;
-} */
-/* .adv-item--gibdd {
-  background: url(../img/icon-advantages/police-station.png) no-repeat center;
-  background-size: 100%;
-} */
-.adv-item--fast {
-  background: url(../img/icon-advantages/speed.png) no-repeat center;
-  background-size: 100%;
-}
-.adv-item--turn {
-  background: url(../img/icon-advantages/mobility.png) no-repeat center;
-  background-size: 100%;
-}
-.adv-item--resource {
-  background: url(../img/icon-advantages/calendar.png) no-repeat center;
-  background-size: 100%;
-}
-/* .adv-item--reg {
-  background: url(../img/icon-advantages/terms-and-conditions.png) no-repeat center;
-  background-size: 100%;
-} */
-/* .adv-item--service {
-  background: url(../img/icon-advantages/car-service.png) no-repeat center;
-  background-size: 100%;
-} */
-/* .adv-item--docs {
-  background: url(../img/icon-advantages/set-docs.png) no-repeat center;
-  background-size: 100%;
-} */
-
-
 .sm-advantages__list .sm-advantages__item {
   margin-bottom: 50px;
 }
-
 
 .sr-services {
   padding-top: 70px;

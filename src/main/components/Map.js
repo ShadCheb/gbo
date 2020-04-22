@@ -1,7 +1,12 @@
 import React from 'react';
 
 
-function Map({activeCity}) {
+function Map({activeCity, selectCityToMap}) {
+  const selectCity = (coords) => {
+    if (coords)
+      selectCityToMap(JSON.parse(coords));
+  }
+
   return (
     <section className="map">
       <div className="map__body">
@@ -20,7 +25,8 @@ function Map({activeCity}) {
                 <strong>г. {activeCity.name},</strong> 
                 {
                   activeCity.addresses.map((address, idx) => {
-                    return (<p key={idx}>{address.address}</p>);
+                    return (<p key={idx}>
+                      <a onClick={selectCity.bind(this, address.coords)}>{address.address}</a></p>);
                   })
                 }
               </div>) 

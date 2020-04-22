@@ -167,7 +167,9 @@ class Variator extends Component {
             <div className="sm-advantages__body">
               <div className="sm-advantages__list">
                 <div className="sm-advantages__item">
-                  <div className="advantages__item__img adv-item--price"></div>
+                  <div className="advantages__item__img lozad"
+                    data-background-image-set="url('../img/icon-advantages/wallet.png')"
+                  ></div>
                   <div className="advantages__item__text">
                     <h2 className="caption__h2">Экономия</h2>
                     <p> На автомобиле объемом 2 литра вариатор экономит 1 литр газа 
@@ -175,7 +177,9 @@ class Variator extends Component {
                   </div>
                 </div>
                 <div className="sm-advantages__item">
-                  <div className="advantages__item__img adv-item--turn"></div>
+                  <div className="advantages__item__img lozad"
+                    data-background-image-set="url('../img/icon-advantages/mobility.png')"
+                  ></div>
                   <div className="advantages__item__text">
                     <h2 className="caption__h2">Легкий старт</h2>
                     <p>Педаль будет реагировать на малейшее прикосновение, машина будет 
@@ -183,14 +187,18 @@ class Variator extends Component {
                   </div>
                 </div>
                 <div className="sm-advantages__item">
-                  <div className="advantages__item__img adv-item--fast"></div>
+                  <div className="advantages__item__img lozad"
+                    data-background-image-set="url('../img/icon-advantages/speed.png')"
+                  ></div>
                   <div className="advantages__item__text">
                     <h2 className="caption__h2">Увеличение мощности</h2>
                     <p>Установка вариатора позволяет повысить мощность до 12%.</p>
                   </div>
                 </div>
                 <div className="sm-advantages__item">
-                  <div className="advantages__item__img adv-item--resource"></div>
+                  <div className="advantages__item__img lozad"
+                    data-background-image-set="url('../img/icon-advantages/calendar.png')"
+                  ></div>
                   <div className="advantages__item__text">
                     <h2 className="caption__h2">Увеличение ресурса</h2>
                     <p> Практикой доказано, что ресурс работы двигателя увеличивается в разы.</p>

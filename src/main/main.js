@@ -282,10 +282,12 @@ class Main extends Component {
 
     let points = infoCity.addresses.map(address => (
       {
-        coord: JSON.parse(address.coords),
+        coord: address.coords && JSON.parse(address.coords) || null,
         address: address.address
       }
-    ));
+    )).filter(address => {
+      return (address.coord)
+    });
 
     if (!points || !points.length)
       return;
@@ -320,6 +322,10 @@ class Main extends Component {
       map.setBounds(map.geoObjects.getBounds());
 
     this.setState({map});
+  }
+
+  selectCityToMap = (coord) => {
+    this.state.map.setCenter(coord, 17);
   }
 
   // Открытие/закрытие меню
@@ -773,7 +779,8 @@ class Main extends Component {
             {
               (infoCity.addresses && infoCity.addresses.length)
                 ? (<Map 
-                  activeCity={infoCity}
+                    activeCity={infoCity}
+                    selectCityToMap={this.selectCityToMap}
                 />) : ('')
             }
 

@@ -10,16 +10,13 @@ class Address extends Component {
     super(props);
 
     this.state = {
-      // map: null,
+      map: null,
       visibleAddAddress: false,
       openMapData: {},
-      // modalAddAddress: React.createRef()
+      placemark: null
     }
   }
 
-  componentDidMount = () => {
-    this.renderMap();
-  }
 
   deleteAddress = (address) => {
     let id = address.id;
@@ -42,7 +39,6 @@ class Address extends Component {
       })
   }
 
-
   openModalAddAddress = (address) => {
     if (address) {
       address['city'] = this.props.data.city;
@@ -55,21 +51,20 @@ class Address extends Component {
 
     address['nameAddress'] = address.address;
 
-    this.setState(
-      {
+    this.setState(() =>
+      ({
         openMapData: address,
         visibleAddAddress: true
-      }
-      // this.state.modalAddAddress.current.renderMap
+      })
     );
+    this.renderMap(address);
   }
 
   closeModalAddAddress = () => {
     this.setState({visibleAddAddress: false});
   }
 
-  renderMap = () => {
-    let {openMapData} = this.state;
+  renderMap = (openMapData) => {
     let mapThis = this.state.map;
     let timerId;
     let coordParse = (openMapData.coords)
@@ -87,8 +82,11 @@ class Address extends Component {
         });
 
         this.changeValue({map: mapThis});
-        // this.setState({map: mapThis});
       }
+
+      // Если есть предыдущая точка на карте, то удаляем ее
+      if (this.state.placemark)
+        mapThis.geoObjects.remove(this.state.placemark);
 
       if (!coordParse) {
         let coords;
@@ -118,7 +116,6 @@ class Address extends Component {
                 });
             });
 
-            // this.setPoint(coords);
             this.setPoint(newCoords);
           }
           
@@ -129,6 +126,7 @@ class Address extends Component {
         });
       } else {
         this.setPoint(coordParse);
+        mapThis.setCenter(coordParse, 17);
       }
     }
 
@@ -151,7 +149,6 @@ class Address extends Component {
 
       this.changeValue({placemark: plcmark});
     } else {
-      plcmark = placemark;
       plcmark.geometry.setCoordinates(c);
     }
 
@@ -174,7 +171,20 @@ class Address extends Component {
       });
     });
   }
-  
+
+  serachAddress = (text) => {
+    let city = this.props.data.city || '';
+    let geocoder = ymaps.geocode(`${city} ${text}`);
+
+    geocoder.then(
+      (res) => {
+        let coord = res.geoObjects.get(0).geometry.getCoordinates();
+
+        if (coord)
+          this.state.map.setCenter(coord, 17);
+      }
+    );
+  }
 
   changeValue = (obj) => {
     let openMapData = this.state.openMapData;
@@ -227,6 +237,7 @@ class Address extends Component {
           csrf={this.props.csrf}
           cancelAddAddress={this.closeModalAddAddress}
           handlerChangesData={this.props.handlerChangesData}
+          serachAddress={this.serachAddress}
         />
       </section>
     );

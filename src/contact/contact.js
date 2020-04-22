@@ -55,12 +55,14 @@ class Contact extends Component {
 
     let points = infoCity.addresses.map(address => (
       {
-        coord: JSON.parse(address.coords),
+        coord: address.coords && JSON.parse(address.coords) || null,
         address: address.address
       }
-    ));
+    )).filter(address => {
+      return (address.coord)
+    });
 
-    if (!points.length)
+    if (!points || !points.length)
       return;
 
     let map = new ymaps.Map('map', {
@@ -93,6 +95,10 @@ class Contact extends Component {
       map.setBounds(map.geoObjects.getBounds());
 
     this.setState({map});
+  }
+
+  selectCityToMap = (coord) => {
+    this.state.map.setCenter(coord, 17);
   }
 
   render() {
@@ -165,6 +171,7 @@ class Contact extends Component {
 
         <Map 
           activeCity={infoCity}
+          selectCityToMap={this.selectCityToMap}
         />
 
         <Footer 

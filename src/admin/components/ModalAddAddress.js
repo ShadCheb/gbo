@@ -1,13 +1,14 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { Modal, Form, Input, message } from 'antd';
+import { Modal, Input, Button } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 
 
 function ModalAddAddress({
   map, placemark,  
   cancelAddAddress, csrf, data, handlerChangesData,
-  changeValue, visibleAddAddress
+  changeValue, visibleAddAddress, serachAddress
 }) {
 
   const cancelAddress = () => {
@@ -16,8 +17,6 @@ function ModalAddAddress({
   }
 
   const onOk = async() => {
-    console.log('data', data);
-
     fetch('/admin/address', {
       method: 'post',
       headers: {
@@ -46,6 +45,10 @@ function ModalAddAddress({
   const changeAddress = (value) => {
     changeValue({nameAddress: value}, 'data');
   }
+
+  const search = () => {
+    serachAddress(data.nameAddress);
+  }
   
   
   return (
@@ -58,13 +61,18 @@ function ModalAddAddress({
       onOk={onOk}
     >
       <div className="a-modal__address">
-          <p>Адрес:</p>
-          <Input 
-            name="address"
-            value={data.nameAddress}
-            defaultValue={data.nameAddress}
-            onChange={changeAddress}
-          />
+        <p>Адрес:</p>
+        <Input 
+          name="address"
+          value={data.nameAddress}
+          defaultValue={data.nameAddress}
+          onChange={changeAddress}
+        />
+        <Button 
+          type="primary"
+          onClick={search}
+          icon={<SearchOutlined />}
+        />
       </div>
       <div id="map-modal" className="a-modal__map">
       </div>

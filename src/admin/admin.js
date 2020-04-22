@@ -476,6 +476,13 @@ class Admin extends Component {
       <div>
         <Spin spinning={this.state.loading}>
           <div className="a-container">
+            <div className="a-logo">
+              <div>
+                <h1 className="a-logo__name">Газовед</h1>
+                <p className="a-logo__text">панель администратора</p>
+                <a className="a-logo__link" href="/" />
+              </div>
+            </div>
             <div className="a-header">
               <p className="a-header__p">{(this.state.data) ? 'Выберите город:' : 'Добавьте город:'}</p>
               {

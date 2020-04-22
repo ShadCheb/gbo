@@ -215,8 +215,6 @@ class Review extends Component {
     let reviewToken = (reviewVk) 
       ? reviewVk.id_token : null;
 
-    console.log('infoGroup', infoGroup);
-
     return (
       <section className="a-section__review">
         { infoGroup && getInfoGroup(infoGroup)}
@@ -225,7 +223,7 @@ class Review extends Component {
           <div className="a-col__2">
             <Input placeholder="id группы" 
               id="a-review__group"
-              defaultValue={reviewGroup} 
+              value={reviewGroup} 
             />
           </div>
         </div>
@@ -234,7 +232,7 @@ class Review extends Component {
           <div className="a-col__2">
             <Input placeholder="id топик" 
               id="a-review__token"
-              defaultValue={reviewToken} 
+              value={reviewToken} 
             />
           </div>
         </div>

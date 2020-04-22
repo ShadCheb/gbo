@@ -76,8 +76,14 @@ p {
   height: 300px;
   width: 100%;
 }
+.a-modal__address {
+  display: flex;
+}
 .a-modal__address .ant-form-item-control {
   width: 100%;
+}
+.a-modal__address > button {
+  margin-left: 4px;
 }
 .text__p--blue {
   color: #1890ff;
@@ -316,6 +322,38 @@ p {
   margin-left: 7px;
 }
 
+
+.a-logo {
+  margin-bottom: 30px;
+}
+.a-logo > div {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+.a-logo__name {
+  padding: 0;
+  margin: 0 14px 0 0;
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #00c2ff;
+}
+.a-logo__text {
+  margin-bottom: 7px;
+  font-size: 12px;
+  line-height: 1.2em;
+  color: #193b46;
+  max-width: 110px;
+}
+.a-logo__link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
 
 
