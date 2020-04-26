@@ -8,52 +8,55 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
 
-    <link rel="stylesheet" href="/style/antd.min.css" />
+    <link rel="preload" href="/style/antd.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+
     {{#if isHome}}
-      <link rel="stylesheet" href="/style/lightgallery.min.css" />
-      <link rel="stylesheet" href="/style/map.css" />
-      <link rel="stylesheet" href="/style/main.css" />
-      <link rel="stylesheet" href="/style/style.css" />
+      <link rel="preload" href="/style/lightgallery.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/style/map.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/style/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isServices}}
-      <link rel="stylesheet" href="/style/service.css" />
-      <link rel="stylesheet" href="/style/style.css" />
+      <link rel="preload" href="/style/service.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isDizel}}
-      <link rel="stylesheet" href="/style/service.css" />
-      <link rel="stylesheet" href="/style/style.css" />
+      <link rel="preload" href="/style/service.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isMetan}}
-      <link rel="stylesheet" href="/style/service.css" />
-      <link rel="stylesheet" href="/style/style.css" />
+      <link rel="preload" href="/style/service.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isRegister}}
-      <link rel="stylesheet" href="/style/service.css" />
-      <link rel="stylesheet" href="/style/style.css" />
+      <link rel="preload" href="/style/service.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isVariator}}
-      <link rel="stylesheet" href="/style/service.css" />
-      <link rel="stylesheet" href="/style/style.css" />
+      <link rel="preload" href="/style/service.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isStock}}
-      <link rel="stylesheet" href="/style/stock.css" />
-      <link rel="stylesheet" href="/style/style.css" />
+      <link rel="preload" href="/style/stock.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isContact}}
-      <link rel="stylesheet" href="/style/map.css" />
-      <link rel="stylesheet" href="/style/contact.css" />
-      <link rel="stylesheet" href="/style/style.css" />
+      <link rel="preload" href="/style/map.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/style/contact.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isWork}}
-      <link rel="stylesheet" href="/style/work.css" />
-      <link rel="stylesheet" href="/style/style.css" />
+      <link rel="preload" href="/style/work.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isWorkItem}}
-      <link rel="stylesheet" href="/style/work.css" />
-      <link rel="stylesheet" href="/style/style.css" />
+      <link rel="preload" href="/style/work.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{/if}}
     
 
     {{#if isAuth}}
+      <link rel="stylesheet" href="/style/antd.min.css" />
       <link rel="stylesheet" href="/style/auth.css" />
     {{/if}}
     {{#if isAdmin}}
+      <link rel="stylesheet" href="/style/antd.min.css" />
       <link rel="stylesheet" href="/style/admin.css" />
     {{/if}}
 
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
-    <script src="https://api-maps.yandex.ru/2.1.74/?lang=ru_RU&amp;coordorder=longlat&amp;apikey=8ea707eb-f2a1-47d2-a099-c60dd9f6228c" type="text/javascript"></script>
+    <script src="https://api-maps.yandex.ru/2.1.74/?lang=ru_RU&amp;coordorder=longlat&amp;apikey=8ea707eb-f2a1-47d2-a099-c60dd9f6228c" type="text/javascript" defer></script>
 </head>
 <body>

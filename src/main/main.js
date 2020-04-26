@@ -13,6 +13,7 @@ import ModalRecord from './components/ModalRecord';
 import Footer from './components/Footer';
 
 import { message } from 'antd';
+import 'antd/es/message/style/css'; 
 import lozad from 'lozad';
 import { LightgalleryProvider, LightgalleryItem } from 'react-lightgallery';
 import InputMask from 'react-input-mask';

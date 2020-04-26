@@ -1,6 +1,8 @@
 import React from 'react';
 import { Select } from 'antd';
 
+import 'antd/es/Select/style/css'; 
+
 const { Option } = Select;
 
 function Header({activeCity, cityList}) {
