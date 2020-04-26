@@ -57,6 +57,11 @@ module.exports = async function(req, res, next) {
         }
       }
 
+      if (data.time) {
+        data.time.from = data.time.from.slice(0, -3);
+        data.time.before = data.time.before.slice(0, -3);
+      }
+
       res.locals.dataGeneral = {
         data,
         cityList

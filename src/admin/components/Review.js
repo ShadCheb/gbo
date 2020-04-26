@@ -47,11 +47,6 @@ class Review extends Component {
     super(props);
 
     this.state = {
-      reviewListVk: [],
-      groupId: '',
-      topicId: '',
-
-      infoGroup: null
     }
   }
 
@@ -121,7 +116,7 @@ class Review extends Component {
           let response = data.result.response;
           let profiles = {};
           let filteredData = [];
-          let group = response.groups[0];
+          let group = response.groups[0] || {};
 
           group['count'] = response.count;
 
@@ -141,21 +136,19 @@ class Review extends Component {
             });
           });
 
-          this.setState({
+          this.props.handlerChangesData({
             reviewListVk: filteredData,
             infoGroup: group
-          });
+          }, true);
         }
         else 
-          this.setState({
+          this.props.handlerChangesData({
             reviewListVk: [],
             infoGroup: null
-          });
+          }, true);
       })
       .catch(e => {
         this.error('Данные группы введены не верно');
-        // if (e.error)
-        //   this.props.handlerChangesData(e.error);
       })
 	}
 
@@ -205,9 +198,18 @@ class Review extends Component {
       })
   }
 
+  onChange(type, e) {
+    let reviewVk = this.props.data.reviewVk || {};
+    let value = e.target.value;
+
+    reviewVk[type] = value;
+
+    this.props.handlerChangesData({reviewVk}, true);
+  }
+
 
   render() {
-    let {reviewListVk, infoGroup} = this.state;
+    let {reviewListVk, infoGroup} = this.props.data;
     let reviewListDb = this.props.data.review || [];
     let reviewVk = this.props.data.reviewVk;
     let reviewGroup = (reviewVk)
@@ -223,7 +225,8 @@ class Review extends Component {
           <div className="a-col__2">
             <Input placeholder="id группы" 
               id="a-review__group"
-              value={reviewGroup} 
+              value={reviewGroup}
+              onChange={this.onChange.bind(this, 'id_group')}
             />
           </div>
         </div>
@@ -233,6 +236,7 @@ class Review extends Component {
             <Input placeholder="id топик" 
               id="a-review__token"
               value={reviewToken} 
+              onChange={this.onChange.bind(this, 'id_token')}
             />
           </div>
         </div>
@@ -280,7 +284,7 @@ class Review extends Component {
           <div className="a-col__1"><p>Отзывы в базе данных:</p></div>
           <div className="a-col__2">
             {
-              reviewListDb.map((review, idx) => {
+              reviewListDb && reviewListDb.map((review, idx) => {
                 return (
                   <div className="review__list" key={idx}>
                     <article className="review__block">

@@ -11,9 +11,9 @@ class Time extends Component {
     super(props);
 
     this.state = {
-      from: null,
-      before: null,
-      timeStrings: ['', ''],
+      // from: null,
+      // before: null,
+      // timeStrings: ['', ''],
       format: 'HH:mm'
     }
   }
@@ -24,8 +24,7 @@ class Time extends Component {
   };
 
   onSave = () => {
-    let from = document.querySelector('#a-timer__from input').value;
-    let before = document.querySelector('#a-timer__before input').value;
+    let {from, before} = this.props.data;
 
     if (!from || !before) {
       this.error('Заполнены не все поля');
@@ -60,24 +59,24 @@ class Time extends Component {
   }
 
   onChangeFrom = (time, timeString) => {
-    let timeStrings = this.state.timeStrings;
+    let timeData = this.props.data;
 
-    timeStrings[0] = timeString;
-
-    this.setState({
-      from: time,
-      timeStrings
-    });
+    this.props.handlerChangesData({time: {
+      id: timeData.timeId || null,
+      from: timeString,
+      before: timeData.before,
+      cityListId: timeData.id
+    }}, true);
   }
   onChangeBefore = (time, timeString) => {
-    let timeStrings = this.state.timeStrings;
+    let timeData = this.props.data;
 
-    timeStrings[1] = timeString;
-
-    this.setState({
-      before: time,
-      timeStrings
-    });
+    this.props.handlerChangesData({time: {
+      id: timeData.timeId || null,
+      from: timeData.from,
+      before: timeString,
+      cityListId: timeData.id
+    }}, true);
   }
 
   render() {

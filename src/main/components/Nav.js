@@ -14,16 +14,16 @@ export default ({showMenu, closeMenu, social, page}) => {
           <li className="main__nav__notlink">
             <button className="main__nav__close" onClick={closeMenu}><span /><span /></button>
           </li>
-          <li><a href="/" className={(page == 'isHome') ? 'active' : ''}>Главная</a></li>
-          <li><a href="/services" className={(page == 'isServices') ? 'active' : ''}>Услуги</a></li>
+          <li><a href="/" className={(page == 'isHome') ? 'active' : ''}><span>Главная</span></a></li>
+          <li><a href="/services" className={(page == 'isServices') ? 'active' : ''}><span>Услуги</span></a></li>
           {/* <li><a href="#0">Фотогалерея</a></li> */}
-          <li><a href="/stock" className={(page == 'isStok') ? 'active' : ''}>Акции</a></li>
-          <li><a href="/contact" className={(page == 'isContact') ? 'active' : ''}>Контакты</a></li>
-          <li><a href="/work" className={(page == 'isWork') ? 'active' : ''}>Наши работы</a></li>
+          <li><a href="/stock" className={(page == 'isStok') ? 'active' : ''}><span>Акции</span></a></li>
+          <li><a href="/contact" className={(page == 'isContact') ? 'active' : ''}><span>Контакты</span></a></li>
+          <li><a href="/work" className={(page == 'isWork') ? 'active' : ''}><span>Наши работы</span></a></li>
           {
             (social && social.youtube) 
               ? (<li><a href={social.youtube} 
-                className="nav--red" target="_blank">youtube</a></li>)
+                className="nav--red" target="_blank"><span>youtube</span></a></li>)
               : ('')
           }
         </ul>

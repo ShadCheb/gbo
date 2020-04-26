@@ -102,8 +102,12 @@ class Register extends Component {
             <div className="s-header__body">
               <div className="s-header__text">
                 <h1 className="s-caption-h1">
-                  Регистрация ГБО <span className="s-caption-h1--i2">в {infoCity.city && 
-                    infoCity.city.name2 || ''}</span>
+                  Регистрация ГБО 
+                  
+                  { infoCity.city 
+                    ? (<span className="s-caption-h1--i2">в {infoCity.city.name2 || 'городе'}</span>)
+                    : ('')
+                  }
                 </h1>
                 <ul className="s-header__list">
                   <li><strong>Установка ГБО</strong> является внесением изменений в конструкцию 

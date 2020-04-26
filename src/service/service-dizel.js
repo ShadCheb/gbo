@@ -106,8 +106,10 @@ class Dizel extends Component {
               <div className="s-header__text">
                 <h1 className="s-caption-h1">
                   <span className="s-caption-h1--i1">Установка</span>ГБО на дизельные машины 
-                  <span className="s-caption-h1--i2">в {infoCity.city && 
-                    infoCity.city.name2 || ''}</span>
+                  { infoCity.city 
+                    ? (<span className="s-caption-h1--i2">в {infoCity.city.name2 || 'городе'}</span>)
+                    : ('')
+                  }
                 </h1>
                 <ul className="s-header__list">
                   <li><strong>В рассрочку на 12 месяцев</strong> без первоначального взноса и переплаты</li>
@@ -338,7 +340,7 @@ class Dizel extends Component {
               <h2 className="caption__section benefit__caption">Последовательность <strong>переоборудования</strong></h2>
             </div>
             <div className="sd-sequence__body">
-              <div className="sd-sequence__col-1">
+              {/* <div className="sd-sequence__col-1"> */}
                 <article className="registration__block">
                   <div className="registration__block__num">1</div>
                   <p>Аудит автопарка, определение возможности переоборудования</p>
@@ -355,6 +357,8 @@ class Dizel extends Component {
                   <div className="registration__block__num">4</div>
                   <p>Разработка и сборка прототипа</p>
                 </article>
+              {/* </div> */}
+              {/* <div className="sd-sequence__col-2"> */}
                 <article className="registration__block">
                   <div className="registration__block__num">5</div>
                   <p>Испытания, оптимизация, вычисление фактической топливной эффективности прототипа</p>
@@ -367,15 +371,14 @@ class Dizel extends Component {
                   <div className="registration__block__num">7</div>
                   <p>Поставка и монтаж комплектов ГБО</p>
                 </article>
-              </div>
-              <div className="sd-sequence__col-2">
-                <div className="sd-sequence__img">
-                  <picture className="lozad" data-iesrc="/img/dizel/fura__bcg.jpg" 
-                    data-alt="Последовательность переоборудования">
-                    <source media="(min-width: 768px)" srcSet="/img/dizel/fura__bcg.jpg" />
-                    <source media="(min-width: 300px)" srcSet="/img/dizel/fura__bcg-m.jpg" />
-                  </picture>
-                </div>
+              {/* </div> */}
+
+              <div className="sd-sequence__img">
+                <picture className="lozad" data-iesrc="/img/dizel/fura__bcg.jpg" 
+                  data-alt="Последовательность переоборудования">
+                  <source media="(min-width: 768px)" srcSet="/img/dizel/fura__bcg.jpg" />
+                  <source media="(min-width: 300px)" srcSet="/img/dizel/fura__bcg-m.jpg" />
+                </picture>
               </div>
             </div>
           </div>

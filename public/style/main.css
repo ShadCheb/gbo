@@ -63,21 +63,22 @@
   content: '';
   position: absolute;
   top: 0;
-  left: -35px;
-  border-top: 44px solid #00c2ff;
-  border-left: 18px solid transparent;
-  border-right: 18px solid #00c2ff;
-  border-bottom: 44px solid transparent;
+  left: -46px;
+  width: 50px;
+  height: 100%;
+  background: url(../img/caption/angle-1.png) no-repeat center;
+  background-size: 100% 100%;
 }
 .main__caption > span::before {
   content: '';
   position: absolute;
   bottom: 0;
-  right: -35px;
-  border-top: 44px solid transparent;
-  border-left: 18px solid #00c2ff;
-  border-right: 18px solid transparent;
-  border-bottom: 44px solid #00c2ff;
+  right: -46px;
+  width: 50px;
+  height: 100%;
+  background: url(../img/caption/angle-1.png) no-repeat center;
+  background-size: 100% 100%;
+  transform: rotate(180deg);
 }
 .main__caption-under {
   position: relative;
@@ -92,25 +93,27 @@
   background-color: #002632;
   z-index: 1;
 }
+
 .main__caption-under::after {
   content: '';
   position: absolute;
   top: 0;
-  left: -29px;
-  border-top: 34px solid #002632;
-  border-left: 15px solid transparent;
-  border-right: 15px solid #002632;
-  border-bottom: 34px solid transparent;
+  left: -30px;
+  width: 34px;
+  height: 100%;
+  background: url(../img/caption/angle-2.png) no-repeat center;
+  background-size: 100% 100%;
 }
 .main__caption-under::before {
   content: '';
   position: absolute;
   bottom: 0;
-  right: -29px;
-  border-top: 34px solid transparent;
-  border-left: 15px solid #002632;
-  border-right: 15px solid transparent;
-  border-bottom: 34px solid #002632;
+  right: -30px;
+  width: 34px;
+  height: 100%;
+  background: url(../img/caption/angle-2.png) no-repeat center;
+  background-size: 100% 100%;
+  transform: rotate(180deg);
 }
 .main__caption-under > span {
   position: absolute;
@@ -164,18 +167,12 @@
     padding: 9px 10px;
   }
   .main__caption > span::before {
-    right: -29px;
-    border-top: 36px solid transparent;
-    border-left: 15px solid #00c2ff;
-    border-right: 15px solid transparent;
-    border-bottom: 36px solid #00c2ff;
+    right: -30px;
+    width: 34px;
   }
   .main__caption > span::after {
-    left: -29px;
-    border-top: 36px solid #00c2ff;
-    border-left: 15px solid transparent;
-    border-right: 15px solid #00c2ff;
-    border-bottom: 36px solid transparent;
+    left: -30px;
+    width: 34px;
   }
   .main__caption::after {
     top: -5px;
@@ -193,18 +190,12 @@
     line-height: 38px;
   }
   .main__caption-under::before {
-    right: -27px;
-    border-top: 30px solid transparent;
-    border-left: 14px solid #002632;
-    border-right: 14px solid transparent;
-    border-bottom: 30px solid #002632;
+    right: -26px;
+    width: 30px;
   }
   .main__caption-under::after {
-    left: -27px;
-    border-top: 30px solid #002632;
-    border-left: 14px solid transparent;
-    border-right: 14px solid #002632;
-    border-bottom: 30px solid transparent;
+    left: -26px;
+    width: 30px;
   }
   .main__caption-under > span {
     bottom: -15px;
@@ -229,13 +220,6 @@
   .main__caption {
     margin-left: -20px;
     font-size: 36px;
-  }
-  .main__caption > span::after {
-    left: -19px;
-    border: none;
-    width: 20px;
-    height: 100%;
-    background-color: #00c2ff;
   }
   .main__caption-under {
     margin-left: 30px;
@@ -264,13 +248,6 @@
     font-size: 32px;
     line-height: 40px;
   }
-  .main__caption > span::before {
-    right: -23px;
-    border-top: 29px solid transparent;
-    border-left: 12px solid #00c2ff;
-    border-right: 12px solid transparent;
-    border-bottom: 29px solid #00c2ff;
-  }
   .main__caption::before {
     bottom: 26px;
     right: 100px;
@@ -285,18 +262,12 @@
     line-height: 26px;
   }
   .main__caption-under::before {
-    right: -19px;
-    border-top: 24px solid transparent;
-    border-left: 10px solid #002632;
-    border-right: 10px solid transparent;
-    border-bottom: 24px solid #002632;
+    right: -20px;
+    width: 24px;
   }
   .main__caption-under::after {
-    left: -19px;
-    border-top: 24px solid #002632;
-    border-left: 10px solid transparent;
-    border-right: 10px solid #002632;
-    border-bottom: 24px solid transparent;
+    left: -20px;
+    width: 24px;
   }
   .main__img {
     align-items: center;
@@ -446,9 +417,6 @@
   font-size: 42px;
   font-weight: 600;
 }
-/* .benefit__result-2 {
-  padding-top: 10px;
-} */
 .benefit__result__name-2 {
   font-size: 62px;
   line-height: 1.0em;
@@ -1249,7 +1217,6 @@
   padding-right: 35px;
   min-height: 280px;
   max-height: 280px;
-  /* background-color: #b8e8ff; */
   border-radius: 4px;
   overflow: hidden;
 }
@@ -1281,7 +1248,6 @@
 @media (max-width: 1140px) {
   .staff__img {
     padding-right: 5px;
-    /* min-height: auto; */
     min-height: 240px;
   }
   .staff__label {
@@ -1708,21 +1674,22 @@
   content: '';
   position: absolute;
   bottom: 0;
-  right: -31px;
-  border-top: 43px solid transparent;
-  border-left: 16px solid #00c2ff;
-  border-right: 16px solid transparent;
-  border-bottom: 43px solid #00c2ff;
+  right: -32px;
+  width: 36px;
+  height: 100%;
+  background: url(../img/caption/angle-1.png) no-repeat center;
+  background-size: 100% 100%;
+  transform: rotate(180deg);
 }
 .install__caption::before {
   content: '';
   position: absolute;
   bottom: 0;
-  left: -31px;
-  border-top: 43px solid #00c2ff;
-  border-left: 16px solid transparent;
-  border-right: 16px solid #00c2ff;
-  border-bottom: 43px solid transparent;
+  left: -32px;
+  width: 36px;
+  height: 100%;
+  background: url(../img/caption/angle-1.png) no-repeat center;
+  background-size: 100% 100%;
 }
 .install__caption__bcg {
   position: absolute;
@@ -1737,21 +1704,22 @@
   content: '';
   position: absolute;
   bottom: 0;
-  right: -31px;
-  border-top: 43px solid transparent;
-  border-left: 16px solid #002632;
-  border-right: 16px solid transparent;
-  border-bottom: 43px solid #002632;
+  right: -32px;
+  width: 36px;
+  height: 100%;
+  background: url(../img/caption/angle-2.png) no-repeat center;
+  background-size: 100% 100%;
+  transform: rotate(180deg);
 }
 .install__caption__bcg::before {
   content: '';
   position: absolute;
   bottom: 0;
-  left: -31px;
-  border-top: 43px solid #002632;
-  border-left: 16px solid transparent;
-  border-right: 16px solid #002632;
-  border-bottom: 43px solid transparent;
+  left: -32px;
+  width: 36px;
+  height: 100%;
+  background: url(../img/caption/angle-2.png) no-repeat center;
+  background-size: 100% 100%;
 }
 .install__caption > span {
   position: absolute;
@@ -1788,32 +1756,20 @@
     line-height: 36px;
   }
   .install__caption::before {
-    left: -29px;
-    border-top: 38px solid #00c2ff;
-    border-left: 15px solid transparent;
-    border-right: 15px solid #00c2ff;
-    border-bottom: 38px solid transparent;
+    left: -30px;
+    width: 34px;
   }
   .install__caption::after {
-    right: -29px;
-    border-top: 38px solid transparent;
-    border-left: 15px solid #00c2ff;
-    border-right: 15px solid transparent;
-    border-bottom: 38px solid #00c2ff;
+    right: -30px;
+    width: 34px;
   }
   .install__caption__bcg::after {
-    right: -29px;
-    border-top: 38px solid transparent;
-    border-left: 15px solid #002632;
-    border-right: 15px solid transparent;
-    border-bottom: 38px solid #002632;
+    right: -30px;
+    width: 34px;
   }
   .install__caption__bcg::before {
-    left: -29px;
-    border-top: 38px solid #002632;
-    border-left: 15px solid transparent;
-    border-right: 15px solid #002632;
-    border-bottom: 38px solid transparent;
+    left: -30px;
+    width: 346px;
   }
 }
 
@@ -1861,32 +1817,20 @@
     line-height: 30px;
   }
   .install__caption::before {
-    left: -21px;
-    border-bottom: 27px solid transparent;
-    border-top: 27px solid #00c2ff;
-    border-left: 11px solid transparent;
-    border-right: 11px solid #00c2ff;
+    left: -22px;
+    width: 26px;
   }
   .install__caption::after {
-    right: -21px;
-    border-bottom: 27px solid #00c2ff;
-    border-top: 27px solid transparent;
-    border-left: 11px solid #00c2ff;
-    border-right: 11px solid transparent;
+    right: -22px;
+    width: 26px;
   }
   .install__caption__bcg::before {
-    left: -21px;
-    border-bottom: 27px solid transparent;
-    border-top: 27px solid #002632;
-    border-left: 11px solid transparent;
-    border-right: 11px solid #002632;
+    left: -22px;
+    width: 26px;
   }
   .install__caption__bcg::after {
-    right: -21px;
-    border-bottom: 27px solid #002632;
-    border-top: 27px solid transparent;
-    border-left: 11px solid #002632;
-    border-right: 11px solid transparent;
+    right: -22px;
+    width: 26px;
   }
   .install__caption > span:nth-child(1) {
     top: 6px;
@@ -1993,21 +1937,22 @@
   content: '';
   position: absolute;
   bottom: 0;
-  right: -31px;
-  border-top: 43px solid transparent;
-  border-left: 16px solid #00c2ff;
-  border-right: 16px solid transparent;
-  border-bottom: 43px solid #00c2ff;
+  right: -32px;
+  width: 36px;
+  height: 100%;
+  background: url(../img/caption/angle-1.png) no-repeat center;
+  background-size: 100% 100%;
+  transform: rotate(180deg);
 }
 .gibdd__caption::before {
   content: '';
   position: absolute;
   bottom: 0;
-  left: -31px;
-  border-top: 43px solid #00c2ff;
-  border-left: 16px solid transparent;
-  border-right: 16px solid #00c2ff;
-  border-bottom: 43px solid transparent;
+  left: -32px;
+  width: 36px;
+  height: 100%;
+  background: url(../img/caption/angle-1.png) no-repeat center;
+  background-size: 100% 100%;
 }
 .gibdd__caption__bcg {
   position: absolute;
@@ -2022,21 +1967,22 @@
   content: '';
   position: absolute;
   bottom: 0;
-  right: -31px;
-  border-top: 43px solid transparent;
-  border-left: 16px solid #002632;
-  border-right: 16px solid transparent;
-  border-bottom: 43px solid #002632;
+  right: -32px;
+  width: 36px;
+  height: 100%;
+  background: url(../img/caption/angle-2.png) no-repeat center;
+  background-size: 100% 100%;
+  transform: rotate(180deg);
 }
 .gibdd__caption__bcg::before {
   content: '';
   position: absolute;
   bottom: 0;
-  left: -31px;
-  border-top: 43px solid #002632;
-  border-left: 16px solid transparent;
-  border-right: 16px solid #002632;
-  border-bottom: 43px solid transparent;
+  left: -32px;
+  width: 36px;
+  height: 100%;
+  background: url(../img/caption/angle-2.png) no-repeat center;
+  background-size: 100% 100%;
 }
 .gibdd__caption > span {
   position: absolute;
@@ -2062,32 +2008,20 @@
     line-height: 36px;
   }
   .gibdd__caption::before {
-    left: -29px;
-    border-top: 38px solid #00c2ff;
-    border-left: 15px solid transparent;
-    border-right: 15px solid #00c2ff;
-    border-bottom: 38px solid transparent;
+    left: -30px;
+    width: 34px;
   }
   .gibdd__caption::after {
-    right: -29px;
-    border-top: 38px solid transparent;
-    border-left: 15px solid #00c2ff;
-    border-right: 15px solid transparent;
-    border-bottom: 38px solid #00c2ff;
+    right: -30px;
+    width: 34px;
   }
   .gibdd__caption__bcg::after {
-    right: -29px;
-    border-top: 38px solid transparent;
-    border-left: 15px solid #002632;
-    border-right: 15px solid transparent;
-    border-bottom: 38px solid #002632;
+    right: -30px;
+    width: 34px;
   }
   .gibdd__caption__bcg::before {
-    left: -29px;
-    border-top: 38px solid #002632;
-    border-left: 15px solid transparent;
-    border-right: 15px solid #002632;
-    border-bottom: 38px solid transparent;
+    left: -30px;
+    width: 34px;
   }
 }
 
@@ -2137,32 +2071,20 @@
     line-height: 30px;
   }
   .gibdd__caption::before {
-    left: -21px;
-    border-bottom: 27px solid transparent;
-    border-top: 27px solid #00c2ff;
-    border-left: 11px solid transparent;
-    border-right: 11px solid #00c2ff;
+    left: -22px;
+    width: 26px;
   }
   .gibdd__caption::after {
-    right: -21px;
-    border-bottom: 27px solid #00c2ff;
-    border-top: 27px solid transparent;
-    border-left: 11px solid #00c2ff;
-    border-right: 11px solid transparent;
+    right: -22px;
+    width: 26px;
   }
   .gibdd__caption__bcg::before {
-    left: -21px;
-    border-bottom: 27px solid transparent;
-    border-top: 27px solid #002632;
-    border-left: 11px solid transparent;
-    border-right: 11px solid #002632;
+    left: -22px;
+    width: 26px;
   }
   .gibdd__caption__bcg::after {
-    right: -21px;
-    border-bottom: 27px solid #002632;
-    border-top: 27px solid transparent;
-    border-left: 11px solid #002632;
-    border-right: 11px solid transparent;
+    right: -22px;
+    width: 26px;
   }
   .gibdd__caption > span:nth-child(1) {
     top: -97px;

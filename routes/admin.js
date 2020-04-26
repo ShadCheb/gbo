@@ -520,8 +520,6 @@ router.post('/review/vk', auth, async(req, res) => {
     res.status(201).json({error: 'Введены не все данные'});
 
   try {
-    // let groupId = groupId; // '147953602'
-    // let topicId = topicId; // '37109092';
     const count = '30';
     const extended = 1;
     const sort = 'desc';

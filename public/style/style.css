@@ -455,15 +455,19 @@ img {
   text-transform: uppercase;
   transition: all .3s ease;
 }
+.main__nav a span {
+  position: relative;
+  z-index: 2;
+}
 .main__nav a::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: -23px;
-  border-top: 29px solid transparent;
-  border-left: 22px solid transparent;
-  border-right: 22px solid #002632;
-  border-bottom: 29px solid #002632;
+  left: -20px;
+  border-top: 0 solid transparent;
+  border-left: 36px solid transparent;
+  border-right: 4px solid #002632;
+  border-bottom: 58px solid #002632;
   transition: all .3s ease;
   z-index: 1;
 } 
@@ -471,11 +475,11 @@ img {
   content: '';
   position: absolute;
   top: 0;
-  right: -21px;
-  border-top: 29px solid #002632;
-  border-left: 22px solid #002632;
-  border-right: 22px solid transparent;
-  border-bottom: 29px solid transparent;
+  right: -16px;
+  border-top: 58px solid #002632;
+  border-left: 4px solid #002632;
+  border-right: 36px solid transparent;
+  border-bottom: 0 solid transparent;
   transition: all .3s ease;
   z-index: 1;
 }
@@ -483,13 +487,13 @@ img {
   padding-left: 0;
 }
 .main__nav li:nth-child(2) a:after {
-  left: -43px;
+  left: -36px;
 }
 .main__nav li:last-child a {
   padding-right: 0;
 }
 .main__nav li:last-child a:before {
-  right: -43px;
+  right: -36px;
 }
 .main__nav a.active,
 .main__nav a:hover {
@@ -565,7 +569,7 @@ img {
     border-bottom: 22px solid #002632;
   }
   .main__nav a::before {
-    right: -17px;
+    right: -18px;
     border-top: 22px solid #002632;
     border-left: 16px solid #002632;
     border-right: 16px solid transparent;
@@ -1039,11 +1043,6 @@ input::placeholder {
   transform: scale(1);
   opacity: 1;
 }
-/* .modal__btn > button {
-  box-sizing: border-box;
-  margin-top: 40px;
-  width: 100%;
-} */
 
 @media (max-width: 1140px) {
   .license > p {

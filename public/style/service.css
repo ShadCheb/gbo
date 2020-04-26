@@ -838,9 +838,11 @@
   display: flex;
   margin-left: -20px;
   margin-right: -20px;
-  align-items: flex-end;
+  /* align-items: flex-end; */
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
-.sd-sequence__body::after {
+/* .sd-sequence__body::after {
   content: '';
   position: absolute;
   top: 80px;
@@ -849,17 +851,17 @@
   width: 50%;
   border-left: 5px dashed #e8faff;
   z-index: -1;
-}
-.sd-sequence__col-1 {
+} */
+/* .sd-sequence__col-1 {
   padding-left: 20px;
   padding-right: 20px;
-  width: 70%;
+  width: 50%;
 }
 .sd-sequence__col-2 {
   padding-left: 20px;
   padding-right: 20px;
-  width: 30%;
-}
+  width: 50%;
+} */
 .registration__block {
   position: relative;
   display: flex;
@@ -883,11 +885,21 @@
   color: #00c2ff;
   text-shadow: 4px 4px 10px rgba(28,28,28,.1);
 }
-.sd-sequence__img {
-  margin-left: -150%;
+
+.sd-sequence__body .registration__block {
+  width: calc(50% - 160px);
 }
-.sd-sequence__img img {
-  width: 180%;
+.sd-sequence__img {
+  position: absolute;
+  bottom: -120px;
+  right: -20%;
+  width: 100%;
+  z-index: -1;
+}
+@media (max-width: 992px) {
+  .sd-sequence__body .registration__block {
+    width: calc(50% - 130px);
+  }
 }
 @media (max-width: 768px) {
   .sd-sequence {
@@ -902,36 +914,26 @@
     margin-left: 0;
     margin-right: 0;
   }
-  .sd-sequence__col-1 {
-    padding-left: 0;
-    padding-right: 0;
-    width: 90%;
-  }
-  .sd-sequence__col-2 {
-    padding-left: 0;
-    padding-right: 0;
-    width: 10%;
-  }
   .registration__block {
     padding-left: 40px;
     margin-left: 30px;
     margin-bottom: 30px;
     min-height: 80px;
   }
-  .sd-sequence__img img {
-    margin-left: -240px;
+  .sd-sequence__body .registration__block {
+    width: calc(50% - 110px);
+  }
+  .sd-sequence__img {
+    bottom: -80px;
     width: 720px;
   }
 }
 @media (max-width: 576px) {
-  .sd-sequence__col-1 {
+  .sd-sequence__body .registration__block {
     width: 100%;
   }
-  .sd-sequence__col-2 {
-    width: 0;
-  }
-  .sd-sequence__img img {
-    margin-left: -320px;
+  .sd-sequence__img {
+    width: 480px;
   }
 }
 @media (max-width: 418px) {
@@ -942,17 +944,11 @@
     left: -25px;
     font-size: 70px;
   }
-  .sd-sequence__img img {
-    margin-left: -260px;
-  }
   .registration__block {
     padding-left: 30px;
     margin-left: 20px;
     margin-bottom: 20px;
     min-height: 40px;
-  }
-  .sd-sequence__body::after {
-    right: 30%;
   }
 }
 

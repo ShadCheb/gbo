@@ -103,8 +103,10 @@ class Metan extends Component {
               <div className="s-header__text">
                 <h1 className="s-caption-h1">
                   <span className="s-caption-h1--i1">Установка</span>ГБО на метане
-                  <span className="s-caption-h1--i2">в {infoCity.city && 
-                    infoCity.city.name2 || ''}</span>
+                  { infoCity.city 
+                    ? (<span className="s-caption-h1--i2">в {infoCity.city.name2 || 'городе'}</span>)
+                    : ('')
+                  }
                 </h1>
                 <ul className="s-header__list">
                   <li><strong>Экономия до 70%</strong> с каждой заправкой</li>
@@ -159,7 +161,6 @@ class Metan extends Component {
             <div className="sm-advantages__body">
               <div className="sm-advantages__list">
                 <div className="sm-advantages__item">
-                {/* adv-item--security */}
                   <div className="advantages__item__img lozad"
                     data-background-image-set="url('../img/icon-advantages/protection.png')"
                   ></div>
@@ -170,7 +171,6 @@ class Metan extends Component {
                   </div>
                 </div>
                 <div className="sm-advantages__item">
-                {/* adv-item--ecology */}
                   <div className="advantages__item__img lozad"
                     data-background-image-set="url('../img/icon-advantages/terpenes.png')"
                   ></div>
@@ -181,7 +181,6 @@ class Metan extends Component {
                   </div>
                 </div>
                 <div className="sm-advantages__item">
-                {/* adv-item--price */}
                   <div className="advantages__item__img lozad"
                     data-background-image-set="url('../img/icon-advantages/wallet.png')"
                   ></div>

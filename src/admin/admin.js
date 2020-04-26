@@ -233,7 +233,8 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
     case typeList[7].brief: // 'review'
       let dataReview = {};
     
-      dataReview['cityListId'] = data.id;
+      dataReview['reviewListVk'] = data.reviewListVk;
+      dataReview['infoGroup'] = data.infoGroup;
 
       if (!data.review) {
         fetch('/admin/review/get', {

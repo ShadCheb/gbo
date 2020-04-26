@@ -3,9 +3,11 @@ import { Select } from 'antd';
 
 const { Option } = Select;
 
-function Header({activeCity, handleChange, cityList}) {
+function Header({activeCity, cityList}) {
   const selectCity = value => {
-    handleChange(value);
+    let link = location.pathname;
+
+    location.href = link + '?city=' + value;
   }
 
   return (

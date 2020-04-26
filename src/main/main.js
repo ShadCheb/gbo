@@ -104,11 +104,6 @@ class Main extends Component {
     this.setState({benefit});
   }
 
-  // Меняем город в шапке
-  handleChange = (brief) => {
-    location.href = '/?city=' + brief;
-  }
-
   openModalRecord = (e) => {
     let target = e.target;
     let title = target.closest('button').textContent;
@@ -349,7 +344,6 @@ class Main extends Component {
                 <Header 
                   cityList={this.state.cityList}
                   activeCity={infoCity}
-                  handleChange={this.handleChange}
                 />
                 <Nav 
                   page="isHome"
