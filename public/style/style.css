@@ -229,7 +229,7 @@ img {
   right: 0;
   width: 1223px;
   height: 461px;
-  background: url(../img/main-bcg-1.jpg) no-repeat right top;
+  background: url(../img/main-bcg-1.webp) no-repeat right top;
   background-size: 100%;
   z-index: 0;
 }
@@ -246,7 +246,7 @@ img {
 @media (max-width: 1140px) {
   .main__bcg-1 {
     width: 80%; 
-    background: url(../img/main-bcg-1-p.jpg) no-repeat right top;
+    background: url(../img/main-bcg-1-p.webp) no-repeat right top;
     background-size: 100%;
   }
   .main__bcg-2 {
@@ -258,7 +258,7 @@ img {
 
 @media (max-width: 576px) {
   .main__bcg-1 {
-    background: url(../img/main-bcg-1-m.jpg) no-repeat right top;
+    background: url(../img/main-bcg-1-m.webp) no-repeat right top;
     background-size: 100%;
   }
   .main__bcg-2 {

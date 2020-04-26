@@ -388,10 +388,10 @@ class Main extends Component {
                     </div>
                   </div>
                   <div className="main__img">
-                    <picture className="lozad" data-iesrc="/img/main-1.png" data-alt="Gazoved">
-                      <source media="(min-width: 768px)" srcSet="/img/main-1.png" />
-                      <source media="(min-width: 420px)" srcSet="/img/main-1-p.png" />
-                      <source media="(min-width: 300px)" srcSet="/img/main-1-m.png" />
+                    <picture className="lozad" data-iesrc="/img/main-1.webp" data-alt="Gazoved">
+                      <source media="(min-width: 768px)" srcSet="/img/main-1.webp" />
+                      <source media="(min-width: 420px)" srcSet="/img/main-1-p.webp" />
+                      <source media="(min-width: 300px)" srcSet="/img/main-1-m.webp" />
                     </picture>
                   </div>
                 </div>

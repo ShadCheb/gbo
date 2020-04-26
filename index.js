@@ -1,4 +1,5 @@
 const path = require('path');
+const compression = require('compression');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
@@ -31,6 +32,7 @@ app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
+app.use(compression());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'dist')))

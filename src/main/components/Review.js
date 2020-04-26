@@ -16,7 +16,7 @@ function Employee({reviewList, reviewVk}) {
               reviewList.map((review, idx) => 
                 (<article className="review__block" key={idx}>
                   <div className="review__img">
-                    <img src={review.avatar} />
+                    <img src={review.avatar} alt={review.name}/>
                   </div>
                   <div className="review__text">
                     <p className="review__text__caption">{review.name}</p>
