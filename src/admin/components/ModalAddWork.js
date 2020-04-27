@@ -1,17 +1,36 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Modal, Upload, Button, Input } from 'antd';
-import { InboxOutlined, PlusOutlined } from '@ant-design/icons';
+import { Modal, Upload, Button, Input, Popover, Checkbox } from 'antd';
+import { InboxOutlined, PlusOutlined, BoldOutlined, UnorderedListOutlined } from '@ant-design/icons';
+
 
 const { Dragger } = Upload;
 
 
-function ModalAddWork({
-  csrf, data, handlerChangesData, cancelAddWork, 
-  visibleAddWork, changeValue, setLoading
-}) {
+// function ModalAddWork({
+//   csrf, data, handlerChangesData, cancelAddWork, 
+//   visibleAddWork, changeValue, setLoading
+// }) {
 
-  const uploadAvatar = async (fileAvatar) => {
+
+class ModalAddWork extends Component {
+  constructor(props) {
+    super(props);
+
+    this.textDescription = React.createRef(),
+    this.textDescriptionHTML = React.createRef(),
+
+    this.state = {
+      showEditor: false
+    }
+  }
+
+  componentDidMount = () => {
+    document.execCommand('defaultParagraphSeparator', false, 'p'); // Установка по умолчанию
+    // this.setEditParagraph(); // Установка по умолчанию
+  }
+
+  uploadAvatar = async (fileAvatar) => {
     let promise = new Promise((resolve, reject) => {
       let sendForm = new FormData();
     
@@ -20,20 +39,20 @@ function ModalAddWork({
       fetch('/upload', {
         method: 'post',
         headers: {
-          'X-XSRF-TOKEN': csrf
+          'X-XSRF-TOKEN': this.props.csrf
         },
         body: sendForm
       })
         .then(res => res.json())
         .then(data => { 
-          handlerChangesData({fileAvatar: null}, true); // проверить
+          this.props.handlerChangesData({fileAvatar: null}, true); // проверить
 
           if (data.success)
             resolve(data.success.filename);
         })
         .catch(e => {
           if (e.error) {
-            handlerChangesData(e.error);
+            this.props.handlerChangesData(e.error);
 
             reject();
           }
@@ -43,7 +62,7 @@ function ModalAddWork({
     return await promise;
   }
 
-  const uploadGallery = (fileGallery) => {
+  uploadGallery = (fileGallery) => {
     let result = fileGallery.map(async img => {
       let promise = new Promise((resolve, reject) => {
         let sendForm = new FormData();
@@ -53,20 +72,20 @@ function ModalAddWork({
         fetch('/upload', {
           method: 'post',
           headers: {
-            'X-XSRF-TOKEN': csrf
+            'X-XSRF-TOKEN': this.props.csrf
           },
           body: sendForm
         })
           .then(res => res.json())
           .then(data => {
-            handlerChangesData({fileGallery: null}, true); // проверить
+            this.props.handlerChangesData({fileGallery: null}, true); // проверить
 
             if (data.success)
               resolve(data.success.filename);
           })
           .catch(e => {
             if (e.error) {
-              handlerChangesData(e.error);
+              this.props.handlerChangesData(e.error);
     
               reject();
             }
@@ -79,8 +98,10 @@ function ModalAddWork({
     return Promise.all(result);
   }
 
-  const onOk = async () => {
-    setLoading(true);
+  onOk = async () => {
+    let data = this.props.data;
+
+    this.props.setLoading(true);
 
     let avatar = (data.avatarFileList && data.avatarFileList.length) 
       ? data.avatarFileList[0].name
@@ -89,10 +110,10 @@ function ModalAddWork({
 
     // сначала загружаем картинку, если она есть
     if (data.fileAvatar) 
-      avatar = await uploadAvatar(data.fileAvatar);
+      avatar = await this.uploadAvatar(data.fileAvatar);
 
     if (data.fileGallery) {
-      let newGallery = await uploadGallery(data.fileGallery);
+      let newGallery = await this.uploadGallery(data.fileGallery);
 
       if (newGallery) 
         gallery = (gallery && gallery.length)
@@ -104,23 +125,31 @@ function ModalAddWork({
     let sendForm = new FormData();
     let established = (data.established) ? data.established : [];
     let additionally = (data.additionally) ? data.additionally : [];
+    let description = (this.state.showEditor)
+      ? this.textDescriptionHTML.current.textContent
+      : this.textDescription.current.innerHTML;
+    let mileage = data.mileage && parseInt(data.mileage) || null;
+    let saving = data.saving && parseInt(data.saving) || null;
 
     if (data.id) {
       sendForm.append('id', data.id);
     }
     sendForm.append('name', data.name);
-    sendForm.append('mileage', parseInt(data.mileage));
-    sendForm.append('saving', parseInt(data.saving));
+    if (mileage)
+      sendForm.append('mileage', mileage);
+    if (saving)
+      sendForm.append('saving', saving);
     sendForm.append('avatar', avatar);
     sendForm.append('established', established.join(','));
     sendForm.append('additionally', additionally.join(','));
     sendForm.append('gallery', gallery.join(','));
     sendForm.append('city_list_id', data.cityListId);
+    sendForm.append('description', description);
 
     fetch('/admin/work', {
       method: 'post',
       headers: {
-        'X-XSRF-TOKEN': csrf
+        'X-XSRF-TOKEN': this.props.csrf
       },
       body: sendForm
     })
@@ -139,19 +168,19 @@ function ModalAddWork({
               : [];
           });
 
-          handlerChangesData({work: data.result});
+          this.props.handlerChangesData({work: data.result});
         }
       })
       .catch(e => {
         if (e.error)
-          handlerChangesData(e.error);
+          this.props.handlerChangesData(e.error);
       });
 
-    setLoading(false);
-    cancelAddWork();
+    this.props.setLoading(false);
+    this.props.cancelAddWork();
   }
 
-  const beforeUploadAvatar = (file) => {
+  beforeUploadAvatar = (file) => {
     let avatarFileList = [{
       uid: '-1',
       name: file.name,
@@ -159,10 +188,12 @@ function ModalAddWork({
       url: file.name,
     }];
 
-    changeValue({avatarFileList});
+    this.props.changeValue({avatarFileList});
   }
 
-  const beforeUploadGallery = (file) => {
+  beforeUploadGallery = (file) => {
+    let data = this.props.data;
+
     let galleryFileList = (data.galleryFileList && data.galleryFileList.length)
       ? data.galleryFileList.slice()
       : [];
@@ -177,18 +208,20 @@ function ModalAddWork({
       url: file.name,
     });
 
-    changeValue({galleryFileList});
+    this.props.changeValue({galleryFileList});
   }
 
-  const onRemoveAvatar = file => {
+  onRemoveAvatar = file => {
+    let data = this.props.data;    
     const index = data.avatarFileList.indexOf(file);
     const newFileList = data.avatarFileList.slice();
 
     newFileList.splice(index, 1);
 
-    changeValue({avatarFileList: newFileList}); 
+    this.props.changeValue({avatarFileList: newFileList}); 
   }
-  const onRemoveGallery = file => {
+  onRemoveGallery = file => {
+    let data = this.props.data;
     const index = data.galleryFileList.indexOf(file);
     const newFileList = data.galleryFileList.slice();
     const newGallery = data.gallery.slice();
@@ -196,37 +229,39 @@ function ModalAddWork({
     newFileList.splice(index, 1);
     newGallery.splice(index, 1);
 
-    changeValue({
+    this.props.changeValue({
       galleryFileList: newFileList,
       gallery: newGallery
     }); 
   }
   
-  const onChange = () => {
+  onChange = () => {
     return;
   }
 
-  const handleChange = e => {
+  handleChange = e => {
     let target = e.target;
 
-    changeValue({[target.name]: target.value});
+    this.props.changeValue({[target.name]: target.value});
   }
 
   // Если добавили новый файл
-  const customRequestAvatar = value => {
-    changeValue({fileAvatar: value.file});
+  customRequestAvatar = value => {
+    this.props.changeValue({fileAvatar: value.file});
   }
-  const customRequestGallery = value => {
+  customRequestGallery = value => {
+    let data = this.props.data;
     let fileGallery = (data.fileGallery)
       ? data.fileGallery
       : [];
 
     fileGallery.push(value.file);
 
-    changeValue({fileGallery});
+    this.props.changeValue({fileGallery});
   }
 
-  const addRowEstablished = e => {
+  addRowEstablished = e => {
+    let data = this.props.data;
     let row = e.target.closest('.a-form__row');
     let value = row.querySelector('#js-input-established').value;
     let established = (data.established) 
@@ -236,10 +271,11 @@ function ModalAddWork({
     established.push(value);
     value = '';
 
-    changeValue({established});
+    this.props.changeValue({established});
   }
 
-  const addRowAdditionally = e => {
+  addRowAdditionally = e => {
+    let data = this.props.data;
     let row = e.target.closest('.a-form__row');
     let value = row.querySelector('#js-input-additionally').value;
     let additionally = (data.additionally) 
@@ -249,134 +285,252 @@ function ModalAddWork({
     additionally.push(value);
     value = '';
     
-    changeValue({additionally});
+    this.props.changeValue({additionally});
   }
 
-  return (
-    <Modal
-      visible={visibleAddWork}
-      title={(data.id) ? 'Редактирование статьи' : 'Добавление статьи'}
-      okText="Сохранить"
-      cancelText="Отмена"
-      onCancel={cancelAddWork}
-      onOk={onOk}
-    >
-      <form>
-        <Dragger 
-          name='avatarFileList'
-          fileList={data.avatarFileList}
-          onRemove={onRemoveAvatar}
-          onChange={onChange}
-          beforeUpload={beforeUploadAvatar}
-          customRequest={customRequestAvatar}
-        >
-          <p className="ant-upload-drag-icon"><InboxOutlined /></p>
-          <p className="ant-upload-text">Главное изображение</p>
-          <p className="ant-upload-hint">Выберите или переместите файл для загрузки</p>
-        </Dragger>
 
-        <hr className="form__shift" />
+  // Редактирование
+  setEditCaption = (e) => {
+    if (e)
+      e.preventDefault();
 
-        <label className="a-form__label">
-          <span className="a-form__label-name">Название:</span>
-          <Input 
-            name="name"
-            value={data.name}
-            defaultValue={data.name}
-            onChange={handleChange}
-            className="required"
-          />
-          <span className="a-form__required">Заполните поле</span>
-        </label>
+    document.execCommand('formatBlock', false, 'h3');
 
-        <label className="a-form__label">
-          <span className="a-form__label-name">Пробег:</span>
-          <Input 
-            name="mileage"
-            value={data.mileage}
-            defaultValue={data.mileage}
-            onChange={handleChange}
-            className="required"
-          />
-          <span className="a-form__required">Заполните поле</span>
-        </label>
+    return false;
+  }
 
-        <label className="a-form__label">
-          <span className="a-form__label-name">Экономия:</span>
-          <Input 
-            name="saving"
-            value={data.saving}
-            defaultValue={data.saving}
-            onChange={handleChange}
-            className="required"
-          />
-          <span className="a-form__required">Заполните поле</span>
-        </label>
-        
+  setEditParagraph = (e) => {
+    if (e)
+      e.preventDefault();
 
-        <span className="a-form__label-name">Установлено:</span>
-        {
-          data.established && data.established.map((item, idx) => 
-            (<label className="a-form__label" key={idx}>
-              <Input 
-                defaultValue={item}
-              />
-              <span className="a-form__required">Заполните поле</span>
-            </label>)) || (<p>Нет информации</p>)
-        }
-        <div className="a-form__row">
+    document.execCommand('formatBlock', false, 'p');
+
+    return false;
+  }
+
+  setEditBold = (e) => {
+    if (e)
+      e.preventDefault();
+
+    document.execCommand('bold', false, null);
+
+    return false;
+  }
+
+  setEditList = (e) => {
+    if (e)
+      e.preventDefault();
+
+    document.execCommand('insertUnorderedList', false, null);
+
+    return false;
+  }
+
+
+  escapeText = (text) => { 
+    var map = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'};
+    return text.replace(/[&<>"']/g, function(m) {
+      return map[m];
+    });
+  }
+
+  // Удаление стилей при вставке
+  pastTextToEditor = (e) => {
+    e.preventDefault();
+
+    let text = (e.originalEvent || e).clipboardData.getData('text/plain');
+
+	  document.execCommand('insertHtml', false, this.escapeText(text));
+  }
+
+  onShowEditor = (e) => {
+    let description = (this.state.showEditor)
+      ? this.textDescriptionHTML.current.textContent
+      : this.textDescription.current.innerHTML;
+
+    this.props.changeValue({description});
+    this.setState(function(prevValue, props) {
+      return ({showEditor: !prevValue.showEditor});
+    });
+  }
+
+  onChangeText = (e) => {
+    this.props.changeValue({description: e.target.value});
+  }
+
+  render() {
+    let {data, visibleAddWork, cancelAddWork} = this.props;
+
+    return (
+      <Modal
+        visible={visibleAddWork}
+        title={(data.id) ? 'Редактирование статьи' : 'Добавление статьи'}
+        okText="Сохранить"
+        cancelText="Отмена"
+        onCancel={cancelAddWork}
+        onOk={this.onOk}
+      >
+        <form>
+          <Dragger 
+            name='avatarFileList'
+            fileList={data.avatarFileList}
+            onRemove={this.onRemoveAvatar}
+            onChange={this.onChange}
+            beforeUpload={this.beforeUploadAvatar}
+            customRequest={this.customRequestAvatar}
+          >
+            <p className="ant-upload-drag-icon"><InboxOutlined /></p>
+            <p className="ant-upload-text">Главное изображение</p>
+            <p className="ant-upload-hint">Выберите или переместите файл для загрузки</p>
+          </Dragger>
+
+          <hr className="form__shift" />
+
           <label className="a-form__label">
-            <Input id="js-input-established" />
+            <span className="a-form__label-name">Название:</span>
+            <Input 
+              name="name"
+              value={data.name}
+              defaultValue={data.name}
+              onChange={this.handleChange}
+              className="required"
+            />
             <span className="a-form__required">Заполните поле</span>
           </label>
-          <Button 
-            type="primary"
-            onClick={addRowEstablished}
-            icon={<PlusOutlined />}
-          ></Button>
-        </div>
 
-        <span className="a-form__label-name">Дополнительно:</span>
-        {
-          data.additionally && data.additionally.map((item, idx) => 
-            (<label className="a-form__label" key={idx}>
-              <Input 
-                value={item}
-              />
-              <span className="a-form__required">Заполните поле</span>
-            </label>)) || (<p>Нет информации</p>)
-        }
-        <div className="a-form__row">
           <label className="a-form__label">
-            <Input id="js-input-additionally" />
+            <span className="a-form__label-name">Пробег:</span>
+            <Input 
+              name="mileage"
+              value={data.mileage}
+              defaultValue={data.mileage}
+              onChange={this.handleChange}
+              className="required"
+            />
             <span className="a-form__required">Заполните поле</span>
           </label>
-          <Button 
-            type="primary"
-            onClick={addRowAdditionally}
-            icon={<PlusOutlined />}
-          ></Button>
-        </div>
 
-        {/* <hr className="form__shift" /> */}
+          <label className="a-form__label">
+            <span className="a-form__label-name">Экономия:</span>
+            <Input 
+              name="saving"
+              value={data.saving}
+              defaultValue={data.saving}
+              onChange={this.handleChange}
+              className="required"
+            />
+            <span className="a-form__required">Заполните поле</span>
+          </label>
+          
 
-        <Dragger 
-          multiple={true}
-          name='galleryFileList'
-          fileList={data.galleryFileList}
-          onRemove={onRemoveGallery}
-          onChange={onChange}
-          beforeUpload={beforeUploadGallery}
-          customRequest={customRequestGallery}
-        >
-          <p className="ant-upload-drag-icon"><InboxOutlined /></p>
-          <p className="ant-upload-text">Галерея</p>
-          <p className="ant-upload-hint">Выберите или переместите файл для загрузки</p>
-        </Dragger>
-        
-      </form>
-    </Modal>
-  );
+          <span className="a-form__label-name">Установлено:</span>
+          {
+            data.established && data.established.map((item, idx) => 
+              (<label className="a-form__label" key={idx}>
+                <Input 
+                  defaultValue={item}
+                />
+                <span className="a-form__required">Заполните поле</span>
+              </label>)) || (<p>Нет информации</p>)
+          }
+          <div className="a-form__row">
+            <label className="a-form__label">
+              <Input id="js-input-established" />
+              <span className="a-form__required">Заполните поле</span>
+            </label>
+            <Button 
+              type="primary"
+              onClick={this.addRowEstablished}
+              icon={<PlusOutlined />}
+            ></Button>
+          </div>
+
+          <span className="a-form__label-name">Дополнительно:</span>
+          {
+            data.additionally && data.additionally.map((item, idx) => 
+              (<label className="a-form__label" key={idx}>
+                <Input 
+                  value={item}
+                />
+                <span className="a-form__required">Заполните поле</span>
+              </label>)) || (<p>Нет информации</p>)
+          }
+          <div className="a-form__row">
+            <label className="a-form__label">
+              <Input id="js-input-additionally" />
+              <span className="a-form__required">Заполните поле</span>
+            </label>
+            <Button 
+              type="primary"
+              onClick={this.addRowAdditionally}
+              icon={<PlusOutlined />}
+            ></Button>
+          </div>
+
+          <Dragger 
+            multiple={true}
+            name='galleryFileList'
+            fileList={data.galleryFileList}
+            onRemove={this.onRemoveGallery}
+            onChange={this.onChange}
+            beforeUpload={this.beforeUploadGallery}
+            customRequest={this.customRequestGallery}
+          >
+            <p className="ant-upload-drag-icon"><InboxOutlined /></p>
+            <p className="ant-upload-text">Галерея</p>
+            <p className="ant-upload-hint">Выберите или переместите файл для загрузки</p>
+          </Dragger>
+
+          <div className="a-form__block">
+            <div className="a-form__block-name"><p>Описание:</p></div>
+            {
+              (!this.state.showEditor) 
+                ? (<div className="a-form__editor">
+                    <div className="a-form__editor__area" 
+                      contentEditable="true" 
+                      ref={this.textDescription}
+                      onPaste={this.pastTextToEditor}
+                      dangerouslySetInnerHTML={{__html: data.description}}
+                    ></div>
+                    <div className="a-form__editor__toolbar">
+                      <Popover placement="left" content={<p>Заголовок</p>}>
+                        <a href="#0" 
+                          onClick={this.setEditCaption}>H</a>
+                      </Popover>
+                      <Popover placement="left" content={<p>Параграф</p>}>
+                        <a href="#0" 
+                          onClick={this.setEditParagraph}>P</a>
+                      </Popover>
+                      <Popover placement="left" content={<p>Выделение</p>}>
+                        <a href="#0" 
+                          onClick={this.setEditBold}><BoldOutlined /></a>
+                      </Popover>
+                      <Popover placement="left" content={<p>Список</p>}>
+                        <a href="#0" 
+                          onClick={this.setEditList}><UnorderedListOutlined /></a>
+                      </Popover>
+                    </div>
+                  </div>)
+                : (
+                  <div>
+                    <textarea className="a-form__editor__view" ref={this.textDescriptionHTML}
+                      onChange={this.onChangeText}
+                      defaultValue={data.description.toString()}
+                    >
+                    </textarea>
+                  </div>
+                )
+            }
+            <div>
+              <Checkbox onChange={this.onShowEditor}>Показать исходный код</Checkbox>
+              <span className="a-form__required">Заполните поле</span>
+            </div>
+          </div>
+          
+        </form>
+      </Modal>
+    );
+  }
 };
 
 export default ModalAddWork;

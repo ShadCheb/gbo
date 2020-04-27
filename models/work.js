@@ -28,6 +28,9 @@ const work = sequelize.define('work', {
   },
   saving: {
     type: Sequelize.INTEGER
+  },
+  description: {
+    type: Sequelize.TEXT
   }
 }, {
   timestamps: false

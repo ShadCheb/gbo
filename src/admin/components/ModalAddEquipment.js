@@ -3,10 +3,6 @@ import ReactDOM from 'react-dom';
 import { Modal, Popover, Input, Checkbox } from 'antd';
 import { BoldOutlined, UnorderedListOutlined } from '@ant-design/icons';
 
-// function ModalAddEquipment({
-//   csrf, data, editActive, handlerChangesData, cancelAddEquipment, 
-//   changeValue, visibleAddEquipment, changeActiveEdit
-// }) {
 
 class ModalAddEquipment extends Component {
   constructor(props) {
@@ -23,8 +19,7 @@ class ModalAddEquipment extends Component {
   componentDidMount = () => {
     document.execCommand('defaultParagraphSeparator', false, 'p'); // Установка по умолчанию
     // this.setEditParagraph(); // Установка по умолчанию
-  }
-  
+  }  
 
   onOk = () => {
     let sendForm = new FormData();
@@ -33,8 +28,6 @@ class ModalAddEquipment extends Component {
       ? this.textDescriptionHTML.current.textContent
       : this.textDescription.current.innerHTML;
     let cylinder = data.cylinder.join(',');
-
-    console.log('ok', cylinder);
 
     if (data.id) {
       sendForm.append('id', data.id);
@@ -124,6 +117,7 @@ class ModalAddEquipment extends Component {
 
   // Удаление стилей при вставке
   pastTextToEditor = (e) => {
+    console.log('past');
     e.preventDefault();
 
     let text = (e.originalEvent || e).clipboardData.getData('text/plain');
@@ -144,6 +138,10 @@ class ModalAddEquipment extends Component {
 
   selectCylinder = (cylinder) => {
     this.props.changeValue({cylinder});
+  }
+
+  onChangeText = (e) => {
+    this.props.changeValue({description: e.target.value});
   }
 
 
@@ -205,6 +203,7 @@ class ModalAddEquipment extends Component {
                 : (
                   <div>
                     <textarea className="a-form__editor__view" ref={this.textDescriptionHTML}
+                      onChange={this.onChangeText}
                       defaultValue={data.description.toString()}
                     >
                     </textarea>

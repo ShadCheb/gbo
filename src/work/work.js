@@ -64,7 +64,6 @@ class Work extends Component {
         <section className="job">
           <div className="container">
             <div className="job__bcg-1 bcg--1"></div>
-            <div className="job__bcg-2 bcg--2"></div>
             <div className="caption__container">
               <h2 className="caption__section ">Наши работы</h2>
             </div>
@@ -88,28 +87,32 @@ class Work extends Component {
                 </div>)
               : (<p>Нет данных</p>)
             }
-            <div className="job__navigation">
-              {
-                (infoCity.page > 1)
-                  ? (<a href={ infoCity.page - 1 } className="nav__arrow nav--right">
+            { (infoCity.pages && infoCity.pages > 1)
+              ? (
+                <div className="job__navigation">
+                  {
+                    (infoCity.page > 1)
+                      ? (<a href={ infoCity.page - 1 } className="nav__arrow nav--right">
+                            <svg>
+                              <use xlinkHref="img/sprite-icon.svg#icon-back"/>
+                            </svg>
+                        </a>) 
+                      : ('')
+                  }
+                  {
+                    <a>{ infoCity.page }</a>
+                  }
+                  {
+                    (infoCity.page < infoCity.pages)
+                      ? (<a href={ infoCity.page + 1 } className="nav__arrow nav--right">
                         <svg>
-                          <use xlinkHref="img/sprite-icon.svg#icon-back"/>
+                          <use xlinkHref="img/sprite-icon.svg#icon-next"/>
                         </svg>
-                    </a>) 
-                  : ('')
-              }
-              {
-                <a>{ infoCity.page }</a>
-              }
-              {
-                (infoCity.page < infoCity.pages)
-                  ? (<a href={ infoCity.page + 1 } className="nav__arrow nav--right">
-                    <svg>
-                      <use xlinkHref="img/sprite-icon.svg#icon-next"/>
-                    </svg>
-                  </a>) : ('')
-              }
-            </div>
+                      </a>) : ('')
+                  }
+                </div>
+              ) : ('')
+            }
           </div>
         </section>
         

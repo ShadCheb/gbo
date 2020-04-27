@@ -675,7 +675,8 @@ router.post('/work', auth, async(req, res) => {
         avatar: data.avatar,
         established: data.established,
         additionally: data.additionally,
-        gallery: data.gallery
+        gallery: data.gallery,
+        description: data.description
       },
       {
         where: {id: data.id}
@@ -699,7 +700,8 @@ router.post('/work', auth, async(req, res) => {
         established: data.established,
         additionally: data.additionally,
         gallery: data.gallery,
-        cityListId: data.city_list_id
+        cityListId: data.city_list_id,
+        description: data.description
       })
         .then(async () => {
           const result = await Work.findAll({
