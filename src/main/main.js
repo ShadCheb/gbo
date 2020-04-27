@@ -244,7 +244,6 @@ class Main extends Component {
   }; 
 
   eventScrollToMap = () => {
-    // let topWindow = window.scrollTop;
     let map = this.state.elemMap;
     const h1 = 600;
     const h2 = -600;
@@ -388,10 +387,10 @@ class Main extends Component {
                     </div>
                   </div>
                   <div className="main__img">
-                    <picture className="lozad" data-iesrc="/img/main-1.webp" data-alt="Gazoved">
-                      <source media="(min-width: 768px)" srcSet="/img/main-1.webp" />
-                      <source media="(min-width: 420px)" srcSet="/img/main-1-p.webp" />
-                      <source media="(min-width: 300px)" srcSet="/img/main-1-m.webp" />
+                    <picture className="lozad" data-iesrc="/img/main-1.png" data-alt="Gazoved">
+                      <source media="(min-width: 768px)" srcSet="/img/main-1.png" />
+                      <source media="(min-width: 420px)" srcSet="/img/main-1-p.png" />
+                      <source media="(min-width: 300px)" srcSet="/img/main-1-m.png" />
                     </picture>
                   </div>
                 </div>

@@ -19,7 +19,7 @@ class Contact extends Component {
   }
 
   componentDidMount = () => {
-    ymaps.ready(this.initMap);
+    window.ymaps && ymaps.ready(this.initMap);
   }
 
   // Меняем город в шапке

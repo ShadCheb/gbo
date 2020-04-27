@@ -235,6 +235,7 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
     
       dataReview['reviewListVk'] = data.reviewListVk;
       dataReview['infoGroup'] = data.infoGroup;
+      dataReview['cityListId'] = data.id;
 
       if (!data.review) {
         fetch('/admin/review/get', {
