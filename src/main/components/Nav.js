@@ -52,7 +52,7 @@ export default ({showMenu, closeMenu, social, page}) => {
                 (social.youtube) 
                   ? (<a className="nav__icon" href={social.youtube} target="_blank">
                   <svg>
-                    <use xlinkHref="img/sprite-icon.svg#icon-youtube"></use>
+                    <use xlinkHref="/img/sprite-icon.svg#icon-youtube"></use>
                   </svg>
                   Youtube</a>)
                   : ('')

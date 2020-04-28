@@ -94,7 +94,7 @@ class Work extends Component {
                     (infoCity.page > 1)
                       ? (<a href={ infoCity.page - 1 } className="nav__arrow nav--right">
                             <svg>
-                              <use xlinkHref="img/sprite-icon.svg#icon-back"/>
+                              <use xlinkHref="/img/sprite-icon.svg#icon-back"/>
                             </svg>
                         </a>) 
                       : ('')
@@ -106,7 +106,7 @@ class Work extends Component {
                     (infoCity.page < infoCity.pages)
                       ? (<a href={ infoCity.page + 1 } className="nav__arrow nav--right">
                         <svg>
-                          <use xlinkHref="img/sprite-icon.svg#icon-next"/>
+                          <use xlinkHref="/img/sprite-icon.svg#icon-next"/>
                         </svg>
                       </a>) : ('')
                   }

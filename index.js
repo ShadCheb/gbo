@@ -40,9 +40,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')))
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-// Для теста (времено)
-app.use('/', testRoutes);
-
 app.use(session({
   secret: keys.SESSION_SECRET,
   resave: false,

@@ -12,6 +12,8 @@ const csrf = container.dataset.csrf;
 const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
 
+console.log('infoCity', infoCity);
+
 
 class WorkItem extends Component {
   state = {
@@ -159,6 +161,15 @@ class WorkItem extends Component {
                 <h2>Gazoved</h2>
               </div>
             </div>
+
+            {
+              (infoCity.description)
+                ? (<div className="wi-description__description" 
+                  dangerouslySetInnerHTML={{__html: infoCity.description}}
+                />)
+                : ('')
+            }
+
             {
               (infoCity.gallery && infoCity.gallery.length)
               ? (

@@ -696,6 +696,8 @@ router.post('/work', auth, async(req, res) => {
     try {
       Work.create({
         name: data.name,
+        mileage: data.mileage,
+        saving: data.saving,
         avatar: data.avatar,
         established: data.established,
         additionally: data.additionally,

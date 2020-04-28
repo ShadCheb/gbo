@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Modal, Upload, Button, Input, Popover, Checkbox } from 'antd';
-import { InboxOutlined, PlusOutlined, BoldOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { 
+  InboxOutlined, 
+  PlusOutlined, 
+  BoldOutlined, 
+  UnorderedListOutlined,
+  MinusOutlined 
+} from '@ant-design/icons';
 
 
 const { Dragger } = Upload;
-
-
-// function ModalAddWork({
-//   csrf, data, handlerChangesData, cancelAddWork, 
-//   visibleAddWork, changeValue, setLoading
-// }) {
 
 
 class ModalAddWork extends Component {
@@ -140,9 +140,12 @@ class ModalAddWork extends Component {
     if (saving)
       sendForm.append('saving', saving);
     sendForm.append('avatar', avatar);
-    sendForm.append('established', established.join(','));
-    sendForm.append('additionally', additionally.join(','));
-    sendForm.append('gallery', gallery.join(','));
+    if (established)
+      sendForm.append('established', established.join(','));
+    if (additionally)
+      sendForm.append('additionally', additionally.join(','));
+    if (gallery)
+      sendForm.append('gallery', gallery.join(','));
     sendForm.append('city_list_id', data.cityListId);
     sendForm.append('description', description);
 
@@ -232,11 +235,33 @@ class ModalAddWork extends Component {
     this.props.changeValue({
       galleryFileList: newFileList,
       gallery: newGallery
-    }); 
+    });
   }
   
-  onChange = () => {
-    return;
+  onChange = (file) => {
+    if (file.file && file.file.status == 'removed') {
+      this.props.changeValue({fileAvatar: null});
+    } else 
+      return;
+  }
+
+  onChangeGallery = (file) => {
+    if (file.file && file.file.status == 'removed') {
+      let data = this.props.data;
+      let fileGallery = (data.fileGallery && data.fileGallery.length)
+        ? data.fileGallery.slice()
+        : [];
+      let name = file.file.name;
+
+      let deleteIdx = fileGallery.findIndex((element) => element.name == name);
+
+      if (deleteIdx > -1) {
+        fileGallery.splice(deleteIdx, 1);
+      }
+
+      this.props.changeValue({fileGallery});
+    } else 
+      return;
   }
 
   handleChange = e => {
@@ -274,6 +299,13 @@ class ModalAddWork extends Component {
     this.props.changeValue({established});
   }
 
+  deleteRowEstablished = (idx) => {
+    let established = this.props.data.established.slice();
+
+    established.splice(idx, 1);
+    this.props.changeValue({established});
+  }
+
   addRowAdditionally = e => {
     let data = this.props.data;
     let row = e.target.closest('.a-form__row');
@@ -285,6 +317,13 @@ class ModalAddWork extends Component {
     additionally.push(value);
     value = '';
     
+    this.props.changeValue({additionally});
+  }
+
+  deleteRowAdditionally = (idx) => {
+    let additionally = this.props.data.additionally.slice();
+
+    additionally.splice(idx, 1);
     this.props.changeValue({additionally});
   }
 
@@ -426,12 +465,21 @@ class ModalAddWork extends Component {
           <span className="a-form__label-name">Установлено:</span>
           {
             data.established && data.established.map((item, idx) => 
-              (<label className="a-form__label" key={idx}>
-                <Input 
-                  defaultValue={item}
-                />
-                <span className="a-form__required">Заполните поле</span>
-              </label>)) || (<p>Нет информации</p>)
+              (
+                <div className="a-form__row" key={idx}>
+                  <label className="a-form__label">
+                    <Input 
+                      defaultValue={item}
+                    />
+                    <span className="a-form__required">Заполните поле</span>
+                  </label>
+                  <Button 
+                    type="primary"
+                    onClick={this.deleteRowEstablished.bind(this, idx)}
+                    icon={<MinusOutlined />}
+                  ></Button>
+                </div>
+              )) || (<p>Нет информации</p>)
           }
           <div className="a-form__row">
             <label className="a-form__label">
@@ -448,12 +496,21 @@ class ModalAddWork extends Component {
           <span className="a-form__label-name">Дополнительно:</span>
           {
             data.additionally && data.additionally.map((item, idx) => 
-              (<label className="a-form__label" key={idx}>
-                <Input 
-                  value={item}
-                />
-                <span className="a-form__required">Заполните поле</span>
-              </label>)) || (<p>Нет информации</p>)
+              (
+                <div className="a-form__row" key={idx}>
+                  <label className="a-form__label">
+                    <Input 
+                      value={item}
+                    />
+                    <span className="a-form__required">Заполните поле</span>
+                  </label>
+                  <Button 
+                    type="primary"
+                    onClick={this.deleteRowAdditionally.bind(this, idx)}
+                    icon={<MinusOutlined />}
+                  ></Button>
+                </div>
+              )) || (<p>Нет информации</p>)
           }
           <div className="a-form__row">
             <label className="a-form__label">
@@ -472,7 +529,7 @@ class ModalAddWork extends Component {
             name='galleryFileList'
             fileList={data.galleryFileList}
             onRemove={this.onRemoveGallery}
-            onChange={this.onChange}
+            onChange={this.onChangeGallery}
             beforeUpload={this.beforeUploadGallery}
             customRequest={this.customRequestGallery}
           >

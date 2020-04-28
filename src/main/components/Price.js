@@ -39,7 +39,7 @@ function PriceBlock({equipment, openDescription, selectEquipment}) {
         <div className="price__body__btn"><button className="btn-1 btn--blue"
             onClick={openDescription}
           ><span className="price--open">Описание</span><span className="price--close">Закрыть</span>
-            <svg><use xlinkHref="img/sprite-icon.svg#icon-description" /></svg></button></div>
+            <svg><use xlinkHref="/img/sprite-icon.svg#icon-description" /></svg></button></div>
       </div>
       <div className="price__container">
         <div className="price__description">
@@ -50,7 +50,7 @@ function PriceBlock({equipment, openDescription, selectEquipment}) {
         </div>
         <button className="price__description__btn" onClick={openDescription}>
           <svg>
-            <use xlinkHref="img/sprite-icon.svg#icon-arrow-up" />
+            <use xlinkHref="/img/sprite-icon.svg#icon-arrow-up" />
           </svg>
         </button>
       </div>
