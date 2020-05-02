@@ -53,7 +53,7 @@ class Employee extends Component {
       openEmployee['idx'] = idx;
     }
 
-    if (openEmployee.avatar) { //  && !openEmployee['fileList']
+    if (openEmployee.avatar) {
       openEmployee['fileList'] = [{
         uid: '-1',
         name: openEmployee.avatar,

@@ -45,7 +45,7 @@ function ModalAddEmployee({
   }
 
   const onOk = async () => {
-    let avatar = data.fileList[0].name;
+    let avatar = data.fileList && data.fileList[0].name;
 
     // сначала загружаем картинку, если она есть
     if (data.file) {

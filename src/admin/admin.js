@@ -22,6 +22,7 @@ import {
   PlusOutlined
 } from '@ant-design/icons';
 
+
 const container = document.getElementById('page-admin');
 const csrf = container.dataset.csrf;
 let cityList = container.dataset.city_list;

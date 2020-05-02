@@ -17,9 +17,9 @@ const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
 const serviceRoutes = require('./routes/service');
 const otherRoutes = require('./routes/other');
-const testRoutes = require('./routes/test');
+// const testRoutes = require('./routes/test');
 
-const PORT = 80;
+const PORT = 8000;
 
 const app = express();
 const hbs = exphbs.create({
