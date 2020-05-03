@@ -9,15 +9,7 @@ const CityList = require('../models/cityList');
 module.exports = async function(req, res, next) {
   try {
     let city = req.query.city;
-    const cityList = await CityList.findAll({attributes: [ 'id', 'name', 'brief' ], raw: true});
-    
-    if (!cityList || !cityList.length) {
-      res.status(201).render('not-data'), {
-        title: 'Нет данных'
-      }
-
-      return;
-    }
+    let cityList = [];
 
     if (!city && req.session.city) {
       city = req.session.city;
@@ -27,13 +19,35 @@ module.exports = async function(req, res, next) {
     }
 
     if (!city) {
+      cityList = await CityList.findAll({attributes: [ 'id', 'name', 'brief' ], raw: true});
+    
+      if (!cityList || !cityList.length) {
+        res.status(201).render('not-data'), {
+          title: 'Нет данных'
+        }
+
+        return;
+      }
+
       city = cityList[0].brief;
 
-      res.cookie('city', city);
+      res.cookie('city', city, {
+        maxAge: 3600 * 24 * 30
+      });
       req.session.city = city;
     }
 
     if (city != req.session.city || !req.session.dataGeneral) { 
+      cityList = await CityList.findAll({attributes: [ 'id', 'name', 'brief' ], raw: true});
+    
+      if (!cityList || !cityList.length) {
+        res.status(201).render('not-data'), {
+          title: 'Нет данных'
+        }
+
+        return;
+      }
+
       let data = await CityList.findOne(
         {
           where: {brief: city},
@@ -49,7 +63,7 @@ module.exports = async function(req, res, next) {
           ]
         }
       )
-        .then(result => result.get({plain:true}));
+        .then(result => result.get({plain: true}));
 
       if (!data || !data.id) {
         res.status(201).render('not-data'), {
@@ -67,15 +81,17 @@ module.exports = async function(req, res, next) {
         cityList
       };
       req.session.dataGeneral = res.locals.dataGeneral;
+      req.session.city = city;
+      res.cookie('city', city, {
+        maxAge: 3600 * 24 * 30
+      });
     } else {
       res.locals.dataGeneral = req.session.dataGeneral;
     }
 
-    req.session.city = city;
-
     next();
   } catch (e) {
-    res.status(201).render('not-data'), {
+    res.status( 201).render('not-data'), {
       title: 'Нет данных'
     }
   }

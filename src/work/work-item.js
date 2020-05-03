@@ -12,8 +12,6 @@ const csrf = container.dataset.csrf;
 const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
 
-console.log('infoCity', infoCity);
-
 
 class WorkItem extends Component {
   state = {
@@ -115,19 +113,19 @@ class WorkItem extends Component {
               <div className="wi-description__text">
                 <div>
                   <h2 className="wi-description__caption">
-                    { (infoCity.mileage) ? ('Пробег' + this.separate(infoCity.mileage) + ' км') : ('') }
+                    { (infoCity.mileage) ? ('Пробег ' + this.separate(infoCity.mileage) + ' км') : ('') }
                     { (infoCity.saving) 
                       ? (<strong> Экономия {this.separate(infoCity.saving)} рублей</strong>) 
                       : ('') }
                   </h2>
                   {
-                    (infoCity.established && infoCity.established.length) 
+                    (infoCity.established && infoCity.established[0]) 
                     ? (<div className="wi-description__install">
                       <p className="text__p2">Установлено газовое оборудование:</p>
                       <ul className="text__list">
                         {
                           infoCity.established.map((item,idx) => (
-                            <li key={ idx }>{ item }</li>
+                            <li key={ idx }>{ item }</li> || ('')
                           ))
                         }
                       </ul>
@@ -135,13 +133,13 @@ class WorkItem extends Component {
                     : ('')
                   }
                   {
-                    (infoCity.additionally && infoCity.additionally.length) 
+                    (infoCity.additionally && infoCity.additionally[0]) 
                     ? (<div className="wi-description__add">
                         <p className="text__p2">Дополнительно:</p>
                         <ul className="text__list">
                           {
                             infoCity.additionally.map((item,idx) => (
-                              <li key={ idx }>{ item }</li>
+                              item && <li key={ idx }>{ item }</li> || ('')
                             ))
                           }
                         </ul>

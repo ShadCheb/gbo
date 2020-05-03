@@ -17,7 +17,6 @@ const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
 const serviceRoutes = require('./routes/service');
 const otherRoutes = require('./routes/other');
-// const testRoutes = require('./routes/test');
 
 const PORT = 8000;
 

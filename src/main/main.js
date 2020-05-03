@@ -278,6 +278,8 @@ class Main extends Component {
     if (!document.querySelector('#map') || !infoCity.addresses)
       return;
 
+    console.log('infoCity.addresses', infoCity.addresses);
+
     let points = infoCity.addresses.map(address => (
       {
         coord: address.coords && JSON.parse(address.coords) || null,
@@ -530,7 +532,7 @@ class Main extends Component {
                         мастера с опытом от 5 лет, прошедшие курсы повешения квалификации!
                       </p>
                       <div className="certificates__btn">
-                        { this.state.certificates[0].map((img, idx) => (
+                        { this.state.certificates && this.state.certificates[0].map((img, idx) => (
                           <PhotoItem 
                             image={img} 
                             group="group1" 
