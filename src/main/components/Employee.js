@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
 
-// function Employee({employeeList}) {
-
 class Employee extends Component {
   constructor(props) {
     super(props);
@@ -52,14 +50,22 @@ class Employee extends Component {
     let widthWindow = windowGallery.offsetWidth;
     let widthItem = widthWindow / c;
     let listDot = new Array(Math.ceil(countAll / c)).fill(0).map((a, b) => b);
-
-    this.setState({
+    let changeData = {
       widthItem,
-      countAll,
-      listDot,
-      countWindow: c,
-      shiftGallery: 0
-    });
+      shiftGallery: -1 * this.state.pageGallery * widthItem * c,
+    };
+
+    if (c != this.state.countWindow) {
+      changeData = Object.assign(changeData, {
+        countAll,
+        listDot,
+        countWindow: c,
+        shiftGallery: 0,
+        pageGallery: 0
+      });
+    }
+
+    this.setState(changeData);
 
     setTimeout(() => {this.setValueHeight()}, 1000);
   }

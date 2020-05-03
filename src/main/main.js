@@ -269,53 +269,6 @@ class Main extends Component {
     }
   }
 
-  /* eventScrollToEmployee = () => {
-    let employee = this.state.elemEmployee;
-    const h1 = 600;
-    const h2 = -600;
-
-    if (!employee) {
-      let elemEmployee = document.querySelector('#employee');
-
-      this.setState({elemEmployee});
-      employee = elemEmployee;
-    }
-
-    if (!this.state.loadEmployee) {
-      let aPos = employee.scrollTop + employee.getBoundingClientRect().top;
-
-      if (aPos < h1 && aPos > h2) { 
-        this.setState({loadEmployee: true});
-
-        const head  = document.querySelector('head');
-        const body  = document.querySelector('body');
-        const link  = document.createElement('LINK');
-        const scriptJQuery  = document.createElement('SCRIPT');
-        const scriptFoto  = document.createElement('SCRIPT');
-        const fotorama = document.querySelector('#fotorama');
-
-        link.rel  = 'stylesheet';
-        link.type = 'text/css';
-        link.href = '/style/fotorama.css';
-        link.media = 'all';
-
-        scriptJQuery.src = '/js/jquery.min.js';
-        scriptFoto.src = '/js/fotorama.js';
-
-        console.log('body', body);
-
-        head.appendChild(link);
-        body.appendChild(scriptJQuery);
-
-        setTimeout(() => body.appendChild(scriptFoto), 1000);
-
-        window.removeEventListener('scroll', this.eventScrollToEmployee);        
-
-        setTimeout(() => fotorama.fotorama(), 1000);
-      }
-    }
-  } */
-
   /*
    * рендер карты
   */
