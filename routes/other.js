@@ -100,9 +100,10 @@ router.get('/work/:id', detaGeneral, async (req, res) => {
 
   dataPage['nameWork'] = dataPage['name'];
   dataPage['name'] = data['name'];
-  dataPage['established'] = dataPage['established'].split(',');
-  dataPage['additionally'] = dataPage['additionally'].split(',');
-  dataPage['gallery'] = dataPage['gallery'].split(',');
+  dataPage['established'] = dataPage['established'] && dataPage['established'].split(',') || [];
+  dataPage['additionally'] = dataPage['additionally'] && dataPage['additionally'].split(',') || [];
+  dataPage['gallery'] = dataPage['gallery'] && dataPage['gallery'].split(',') || [];
+
   data = Object.assign(data, dataPage);
 
   res.render('page', {
