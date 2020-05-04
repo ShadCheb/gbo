@@ -27,7 +27,6 @@ class ModalAddWork extends Component {
 
   componentDidMount = () => {
     document.execCommand('defaultParagraphSeparator', false, 'p'); // Установка по умолчанию
-    // this.setEditParagraph(); // Установка по умолчанию
   }
 
   uploadAvatar = async (fileAvatar) => {
@@ -397,6 +396,20 @@ class ModalAddWork extends Component {
     this.props.changeValue({description: e.target.value});
   }
 
+  onChangeEstablished = (idx, e) => {
+    let established = this.props.data.established;
+
+    established[idx] = e.target.value;
+    this.props.changeValue({established});
+  }
+
+  onChangeAdditionally = (idx, e) => {
+    let additionally = this.props.data.additionally;
+
+    additionally[idx] = e.target.value;
+    this.props.changeValue({additionally});
+  }
+
   render() {
     let {data, visibleAddWork, cancelAddWork} = this.props;
 
@@ -469,7 +482,9 @@ class ModalAddWork extends Component {
                 <div className="a-form__row" key={idx}>
                   <label className="a-form__label">
                     <Input 
+                      value={item}
                       defaultValue={item}
+                      onChange={this.onChangeEstablished.bind(this, idx)}
                     />
                     <span className="a-form__required">Заполните поле</span>
                   </label>
@@ -501,6 +516,8 @@ class ModalAddWork extends Component {
                   <label className="a-form__label">
                     <Input 
                       value={item}
+                      defaultValue={item}
+                      onChange={this.onChangeAdditionally.bind(this, idx)}
                     />
                     <span className="a-form__required">Заполните поле</span>
                   </label>

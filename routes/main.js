@@ -86,7 +86,7 @@ router.post('/mail', async (req, res) => {
   let email = cityList.email;
 
   if (!email)
-    email = 'vas.box@mail.ru';
+    email = 'gazoved21@mail.ru';
 
 	let output = `
     <p>Пришла новая заявка.</p>
