@@ -88,6 +88,7 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
           csrf={csrf}
           data={dataGeneral}
           handlerChangesData={handlerChangesData}
+          setLoading={setLoading}
         />
       );
     case typeList[1].brief: // 'address'
@@ -102,6 +103,7 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
           csrf={csrf}
           data={dataAddress}
           handlerChangesData={handlerChangesData}
+          setLoading={setLoading}
         />
       );
     case typeList[2].brief: // 'social'
@@ -122,6 +124,7 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
           csrf={csrf}
           data={dataSocial}
           handlerChangesData={handlerChangesData}
+          setLoading={setLoading}
         />
       );
     case typeList[3].brief: // 'time'
@@ -137,7 +140,9 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
         csrf={csrf}
         data={dataTime}
         handlerChangesData={handlerChangesData}
+        setLoading={setLoading}
       />);
+
     case typeList[4].brief: // 'phone'
       let phone = data.phone || {};
       let phoneId = phone.id;
@@ -156,7 +161,9 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
         csrf={csrf}
         data={dataPhone}
         handlerChangesData={handlerChangesData}
+        setLoading={setLoading}
       />);
+
     case typeList[5].brief: // 'employee'
       let dataEmployee = {};
       
@@ -190,7 +197,9 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
         csrf={csrf}
         data={dataEmployee}
         handlerChangesData={handlerChangesData}
+        setLoading={setLoading}
       />);
+
     case typeList[6].brief: // 'equipment'
       let dataEquipment = {};
     
@@ -229,6 +238,7 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
         csrf={csrf}
         data={dataEquipment}
         handlerChangesData={handlerChangesData}
+        setLoading={setLoading}
       />);
 
     case typeList[7].brief: // 'review'
@@ -271,6 +281,7 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
         csrf={csrf}
         data={dataReview}
         handlerChangesData={handlerChangesData}
+        setLoading={setLoading}
       />);
 
     case typeList[8].brief: // 'work'

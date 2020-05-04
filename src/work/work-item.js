@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import Loader from '../main/components/Loader';
 import Header from '../main/components/Header';
 import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
 import ModalRecord from '../main/components/ModalRecord';
+
+import { LightgalleryProvider, LightgalleryItem } from 'react-lightgallery';
 
 
 const container = document.getElementById('page-other');
@@ -24,6 +27,13 @@ class WorkItem extends Component {
     },
 
     showMenu: false, // открытие меню
+    loader: true
+  }
+
+  componentDidMount = () => {
+    window.onload = () => {
+      this.setState({loader: false});
+    }
   }
 
   // Меняем город в шапке
@@ -77,6 +87,8 @@ class WorkItem extends Component {
 
     return (
       <div>
+        { this.state.loader && <Loader /> } 
+
         <main className="main-header">
           <div className="container">
             <Header 
@@ -170,18 +182,20 @@ class WorkItem extends Component {
 
             {
               (infoCity.gallery && infoCity.gallery.length)
-              ? (
-              <div className="wi-description__gallery">
-                {
-                  infoCity.gallery.map((img, idx) => (
-                    <div className="wi-description__gallery__img" key={ idx }>
-                      <img src={ '/images/' + img } />
-                    </div>
-                  ))
-                }
-              </div>)
+              ? (<LightgalleryProvider>
+                  <div className="wi-description__gallery">
+                  { infoCity.gallery.map((image, idx) => (
+                    <LightgalleryItem group="group" src={ '/images/' + image } key={ idx }>
+                      <img src={ '/images/' + image } />
+                    </LightgalleryItem>
+                    ))
+                  }
+                  </div>
+                </LightgalleryProvider>
+                ) 
               : ('')
             }
+
           </div>
         </section>
 
@@ -206,5 +220,6 @@ class WorkItem extends Component {
     );
   }
 }
+
 
 ReactDOM.render(<WorkItem/>, container);

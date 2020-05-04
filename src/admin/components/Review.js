@@ -83,6 +83,8 @@ class Review extends Component {
       return;
     }
 
+    this.props.setLoading(true);
+
     // Запись группы и токена
     fetch('/admin/review_vk', {
       method: 'post',
@@ -136,6 +138,7 @@ class Review extends Component {
             });
           });
 
+          this.props.setLoading(false);
           this.props.handlerChangesData({
             reviewListVk: filteredData,
             infoGroup: group
@@ -146,14 +149,18 @@ class Review extends Component {
             reviewListVk: [],
             infoGroup: null
           }, true);
+          this.props.setLoading(false);
       })
       .catch(e => {
         this.error('Данные группы введены не верно');
+        this.props.setLoading(false);
       })
 	}
 
   addReview = (review) => {
     review['city_list_id'] = this.props.data.cityListId;
+
+    this.props.setLoading(true);
 
     fetch('/admin/review', {
       method: 'post',
@@ -165,10 +172,14 @@ class Review extends Component {
     })
       .then(res => res.json())
       .then(data => {
+        this.props.setLoading(false);
+
         if (data.result)
           this.props.handlerChangesData({review: data.result});
       })
       .catch(e => {
+        this.props.setLoading(false);
+
         if (e.error)
           this.props.handlerChangesData(e.error);
       })
@@ -179,6 +190,8 @@ class Review extends Component {
 
     if (!id)
       return;
+
+    this.props.setLoading(true);
 
     fetch('/admin/review/' + id, {
       method: 'delete',
@@ -191,8 +204,11 @@ class Review extends Component {
 
         review = review.filter(a => a.id !== id);
         this.props.handlerChangesData({review});
+        this.props.setLoading(false);
       })
       .catch(e => {
+        this.props.setLoading(false);
+        
         if (e.error)
           this.props.handlerChangesData(e.error);
       })

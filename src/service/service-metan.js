@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import Loader from '../main/components/Loader';
 import Header from '../main/components/Header';
 import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
@@ -24,12 +25,16 @@ class Metan extends Component {
     },
 
     showMenu: false, // открытие меню
+    loader: true
   }
 
   componentDidMount = () => {
     const observer = lozad();
 
     observer.observe();
+    window.onload = () => {
+      this.setState({loader: false});
+    }
   }
 
   // Меняем город в шапке
@@ -81,6 +86,8 @@ class Metan extends Component {
 
     return (
       <div>
+        { this.state.loader && <Loader /> } 
+
         <main className="main-header">
           <div className="container">
             <Header 

@@ -1,4 +1,138 @@
-<div class="body">
-  <h1>404</h1>
-  <h2>Страница не найдена</h2>
+<style>
+  @font-face {
+    font-family: 'Futura PT';
+    src: url('../fonts/FuturaPT-Medium.eot');
+    src: local('Futura PT Medium'), local('FuturaPT-Medium'),
+        url('../fonts/FuturaPT-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/FuturaPT-Medium.woff') format('woff'),
+        url('../fonts/FuturaPT-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Futura PT';
+    src: url('../fonts/FuturaPT-Light.eot');
+    src: local('Futura PT Light'), local('FuturaPT-Light'),
+        url('../fonts/FuturaPT-Light.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/FuturaPT-Light.woff') format('woff'),
+        url('../fonts/FuturaPT-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Futura PT';
+    src: url('../fonts/FuturaPT-ExtraBold.eot');
+    src: local('Futura PT Extra Bold'), local('FuturaPT-ExtraBold'),
+        url('../fonts/FuturaPT-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/FuturaPT-ExtraBold.woff') format('woff'),
+        url('../fonts/FuturaPT-ExtraBold.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  *, :after, :before {
+    box-sizing: content-box;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-family: "Futura PT", sans-serif;
+    background: #1c1c1c;
+  }
+  .page-404 {
+    background: url(/img/404.jpg) no-repeat center;
+    background-size: cover;
+  }
+  .container {
+    position: relative;
+    padding: 0 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 100vh;
+  }
+  .page-404__body {
+    position: absolute;
+    right: 20px;
+    bottom: 50px;
+    width: 100%;
+    text-align: right;
+  }
+  .page-404__caption {
+    margin-bottom: 0;
+    font-size: 12em;
+    line-height: 1.2em;
+    font-weight: 900;
+    color: #fff;
+  }
+  .page-404__caption-h2 {
+    position: relative;
+    padding-bottom: 1.2em;
+    margin-top: -1em;
+    font-size: 2.5em;
+    line-height: 1.2em;
+    font-weight: 300;
+    color: #fff;
+  }
+  .page-404__link {
+    text-decoration: none;
+    display: inline-block;
+    padding: 16px 50px;
+    font-family: 'Futura PT', sans-serif;
+    font-size: 1.2em;
+    line-height: 30px;
+    font-weight: 500;
+    min-width: 208px;
+    text-align: center;
+    background-color: rgba(0, 194, 255, .4);
+    color: #004257;
+    border: 1px solid #00c2ff;
+    border-radius: 4px;  
+    box-shadow: 0 10px 30px 0 rgba(0, 194, 255, .4);
+    transition: all .3s ease;
+    cursor: pointer;
+  }
+  .page-404__link:hover {
+    color: #002632;
+    box-shadow: 0 10px 30px 0 rgba(0, 194, 255, 0);
+  }
+  .page-404__link:active, .page-404__link:focus {
+    color: #002632;
+    box-shadow: 0 10px 30px 0 rgba(0, 194, 255, 0);
+    outline: none;
+  }
+  @media (max-width: 768px) {
+    body {
+      font-size: 12px;
+    }
+    .page-404__link {
+      font-size: 1.5em;
+    }
+  }
+  @media (max-width: 576px) {
+    body {
+      font-size: 10px;
+    }
+    .page-404__link {
+      padding: 12px 30px;
+      font-size: 1.8em;
+    }
+   .page-404 {
+      background: url(../img/404-m.jpg) no-repeat center;
+      background-size: cover;
+    }
+  }
+</style>
+
+<div class="body page-404">
+  <div class="container">
+    <div class="page-404__body">
+      <h1 class="page-404__caption">404</h1>
+      <h2 class="page-404__caption-h2">Страница не найдена</h2>
+      <a class="page-404__link" href="/">Перейти на главную</a>
+    </div>
+  </div>
 </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import Loader from './components/Loader';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Benefit from './components/Benefit';
@@ -81,6 +82,8 @@ class Main extends Component {
     elemEmployee: null,
     loadMap: false, // загрузилась ли карта
     loadEmployee: false, // загрузились ли сотрудники
+
+    loader: true
   };
 
   componentDidMount = () => {
@@ -97,6 +100,10 @@ class Main extends Component {
     const observer = lozad();
 
     observer.observe();
+
+    window.onload = () => {
+      this.setState({loader: false});
+    }
   }
 
   changeDatabenefit = (data) => {
@@ -341,6 +348,8 @@ class Main extends Component {
     if (this.state.data)
       return (
         <div>
+            { this.state.loader && <Loader /> } 
+
             <main className="main" id="main">
               <div className="main__bcg-1" />
               <div className="main__bcg-2" />
@@ -674,8 +683,8 @@ class Main extends Component {
                   <div className="install__img">
                     <picture className="lozad" data-iesrc="/img/install-1.png" 
                       data-alt="Установка ГБО в Газовед">
-                      <source media="(min-width: 768px)" srcSet="/img/install-1.png" />
-                      <source media="(min-width: 300px)" srcSet="/img/install-1-m.png" />
+                      <source media="(min-width: 768px)" srcSet="/img/install-2.png" />
+                      <source media="(min-width: 300px)" srcSet="/img/install-2-m.png" />
                     </picture>
                   </div>
                   <div className="install__form">

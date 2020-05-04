@@ -21,6 +21,8 @@ class Address extends Component {
   deleteAddress = (address) => {
     let id = address.id;
 
+    this.props.setLoading(true);
+
     fetch('/admin/address/' + id, {
       method: 'delete',
       headers: {
@@ -28,12 +30,16 @@ class Address extends Component {
       }
     })
       .then(() => {
+        this.props.setLoading(false);
+
         let addresses = this.props.data.addresses.slice();
 
         addresses = addresses.filter(a => a.id !== id);
         this.props.handlerChangesData({addresses});
       })
       .catch(e => {
+        this.props.setLoading(false);
+
         if (e.error)
           this.props.handlerChangesData(e.error);
       })
@@ -238,6 +244,7 @@ class Address extends Component {
           cancelAddAddress={this.closeModalAddAddress}
           handlerChangesData={this.props.handlerChangesData}
           serachAddress={this.serachAddress}
+          setLoading={this.props.setLoading}
         />
       </section>
     );

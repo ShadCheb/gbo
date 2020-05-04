@@ -29,6 +29,8 @@ class Equipment extends Component {
   deleteEquipment = (equipment) => {
     let id = equipment.id;
 
+    this.props.setLoading(true);
+
     fetch('/admin/equipment/' + id, {
       method: 'delete',
       headers: {
@@ -39,9 +41,13 @@ class Equipment extends Component {
         let equipment = this.props.data.equipment.slice();
 
         equipment = equipment.filter(a => a.id !== id);
+
         this.props.handlerChangesData({equipment});
+        this.props.setLoading(false);
       })
       .catch(e => {
+        this.props.setLoading(false);
+
         if (e.error)
           this.props.handlerChangesData(e.error);
       })
@@ -141,6 +147,7 @@ class Equipment extends Component {
           cancelAddEquipment={this.closeModalAddEquipment}
           handlerChangesData={this.props.handlerChangesData}
           changeValue={this.changeValue}
+          setLoading={this.props.setLoading}
         />
       </section>
     );

@@ -9,7 +9,7 @@ const { Dragger } = Upload;
 
 function ModalAddEmployee({
   csrf, data, handlerChangesData, cancelAddEmployee, 
-  changeValue, visibleAddEmployee
+  changeValue, visibleAddEmployee, setLoading
 }) {
 
   const uploadAvatar = async (file) => {
@@ -47,6 +47,8 @@ function ModalAddEmployee({
   const onOk = async () => {
     let avatar = data.fileList && data.fileList[0].name;
 
+    setLoading(true);
+
     // сначала загружаем картинку, если она есть
     if (data.file) {
       avatar = await uploadAvatar(data.file);
@@ -73,10 +75,14 @@ function ModalAddEmployee({
     })
       .then(res => res.json())
       .then(data => {
+        setLoading(false);
+
         if (data.result)
           handlerChangesData({employee: data.result});
       })
       .catch(e => {
+        setLoading(false);
+        
         if (e.error)
           handlerChangesData(e.error);
       });

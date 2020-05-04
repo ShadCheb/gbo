@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Form, Input, Button } from 'antd';
 
-function Social({csrf, data, handlerChangesData}) {
+function Social({csrf, data, handlerChangesData, setLoading}) {
   const formItemLayout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 14 }
@@ -11,6 +11,8 @@ function Social({csrf, data, handlerChangesData}) {
   const onFinish = values => {
     values['id'] = data.id;
     values['socialId'] = data.socialId;
+
+    setLoading(true);
 
     fetch('/admin/social', {
       method: 'post',
@@ -22,10 +24,14 @@ function Social({csrf, data, handlerChangesData}) {
     })
       .then(res => res.json())
       .then(data => {
+        setLoading(false);
+
         if (data.result)
           handlerChangesData({social: data.result});
       })
       .catch(e => {
+        setLoading(false);
+        
         if (e.error)
           handlerChangesData(e.error);
       })

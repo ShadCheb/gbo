@@ -32,6 +32,8 @@ class Time extends Component {
       return;
     }
 
+    this.props.setLoading(true);
+
     let values = {
       id: this.props.data.id,
       timeId: this.props.data.timeId,
@@ -49,10 +51,14 @@ class Time extends Component {
     })
       .then(res => res.json())
       .then(data => {
+        this.props.setLoading(false);
+
         if (data.result)
           this.props.handlerChangesData({time: data.result});
       })
       .catch(e => {
+        this.props.setLoading(false);
+        
         if (e.error)
           this.props.handlerChangesData(e.error);
       })

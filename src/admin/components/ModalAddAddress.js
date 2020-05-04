@@ -8,7 +8,7 @@ import { SearchOutlined } from '@ant-design/icons';
 function ModalAddAddress({
   map, placemark,  
   cancelAddAddress, csrf, data, handlerChangesData,
-  changeValue, visibleAddAddress, serachAddress
+  changeValue, visibleAddAddress, serachAddress, setLoading
 }) {
 
   const cancelAddress = () => {
@@ -17,6 +17,8 @@ function ModalAddAddress({
   }
 
   const onOk = async() => {
+    setLoading(true);
+
     fetch('/admin/address', {
       method: 'post',
       headers: {
@@ -32,10 +34,14 @@ function ModalAddAddress({
     })
       .then(res => res.json())
       .then(({result}) => {
+        setLoading(false);
+
         if (result)
           handlerChangesData({addresses: result});
       })
       .catch(e => {
+        setLoading(false);
+        
         if (e.error)
           handlerChangesData(e.error);
       });

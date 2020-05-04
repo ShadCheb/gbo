@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Input, Button } from 'antd';
 
 
-function General({csrf, data, handlerChangesData}) {
+function General({csrf, data, handlerChangesData, setLoading}) {
   const formItemLayout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 14 }
@@ -10,6 +10,8 @@ function General({csrf, data, handlerChangesData}) {
 
   const onFinish = values => {
     values['id'] = data.id;
+
+    setLoading(true);
 
     fetch('/admin/general', {
       method: 'post',
@@ -21,10 +23,14 @@ function General({csrf, data, handlerChangesData}) {
     })
       .then(res => res.json())
       .then(data => {
+        setLoading(false);
+
         if (data.result)
           handlerChangesData(data.result);
       })
       .catch(e => {
+        setLoading(false);
+        
         if (e.error)
           handlerChangesData(e.error);
       })

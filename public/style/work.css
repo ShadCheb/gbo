@@ -1,5 +1,5 @@
 .job {
-  padding-top: 70px;
+  padding-top: 20px;
   padding-bottom: 70px;
 }
 .job__bcg-1 {
@@ -242,7 +242,7 @@
   flex-wrap: wrap;
   border-radius: 4px;
 }
-.wi-description__gallery__img {
+.wi-description__gallery .react_lightgallery_item {
   display: flex;
   margin-left: 4px;
   margin-right: 4px;
@@ -256,7 +256,7 @@
   box-shadow: 0 0 10px 0 rgba(28,28,28,0);
   overflow: hidden;
 }
-.wi-description__gallery__img:hover {
+.wi-description__gallery .react_lightgallery_item:hover {
   transform: translateY(-4px) scale(1.05);
   box-shadow: 0 5px 10px 0 rgba(28,28,28,.1);
 }
@@ -312,7 +312,7 @@
   .wi-description__gallery {
     margin-top: 20px;
   }
-  .wi-description__gallery__img {
+  .wi-description__gallery .react_lightgallery_item {
     width: calc(33.33% - 8px);
   }
 }
@@ -339,7 +339,7 @@
     padding: 7px 10px;
     font-size: 18px;
   }
-  .wi-description__gallery__img {
+  .wi-description__gallery .react_lightgallery_item {
     width: calc(50% - 8px);
   }
 }
@@ -348,8 +348,8 @@
 .wi-description__description {
   padding-top: 50px;
   padding-bottom: 50px;
-  color: #00c2ff;
-  max-width: 550px;
+  color: #002632;
+  max-width: 770px;
 }
 .wi-description__description h3 {
   margin-bottom: 14px;
@@ -364,6 +364,7 @@
   line-height: 1.4em;
 }
 .wi-description__description ul {
+  margin-bottom: 10px;
   list-style: none;
 }
 .wi-description__description li {
@@ -377,10 +378,10 @@
   left: 6px;
   width: 12px;
   height: 1px;
-  background-color: #00c2ff;
+  background-color: #002632;
 }
 .wi-description__description b {
-  color: #002632;
+  color: #00c2ff;
   font-weight: 500;
 }
 

@@ -1692,7 +1692,7 @@
 .install__img img {
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 100%;
 }
 .install__form {
   margin-bottom: 50px;
@@ -1859,7 +1859,7 @@
     width: 150px;
   }
   .install__img img {
-    margin-left: -120px;
+    margin-left: -90px;
     width: 260px;
   }
   .install__caption {
@@ -1894,8 +1894,8 @@
     width: 70px;
   }
   .install__img img {
-    margin-left: -150px;
-    width: 230px;
+    margin-left: -80px;
+    width: 180px;
   }
   .install__form {
     width: calc(100% - 70px);
@@ -2104,6 +2104,10 @@
   }
   .gibdd__caption__container {
     width: 100%;
+  }
+  .gibdd__bcg {
+    left: -30px;
+    bottom: -130px;
   }
 }
 @media (max-width: 576px) {

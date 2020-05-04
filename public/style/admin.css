@@ -362,4 +362,13 @@ p {
   padding-left: 4px;
 }
 
-
+.ant-spin-nested-loading > div > .ant-spin {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  max-height: none;
+  background-color: rgba(255, 255, 255,.2);
+  z-index: 1001;
+}

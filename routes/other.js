@@ -83,23 +83,37 @@ router.get('/work', detaGeneral, async (req, res) => {
 router.get('/work/:id', detaGeneral, async (req, res) => {
   let {cityList, data} = res.locals.dataGeneral;
   let idWork = req.params.id;  
-  let dataPage = await Work.findOne(
-    {
-      where: {id: idWork}
+  let dataPage = null;
+  
+  try {
+    dataPage = await Work.findOne(
+      {
+        where: {id: idWork}
+      }
+    )
+      .then(result => {
+        return (result) 
+          ? result.get({plain: true})
+          : null;
+      });
+    } catch (e) {      
+      res.status(404).render('404'), {
+        title: 'Страница не найдена'
+      }
+
+      return;
     }
-  )
-    .then(result => {
-      return result.get({plain:true})
-    });
 
   if (!dataPage || !dataPage.id) {
     res.status(404).render('404'), {
       title: 'Страница не найдена'
     }
+
+    return;
   }
 
-  dataPage['nameWork'] = dataPage['name'];
-  dataPage['name'] = data['name'];
+  dataPage['nameWork'] = dataPage['name'] || '';
+  dataPage['name'] = data['name'] || '';
   dataPage['established'] = dataPage['established'] && dataPage['established'].split(',') || [];
   dataPage['additionally'] = dataPage['additionally'] && dataPage['additionally'].split(',') || [];
   dataPage['gallery'] = dataPage['gallery'] && dataPage['gallery'].split(',') || [];

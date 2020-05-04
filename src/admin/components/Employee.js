@@ -22,6 +22,8 @@ class Employee extends Component {
   deleteEmployee = (employee) => {
     let id = employee.id;
 
+    this.props.setLoading(true);
+
     fetch('/admin/employee/' + id, {
       method: 'delete',
       headers: {
@@ -29,12 +31,16 @@ class Employee extends Component {
       }
     })
       .then(() => {
+        this.props.setLoading(false);
+
         let employee = this.props.data.employee.slice();
 
         employee = employee.filter(a => a.id !== id);
         this.props.handlerChangesData({employee});
       })
       .catch(e => {
+        this.props.setLoading(false);
+        
         if (e.error)
           this.props.handlerChangesData(e.error);
       })
@@ -139,8 +145,8 @@ class Employee extends Component {
           cancelAddEmployee={this.closeModalAddEmployee}
           handlerChangesData={this.props.handlerChangesData}
           changeValue={this.changeValue}
+          setLoading={this.props.setLoading}
         />
-        {/* changeEmployee={this.changeEmployee} */}
       </section>
     );
   }

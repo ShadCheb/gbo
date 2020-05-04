@@ -18,7 +18,6 @@ class ModalAddEquipment extends Component {
 
   componentDidMount = () => {
     document.execCommand('defaultParagraphSeparator', false, 'p'); // Установка по умолчанию
-    // this.setEditParagraph(); // Установка по умолчанию
   }  
 
   onOk = () => {
@@ -28,6 +27,8 @@ class ModalAddEquipment extends Component {
       ? this.textDescriptionHTML.current.textContent
       : this.textDescription.current.innerHTML;
     let cylinder = data.cylinder.join(',');
+
+    this.props.setLoading(true);
 
     if (data.id) {
       sendForm.append('id', data.id);
@@ -46,6 +47,8 @@ class ModalAddEquipment extends Component {
     })
       .then(res => res.json())
       .then(data => {
+        this.props.setLoading(false);
+
         if (data.result) {
           data.result = data.result.map(item => {
             item.cylinder = item.cylinder.split(','); // Строку в массив
@@ -57,6 +60,8 @@ class ModalAddEquipment extends Component {
         }
       })
       .catch(e => {
+        this.props.setLoading(false);
+        
         if (e.error)
           this.props.handlerChangesData(e.error);
       });
