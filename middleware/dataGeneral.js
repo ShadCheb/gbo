@@ -32,7 +32,7 @@ module.exports = async function(req, res, next) {
       city = cityList[0].brief;
 
       res.cookie('city', city, {
-        maxAge: 3600 * 24 * 30
+        maxAge: 3600 * 365 * 30
       });
       req.session.city = city;
     }
@@ -83,7 +83,7 @@ module.exports = async function(req, res, next) {
       req.session.dataGeneral = res.locals.dataGeneral;
       req.session.city = city;
       res.cookie('city', city, {
-        maxAge: 3600 * 24 * 30
+        maxAge: 3600 * 365 * 30
       });
     } else {
       res.locals.dataGeneral = req.session.dataGeneral;

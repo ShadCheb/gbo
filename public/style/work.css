@@ -59,7 +59,7 @@
 }
 .job__item__body {
   padding: 14px 10px 14px 10px;
-  height: 40px;
+  height: 62px;
   color: #002632;
 }
 .job__item:hover .job__img__label {
@@ -116,6 +116,9 @@
   .job {
     padding-top: 40px;
     padding-bottom: 50px;
+  }
+  .job__item__body {
+    height: auto;
   }
   .job__item__body > h2 {
     font-size: 18px;
@@ -260,6 +263,15 @@
   transform: translateY(-4px) scale(1.05);
   box-shadow: 0 5px 10px 0 rgba(28,28,28,.1);
 }
+.wi-description__video {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 340px;
+  width: 100%;
+  max-width: 540px;
+}
 
 @media (max-width: 992px) {
   .wi-description__caption {
@@ -333,6 +345,10 @@
   .wi-description__img > h2 {
     display: none;
   }
+  .wi-description__video {
+    max-width: none;
+    height: 300px;
+  }
 }
 @media (max-width: 418px) {
   .wi__header__text {
@@ -341,6 +357,9 @@
   }
   .wi-description__gallery .react_lightgallery_item {
     width: calc(50% - 8px);
+  }
+  .wi-description__video {
+    height: 200px;
   }
 }
 
