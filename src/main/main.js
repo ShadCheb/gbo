@@ -219,7 +219,6 @@ class Main extends Component {
 
       dataSend[inputList[i].name] = value;
     }
-    dataSend['city'] = localStorage.getItem('city');
     dataSend['page'] = 'Главная';
 
     // Прошла ли валидация

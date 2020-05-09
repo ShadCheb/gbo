@@ -69,8 +69,9 @@ function ModalRecord(props) {
     let inputList = formSend.querySelectorAll('input');
     let dataSend = {};
     let check = true;
+    let btn = e.target;
 
-    target.disabled = true;
+    btn.disabled = true;
 
     for (let i = 0; i < inputList.length; i++) {
       let valid = inputList[i].dataset && inputList[i].dataset.valid;
@@ -85,13 +86,12 @@ function ModalRecord(props) {
 
       dataSend[inputList[i].name] = value;
     }
-    dataSend['city'] = localStorage.getItem('city');
     dataSend['btn'] = props.data.title;
     dataSend['page'] = props.data.page;
 
     // Прошла ли валидация
     if (!check) {
-      target.disabled = false;
+      btn.disabled = false;
 
       return;
     }
@@ -114,18 +114,18 @@ function ModalRecord(props) {
     })
       .then(res => res.json())
       .then(data => {
-        target.disabled = false;
+        btn.disabled = false;
 
         if (data.success) {
           afterClose();
           success(data.success);
         }
       })
-      .catch(e => {
-        target.disabled = false;
+      .catch(err => {
+        btn.disabled = false;
 
-        if (e.error)
-          error(e.error);
+        if (err.error)
+          error(err.error);
       })
   };  
 

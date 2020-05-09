@@ -8,6 +8,7 @@ const Equipment = require('../models/equipment');
 const Review = require('../models/review');
 const ReviewVk = require('../models/review_vk');
 const CityList = require('../models/cityList');
+const City = require('../models/city');
 
 const detaGeneral = require('../middleware/dataGeneral');
 
@@ -72,18 +73,8 @@ router.post('/mail', async (req, res) => {
   const message = req.body.message;
   const type = req.body.type;
   const description = req.body.description;
-  const city = req.body.city;
-  const cityList = (city)
-    ? await CityList.findAll({brief: city})
-    : await CityList.findOne();
-
-  if (!cityList) {
-    res.status(500).json({error: 'Произошла ошибка. Попробуйте позже'}); 
-
-    return;
-  }
-
-  let email = cityList.email;
+  const city = req.session.dataGeneral.data.name;
+  let {email} = req.session.dataGeneral.data.city;
 
   if (!email)
     email = 'gazoved21@mail.ru';
@@ -93,10 +84,12 @@ router.post('/mail', async (req, res) => {
     <hr />
   `;
 
+  if (city)
+    output += `<p><b>Город:</b> ${city}</p>`
   if (page)
-    output += `<p><b>Заявка отправлена со страницы:</b> ${page}</p>`
+    output += `<p><b>Заявка отправлена со страницы:</b> ${page}</p>`;
   if (btn)
-    output += `<p><b>При нажатии кнопки:</b> ${btn}</p>`
+    output += `<p><b>При нажатии кнопки:</b> ${btn}</p>`;
   if (message)
     output += `<p><b>Сообщение от посетителя сайта:</b> ${message}</p>`;
   if (type)
@@ -104,9 +97,9 @@ router.post('/mail', async (req, res) => {
   if (description)
     output += `<p><b>Описание заявки:</b> ${description}</p>`;
   if (name)
-    output += `<br /><p><b>Имя отправителя:</b> ${name}</p>`
+    output += `<br /><p><b>Имя отправителя:</b> ${name}</p>`;
   if (phone)
-    output += `<p><b>Телефон отправителя:</b> ${phone}</p>`
+    output += `<p><b>Телефон отправителя:</b> ${phone}</p>`; 
 
 
   let transporter = nodemailer.createTransport({
