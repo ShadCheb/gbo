@@ -12,6 +12,9 @@ import Equipment from './components/Equipment';
 import Review from './components/Review';
 import Work from './components/Work';
 
+import '../../public/style/antd.min.css';
+import '../../public/style/admin.css';
+
 import { 
   Spin,
   Button, 

@@ -7,6 +7,11 @@ import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
 import Map from '../main/components/Map';
 
+import '../../public/style/antd.css';
+import '../../public/style/map.css';
+import '../../public/style/style.css';
+import '../../public/style/contact.css';
+
 const container = document.getElementById('page-other');
 const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
@@ -185,6 +190,14 @@ class Contact extends Component {
         <Footer 
           activeCity={infoCity}
         />
+
+        <button className="btn-menu"
+          onClick={this.toggleMenu}
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
       </div>
     );
   }

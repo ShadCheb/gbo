@@ -2,59 +2,41 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="keywords" content="Газовед Gazoved ГБО газобалонное оборудование установка ГБО по низким ценам" />
 	  <meta name="description" content="Установка газового оборудования на авто по низким ценам. 
       Начни экономить на топливе уже сегодня до 50%" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
 
-    <link rel="preload" href="/style/antd.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-
     {{#if isHome}}
-      <link rel="preload" href="/style/lightgallery.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <link rel="preload" href="/style/map.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <link rel="preload" href="/style/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isServices}}
-      <link rel="preload" href="/style/service.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/service.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isDizel}}
-      <link rel="preload" href="/style/service.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/dizel.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isMetan}}
-      <link rel="preload" href="/style/service.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/metan.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isRegister}}
-      <link rel="preload" href="/style/service.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/register.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isVariator}}
-      <link rel="preload" href="/style/service.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/variator.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isStock}}
-      <link rel="preload" href="/style/stock.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/stock.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isContact}}
-      <link rel="preload" href="/style/map.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <link rel="preload" href="/style/contact.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/contact.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isWork}}
-      <link rel="preload" href="/style/work.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/work.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{else if isWorkItem}}
-      <link rel="preload" href="/style/lightgallery.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <link rel="preload" href="/style/work.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <link rel="preload" href="/style/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="preload" href="/work-item.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     {{/if}}
     
 
     {{#if isAuth}}
-      <link rel="stylesheet" href="/style/antd.min.css" />
-      <link rel="stylesheet" href="/style/auth.css" />
+      <link rel="stylesheet" href="/auth.css" />
     {{/if}}
     {{#if isAdmin}}
-      <link rel="stylesheet" href="/style/antd.min.css" />
-      <link rel="stylesheet" href="/style/admin.css" />
+      <link rel="stylesheet" href="/admin.css" />
     {{/if}}
 
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">

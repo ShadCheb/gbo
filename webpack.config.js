@@ -1,10 +1,18 @@
-
+const TerserJSPlugin = require('terser-webpack-plugin');
 const path = require('path');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserJSPlugin({}),
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  },
   entry: {
     main: './src/main/main.js',
     auth: './src/auth/auth.js',
@@ -26,12 +34,24 @@ module.exports = {
   module: {
     rules: [
       {
-          test: /\.js$/,
-          loader: 'babel-loader',
+        test: /\.js$/,
+        loader: 'babel-loader',
       },
       {
-          test: /\.css$/,
-          use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader']
+        test: /\.css$/,
+        use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|gif|webp)$/,
+        use: [
+          'file-loader',
+        ],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          'file-loader',
+        ],
       },
     ]
   },
@@ -45,6 +65,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
+      chunkFilename: '[id].css'
     }),
     new WebpackMd5Hash()
   ]

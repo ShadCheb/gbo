@@ -6,6 +6,9 @@ import Header from '../main/components/Header';
 import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
 
+import '../../public/style/style.css';
+import '../../public/style/service.css';
+
 const container = document.getElementById('page-service');
 const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
@@ -112,6 +115,14 @@ class Services extends Component {
         <Footer 
           activeCity={infoCity}
         />
+
+        <button className="btn-menu"
+          onClick={this.toggleMenu}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     );
   }

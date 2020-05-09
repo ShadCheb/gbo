@@ -9,6 +9,10 @@ import ModalRecord from '../main/components/ModalRecord';
 
 import lozad from 'lozad';
 
+import '../../public/style/antd.css';
+import '../../public/style/style.css';
+import '../../public/style/service.css';
+
 const container = document.getElementById('page-service-item');
 const csrf = container.dataset.csrf;
 const infoCity = JSON.parse(container.dataset.info);
@@ -229,9 +233,9 @@ class Metan extends Component {
         <button className="btn-menu"
           onClick={this.toggleMenu}
         >
-            <span></span>
-            <span></span>
-            <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
     );

@@ -13,6 +13,13 @@ import Map from './components/Map';
 import ModalRecord from './components/ModalRecord';
 import Footer from './components/Footer';
 
+import '../../public/style/antd.css';
+import '../../public/style/lightgallery.min.css';
+import '../../public/style/map.css';
+import '../../public/style/style.css';
+import '../../public/style/main.css';
+
+
 import { message } from 'antd';
 import 'antd/es/message/style/css'; 
 import lozad from 'lozad';

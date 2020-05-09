@@ -9,6 +9,10 @@ import ModalRecord from '../main/components/ModalRecord';
 
 import { LightgalleryProvider, LightgalleryItem } from 'react-lightgallery';
 
+import '../../public/style/lightgallery.min.css';
+import '../../public/style/antd.css';
+import '../../public/style/style.css';
+import '../../public/style/work.css';
 
 const container = document.getElementById('page-other');
 const csrf = container.dataset.csrf;
@@ -212,9 +216,9 @@ class WorkItem extends Component {
         <button className="btn-menu"
           onClick={this.toggleMenu}
         >
-            <span></span>
-            <span></span>
-            <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
     );

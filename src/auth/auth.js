@@ -12,6 +12,9 @@ import {
   LockOutlined 
 } from '@ant-design/icons';
 
+import '../../public/style/antd.min.css';
+import '../../public/style/auth.css';
+
 
 const error = (msg) => {
   message.error(msg);
