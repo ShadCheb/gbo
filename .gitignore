@@ -1,6 +1,5 @@
 node_modules/
 images/
-keys/
 src/
 .babelrc
 .webpack.config.js
