@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: 
+Disallow: /auth?key=112
+Sitemap: https://gazoved.com/sitemap.xml
+Host: https://gazoved.com
