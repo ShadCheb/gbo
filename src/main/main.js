@@ -250,7 +250,7 @@ class Main extends Component {
 
         if (data.success) {
           this.success(data.success);
-          
+
           window.ym && ym(62691718,'reachGoal','ZAYVKA');
         }
       })
@@ -292,8 +292,6 @@ class Main extends Component {
 
     if (!document.querySelector('#map') || !infoCity.addresses)
       return;
-
-    console.log('infoCity.addresses', infoCity.addresses);
 
     let points = infoCity.addresses.map(address => (
       {

@@ -24,8 +24,10 @@ class Employee extends Component {
   }
 
   componentDidMount = () => {
-    this.resizeWindow();
     window.addEventListener('resize', this.resizeWindow);
+    window.onload = () => {
+      this.resizeWindow();
+    }
   } 
   
   resizeWindow = () => {
