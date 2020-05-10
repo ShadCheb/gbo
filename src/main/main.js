@@ -354,7 +354,7 @@ class Main extends Component {
     if (this.state.data)
       return (
         <div>
-            {/* { this.state.loader && <Loader /> }  */}
+            { this.state.loader && <Loader /> } 
 
             <main className="main" id="main">
               <div className="main__bcg-1" />

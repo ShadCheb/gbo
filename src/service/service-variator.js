@@ -92,7 +92,7 @@ class Variator extends Component {
 
     return (
       <div>
-        {/* { this.state.loader && <Loader /> }  */}
+        { this.state.loader && <Loader /> } 
 
         <main className="main-header">
           <div className="container">
