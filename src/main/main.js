@@ -250,6 +250,8 @@ class Main extends Component {
 
         if (data.success) {
           this.success(data.success);
+          
+          window.ym && ym(62691718,'reachGoal','ZAYVKA');
         }
       })
       .catch(e => {

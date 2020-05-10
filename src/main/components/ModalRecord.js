@@ -119,6 +119,8 @@ function ModalRecord(props) {
         if (data.success) {
           afterClose();
           success(data.success);
+          
+          window.ym && ym(62691718,'reachGoal','ZAYVKA');
         }
       })
       .catch(err => {

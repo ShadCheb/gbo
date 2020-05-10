@@ -42,7 +42,7 @@ router.get('/', detaGeneral,  async (req, res) => {
     data = Object.assign(data, dataPage);
 
     res.render('main', {
-      title: 'Главная страница | Gazoved ' + data.name,
+      title: 'GAZOVED | Установка ГБО за один день в г. ' + data.name,
       isHome: true,
       cityList: JSON.stringify(cityList),
       data: JSON.stringify(data)
