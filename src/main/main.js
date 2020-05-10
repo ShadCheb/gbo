@@ -198,6 +198,11 @@ class Main extends Component {
   send = (e) => {
     e.preventDefault();
 
+    if (window.ym) {
+      console.log('YM');
+      ym(62691718,'reachGoal','ZAYVKA');
+    }
+
     let target = e.target;
     let formSend = target.closest('form');
     let inputList = formSend.querySelectorAll('input');
@@ -250,8 +255,6 @@ class Main extends Component {
 
         if (data.success) {
           this.success(data.success);
-
-          window.ym && ym(62691718,'reachGoal','ZAYVKA');
         }
       })
       .catch(e => {

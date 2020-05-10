@@ -64,6 +64,11 @@ function ModalRecord(props) {
   const send = (e) => {
     e.preventDefault();
 
+    if (window.ym) {
+      console.log('YM');
+      ym(62691718,'reachGoal','ZAYVKA');
+    }
+
     let target = props.data.target;
     let formSend = formRecord.current;
     let inputList = formSend.querySelectorAll('input');
@@ -119,8 +124,6 @@ function ModalRecord(props) {
         if (data.success) {
           afterClose();
           success(data.success);
-          
-          window.ym && ym(62691718,'reachGoal','ZAYVKA');
         }
       })
       .catch(err => {

@@ -3,3 +3,4 @@ images/
 src/
 .babelrc
 .webpack.config.js
+public/robots.txt
