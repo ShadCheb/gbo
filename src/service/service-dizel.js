@@ -93,7 +93,7 @@ class Dizel extends Component {
 
     return (
       <div>
-        { this.state.loader && <Loader /> } 
+        {/* { this.state.loader && <Loader /> }  */}
 
         <main className="main-header">
           <div className="container">
@@ -351,7 +351,7 @@ class Dizel extends Component {
               <h2 className="caption__section benefit__caption">Последовательность <strong>переоборудования</strong></h2>
             </div>
             <div className="sd-sequence__body">
-              {/* <div className="sd-sequence__col-1"> */}
+              
                 <article className="registration__block">
                   <div className="registration__block__num">1</div>
                   <p>Аудит автопарка, определение возможности переоборудования</p>
@@ -368,8 +368,6 @@ class Dizel extends Component {
                   <div className="registration__block__num">4</div>
                   <p>Разработка и сборка прототипа</p>
                 </article>
-              {/* </div> */}
-              {/* <div className="sd-sequence__col-2"> */}
                 <article className="registration__block">
                   <div className="registration__block__num">5</div>
                   <p>Испытания, оптимизация, вычисление фактической топливной эффективности прототипа</p>
@@ -382,7 +380,6 @@ class Dizel extends Component {
                   <div className="registration__block__num">7</div>
                   <p>Поставка и монтаж комплектов ГБО</p>
                 </article>
-              {/* </div> */}
 
               <div className="sd-sequence__img">
                 <picture className="lozad" data-iesrc="/img/dizel/fura__bcg.jpg" 
