@@ -5,6 +5,30 @@ import 'antd/es/Select/style/css';
 
 const { Option } = Select;
 
+function YaSprav({cityBrief}){
+  switch (cityBrief) {
+    case 'cheboksary':
+      return (
+        <article className="ya-sprav">
+          <iframe src="https://yandex.ru/sprav/widget/rating-badge/183460183052" width="150" height="50" frameBorder="0" />
+        </article>
+      );
+    case 'yoshkar-ola':
+      return (
+        <article className="ya-sprav">
+          <iframe src="https://yandex.ru/sprav/widget/rating-badge/103103368963" width="150" height="50" frameBorder="0" />
+        </article>
+      );
+    case 'Nizhnii-Novgorod':
+      return (
+        <article className="ya-sprav">
+          <iframe src="https://yandex.ru/sprav/widget/rating-badge/4617431402" width="150" height="50" frameBorder="0" />
+        </article>);
+    default: 
+      return ('');
+  }
+}
+
 function Header({activeCity, cityList}) {
   const selectCity = value => {
     let link = location.pathname;
@@ -14,6 +38,8 @@ function Header({activeCity, cityList}) {
 
   return (
     <header className="header">
+      <YaSprav cityBrief={activeCity.brief}/>
+
       <div className="header__left">
         <div className="header__logo">
           <a href="/" className="header__logo__link">

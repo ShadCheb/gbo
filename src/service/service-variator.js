@@ -65,7 +65,8 @@ class Variator extends Component {
       target,
       visible: true,
       title,
-      page: 'Вариатор'
+      page: 'Вариатор',
+      pageBrief: 'variator'
     };
 
     this.setState({modalRecord});

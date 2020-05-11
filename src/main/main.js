@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM, { unstable_renderSubtreeIntoContainer } from 'react-dom';
 
 import Loader from './components/Loader';
 import Header from './components/Header';
@@ -95,6 +95,7 @@ class Main extends Component {
 
   componentDidMount = () => {
     window.addEventListener('scroll', this.eventScrollToMap);
+    window.addEventListener('scroll', this.eventScrollToEmployee);
 
     let benefit = this.state.benefit;
 
@@ -129,7 +130,8 @@ class Main extends Component {
       target,
       visible: true,
       title,
-      page: 'Главная'
+      page: 'Главная',
+      pageBrief: 'main'
     };
 
     this.setState({modalRecord});
@@ -199,7 +201,6 @@ class Main extends Component {
     e.preventDefault();
 
     if (window.ym) {
-      console.log('YM');
       ym(62691718,'reachGoal','ZAYVKA');
     }
 
@@ -275,6 +276,9 @@ class Main extends Component {
       this.setState({elemMap});
       map = elemMap;
     }
+
+    if (!map)
+      return;
     
     if (!this.state.loadMap) {
       let aPos = map.scrollTop + map.getBoundingClientRect().top;
@@ -283,6 +287,31 @@ class Main extends Component {
         window.ymaps && ymaps.ready(this.initMap);
         this.setState({loadMap: true});
         window.removeEventListener('scroll', this.eventScrollToMap);
+      }
+    }
+  }
+
+  eventScrollToEmployee = () => {
+    let employee = this.state.elemEmployee;
+    const h1 = 600;
+    const h2 = -600;
+
+    if (!employee) {
+      let elemEmployee = document.querySelector('#employee');
+
+      this.setState({elemEmployee});
+      employee = elemEmployee;
+    }
+
+    if (!employee) 
+      return;
+    
+    if (!this.state.loadEmployee) {
+      let aPos = employee.scrollTop + employee.getBoundingClientRect().top;
+
+      if (aPos < h1 && aPos > h2) { 
+        this.setState({loadEmployee: true});
+        window.removeEventListener('scroll', this.eventScrollToEmployee);
       }
     }
   }
@@ -610,12 +639,14 @@ class Main extends Component {
             </section>
 
             {/* Сотрудники */}
-            {
-              (infoCity.employees && infoCity.employees.length) 
-                ? (<Employee
-                  employeeList={infoCity.employees}
-                />) : ('')
-            }
+            <div id="employee">
+              {
+                (infoCity.employees && infoCity.employees.length) 
+                  ? (this.state.loadEmployee && <Employee
+                    employeeList={infoCity.employees}
+                  />) : ('')
+              }
+            </div>
 
             {/* Вопросы */}
             <Question/>

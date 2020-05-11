@@ -63,7 +63,8 @@ class Register extends Component {
       target,
       visible: true,
       title,
-      page: 'Регистрация в ГИБДД'
+      page: 'Регистрация в ГИБДД',
+      pageBrief: 'register'
     };
 
     this.setState({modalRecord});

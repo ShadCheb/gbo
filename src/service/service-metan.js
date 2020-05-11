@@ -63,7 +63,8 @@ class Metan extends Component {
       target,
       visible: true,
       title,
-      page: 'Метан'
+      page: 'Метан',
+      pageBrief: 'metan'
     };
 
     this.setState({modalRecord});

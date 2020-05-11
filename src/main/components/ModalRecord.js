@@ -64,17 +64,33 @@ function ModalRecord(props) {
   const send = (e) => {
     e.preventDefault();
 
-    if (window.ym) {
-      console.log('YM');
-      ym(62691718,'reachGoal','ZAYVKA');
-    }
-
     let target = props.data.target;
     let formSend = formRecord.current;
     let inputList = formSend.querySelectorAll('input');
     let dataSend = {};
     let check = true;
     let btn = e.target;
+
+    if (window.ym) {
+      let pageBrief = props.data.pageBrief;
+
+      switch (pageBrief) {
+        case 'register':
+          ym(62691718,'reachGoal','REG')
+          break;
+        case 'variator':
+          ym(62691718,'reachGoal','VARIATOR')
+          break;
+        case 'metan':
+          ym(62691718,'reachGoal','METAN')
+          break;
+        case 'dizel':
+          ym(62691718,'reachGoal','GAZDIZEL')
+          break;
+        default:
+          ym(62691718,'reachGoal','ZAYVKA');
+      }      
+    }
 
     btn.disabled = true;
 

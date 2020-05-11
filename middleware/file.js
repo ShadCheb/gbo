@@ -3,9 +3,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    // cb(null, './images')
     cb(null, path.join(__dirname + '/../images'));
-    // cb(null, path.join(__dirname,".","images", file.originalname));
   },
   filename(req, file, cb) {
     let name = Math.floor(Math.random() * Math.floor(99999)) + '_' + file.originalname;

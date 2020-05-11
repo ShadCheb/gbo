@@ -65,7 +65,8 @@ class Dizel extends Component {
       target,
       visible: true,
       title,
-      page: 'Газодизель'
+      page: 'Газодизель',
+      pageBrief: 'dizel'
     };
 
     this.setState({modalRecord});
