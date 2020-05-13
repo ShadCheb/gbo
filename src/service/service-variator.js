@@ -336,7 +336,7 @@ class Variator extends Component {
         { (infoCity.phone)
           ? (
             <a href={'tel:' + infoCity.phone.link} 
-              className="btn__call btn--mobile" 
+              className="btn__call" 
               type="button"
             >
               <svg>

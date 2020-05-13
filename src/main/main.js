@@ -890,7 +890,7 @@ class Main extends Component {
             { (infoCity.phone)
             ? (
               <a href={'tel:' + infoCity.phone.link} 
-                className="btn__call btn__call--main btn--mobile" 
+                className="btn__call btn__call--main" 
                 type="button"
               >
                 <svg>
