@@ -198,6 +198,18 @@ class Contact extends Component {
             <span></span>
             <span></span>
         </button>
+
+        { (infoCity.phone)
+          ? (
+            <a href={'tel:' + infoCity.phone.link} 
+              className="btn__call btn--mobile" 
+              type="button"
+            >
+              <svg>
+                <use xlinkHref="/img/sprite-icon.svg#icon-phone"></use>
+              </svg>
+            </a>
+          ) : ('') }
       </div>
     );
   }

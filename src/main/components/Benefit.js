@@ -69,10 +69,6 @@ function Benefit(props) {
 
   calculation();
 
-  const openModal = (e) => {
-    props.openModal(e);
-  };
-
 
   return(
     <section className="benefit">
@@ -139,6 +135,13 @@ function Benefit(props) {
               <p className="benefit__result__value-2"><span>{benefit.result}</span> руб/год</p>
             </div>
           </div>
+        </div>
+        <div className="benefit__btn">
+          <button class="btn-1" 
+            data-type="Начать экономить" 
+            aria-label="Начать экономить"
+            onClick={props.openModal}
+          >Начать экономить</button>
         </div>
       </div>
     </section>

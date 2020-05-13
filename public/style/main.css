@@ -431,6 +431,10 @@
   font-size: 72px;
   font-weight: 600;
 }
+.benefit__btn {
+  margin-top: 50px;
+  text-align: center;
+}
 
 @media (max-width: 1140px) {
   .benefit__result__name-1 {
@@ -508,6 +512,9 @@
   }
   .benefit__caption {
     width: 220px;
+  }
+  .benefit__btn {
+    margin-top: 40px;
   }
 }
 

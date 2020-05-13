@@ -73,6 +73,7 @@ router.post('/mail', async (req, res) => {
   const message = req.body.message;
   const type = req.body.type;
   const description = req.body.description;
+  const brand = req.body.brand;
   const city = req.session.dataGeneral.data.name;
   let {email} = req.session.dataGeneral.data.city;
 
@@ -96,6 +97,9 @@ router.post('/mail', async (req, res) => {
     output += `<p><b>Тип заявки:</b> ${type}</p>`;
   if (description)
     output += `<p><b>Описание заявки:</b> ${description}</p>`;
+    
+  if (brand)
+    output += `<br /><p><b>Марка автомобиля:</b> ${brand}</p>`;
   if (name)
     output += `<br /><p><b>Имя отправителя:</b> ${name}</p>`;
   if (phone)

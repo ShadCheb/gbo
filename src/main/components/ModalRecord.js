@@ -160,7 +160,7 @@ function ModalRecord(props) {
       destroyOnClose={true}
     >
       <div>
-        <p className="modal__p">Заплните форму и наш сотрудник свяжется с вами:</p>
+        <p className="modal__p">Заполните форму и наш сотрудник свяжется с вами:</p>
         <form className="form modal__form" ref={formRecord}>
             <label className="form__input">
               <input type="text" name="name" required />

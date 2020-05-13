@@ -11,6 +11,7 @@ import Employee from './components/Employee';
 import Review from './components/Review';
 import Map from './components/Map';
 import ModalRecord from './components/ModalRecord';
+import ModalBrandAuto from './components/ModalBrandAuto';
 import Footer from './components/Footer';
 
 import '../../public/style/antd.css';
@@ -81,6 +82,10 @@ class Main extends Component {
       visible: false,
       title: 'Форма'
     },
+    openModalBrandAuto: {
+      visible: false,
+      title: 'Форма'
+    },
 
     showMenu: false, // открытие меню
 
@@ -143,6 +148,29 @@ class Main extends Component {
       title: 'Форма'
     };
     this.setState({modalRecord});
+  }
+
+  /*Модальное окно с маркой авто*/
+  openModalBrandAuto = (e) => {
+    let target = e.target;
+    let title = target.closest('button').textContent;
+    let openModalBrandAuto = {
+      target,
+      visible: true,
+      title,
+      page: 'Главная'
+    };
+
+    this.setState({openModalBrandAuto});
+  }
+
+  closeModalBrandAuto = () => {
+    console.log('close');
+    let openModalBrandAuto = {
+      visible: false,
+      title: 'Форма'
+    };
+    this.setState({openModalBrandAuto});
   }
 
   /*Отправка сообщений*/
@@ -453,7 +481,7 @@ class Main extends Component {
               data={this.state.benefit}
               csrf={this.state.csrf}
               changeData={this.changeDatabenefit}
-              openModal={this.openModalRecord.bind(this)}
+              openModal={this.openModalBrandAuto.bind(this)}
             />
 
             <section className="advantages">
@@ -842,6 +870,13 @@ class Main extends Component {
               csrf={csrf}
             />
 
+            <ModalBrandAuto 
+              data={this.state.openModalBrandAuto}
+              open={this.openModalBrandAuto.bind(this)}
+              close={this.closeModalBrandAuto.bind(this)}
+              csrf={csrf}
+            />
+
             <button className="btn-menu"
               onClick={this.toggleMenu}
             >
@@ -849,6 +884,20 @@ class Main extends Component {
                 <span></span>
                 <span></span>
             </button>
+
+            {infoCity.phone.link}
+
+            { (infoCity.phone)
+            ? (
+              <a href={'tel:' + infoCity.phone.link} 
+                className="btn__call btn__call--main btn--mobile" 
+                type="button"
+              >
+                <svg>
+                  <use xlinkHref="/img/sprite-icon.svg#icon-phone"></use>
+                </svg>
+              </a>
+            ) : ('') }
         </div>
       );
     else 
