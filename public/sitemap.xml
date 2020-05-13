@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>		
+		<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+	<loc>https://gazoved.com/?city=cheboksary</loc>
+	<lastmod>2020-04-01T18:10:45+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://gazoved.com/?city=Nizhnii-Novgorod</loc>
+	<lastmod>2020-04-01T18:10:45+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://gazoved.com/?city=yoshkar-ola</loc>
+	<lastmod>2020-04-01T18:10:45+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://gazoved.com/services</loc>
+	<lastmod>2020-04-01T18:10:45+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://gazoved.com/services/metan</loc>
+	<lastmod>2020-04-01T18:10:45+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://gazoved.com/services/registration</loc>
+	<lastmod>2020-04-01T18:10:45+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://gazoved.com/services/dizel</loc>
+	<lastmod>2020-04-01T18:10:45+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://gazoved.com/services/variator</loc>
+	<lastmod>2020-04-01T18:10:45+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+</urlset>
