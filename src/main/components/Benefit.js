@@ -137,7 +137,7 @@ function Benefit(props) {
           </div>
         </div>
         <div className="benefit__btn">
-          <button class="btn-1" 
+          <button className="btn-1" 
             data-type="Начать экономить" 
             aria-label="Начать экономить"
             onClick={props.openModal}

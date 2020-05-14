@@ -518,7 +518,8 @@ class Main extends Component {
                       ></div>
                       <div className="advantages__item__text">
                         <h2 className="caption__h2">Регистрация</h2>
-                        <p>Полный пакет документов в ГИБДД за 3 000 руб</p>
+                        <p>Полный пакет документов в ГИБДД за 
+                          {infoCity.brief == 'Nizhnii-Novgorod' ? ' 7 500 руб' : ' 3 000 руб'}</p>
                       </div>
                     </div>
                     <div className="advantages__item">

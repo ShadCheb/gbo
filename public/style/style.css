@@ -1971,3 +1971,46 @@ picture {
   }
 }
 
+.ant-modal-header {
+  padding: 16px 60px 16px 24px;
+}
+
+.pulse::before,
+.pulse::after {
+  content: '';
+  position: absolute;
+  border: 1px solid rgba(0,68,88,.7);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 50%;
+  animation: pulse 4.2s linear infinite;
+  opacity: 0;
+}
+.pulse:hover::after {
+  animation-delay: .5s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  30% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+}
+
