@@ -272,9 +272,6 @@ img {
   }
 }
 
-.main .container {
-  padding-bottom: 30px;
-}
 .header {
   position: relative;
   display: flex;
@@ -1892,12 +1889,6 @@ picture {
 .btn__calculate-cost:active {
   outline: none;
 }
-.btn__calculate-cost svg,
-.btn__call svg {
-  fill: #fff;
-  width: 26px;
-  height: 26px;
-}
 .btn__call {
   display: none;
   align-items: center;
@@ -1935,6 +1926,13 @@ picture {
 }
 .btn__call--main {
   bottom: 100px;
+}
+.btn__calculate-cost svg,
+.btn__call svg {
+  fill: #fff;
+  width: 26px;
+  min-width: 26px;
+  height: 26px;
 }
 
 .btn--mobile {

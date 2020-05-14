@@ -1,3 +1,9 @@
+.main .container {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+  min-height: calc(100vh - 30px);
+}
 .main__body {
   position: relative;
   display: flex;
@@ -146,6 +152,8 @@
   padding-right: 0;
 }
 .main__img {
+  display: flex;
+  align-items: center;
   width: 40%;
 }
 .main__img img {
