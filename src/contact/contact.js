@@ -16,6 +16,77 @@ const container = document.getElementById('page-other');
 const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
 
+
+function Contacts({brief}) {
+  return brief == 'Nizhnii-Novgorod'
+    ? (
+      <div>
+        <h2 className="contact__caption">Реквизиты</h2>
+        <div className="contact__row">
+          <p className="contact__row__caption">Наименование</p>
+          <p className="contact__row__value">ИП Чуразов Сергей Александрович</p>
+        </div>
+        <div className="contact__row">
+          <p className="contact__row__caption">ИНН</p>
+          <p className="contact__row__value">525012256281</p>
+        </div>
+        <div className="contact__row">
+          <p className="contact__row__caption">Счёт</p>
+          <p className="contact__row__value">40802810229380001149</p>
+        </div>
+        <div className="contact__row">
+          <p className="contact__row__caption">Банк получателя</p>
+          <p className="contact__row__value">Филиал “НИЖЕГОРОДСКИЙ” АО “АЛЬФА-БАНК”</p>
+        </div>
+        <div className="contact__row">
+          <p className="contact__row__caption">Город</p>
+          <p className="contact__row__value">Нижний Новгород</p>
+        </div>
+        <div className="contact__row">
+          <p className="contact__row__caption">БИК</p>
+          <p className="contact__row__value">042202824</p>
+        </div>
+        <div className="contact__row">
+          <p className="contact__row__caption">Корр. счёт</p>
+          <p className="contact__row__value">30101810200000000824</p>
+        </div>
+      </div>
+    )
+    : (
+      <div>
+        <h2 className="contact__caption">Реквизиты</h2>
+        <div className="contact__row">
+          <p className="contact__row__caption">Наименование</p>
+          <p className="contact__row__value">ИП Александров Константин Владиславович</p>
+        </div>
+        <div className="contact__row">
+          <p className="contact__row__caption">ИНН</p>
+          <p className="contact__row__value">212401158287</p>
+        </div>
+        <div className="contact__row">
+          <p className="contact__row__caption">Счёт</p>
+          <p className="contact__row__value">40802810602500021543</p>
+        </div>
+        <div className="contact__row">
+          <p className="contact__row__caption">Банк получателя</p>
+          <p className="contact__row__value">Точка ПАО Банка "Открытие"</p>
+        </div>
+        <div className="contact__row">
+          <p className="contact__row__caption">Город</p>
+          <p className="contact__row__value">Москва</p>
+        </div>
+        <div className="contact__row">
+          <p className="contact__row__caption">БИК</p>
+          <p className="contact__row__value">044525999</p>
+        </div>
+        <div className="contact__row">
+          <p className="contact__row__caption">Корр. счёт</p>
+          <p className="contact__row__value">30101810845250000999</p>
+        </div>
+      </div>
+    )
+}
+
 class Contact extends Component {
   state = {
     cityList,
@@ -143,37 +214,7 @@ class Contact extends Component {
             </div>
             <div className="contact__body">
               <div className="contact__body__text">
-                <div>
-                  <h2 className="contact__caption">Реквизиты</h2>
-                  <div className="contact__row">
-                    <p className="contact__row__caption">Наименование</p>
-                    <p className="contact__row__value">ИП Александров Константин Владиславович</p>
-                  </div>
-                  <div className="contact__row">
-                    <p className="contact__row__caption">ИНН</p>
-                    <p className="contact__row__value">212401158287</p>
-                  </div>
-                  <div className="contact__row">
-                    <p className="contact__row__caption">Счёт</p>
-                    <p className="contact__row__value">40802810602500021543</p>
-                  </div>
-                  <div className="contact__row">
-                    <p className="contact__row__caption">Банк получателя</p>
-                    <p className="contact__row__value">Точка ПАО Банка "Открытие"</p>
-                  </div>
-                  <div className="contact__row">
-                    <p className="contact__row__caption">Город</p>
-                    <p className="contact__row__value">Москва</p>
-                  </div>
-                  <div className="contact__row">
-                    <p className="contact__row__caption">БИК</p>
-                    <p className="contact__row__value">044525999</p>
-                  </div>
-                  <div className="contact__row">
-                    <p className="contact__row__caption">Корр. счёт</p>
-                    <p className="contact__row__value">30101810845250000999</p>
-                  </div>
-                </div>
+                <Contacts brief={infoCity.brief}/>
               </div>
               <div className="contact__body__img">
                 <img src="/img/contact-logo.png" alt="Автомобильные газовые системы" />
