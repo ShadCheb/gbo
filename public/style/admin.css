@@ -292,6 +292,7 @@ p {
   margin-left: -2px;
   margin-right: -2px;
   margin-bottom: -2px;
+  flex-wrap: wrap;
 }
 .a-card__gallery > img {
   margin: 2px;

@@ -1,6 +1,6 @@
 .stock {
   position: relative;
-  padding-top: 70px;
+  padding-top: 20px;
   padding-bottom: 70px;
 }
 .stock__bcg-1 {
@@ -111,9 +111,6 @@
   }
 }
 @media (max-width: 768px) {
-  .stock {
-    padding-top: 20px;
-  }
   .stock__block {
     width: calc(100% - 40px);
     height: 230px;

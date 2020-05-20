@@ -1,6 +1,6 @@
 .contact {
   position: relative;
-  padding-top: 70px;
+  padding-top: 20px;
   padding-bottom: 70px;
 }
 .contact__body {
@@ -56,9 +56,6 @@
   }
 }
 @media (max-width: 768px) {
-  .contact {
-    padding-top: 20px;
-  }
   .installment__caption {
     margin-bottom: 10px;
     font-size: 20px;

@@ -71,27 +71,6 @@ function ModalRecord(props) {
     let check = true;
     let btn = e.target;
 
-    if (window.ym) {
-      let pageBrief = props.data.pageBrief;
-
-      switch (pageBrief) {
-        case 'register':
-          ym(62691718,'reachGoal','REG')
-          break;
-        case 'variator':
-          ym(62691718,'reachGoal','VARIATOR')
-          break;
-        case 'metan':
-          ym(62691718,'reachGoal','METAN')
-          break;
-        case 'dizel':
-          ym(62691718,'reachGoal','GAZDIZEL')
-          break;
-        default:
-          ym(62691718,'reachGoal','ZAYVKA');
-      }      
-    }
-
     btn.disabled = true;
 
     for (let i = 0; i < inputList.length; i++) {
@@ -115,6 +94,27 @@ function ModalRecord(props) {
       btn.disabled = false;
 
       return;
+    }
+
+    if (window.ym) {
+      let pageBrief = props.data.pageBrief;
+
+      switch (pageBrief) {
+        case 'register':
+          ym(62691718,'reachGoal','REG')
+          break;
+        case 'variator':
+          ym(62691718,'reachGoal','VARIATOR')
+          break;
+        case 'metan':
+          ym(62691718,'reachGoal','METAN')
+          break;
+        case 'dizel':
+          ym(62691718,'reachGoal','GAZDIZEL')
+          break;
+        default:
+          ym(62691718,'reachGoal','ZAYVKA');
+      }      
     }
 
     // Дополнительные данные для отправки

@@ -228,10 +228,6 @@ class Main extends Component {
   send = (e) => {
     e.preventDefault();
 
-    if (window.ym) {
-      ym(62691718,'reachGoal','ZAYVKA');
-    }
-
     let target = e.target;
     let formSend = target.closest('form');
     let inputList = formSend.querySelectorAll('input');
@@ -260,6 +256,31 @@ class Main extends Component {
       target.disabled = false;
 
       return;
+    }
+
+    if (window.ym) {
+      ym(62691718,'reachGoal','ZAYVKA');
+    }
+
+    if (window.ym) {
+      let pageBrief = props.data.pageBrief;
+
+      switch (pageBrief) {
+        case 'register':
+          ym(62691718,'reachGoal','REG')
+          break;
+        case 'variator':
+          ym(62691718,'reachGoal','VARIATOR')
+          break;
+        case 'metan':
+          ym(62691718,'reachGoal','METAN')
+          break;
+        case 'dizel':
+          ym(62691718,'reachGoal','GAZDIZEL')
+          break;
+        default:
+          ym(62691718,'reachGoal','ZAYVKA');
+      }      
     }
 
     // Дополнительные данные для отправки
