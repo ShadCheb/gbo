@@ -60,7 +60,7 @@ function Footer({activeCity}) {
             }
           </div>
         </div>
-        <div className="footer__copy">© Газовед | 2018</div>
+        <div className="footer__copy">© Газовед | 2020</div>
       </div>
     </footer>
   );
