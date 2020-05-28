@@ -500,7 +500,7 @@ class Main extends Component {
             </main>
 
             {
-              infoCity.brief == 'new.cheb' ? <Stock /> : ''
+              infoCity.brief == 'new.cheb' ? <Stock open={this.openModalRecord.bind(this)}/> : ''
             }
 
             <Benefit 
