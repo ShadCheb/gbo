@@ -13,6 +13,7 @@ import Map from './components/Map';
 import ModalRecord from './components/ModalRecord';
 import ModalBrandAuto from './components/ModalBrandAuto';
 import Footer from './components/Footer';
+import Stock from './components/Stock';
 
 import '../../public/style/antd.css';
 import '../../public/style/lightgallery.min.css';
@@ -498,6 +499,10 @@ class Main extends Component {
               </div>
             </main>
 
+            {
+              infoCity.brief == 'new.cheb' ? <Stock /> : ''
+            }
+
             <Benefit 
               data={this.state.benefit}
               csrf={this.state.csrf}
@@ -790,12 +795,13 @@ class Main extends Component {
                           name="phone"  data-valid="phone" required />
                         <span>Телефон</span>
                       </label>
-                      <label className="input__check license">
+                      {/* <label className="input__check license">
                         <input type="checkbox" name="treatment" 
                           data-valid="check" className="input__required" />
                         <span></span>
                         <p>Я даю свое согласие на обработку персональных данных</p>
-                      </label>
+                      </label> */}
+                      <p className="form__text">Отправляя форму, Вы соглашаетесь на обработку своих персональных данных</p>
                       <input type="hidden" name="_csrf" value={this.state.csrf} />
                       <div className="install__btn">
                         <button className="btn-1 btn--blue" 
@@ -832,12 +838,13 @@ class Main extends Component {
                           type="text" name="phone" required />
                         <span>Телефон</span>
                       </label>
-                      <label className="input__check license">
+                      {/* <label className="input__check license">
                         <input type="checkbox" name="treatment" 
                           data-valid="check" className="input__required" />
                         <span></span>
                         <p>Я даю свое согласие на обработку персональных данных</p>
-                      </label>
+                      </label> */}
+                      <p className="form__text">Отправляя форму, Вы соглашаетесь на обработку своих персональных данных</p>
                       <input type="hidden" name="_csrf" value={this.state.csrf} />
                       <div className="gibdd__btn">
                         <button className="btn-1 btn--blue" 
@@ -907,12 +914,10 @@ class Main extends Component {
                 <span></span>
             </button>
 
-            {infoCity.phone.link}
-
             { (infoCity.phone)
             ? (
               <a href={'tel:' + infoCity.phone.link} 
-                className="btn__call btn__call--main" 
+                className="btn__call" 
                 type="button"
               >
                 <svg>

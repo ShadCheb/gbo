@@ -171,11 +171,12 @@ function ModalRecord(props) {
                 type="text" name="phone" required />
               <span>Телефон</span>
             </label>
-            <label className="input__check license">
+            {/* <label className="input__check license">
               <input type="checkbox" name="treatment" data-valid="check" className="input__required" />
               <span></span>
               <p>Я даю свое согласие на обработку персональных данных</p>
-            </label>
+            </label> */}
+            <p className="form__text">Отправляя форму, Вы соглашаетесь на обработку своих персональных данных</p>
             <input type="hidden" name="_csrf" value={props.csrf} />
             <div className="modal__btn">
               <button className="btn-1 btn--blue"

@@ -2269,3 +2269,188 @@
 }
 
 
+.b-stock {
+  position: relative;
+  background: linear-gradient(0deg, #00c2ff, #333333);
+}
+.b-stock::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../img/dizel/bcg-shtrih.png) repeat center;
+  background-size: 320px;
+  opacity: .05;
+}
+.b-stock .container {
+  z-index: 1;
+}
+.b-stock__body {
+  display: flex;
+  padding-top: 40px;
+  padding-bottom: 14px;
+  align-items: center;
+}
+.b-stock__text {
+  margin-left: 38px;
+  width: calc(40% - 38px);
+}
+.b-stock__text > p {
+  max-width: 300px;
+}
+.bs__text-1 {
+  margin-bottom: 0;
+  font-size: 20px;
+  line-height: 1em;
+  color: #fff;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.bs__text-1 > strong,
+.bs__text-2 > strong {
+  font-size: 36px;
+  line-height: 1em;
+  font-weight: 600;
+  color: #00c2ff;
+}
+.bs__text-2 {
+  font-size: 20px;
+  line-height: 1em;
+  color: #fff;
+  font-weight: 500;
+}
+.b-stock__caption {
+  width: 60%;
+}
+.b-stock__caption > h2 {
+  position: relative;
+  margin-bottom: 0;
+  margin-left: auto;
+  max-width: 360px;
+}
+.b-stock__caption > h2::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  bottom: -34px;
+  right: 40%;
+  width: 130%;
+  background: url(../img/car-1.png) no-repeat center;
+  background-size: 100%;
+}
+.b-stock__caption span {
+  display: block;
+}
+.b-stock__caption span:nth-child(1) {
+  margin-left: 54px;
+  font-size: 45px;
+  line-height: 1em;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.b-stock__caption span:nth-child(2) {
+  font-size: 45px;
+  line-height: 1em;
+  color: #00c2ff;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.b-stock__caption span:nth-child(3) {
+  font-size: 77px;
+  line-height: 1em;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.b-stock__btn {
+  padding-top: 38px;
+}
+.b-stock__footer {
+  display: flex;
+  padding-bottom: 25px;
+}
+.b-stock__col {
+  margin-right: 25px;
+  font-size: 20px;
+  line-height: 1.2em;
+  color: #fff;
+}
+.b-stock__col > ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.bs__footer__col li {
+  padding-left: 30px;
+}
+
+@media (max-width: 900px) {
+  .b-stock__col {
+    font-size: 16px;
+  }
+  .b-stock__caption {
+    width: 50%;
+  }
+  .b-stock__caption > h2 {
+    max-width: 290px;
+  }
+  .b-stock__caption span:nth-child(1) {
+    margin-left: 46px;
+    font-size: 36px;
+  }
+  .b-stock__caption span:nth-child(2) {
+    font-size: 36px;
+  }
+  .b-stock__caption span:nth-child(3) {
+    font-size: 58px;
+  }
+  .b-stock__body__text {
+    width: calc(50% - 38px);
+  }
+  .bs__text-1 {
+    font-size: 16px;
+  }
+  .bs__text-1 > strong, 
+  .bs__text-2 > strong {
+    font-size: 27px;
+  }
+}
+@media (max-width: 670px) {
+  .b-stock__body {
+    padding-bottom: 50px;
+    flex-wrap: wrap;
+  }
+  .b-stock__caption {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 360px;
+  }
+  .b-stock__text {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 360px;
+  }
+  .b-stock__footer {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 420px;
+    flex-wrap: wrap;
+  }
+  .b-stock__col {
+    width: 100%;
+  }
+  .b-stock__col:nth-child(2) > p {
+    display: none;
+  }
+  .b-stock__btn {
+    text-align: center;
+  }
+}
+
+
