@@ -166,7 +166,6 @@ class Main extends Component {
   }
 
   closeModalBrandAuto = () => {
-    console.log('close');
     let openModalBrandAuto = {
       visible: false,
       title: 'Форма'
@@ -261,27 +260,6 @@ class Main extends Component {
 
     if (window.ym) {
       ym(62691718,'reachGoal','ZAYVKA');
-    }
-
-    if (window.ym) {
-      let pageBrief = props.data.pageBrief;
-
-      switch (pageBrief) {
-        case 'register':
-          ym(62691718,'reachGoal','REG')
-          break;
-        case 'variator':
-          ym(62691718,'reachGoal','VARIATOR')
-          break;
-        case 'metan':
-          ym(62691718,'reachGoal','METAN')
-          break;
-        case 'dizel':
-          ym(62691718,'reachGoal','GAZDIZEL')
-          break;
-        default:
-          ym(62691718,'reachGoal','ZAYVKA');
-      }      
     }
 
     // Дополнительные данные для отправки
@@ -916,14 +894,22 @@ class Main extends Component {
 
             { (infoCity.phone)
             ? (
-              <a href={'tel:' + infoCity.phone.link} 
-                className="btn__call" 
-                type="button"
-              >
-                <svg>
-                  <use xlinkHref="/img/sprite-icon.svg#icon-phone"></use>
-                </svg>
-              </a>
+              <div className="link-fix">
+                <a href={'whatsapp://send?phone=' + infoCity.phone.link}
+                  className="link-fix__btn btn__wup"
+                >
+                  <svg>
+                    <use xlinkHref="/img/sprite-icon.svg#icon-whatsup" />
+                  </svg>
+                </a>
+                <a href={'tel:' + infoCity.phone.link} 
+                  className="link-fix__btn btn__call" 
+                >
+                  <svg>
+                    <use xlinkHref="/img/sprite-icon.svg#icon-phone"></use>
+                  </svg>
+                </a>
+              </div>
             ) : ('') }
         </div>
       );
