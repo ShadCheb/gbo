@@ -14,6 +14,7 @@ import ModalRecord from './components/ModalRecord';
 import ModalBrandAuto from './components/ModalBrandAuto';
 import Footer from './components/Footer';
 import Stock from './components/Stock';
+import FixedBtn from './components/FixedBtn';
 
 import '../../public/style/antd.css';
 import '../../public/style/lightgallery.min.css';
@@ -893,24 +894,8 @@ class Main extends Component {
             </button>
 
             { (infoCity.phone)
-            ? (
-              <div className="link-fix">
-                <a href={'whatsapp://send?phone=' + infoCity.phone.link}
-                  className="link-fix__btn btn__wup"
-                >
-                  <svg>
-                    <use xlinkHref="/img/sprite-icon.svg#icon-whatsup" />
-                  </svg>
-                </a>
-                <a href={'tel:' + infoCity.phone.link} 
-                  className="link-fix__btn btn__call" 
-                >
-                  <svg>
-                    <use xlinkHref="/img/sprite-icon.svg#icon-phone"></use>
-                  </svg>
-                </a>
-              </div>
-            ) : ('') }
+              ? (<FixedBtn phone={infoCity.phone}/>) 
+              : ('') }
         </div>
       );
     else 

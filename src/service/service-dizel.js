@@ -7,6 +7,7 @@ import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
 import ModalRecord from '../main/components/ModalRecord';
 import Timer from '../main/components/Timer';
+import FixedBtn from '../main/components/FixedBtn';
 
 import lozad from 'lozad';
 
@@ -589,16 +590,8 @@ class Dizel extends Component {
         </button>
 
         { (infoCity.phone)
-          ? (
-            <a href={'tel:' + infoCity.phone.link} 
-              className="btn__call" 
-              type="button"
-            >
-              <svg>
-                <use xlinkHref="/img/sprite-icon.svg#icon-phone"></use>
-              </svg>
-            </a>
-          ) : ('') }
+          ? (<FixedBtn phone={infoCity.phone}/>) 
+          : ('') }
       </div>
     );
   }

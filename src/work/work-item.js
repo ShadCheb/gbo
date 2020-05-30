@@ -6,6 +6,7 @@ import Header from '../main/components/Header';
 import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
 import ModalRecord from '../main/components/ModalRecord';
+import FixedBtn from '../main/components/FixedBtn';
 
 import { LightgalleryProvider, LightgalleryItem } from 'react-lightgallery';
 
@@ -222,16 +223,8 @@ class WorkItem extends Component {
         </button>
 
         { (infoCity.phone)
-          ? (
-            <a href={'tel:' + infoCity.phone.link} 
-              className="btn__call" 
-              type="button"
-            >
-              <svg>
-                <use xlinkHref="/img/sprite-icon.svg#icon-phone"></use>
-              </svg>
-            </a>
-          ) : ('') }
+          ? (<FixedBtn phone={infoCity.phone}/>) 
+          : ('') }
       </div>
     );
   }

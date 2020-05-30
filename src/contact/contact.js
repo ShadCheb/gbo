@@ -6,6 +6,7 @@ import Header from '../main/components/Header';
 import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
 import Map from '../main/components/Map';
+import FixedBtn from '../main/components/FixedBtn';
 
 import '../../public/style/antd.css';
 import '../../public/style/map.css';
@@ -241,16 +242,8 @@ class Contact extends Component {
         </button>
 
         { (infoCity.phone)
-          ? (
-            <a href={'tel:' + infoCity.phone.link} 
-              className="btn__call" 
-              type="button"
-            >
-              <svg>
-                <use xlinkHref="/img/sprite-icon.svg#icon-phone"></use>
-              </svg>
-            </a>
-          ) : ('') }
+          ? (<FixedBtn phone={infoCity.phone}/>) 
+          : ('') }
       </div>
     );
   }

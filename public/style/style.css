@@ -2006,6 +2006,7 @@ picture {
     position: fixed;
     bottom: 40px;
     right: 20px;
+    z-index: 1;
   }
   .btn__calculate-cost {
     padding: 4px;

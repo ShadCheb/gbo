@@ -5,6 +5,7 @@ import Loader from '../main/components/Loader';
 import Header from '../main/components/Header';
 import Nav from '../main/components/Nav';
 import Footer from '../main/components/Footer';
+import FixedBtn from '../main/components/FixedBtn';
 
 import '../../public/style/style.css';
 import '../../public/style/service.css';
@@ -125,16 +126,8 @@ class Services extends Component {
         </button>
 
         { (infoCity.phone)
-          ? (
-            <a href={'tel:' + infoCity.phone.link} 
-              className="btn__call" 
-              type="button"
-            >
-              <svg>
-                <use xlinkHref="/img/sprite-icon.svg#icon-phone"></use>
-              </svg>
-            </a>
-          ) : ('') }
+          ? (<FixedBtn phone={infoCity.phone}/>) 
+          : ('') }
       </div>
     );
   }
