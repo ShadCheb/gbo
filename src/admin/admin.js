@@ -152,7 +152,8 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
       let dataPhoneFormat = [
         {name: 'kod', value: phone.kod},
         {name: 'number', value: phone.number},
-        {name: 'link', value: phone.link}
+        {name: 'link', value: phone.link},
+        {name: 'whatsup', value: phone.whatsup},
       ];
       let dataPhone = {
         id: data.id,

@@ -84,6 +84,19 @@ function Phone({csrf, data, handlerChangesData, setLoading}) {
         >
           <Input placeholder="Ссылка" className="required" />
         </Form.Item>
+        <Form.Item 
+          {...formItemLayout}
+          name="whatsup"
+          label="WhatsUp (79998887777):"
+          rules={[
+            {
+              required: true,
+              message: 'Заполните поле',
+            },
+          ]}
+        >
+          <Input placeholder="WhatsUp" className="required" />
+        </Form.Item>
         
         <Form.Item 
           wrapperCol={{

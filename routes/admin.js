@@ -316,7 +316,8 @@ router.post('/phone', auth, async(req, res) => {
       Phone.update({
         kod: data.kod,
         number: data.number,
-        link: data.link
+        link: data.link,
+        whatsup: data.whatsup
       },
       {
         where: {id: data.phoneId}
@@ -339,6 +340,7 @@ router.post('/phone', auth, async(req, res) => {
         kod: data.kod,
         number: data.number,
         link: data.link,
+        whatsup: data.whatsup,
         cityListId: data.id
       })
         .then(async () => {

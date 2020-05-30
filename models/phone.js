@@ -16,9 +16,14 @@ const phone = sequelize.define('phone', {
   },
   link: {
     type: Sequelize.STRING
+  },
+  whatsup: {
+    type: Sequelize.STRING
   }
 }, {
   timestamps: false
-})
+});
+
+
 
 module.exports = phone;
