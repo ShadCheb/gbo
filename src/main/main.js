@@ -154,6 +154,7 @@ class Main extends Component {
 
   /*Модальное окно с маркой авто*/
   openModalBrandAuto = (e) => {
+    console.log('click');
     let target = e.target;
     let title = target.closest('button').textContent;
     let openModalBrandAuto = {
@@ -894,7 +895,10 @@ class Main extends Component {
             </button>
 
             { (infoCity.phone)
-              ? (<FixedBtn phone={infoCity.phone}/>) 
+              ? (<FixedBtn 
+                  phone={infoCity.phone}
+                  openModal={this.openModalBrandAuto.bind(this)}
+                />) 
               : ('') }
         </div>
       );

@@ -860,6 +860,9 @@ img {
   font-weight: 300;
   color: #002632;
 }
+.form--up {
+  margin-top: -20px;
+}
 @media (max-width: 1140px) {
   .form__text {
     font-weight: 500;
@@ -1874,10 +1877,10 @@ picture {
 }
 
 .btn__calculate-cost {
-  position: fixed;
-  bottom: 40px;
-  right: 50%;
+  display: flex;
+  position: relative;
   padding: 10px;
+  align-items: center;
   width: 80px;
   height: 80px;
   max-width: 80px;
@@ -1889,9 +1892,8 @@ picture {
   border: none;
   border-radius: 50%;
   background: linear-gradient(45deg, rgba(178,0,37,.9) 0%, rgba(218,0,45,.9) 50%, rgba(250,55,94,.9) 70%, rgba(218,0,45,.9) 90%, rgba(178,0,37,.9) 100%);
-  transform: translateX(550px);
   box-shadow: 0 10px 30px 0 rgba(28,28,28,.4);
-  z-index: 5;
+  cursor: pointer;
 }
 .btn__calculate-cost::after {
   content: '';
@@ -1907,9 +1909,17 @@ picture {
 .btn__calculate-cost:active {
   outline: none;
 }
+.btn__calculate-cost:hover {
+  color: #fff;
+}
 
 .link-fix {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  z-index: 1;
 }
 .link-fix__btn {
   position: relative;
@@ -1937,9 +1947,11 @@ picture {
   outline: none;
 }
 .btn__wup {
+  display: none;
   background-color: #fff;
 }
 .btn__call { 
+  display: none;
   background: linear-gradient(45deg, rgba(36,84,0,.9) 0%, rgba(47,112,0,.9) 50%, rgba(72,170,0,.9) 70%, rgba(47,112,0,.9) 90%, rgba(36,84,0,.9) 100%);
 }
 .btn__calculate-cost svg,
@@ -2000,20 +2012,17 @@ picture {
   .btn--mobile {
     display: block;
   }
-  .link-fix {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    bottom: 40px;
-    right: 20px;
-    z-index: 1;
-  }
   .btn__calculate-cost {
+    display: none;
     padding: 4px;
     width: 40px;
     height: 40px;
     max-width: 40px;
     box-shadow: 0 5px 20px 0 rgba(28,28,28,.3);
+  }
+  .btn__wup,
+  .btn__call {
+    display: flex;
   }
 }
 
