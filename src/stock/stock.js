@@ -126,6 +126,22 @@ class Stock extends Component {
                   </div>
                 </div>
               </article>
+
+              <article className="stock__block">
+                <div>
+                  <div className="stock__block__img">
+                    <img src="/img/stock/friend.png" alt="Приведи друга" />
+                  </div>
+                  <div className="stock__block__text">
+                    <div>
+                      <p className="stock__header">Акция</p>
+                      <h2 className="stock__caption">Приведи друга - <strong>получи бесплатно</strong>
+                        <strong> 50л газа</strong></h2>
+                      <p className="stock__label">акция распространяется только на установку нового не акционного оборудования</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
             </div>
           </div>
         </section>

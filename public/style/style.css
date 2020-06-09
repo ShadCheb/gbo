@@ -1918,8 +1918,9 @@ picture {
   flex-direction: column;
   position: fixed;
   bottom: 40px;
-  right: 20px;
-  z-index: 1;
+  right: 50%;
+  transform: translateX(550px);
+  z-index: 2;
 }
 .link-fix__btn {
   position: relative;
@@ -1992,7 +1993,7 @@ picture {
 }
 
 @media (max-width: 1140px) {
-  .btn__calculate-cost {
+  .link-fix {
     right: 20px;
     transform: translateX(0);
   }
