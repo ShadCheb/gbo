@@ -112,7 +112,7 @@ class Stock extends Component {
                 </div>
               </article>
 
-              <article className="stock__block">
+              {/* <article className="stock__block">
                 <div>
                   <div className="stock__block__img">
                     <img src="/img/stock/money.png" alt="Приведи друга" />
@@ -125,7 +125,7 @@ class Stock extends Component {
                     </div>
                   </div>
                 </div>
-              </article>
+              </article> */}
 
               <article className="stock__block">
                 <div>
