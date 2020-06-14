@@ -837,8 +837,12 @@ img {
 }
 .modal__btn {
   padding-top: 40px;
+  margin-top: -5px;
+  margin-bottom: -5px;
 }
 .modal__btn > button {
+  margin-top: 5px;
+  margin-bottom: 5px;
   box-sizing: border-box;
   width: 100%;
 }
@@ -863,6 +867,24 @@ img {
 .form--up {
   margin-top: -20px;
 }
+.modal__h2 {
+  margin-bottom: 30px;
+  font-size: 1.2rem;
+  line-height: 1.2em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.modal__h2 > strong {
+  font-weight: 600;
+  color: #00c2ff;
+}
+.modal__h2 > i {
+  font-size: 1rem;
+  line-height: 1.2em;
+  font-style: normal;
+  font-weight: 400;
+}
+
 @media (max-width: 1140px) {
   .form__text {
     font-weight: 500;

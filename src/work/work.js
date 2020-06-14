@@ -107,7 +107,7 @@ class Work extends Component {
                 <div className="job__navigation">
                   {
                     (infoCity.page > 1)
-                      ? (<a href={ infoCity.page - 1 } className="nav__arrow nav--right">
+                      ? (<a href={ "/work?page=" + (infoCity.page - 1) } className="nav__arrow nav--right">
                             <svg>
                               <use xlinkHref="/img/sprite-icon.svg#icon-back"/>
                             </svg>
@@ -119,7 +119,7 @@ class Work extends Component {
                   }
                   {
                     (infoCity.page < infoCity.pages)
-                      ? (<a href={ infoCity.page + 1 } className="nav__arrow nav--right">
+                      ? (<a href={ "/work?page=" + (infoCity.page + 1) } className="nav__arrow nav--right">
                         <svg>
                           <use xlinkHref="/img/sprite-icon.svg#icon-next"/>
                         </svg>

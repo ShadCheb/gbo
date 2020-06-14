@@ -12,12 +12,6 @@ const City = require('../models/city');
 
 const detaGeneral = require('../middleware/dataGeneral');
 
-// Для тест-задания
-router.get('/test', async(req, res) => {
-  const index = fs.readFileSync('./test/index.html');
-
-  res.end(index);
-});
 
 router.get('/', detaGeneral,  async (req, res) => {
   try {
@@ -107,12 +101,12 @@ router.post('/mail', async (req, res) => {
 
 
   let transporter = nodemailer.createTransport({
-    host: 'smtp.yandex.ru',
+    host: 'smtp.mail.ru',
     port: 465,
     secure: true,
     auth: {
-        user: 't3.t3st@yandex.ru',
-        pass: 'rapira15'
+      user: 't3.t3st@mail.ru',
+      pass: 'sr?Iolr2UTP1'
     },
     tls:{
       rejectUnauthorized:false
@@ -120,10 +114,9 @@ router.post('/mail', async (req, res) => {
   });
 
   let mailOptions = {
-    from: 't3.t3st@yandex.ru',
+    from: 't3.t3st@mail.ru',
     to: email,
     subject: 'Сообщение с сайта Gazoved',
-    // text: 'Hello world?', // plain text body
     html: output // html body
   };
 

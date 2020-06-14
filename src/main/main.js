@@ -12,6 +12,7 @@ import Review from './components/Review';
 import Map from './components/Map';
 import ModalRecord from './components/ModalRecord';
 import ModalBrandAuto from './components/ModalBrandAuto';
+import ModalBonus from './components/ModalBonus';
 import Footer from './components/Footer';
 import Stock from './components/Stock';
 import FixedBtn from './components/FixedBtn';
@@ -84,7 +85,11 @@ class Main extends Component {
       visible: false,
       title: 'Форма'
     },
-    openModalBrandAuto: {
+    modalBrandAuto: {
+      visible: false,
+      title: 'Форма'
+    },
+    modalBonus: {
       visible: false,
       title: 'Форма'
     },
@@ -97,10 +102,13 @@ class Main extends Component {
     loadMap: false, // загрузилась ли карта
     loadEmployee: false, // загрузились ли сотрудники
 
-    loader: true
+    loader: true,
+    bonusShow: true
   };
 
   componentDidMount = () => {
+    this.initModalBonus();
+
     window.addEventListener('scroll', this.eventScrollToMap);
     window.addEventListener('scroll', this.eventScrollToEmployee);
 
@@ -130,6 +138,32 @@ class Main extends Component {
     this.setState({benefit});
   }
 
+  initModalBonus = () => {
+    let bonus = localStorage.getItem('bonusGazoved');
+
+    if (!bonus) 
+      bonus = sessionStorage.getItem('bonusGazoved');
+
+    if (bonus) {
+      this.setState({bonusShow: false});
+
+      return;
+    }
+
+    setTimeout(() => {
+      this.openModalBonus();
+    }, 30000);
+  }
+
+  finishSend = () => {
+    if (!this.state.bonusShow)
+      return;
+      
+    this.setState({bonusShow: false});
+    localStorage.setItem('bonusGazoved', 'true');
+    sessionStorage.setItem('bonusGazoved', 'true');
+  }
+
   openModalRecord = (e) => {
     let target = e.target;
     let title = target.closest('button').textContent;
@@ -154,25 +188,50 @@ class Main extends Component {
 
   /*Модальное окно с маркой авто*/
   openModalBrandAuto = (e) => {
-    console.log('click');
     let target = e.target;
     let title = target.closest('button').textContent;
-    let openModalBrandAuto = {
+    let modalBrandAuto = {
       target,
       visible: true,
       title,
       page: 'Главная'
     };
 
-    this.setState({openModalBrandAuto});
+    this.setState({modalBrandAuto});
   }
 
   closeModalBrandAuto = () => {
-    let openModalBrandAuto = {
+    let modalBrandAuto = {
       visible: false,
       title: 'Форма'
     };
-    this.setState({openModalBrandAuto});
+
+    this.setState({modalBrandAuto});
+  }
+
+  openModalBonus = () => {
+    if (!this.state.bonusShow)
+      return;
+
+    let modalBonus = {
+      data: {
+        type: 'Скидочное предложение',
+        description: 'Бонус -термопластиковая  магистраль'
+      },
+      visible: true,
+      title: 'Скидочное предложение',
+      page: 'Главная'
+    };
+
+    this.setState({modalBonus});
+  }
+
+  closeModalBonus = () => {
+    let modalBonus = {
+      visible: false,
+      title: 'Форма'
+    };
+    this.setState({modalBonus});
   }
 
   /*Отправка сообщений*/
@@ -252,6 +311,10 @@ class Main extends Component {
       dataSend[inputList[i].name] = value;
     }
     dataSend['page'] = 'Главная';
+    dataSend['btn'] = 'С главной страницы';
+
+    if (!dataSend['name'])
+      dataSend['name'] = 'Без имени';
 
     // Прошла ли валидация
     if (!check) {
@@ -260,9 +323,8 @@ class Main extends Component {
       return;
     }
 
-    if (window.ym) {
+    if (window.ym)
       ym(62691718,'reachGoal','ZAYVKA');
-    }
 
     // Дополнительные данные для отправки
     if (target && target.dataset) {
@@ -285,7 +347,11 @@ class Main extends Component {
         target.disabled = false;
 
         if (data.success) {
+          this.finishSend();
+
           this.success(data.success);
+        } else if (data.error) {
+          this.error(data.error);
         }
       })
       .catch(e => {
@@ -875,14 +941,22 @@ class Main extends Component {
 
             <ModalRecord 
               data={this.state.modalRecord}
+              finishSend={this.finishSend}
               close={this.closeModalRecord.bind(this)}
               csrf={csrf}
             />
 
             <ModalBrandAuto 
-              data={this.state.openModalBrandAuto}
-              open={this.openModalBrandAuto.bind(this)}
+              data={this.state.modalBrandAuto}
+              finishSend={this.finishSend}
               close={this.closeModalBrandAuto.bind(this)}
+              csrf={csrf}
+            />
+
+            <ModalBonus 
+              data={this.state.modalBonus}
+              finishSend={this.finishSend}
+              close={this.closeModalBonus.bind(this)}
               csrf={csrf}
             />
 

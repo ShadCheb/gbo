@@ -138,8 +138,11 @@ function ModalRecord(props) {
         btn.disabled = false;
 
         if (data.success) {
+          props.finishSend();
           afterClose();
           success(data.success);
+        } else if (data.error) {
+          error(data.error);
         }
       })
       .catch(err => {

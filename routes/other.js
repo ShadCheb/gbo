@@ -31,9 +31,9 @@ router.get('/contact', detaGeneral, async (req, res) => {
 
 router.get('/work', detaGeneral, async (req, res) => {
   let page = (req.query.page)
-    ? req.query.page
+    ? Number(req.query.page)
     : 1;
-  const countPage = 8;
+  const countPage = 6;
   let {cityList, data} = res.locals.dataGeneral;
   let dataPage = await CityList.findOne(
     {
