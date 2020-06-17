@@ -152,7 +152,7 @@ class Main extends Component {
 
     setTimeout(() => {
       this.openModalBonus();
-    }, 15000);
+    }, 21000);
   }
 
   finishSend = () => {
