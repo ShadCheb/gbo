@@ -2386,6 +2386,12 @@
 .bs__footer__col li {
   padding-left: 30px;
 }
+.b-stock__label {
+  font-weight: 300;
+}
+.b-stock__col a {
+  color: #193b46;
+}
 
 @media (max-width: 900px) {
   .b-stock__col {
@@ -2444,9 +2450,6 @@
   }
   .b-stock__col {
     width: 100%;
-  }
-  .b-stock__col:nth-child(2) > p {
-    display: none;
   }
   .b-stock__btn {
     text-align: center;
