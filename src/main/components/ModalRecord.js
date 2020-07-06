@@ -137,6 +137,8 @@ function ModalRecord(props) {
       .then(data => {
         btn.disabled = false;
 
+        console.log('dataSend', data);
+
         if (data.success) {
           props.finishSend();
           afterClose();
@@ -147,6 +149,8 @@ function ModalRecord(props) {
       })
       .catch(err => {
         btn.disabled = false;
+
+        console.log('dataSendError', err);
 
         if (err.error)
           error(err.error);
