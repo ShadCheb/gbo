@@ -346,6 +346,8 @@ class Main extends Component {
       .then(data => {
         target.disabled = false;
 
+        console.log('dataSend', data);
+
         if (data.success) {
           this.finishSend();
 
@@ -356,6 +358,7 @@ class Main extends Component {
       })
       .catch(e => {
         target.disabled = false;
+        console.log('dataSendError', e);
         if (e.error)
           this.error(e.error);
       })

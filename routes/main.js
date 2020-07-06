@@ -123,15 +123,12 @@ router.post('/mail', async (req, res) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.log('error', error);      
-      res.status(500).json({error: 'Произошла ошибка. Попробуйте позже'}); 
+      res.status(500).json({error: 'Произошла ошибка. Попробуйте позже', info, err: error}); 
 
       return;
     }
-    console.log('info', info);
-    console.log(`send: ${error}, ${from}`);
 
-    res.status(201).json({success: 'Сообщение отправлено. Ждите звонка'}); 
+    res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', info, err: error});
   });
 });
 
