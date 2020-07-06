@@ -114,7 +114,8 @@ router.post('/mail', async (req, res) => {
   });
 
   let mailOptions = {
-    from: 't3.t3st@mail.ru',
+    // from: 't3.t3st@mail.ru',
+    from: 's.admin@tirax.pro',
     to: email,
     subject: 'Сообщение с сайта Gazoved',
     html: output // html body
@@ -122,10 +123,13 @@ router.post('/mail', async (req, res) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
+      console.log('error', error);      
       res.status(500).json({error: 'Произошла ошибка. Попробуйте позже'}); 
 
       return;
     }
+    console.log('info', info);
+    console.log(`send: ${error}, ${from}`);
 
     res.status(201).json({success: 'Сообщение отправлено. Ждите звонка'}); 
   });
