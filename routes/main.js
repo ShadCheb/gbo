@@ -114,8 +114,8 @@ router.post('/mail', async (req, res) => {
   });
 
   let mailOptions = {
-    // from: 't3.t3st@mail.ru',
-    from: 's.admin@tirax.pro',
+    from: 't3.t3st@mail.ru',
+    // from: 's.admin@tirax.pro',
     to: email,
     subject: 'Сообщение с сайта Gazoved',
     html: output // html body
