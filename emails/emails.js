@@ -18,7 +18,7 @@ const emails ={
     port: 465,
   },
   'nn@gazoved.com': {
-    user: 't3.t3st@mail.ru',
+    user: 'nn@gazoved.com',
     pass: 'pe7pfDoDWt',
     host: 'smtp.mail.ru',
     port: 465,
@@ -34,7 +34,7 @@ const emails ={
     pass: 'sr?Iolr2UTP1',
     host: 'smtp.mail.ru',
     port: 465,
-  }
+  },
 }
 
 module.exports = emails;
