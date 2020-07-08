@@ -10,6 +10,8 @@ const ReviewVk = require('../models/review_vk');
 const CityList = require('../models/cityList');
 const City = require('../models/city');
 
+const emails = require('../emails/emails');
+
 const detaGeneral = require('../middleware/dataGeneral');
 
 
@@ -69,7 +71,10 @@ router.post('/mail', async (req, res) => {
   const description = req.body.description;
   const brand = req.body.brand;
   const city = req.session.dataGeneral.data.name;
-  let {email} = req.session.dataGeneral.data.city;
+  const brief = req.session.dataGeneral.data.brief;
+  let { email } = req.session.dataGeneral.data.city;
+  let emailData = emails.default;
+
 
   if (!email)
     email = 'gazoved21@mail.ru';
@@ -99,14 +104,18 @@ router.post('/mail', async (req, res) => {
   if (phone)
     output += `<p><b>Телефон отправителя:</b> ${phone}</p>`; 
 
+  if (emails[brief]) {
+    emailData = emails[brief];
+  }
+
 
   let transporter = nodemailer.createTransport({
-    host: 'smtp.mail.ru',
-    port: 465,
+    host: emailData.host,
+    port: emailData.port,
     secure: true,
     auth: {
-      user: 't3.t3st@mail.ru',
-      pass: 'sr?Iolr2UTP1'
+      user: emailData.user,
+      pass: emailData.pass
     },
     tls:{
       rejectUnauthorized:false
@@ -114,8 +123,7 @@ router.post('/mail', async (req, res) => {
   });
 
   let mailOptions = {
-    from: 't3.t3st@mail.ru',
-    // from: 's.admin@tirax.pro',
+    from: emailData.user,
     to: email,
     subject: 'Сообщение с сайта Gazoved',
     html: output // html body
