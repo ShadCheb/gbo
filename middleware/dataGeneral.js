@@ -11,7 +11,7 @@ module.exports = async function(req, res, next) {
     let city = req.query.city;
     let cityList = [];
 
-    const subdomains = req.subdomains && JSON.stringify(req.subdomains);
+    const subdomains = req.subdomains;
 
     if (!city && req.session.city) {
       city = req.session.city;

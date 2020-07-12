@@ -41,7 +41,8 @@ router.get('/', detaGeneral,  async (req, res) => {
       title: 'GAZOVED | Установка ГБО за один день в г. ' + data.name,
       isHome: true,
       cityList: JSON.stringify(cityList),
-      data: JSON.stringify(data)
+      data: JSON.stringify(data),
+      subdomains: subdomains && JSON.stringify(subdomains)
     });
   } catch (e) {
     console.log(e);
