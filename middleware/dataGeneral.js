@@ -5,14 +5,6 @@ const Time = require('../models/time');
 const Phone = require('../models/phone');
 const CityList = require('../models/cityList');
 
-const subdomainData = {
-  cheb: 'cheboksary',
-  'n-cheb': 'new.cheb',
-  ufa: 'ufa',
-  'yoshkarola': 'yoshkarola',
-  'n-novgorod': 'Nizhnii-Novgorod'
-}
-
 
 module.exports = async function(req, res, next) {
   try {
@@ -26,7 +18,7 @@ module.exports = async function(req, res, next) {
     // const regStr = new RegExp(`(www\.*)*([a-zA-Z0-9-]*)(\.*${domain}){1}`);
     const subdomains = (req.get('host')).match(/(www\.*)*([a-zA-Z0-9-]*)(\.*gazoved.com){1}/);
 
-    if (subdomains && subdomains[2] && subdomainData[subdomains[2]]) {
+    if (subdomains && subdomains[2]) {
       let { brief } = await CityList.findOne({where: {subdomain: subdomains[2]}, attributes: ['brief'], raw: true});
 
       city = (brief) ? brief : city;
