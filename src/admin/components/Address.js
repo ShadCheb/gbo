@@ -55,8 +55,6 @@ class Address extends Component {
       }
     }
 
-    address['nameAddress'] = address.address;
-
     this.setState(() =>
       ({
         openMapData: address,
@@ -87,7 +85,7 @@ class Address extends Component {
           controls: ['zoomControl']
         });
 
-        this.changeValue({map: mapThis});
+        this.setState({map: mapThis});
       }
 
       // Если есть предыдущая точка на карте, то удаляем ее
@@ -105,7 +103,7 @@ class Address extends Component {
           coords = firstGeoObject.geometry.getCoordinates();
 
           const setCoordPoint = (e) => {
-            mapThis.events.remove("click", setCoordPoint);
+            mapThis.events.remove('click', setCoordPoint);
             let newCoords = e.get('coords');
 
             ymaps.geocode(newCoords).then((res) => {
@@ -117,7 +115,7 @@ class Address extends Component {
 
               if (names) 
                 this.changeValue({
-                  nameAddress: names[0],
+                  address: names[0],
                   coords: newCoords
                 });
             });
@@ -128,7 +126,7 @@ class Address extends Component {
           mapThis.setCenter(coords, 17);
           mapThis.events.add('click', setCoordPoint);
 
-          this.changeValue({map: mapThis});
+          this.setState({ map: mapThis });
         });
       } else {
         this.setPoint(coordParse);
@@ -143,6 +141,10 @@ class Address extends Component {
   }
 
   setPoint = (c) => {
+    if (!this.state.map) {
+      return;
+    }
+
     let plcmark = this.state.placemark;
 
     if (!plcmark) {
@@ -153,13 +155,14 @@ class Address extends Component {
         draggable: true
       });
 
-      this.changeValue({placemark: plcmark});
+      this.setState({placemark: plcmark});
     } else {
       plcmark.geometry.setCoordinates(c);
     }
 
     this.state.map.geoObjects.add(plcmark);
-    plcmark.events.add('drag', () => {
+
+    plcmark.events.add('drag', (e) => {
       let coordPopint = plcmark.geometry.getCoordinates();
 
       ymaps.geocode(coordPopint).then((res) => {
@@ -171,8 +174,8 @@ class Address extends Component {
 
         if (names) 
           this.changeValue({
-            nameAddress: names[0],
-            coord: coordPopint
+            address: names[0],
+            coords: coordPopint
           });
       });
     });
@@ -184,21 +187,24 @@ class Address extends Component {
 
     geocoder.then(
       (res) => {
-        let coord = res.geoObjects.get(0).geometry.getCoordinates();
+        if (res) {
+          let coord = res.geoObjects.get(0).geometry.getCoordinates();
 
-        if (coord)
-          this.state.map.setCenter(coord, 17);
+          if (coord)
+            this.state.map.setCenter(coord, 17);
+        }
       }
     );
   }
 
   changeValue = (obj) => {
-    let openMapData = this.state.openMapData;
+    let openMapData = { ...this.state.openMapData };
 
     for(let key in obj) {
-      Object.assign(openMapData, {[key]: obj[key]})
+      openMapData[key] = obj[key];
     }
-    this.setState(openMapData);
+
+    this.setState({openMapData});
   }
 
   render() {
@@ -242,6 +248,7 @@ class Address extends Component {
           data={this.state.openMapData}
           csrf={this.props.csrf}
           cancelAddAddress={this.closeModalAddAddress}
+          changeValue={this.changeValue}
           handlerChangesData={this.props.handlerChangesData}
           serachAddress={this.serachAddress}
           setLoading={this.props.setLoading}

@@ -78,6 +78,10 @@ p {
 }
 .a-modal__address {
   display: flex;
+  align-items: center;
+}
+.a-modal__address > p {
+  margin-right: 7px;
 }
 .a-modal__address .ant-form-item-control {
   width: 100%;

@@ -19,6 +19,10 @@ function ModalAddAddress({
   const onOk = async() => {
     setLoading(true);
 
+    const coords = (typeof data.coords === 'string')
+      ? data.coords
+      : `[${data.coords.join(',')}]`;
+
     fetch('/admin/address', {
       method: 'post',
       headers: {
@@ -27,8 +31,8 @@ function ModalAddAddress({
       },
       body: JSON.stringify({
         id:         data.id,
-        address:    data.nameAddress,
-        coords:     JSON.stringify(data.coords),
+        address:    data.address,
+        coords,
         cityListId: data.cityListId
       })
     })
@@ -48,12 +52,14 @@ function ModalAddAddress({
     cancelAddress();
   }
 
-  const changeAddress = (value) => {
-    changeValue({nameAddress: value}, 'data');
+  const changeAddress = (e) => {
+    let { value } = e.target;
+
+    changeValue({address: value});
   }
 
   const search = () => {
-    serachAddress(data.nameAddress);
+    serachAddress(data.address);
   }
   
   
@@ -70,8 +76,8 @@ function ModalAddAddress({
         <p>Адрес:</p>
         <Input 
           name="address"
-          value={data.nameAddress}
-          defaultValue={data.nameAddress}
+          value={data.address}
+          // defaultValue={data.address}
           onChange={changeAddress}
         />
         <Button 
