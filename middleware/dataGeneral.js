@@ -5,13 +5,32 @@ const Time = require('../models/time');
 const Phone = require('../models/phone');
 const CityList = require('../models/cityList');
 
+const subdomainData = {
+  cheb: 'cheboksary',
+  'n-cheb': 'new.cheb',
+  ufa: 'ufa',
+  'yoshkarola': 'yoshkarola',
+  'n-novgorod': 'Nizhnii-Novgorod'
+}
+
 
 module.exports = async function(req, res, next) {
   try {
     let city = req.query.city;
     let cityList = [];
 
-    const subdomains = req.subdomains;
+    // Присутствует данные домена (gazoved.com)
+    // const domain = 'gazoved.com';
+    // const domain = 'localhot\:8000';
+    // const regStr = /(www\.*)*([a-zA-Z0-9-]*)(\.*{gazoved.com}){1}/;
+    // const regStr = new RegExp(`(www\.*)*([a-zA-Z0-9-]*)(\.*${domain}){1}`);
+    const subdomains = (req.get('host')).match(/(www\.*)*([a-zA-Z0-9-]*)(\.*gazoved.com){1}/);
+
+    if (subdomains && subdomains[2] && subdomainData[subdomains[2]]) {
+      let { brief } = await CityList.findOne({where: {subdomain: subdomains[2]}, attributes: ['brief'], raw: true});
+
+      city = (brief) ? brief : city;
+    }
 
     if (!city && req.session.city) {
       city = req.session.city;
@@ -21,7 +40,7 @@ module.exports = async function(req, res, next) {
     }
 
     if (!city) {
-      cityList = await CityList.findAll({attributes: [ 'id', 'name', 'brief' ], raw: true});
+      cityList = await CityList.findAll({attributes: [ 'id', 'name', 'brief', 'subdomain' ], raw: true});
     
       if (!cityList || !cityList.length) {
         res.status(201).render('not-data'), {
@@ -40,7 +59,7 @@ module.exports = async function(req, res, next) {
     }
 
     if (city != req.session.city || !req.session.dataGeneral) { 
-      cityList = await CityList.findAll({attributes: [ 'id', 'name', 'brief' ], raw: true});
+      cityList = await CityList.findAll({attributes: [ 'id', 'name', 'brief', 'subdomain' ], raw: true});
     
       if (!cityList || !cityList.length) {
         res.status(201).render('not-data'), {
@@ -94,6 +113,7 @@ module.exports = async function(req, res, next) {
 
     next();
   } catch (e) {
+    console.log(e);
     res.status( 201).render('not-data'), {
       title: 'Нет данных'
     }

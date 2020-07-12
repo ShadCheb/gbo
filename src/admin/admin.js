@@ -78,6 +78,7 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
       let dataGeneralFormat = [
         {name: 'name', value: data.name},
         {name: 'brief', value: data.brief},
+        {name: 'subdomain', value: data.subdomain},
         {name: 'name2', value: name2},
         {name: 'email', value: email},
       ];

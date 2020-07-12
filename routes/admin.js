@@ -105,7 +105,8 @@ router.post('/general', auth, async(req, res) => {
         CityList.update(
           {
             name:  data.city,
-            brief: data.brief
+            brief: data.brief,
+            subdomain: data.subdomain,
           },
           {
             where: {id: data.id}
@@ -137,7 +138,8 @@ router.post('/general', auth, async(req, res) => {
         CityList.update(
           {
             name:  data.city,
-            brief: data.brief
+            brief: data.brief,
+            subdomain: data.subdomain,
           },
           {
             where: {id: data.id}

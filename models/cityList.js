@@ -26,6 +26,9 @@ const cityList = sequelize.define('city_list', {
   brief: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  subdomain: {
+    type: Sequelize.STRING
   }
 });
 

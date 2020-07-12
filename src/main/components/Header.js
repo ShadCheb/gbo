@@ -31,9 +31,10 @@ function YaSprav({cityBrief}){
 
 function Header({activeCity, cityList}) {
   const selectCity = value => {
-    let link = location.pathname;
+    const linkGroup = location.href.match(/(www\.*)*([a-zA-Z0-9-]*.)(\.*gazoved.com){1}(\/*[a-zA-Z0-9-\/]*)/);
+    const link = location.protocol + '//' + (linkGroup[1] || '') + value + '.' + linkGroup[3] + linkGroup[4];
 
-    location.href = link + '?city=' + value;
+    window.location.href = link;
   }
 
   return (
@@ -49,9 +50,9 @@ function Header({activeCity, cityList}) {
         </div>
         
         <div className="header__select">
-          <Select defaultValue={activeCity.brief} style={{width: 200}} onChange={selectCity}>
+          <Select defaultValue={activeCity.subdomain} style={{width: 200}} onChange={selectCity}>
             {cityList.map((city) => {
-              return <Option key={city.id} value={city.brief}>{city.name}</Option>
+              return <Option key={city.id} value={city.subdomain}>{city.name}</Option>
             })}
           </Select>
           <div>

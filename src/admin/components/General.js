@@ -68,6 +68,19 @@ function General({csrf, data, handlerChangesData, setLoading}) {
         </Form.Item>
         <Form.Item 
           {...formItemLayout}
+          name="subdomain"
+          label="Поддомен:"
+          rules={[
+            {
+              required: true,
+              message: 'Заполните поле',
+            },
+          ]}
+        >
+          <Input placeholder="Поддомен" className="required" />
+        </Form.Item>
+        <Form.Item 
+          {...formItemLayout}
           name="name2"
           label="В городе:"
           rules={[
