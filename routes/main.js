@@ -17,7 +17,7 @@ const detaGeneral = require('../middleware/dataGeneral');
 
 router.get('/', detaGeneral,  async (req, res) => {
   try {
-    let {cityList, data} = res.locals.dataGeneral;
+    let {cityList, data, subdomains} = res.locals.dataGeneral;
     let dataPage = await CityList.findOne(
       {
         where: {brief: data.brief},

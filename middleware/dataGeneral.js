@@ -11,6 +11,8 @@ module.exports = async function(req, res, next) {
     let city = req.query.city;
     let cityList = [];
 
+    const subdomains = req.subdomains && JSON.stringify(req.subdomains);
+
     if (!city && req.session.city) {
       city = req.session.city;
     } else if (!city && (req.cookies && req.cookies['city'])) {
@@ -78,7 +80,8 @@ module.exports = async function(req, res, next) {
 
       res.locals.dataGeneral = {
         data,
-        cityList
+        cityList,
+        subdomains
       };
       req.session.dataGeneral = res.locals.dataGeneral;
       req.session.city = city;
