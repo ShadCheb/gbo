@@ -508,7 +508,7 @@ class Main extends Component {
                   <div className="main__text">
                     <h1 className="main__caption">
                       <span className="main__caption--first">Установка</span>
-                      <span className="main__caption--last">и регистрация ГБО</span>
+                      <span className="main__caption--last">ГБО за 1 день</span>
                     </h1>
                     {
                       (infoCity.city)
@@ -622,6 +622,36 @@ class Main extends Component {
                       <div className="advantages__item__text">
                         <h2 className="caption__h2">Неубиваемые форсунки</h2>
                         <p>Ставим самые надёжные форсунки</p>
+                      </div>
+                    </div>
+
+                    <div className="advantages__item">
+                      <div className="advantages__item__img lozad"
+                        data-background-image-set="url('../img/icon-advantages/gift-card.png')"
+                      ></div>
+                      <div className="advantages__item__text">
+                        <h2 className="caption__h2">Бонусные карты</h2>
+                        <p>Предоставляются для АЗС наших партнеров. Скидки до 5 % на 
+                          газовое топливо</p>
+                      </div>
+                    </div>
+                    <div className="advantages__item">
+                      <div className="advantages__item__img lozad"
+                        data-background-image-set="url('../img/icon-advantages/authentic.png')"
+                      ></div>
+                      <div className="advantages__item__text">
+                        <h2 className="caption__h2">Гарантия</h2>
+                        <p>Гарантия на оборудование от 1 года до 5 лет в зависимости от 
+                          выбранного вами комплекта</p>
+                      </div>
+                    </div>
+                    <div className="advantages__item">
+                      <div className="advantages__item__img lozad"
+                        data-background-image-set="url('../img/icon-advantages/install.png')"
+                      ></div>
+                      <div className="advantages__item__text">
+                        <h2 className="caption__h2">Быстрая установка</h2>
+                        <p>Надежная установка ГБО за 1 день в день обращения</p>
                       </div>
                     </div>
                   </div>
