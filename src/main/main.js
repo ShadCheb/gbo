@@ -564,9 +564,19 @@ class Main extends Component {
 
             <section className="advantages">
               <div className="container">
-                <div className="caption__container">
+                {/* <div className="caption__container">
                   <h2 className="caption__section">Нас выбирают</h2>
                   <h3 class="caption__section-under">более 1000 автовладельцев выбрали нас</h3>
+                </div> */}
+                <div className="caption__container">
+                  <div className="staff__caption">
+                    <h2 className="caption__section">Нас выбирают </h2>
+                    <h3 className="caption__section-under">более 1000 автовладельцев <span className="city">{
+                      (infoCity.city)
+                        ? ('в ' + infoCity.city.name2 || 'городе N') 
+                        : ('')
+                    }</span></h3>
+                  </div>
                 </div>
                 <div className="advantages__body">
                   <div className="advantages__img">
@@ -669,6 +679,8 @@ class Main extends Component {
             <section className="install">
               <div className="container">
                 <div className="install__bcg bcg--2" />
+                <div className="install__title caption__h2">Оставь заявку прямо сейчас и уже завтра 
+                начни экономить на заправках!</div>
                 <div className="install__body">
                   <div className="install__img">
                     <picture className="lozad" data-iesrc="/img/install-1.png" 
@@ -761,6 +773,16 @@ class Main extends Component {
                     openModal={this.openModalRecord.bind(this)}
                 />) : ('')
             }
+
+            {/* Сотрудники */}
+            <div id="employee">
+              {
+                (infoCity.employees && infoCity.employees.length) 
+                  ? (this.state.loadEmployee && <Employee
+                    employeeList={infoCity.employees}
+                  />) : ('')
+              }
+            </div>
 
             <section className="certificates">
               <div className="container">
@@ -955,16 +977,6 @@ class Main extends Component {
                 </div>
               </div>
             </section>
-
-            {/* Сотрудники */}
-            <div id="employee">
-              {
-                (infoCity.employees && infoCity.employees.length) 
-                  ? (this.state.loadEmployee && <Employee
-                    employeeList={infoCity.employees}
-                  />) : ('')
-              }
-            </div>
 
             {/* Карта */}
             {

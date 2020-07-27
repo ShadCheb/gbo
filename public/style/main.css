@@ -362,6 +362,9 @@
   .main__caption {
     font-size: 26px;
   }
+  .main__img {
+    width: 20%;
+  }
   .main__img > img {
     margin-left: -100px;
     width: 330px;
@@ -1262,6 +1265,12 @@
     font-size: 16px;
     text-transform: lowercase;
   }
+  .caption__section-under .city {
+    text-transform: none;
+  }
+  .caption__section-under .city:first-letter {
+    text-transform: uppercase;
+  }
 }
 
 
@@ -1752,6 +1761,9 @@
 .install__bcg {
   bottom: -216px;
   left: -110px;
+}
+.install__title {
+  text-align: center;
 }
 .install__body {
   position: relative;
