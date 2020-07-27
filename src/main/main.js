@@ -508,7 +508,7 @@ class Main extends Component {
                   <div className="main__text">
                     <h1 className="main__caption">
                       <span className="main__caption--first">Установка</span>
-                      <span className="main__caption--last">ГБО за 1 день</span>
+                      <span className="main__caption--last">ГБО за <i>1</i> день</span>
                     </h1>
                     {
                       (infoCity.city)
@@ -519,6 +519,8 @@ class Main extends Component {
                           ) 
                         : ('')
                     }
+                    <p className="main__text__description">Установка и сервис итальянского ГБО 2, 4, 5 поколения 
+                    TSI/FSI на сертифицированном СТО <strong>с гарантией до 5 лет!</strong></p>
                     <div className="main__btn">
                       <form className="main__btn__form">
                         <label className="form__input">
@@ -535,6 +537,7 @@ class Main extends Component {
                           id="test"
                         >Узнать цену</button>
                       </form>
+                      <p className="main__btn__label">Специалист свяжется в течении 5 минут!</p>
                     </div>
                   </div>
                   <div className="main__img">
@@ -561,6 +564,10 @@ class Main extends Component {
 
             <section className="advantages">
               <div className="container">
+                <div className="caption__container">
+                  <h2 className="caption__section">Нас выбирают</h2>
+                  <h3 class="caption__section-under">более 1000 автовладельцев выбрали нас</h3>
+                </div>
                 <div className="advantages__body">
                   <div className="advantages__img">
                     <div className="advantages__bcg">
@@ -658,6 +665,65 @@ class Main extends Component {
                 </div>
               </div>
             </section>
+
+            <section className="install">
+              <div className="container">
+                <div className="install__bcg bcg--2" />
+                <div className="install__body">
+                  <div className="install__img">
+                    <picture className="lozad" data-iesrc="/img/install-1.png" 
+                      data-alt="Установка ГБО в Газовед">
+                      <source media="(min-width: 768px)" srcSet="/img/install-2.png" />
+                      <source media="(min-width: 300px)" srcSet="/img/install-2-m.png" />
+                    </picture>
+                  </div>
+                  <div className="install__form">
+                    <p className="install__p">Отправь заявку и Наш специалист 
+                      свяжется с Вами для установки ГБО</p>
+                    <form calss="form">
+                      <label className="form__input">
+                        <input type="text" name="name" required />
+                        <span>Имя</span>
+                      </label>
+                      <label className="form__input">
+                        <InputMask mask="+7 (999) 999-99-999" type="text" 
+                          name="phone"  data-valid="phone" required />
+                        <span>Телефон</span>
+                      </label>
+                      {/* <label className="input__check license">
+                        <input type="checkbox" name="treatment" 
+                          data-valid="check" className="input__required" />
+                        <span></span>
+                        <p>Я даю свое согласие на обработку персональных данных</p>
+                      </label> */}
+                      <p className="form__text">Отправляя форму, Вы соглашаетесь на обработку своих персональных данных</p>
+                      <input type="hidden" name="_csrf" value={this.state.csrf} />
+                      <div className="install__btn">
+                        <button className="btn-1 btn--blue" 
+                          data-type="Установка ГБО"
+                          aria-label="Отправить заявку"
+                          type="submit"
+                          onClick={this.send.bind(this)}
+                        >Отправить</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div className="install__caption__container">
+                  <h2 className="install__caption">Установка ГБО<span></span><span></span></h2>
+                  <div className="install__caption__bcg"></div>
+                </div>
+              </div>
+            </section>
+
+            {/* Отзывы */}
+            {
+              (infoCity.reviews && infoCity.reviews.length) 
+                ? (<Review
+                  reviewList={infoCity.reviews}
+                  reviewVk={infoCity.review_vk}
+                />) : ('')
+            }
 
             <section className="installment">
               <div className="container">
@@ -772,16 +838,6 @@ class Main extends Component {
               </div>
             </section>
 
-            {/* Сотрудники */}
-            <div id="employee">
-              {
-                (infoCity.employees && infoCity.employees.length) 
-                  ? (this.state.loadEmployee && <Employee
-                    employeeList={infoCity.employees}
-                  />) : ('')
-              }
-            </div>
-
             {/* Вопросы */}
             <Question/>
 
@@ -850,56 +906,6 @@ class Main extends Component {
               </div>
             </section>
 
-            <section className="install">
-              <div className="container">
-                <div className="install__bcg bcg--2" />
-                <div className="install__body">
-                  <div className="install__img">
-                    <picture className="lozad" data-iesrc="/img/install-1.png" 
-                      data-alt="Установка ГБО в Газовед">
-                      <source media="(min-width: 768px)" srcSet="/img/install-2.png" />
-                      <source media="(min-width: 300px)" srcSet="/img/install-2-m.png" />
-                    </picture>
-                  </div>
-                  <div className="install__form">
-                    <p className="install__p">Отправь заявку и Наш специалист 
-                      свяжется с Вами для установки ГБО</p>
-                    <form calss="form">
-                      <label className="form__input">
-                        <input type="text" name="name" required />
-                        <span>Имя</span>
-                      </label>
-                      <label className="form__input">
-                        <InputMask mask="+7 (999) 999-99-999" type="text" 
-                          name="phone"  data-valid="phone" required />
-                        <span>Телефон</span>
-                      </label>
-                      {/* <label className="input__check license">
-                        <input type="checkbox" name="treatment" 
-                          data-valid="check" className="input__required" />
-                        <span></span>
-                        <p>Я даю свое согласие на обработку персональных данных</p>
-                      </label> */}
-                      <p className="form__text">Отправляя форму, Вы соглашаетесь на обработку своих персональных данных</p>
-                      <input type="hidden" name="_csrf" value={this.state.csrf} />
-                      <div className="install__btn">
-                        <button className="btn-1 btn--blue" 
-                          data-type="Установка ГБО"
-                          aria-label="Отправить заявку"
-                          type="submit"
-                          onClick={this.send.bind(this)}
-                        >Отправить</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-                <div className="install__caption__container">
-                  <h2 className="install__caption">Установка ГБО<span></span><span></span></h2>
-                  <div className="install__caption__bcg"></div>
-                </div>
-              </div>
-            </section>
-
             <section className="gibdd">
               <div className="container">
                 <div className="gibdd__bcg bcg--2" />
@@ -950,14 +956,15 @@ class Main extends Component {
               </div>
             </section>
 
-            {/* Отзывы */}
-            {
-              (infoCity.reviews && infoCity.reviews.length) 
-                ? (<Review
-                  reviewList={infoCity.reviews}
-                  reviewVk={infoCity.review_vk}
-                />) : ('')
-            }
+            {/* Сотрудники */}
+            <div id="employee">
+              {
+                (infoCity.employees && infoCity.employees.length) 
+                  ? (this.state.loadEmployee && <Employee
+                    employeeList={infoCity.employees}
+                  />) : ('')
+              }
+            </div>
 
             {/* Карта */}
             {
