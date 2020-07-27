@@ -2006,12 +2006,11 @@
 
 
 .gibdd {
-  bottom: -216px;
-  left: -110px;
+  padding-bottom: 90px;
 }
 .gibdd__bcg {
-  bottom: -230px;
-  left: -80px;
+  bottom: -216px;
+  left: -110px;
 }
 .gibdd__body {
   position: relative;
