@@ -2357,18 +2357,29 @@
 
 
 .b-stock {
+  position: relative;
   background: linear-gradient(0deg, #92ddff, #b8e8ff);
   overflow: hidden;
 }
-.b-stock__bcg {
+.b-stock__bcg-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: url(../img/italian.jpg) no-repeat left;
+  background-size: cover;
+  opacity: .1;
+}
+.b-stock__bcg-2 {
   position: absolute;
   bottom: -50%;
   right: -50%;
   width: 200%;
   height: 500px;
-  background: linear-gradient(15deg, #00c2ff, #3e659e);
+  background: linear-gradient(15deg, #2eafe6, #4b90c3);
   transform: rotate(-45deg);
-  opacity: .8;
+  opacity: 1;
 }
 /* .b-stock::after {
   content: '';
@@ -2540,9 +2551,15 @@
   }
 }
 @media (max-width: 670px) {
-  .b-stock__bcg {
+  .b-stock__bcg-1 {
+    width: 100%;
+  }
+  .b-stock__bcg-2 {
     bottom: 0;
-    height: 600px;
+    right: -70%;
+    width: 230%;
+    height: 480px;
+    opacity: .65;
   }
   .b-stock__body {
     padding-bottom: 50px;
