@@ -554,7 +554,6 @@ class Main extends Component {
             {
               infoCity.brief == 'new.cheb' ? <Stock open={this.openModalRecord.bind(this)}/> : ''
             }
-            <Stock open={this.openModalRecord.bind(this)}/>
 
             <Benefit 
               data={this.state.benefit}
