@@ -11,33 +11,43 @@
     <title>{{title}}</title>
 
     {{#if isHome}}
-      <link rel="preload" href="/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="stylesheet" type="text/css" href="/main.css">
+      {{!-- <link rel="preload" href="/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" /> --}}
     {{else if isServices}}
-      <link rel="preload" href="/service.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="stylesheet" type="text/css" href="/service.css">
+      {{!-- <link rel="preload" href="/service.css" as="style" onload="this.onload=null;this.rel='stylesheet'" /> --}}
     {{else if isDizel}}
-      <link rel="preload" href="/dizel.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="stylesheet" type="text/css" href="/dizel.css">
+      {{!-- <link rel="preload" href="/dizel.css" as="style" onload="this.onload=null;this.rel='stylesheet'" /> --}}
     {{else if isMetan}}
-      <link rel="preload" href="/metan.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="stylesheet" type="text/css" href="/metan.css">
+      {{!-- <link rel="preload" href="/metan.css" as="style" onload="this.onload=null;this.rel='stylesheet'" /> --}}
     {{else if isRegister}}
-      <link rel="preload" href="/register.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="stylesheet" type="text/css" href="/register.css">
+      {{!-- <link rel="preload" href="/register.css" as="style" onload="this.onload=null;this.rel='stylesheet'" /> --}}
     {{else if isVariator}}
-      <link rel="preload" href="/variator.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="stylesheet" type="text/css" href="/variator.css">
+      {{!-- <link rel="preload" href="/variator.css" as="style" onload="this.onload=null;this.rel='stylesheet'" /> --}}
     {{else if isStock}}
-      <link rel="preload" href="/stock.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="stylesheet" type="text/css" href="/stock.css">
+      {{!-- <link rel="preload" href="/stock.css" as="style" onload="this.onload=null;this.rel='stylesheet'" /> --}}
     {{else if isContact}}
-      <link rel="preload" href="/contact.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="stylesheet" type="text/css" href="/contact.css">
+      {{!-- <link rel="preload" href="/contact.css" as="style" onload="this.onload=null;this.rel='stylesheet'" /> --}}
     {{else if isWork}}
-      <link rel="preload" href="/work.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="stylesheet" type="text/css" href="/work.css">
+      {{!-- <link rel="preload" href="/work.css" as="style" onload="this.onload=null;this.rel='stylesheet'" /> --}}
     {{else if isWorkItem}}
-      <link rel="preload" href="/work-item.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <link rel="stylesheet" type="text/css" href="/work-item.css">
+      {{!-- <link rel="preload" href="/work-item.css" as="style" onload="this.onload=null;this.rel='stylesheet'" /> --}}
     {{/if}}
     
 
     {{#if isAuth}}
-      <link rel="stylesheet" href="/auth.css" />
+      <link rel="stylesheet" type="text/css" href="/auth.css" />
     {{/if}}
     {{#if isAdmin}}
-      <link rel="stylesheet" href="/admin.css" />
+      <link rel="stylesheet" type="text/css" href="/admin.css" />
     {{/if}}
 
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
