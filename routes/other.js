@@ -33,7 +33,7 @@ router.get('/work', detaGeneral, async (req, res) => {
   let page = (req.query.page)
     ? Number(req.query.page)
     : 1;
-  const countPage = 4;
+  const countPage = 8;
   let {cityList, data} = res.locals.dataGeneral;
   /* let dataPage = await CityList.findOne(
     {
