@@ -35,7 +35,7 @@ router.get('/work', detaGeneral, async (req, res) => {
     : 1;
   const countPage = 8;
   let {cityList, data} = res.locals.dataGeneral;
-  let dataPage = await CityList.findOne(
+  /* let dataPage = await CityList.findOne(
     {
       where: {brief: data.brief},
       include: [
@@ -49,7 +49,8 @@ router.get('/work', detaGeneral, async (req, res) => {
   )
     .then(result => {
       return result.get({plain:true})
-    });
+    }); */
+  const dataPage = await Work.findAll({raw: true});
     
   let countAll = 0;
   
@@ -70,7 +71,8 @@ router.get('/work', detaGeneral, async (req, res) => {
   data['countAll'] = countAll;
   data['pages'] = Math.ceil(countAll / countPage);
   data['page'] = page;
-  data = Object.assign(data, dataPage);
+  data['works'] = dataPage;
+  // data = Object.assign(data, dataPage);
 
   res.render('page', {
     title: 'Наши работы | Gazoved ' + data.name,
