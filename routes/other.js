@@ -33,7 +33,7 @@ router.get('/work', detaGeneral, async (req, res) => {
   let page = (req.query.page)
     ? Number(req.query.page)
     : 1;
-  const countPage = 8;
+  const countPage = 4;
   let {cityList, data} = res.locals.dataGeneral;
   /* let dataPage = await CityList.findOne(
     {
@@ -50,18 +50,23 @@ router.get('/work', detaGeneral, async (req, res) => {
     .then(result => {
       return result.get({plain:true})
     }); */
-  const dataPage = await Work.findAll({raw: true});
+  const dataPage = await Work.findAll({
+    order: [[ 'id', 'DESC']],
+    offset: (page - 1) * countPage,
+    limit: countPage,
+    raw: true
+  });
     
   let countAll = 0;
   
   if (res.locals.countWork) {
     countAll = res.locals.countWork;
   } else {
-    await Work.count(
-      {
-        where: {cityListId: data.id}
-      }
-    )
+    await Work.count()
+      // {
+      //   where: {cityListId: data.id}
+      // }
+    // )
       .then(result => {
         countAll = result;
         res.locals.countWork = result;
