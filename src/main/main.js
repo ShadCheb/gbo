@@ -152,7 +152,7 @@ class Main extends Component {
 
     setTimeout(() => {
       this.openModalBonus();
-    }, 21000);
+    }, 15000);
   }
 
   finishSend = () => {
@@ -552,7 +552,7 @@ class Main extends Component {
             </main>
 
             {
-              infoCity.brief == 'new.cheb' ? <Stock open={this.openModalRecord.bind(this)}/> : ''
+              infoCity.brief === 'new.cheb' ? <Stock open={this.openModalRecord.bind(this)}/> : ''
             }
 
             <Benefit 
