@@ -171,6 +171,10 @@ class Main extends Component {
       return;
     }
 
+    if (this.state.infoCity && this.state.infoCity.brief === 'new.cheb') {
+      return;
+    }
+
     setTimeout(() => {
       this.openModalBonus();
     }, 15000);
