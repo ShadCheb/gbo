@@ -5,6 +5,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+// const nodeExternals = require('webpack-node-externals');
+
 module.exports = {
   optimization: {
     minimize: true,
@@ -13,6 +15,7 @@ module.exports = {
       new OptimizeCSSAssetsPlugin({})
     ]
   },
+  // externals: [nodeExternals()],
   entry: {
     main: './src/main/main.js',
     auth: './src/auth/auth.js',

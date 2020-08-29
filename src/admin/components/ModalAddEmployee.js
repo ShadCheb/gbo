@@ -34,7 +34,7 @@ function ModalAddEmployee({
         })
         .catch(e => {
           if (e.error) {
-            handlerChangesData(e.error);
+            handlerChangesData({ error: e.error });
   
             reject();
           }
@@ -78,13 +78,13 @@ function ModalAddEmployee({
         setLoading(false);
 
         if (data.result)
-          handlerChangesData({employee: data.result});
+          handlerChangesData({ employee: data.result });
       })
       .catch(e => {
         setLoading(false);
         
         if (e.error)
-          handlerChangesData(e.error);
+          handlerChangesData({ error: e.error });
       });
     cancelAddEmployee();
   }
@@ -97,7 +97,7 @@ function ModalAddEmployee({
       url: file.name,
     }];
 
-    changeValue({fileList});
+    changeValue({ fileList });
   }
   const onRemove = file => {
     const index = data.fileList.indexOf(file);

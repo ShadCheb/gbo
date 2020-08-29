@@ -8,7 +8,9 @@ const Equipment = require('../models/equipment');
 const Review = require('../models/review');
 const ReviewVk = require('../models/review_vk');
 const CityList = require('../models/cityList');
-const City = require('../models/city');
+// const City = require('../models/city');
+const Composition = require('../models/composition');
+const Images = require('../models/images');
 
 const emails = require('../emails/emails');
 
@@ -23,13 +25,19 @@ router.get('/', detaGeneral,  async (req, res) => {
         where: {brief: data.brief},
         include: [
           { model: Employee },
-          { model: Equipment },
+          { 
+            model: Equipment,
+            include: [{
+              model: Composition,
+              include: [Images],
+              order: [ [ 'composition_id', 'ASC' ] ]
+            }],
+          },
           { model: Review, 
             order: [[ 'id', 'DESC']],
             limit: 5 
           },
-          { model: ReviewVk },
-          { model: Equipment },
+          { model: ReviewVk }
         ]
       }
     )

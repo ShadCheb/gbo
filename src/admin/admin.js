@@ -217,18 +217,78 @@ function BodyList({component, csrf, data, handlerChangesData, setLoading}) {
             'Content-Type': 'application/json;charset=utf-8',
             'X-XSRF-TOKEN': csrf
           },
-          body: JSON.stringify({cityId: data.id})
+          body: JSON.stringify({ cityId: data.id })
         })
           .then(res => res.json())
           .then(data => {
-            if (data.result) {
-              data.result = data.result.map(item => {
-                item.cylinder = item.cylinder.split(','); // Строку в массив
-  
-                return item;
-              });
-              handlerChangesData({equipment: data.result}, true);
-              dataEquipment['equipment'] = data.result;
+            const equipments = data.result;
+
+            try {
+              if (equipments) {
+                const result = equipments.map(item => {
+                  item.cylinder = item.cylinder && item.cylinder.split(',') || ['', '', '']; // Строку в массив
+                  while (item.cylinder.length < 3) {
+                    item.cylinder.push('');
+                  }
+
+                  const composition_main = [];
+                  const composition_add = [];
+                  const compositions = [ ...item.compositions];
+
+                  compositions.map(composition => {
+                    if (composition.composition_type === 'main') {
+                      const template = {
+                        id:    composition.composition_id,
+                        name:  composition.name,
+                        image: null
+                      }
+
+                      if (composition.image) {
+                        template['image'] = {
+                          ...composition.image
+                        };
+                        template['fileBefore'] = {
+                          uid:    '-1',
+                          name:   composition.image.name,
+                          status: 'done',
+                          url:    composition.image.name,
+                        };
+                      }
+                      composition_main.push(template);
+                    } else if (composition.composition_type === 'additional') {
+                      const template = {
+                        id:    composition.composition_id,
+                        name:  composition.name,
+                        price: composition.price,
+                        image: null
+                      }
+                      if (composition.image) {
+                        template['image'] = {
+                          ...composition.image
+                        };
+                        template['fileBefore'] = {
+                          uid:    '-1',
+                          name:   composition.image.name,
+                          status: 'done',
+                          url:    composition.image.name,
+                        };
+                      }
+                      composition_add.push(template);
+                    }
+                  });
+
+                  delete item.compositions;
+                  item['compositionMain'] = composition_main;
+                  item['compositionAdd'] = composition_add;
+        
+                  return item;
+                });
+
+                handlerChangesData({ equipment: result }, true);
+                dataEquipment['equipment'] = result;
+              }
+            } catch (e) {
+              console.log('error',e);
             }
           })
           .catch(e => {
@@ -422,7 +482,7 @@ class Admin extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        this.setState({data});
+        this.setState({ data });
       })
       .catch(e => {
         if (e.error)
@@ -463,7 +523,7 @@ class Admin extends Component {
 
   // Общий обработчик изменений
   // первый параметр объект обновленных данных(ключ значение), второй - нужно ли показывать уведомление
-  // :todo Нужно переделать на текст сообщения 
+  // :TODO Нужно переделать на текст сообщения 
   handlerChangesData = (values, notmessage) => {
     if (values.error) {
       this.error('Произошла ошибка. Попробуйте позже');
@@ -471,7 +531,7 @@ class Admin extends Component {
       return;
     }
 
-    let data = this.state.data;
+    let data = { ...this.state.data };
 
     if (!notmessage)
       this.success('Изменения успешно проведены');
@@ -479,7 +539,7 @@ class Admin extends Component {
     for(let key in values) {
       data[key] = values[key];
     }
-    this.setState({data});
+    this.setState({ data });
   }
 
   activateType = (value) => {

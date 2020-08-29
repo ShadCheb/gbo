@@ -1,10 +1,8 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../utils/database');
 
-const Composition = require('../models/composition');
-
-const Equipment = sequelize.define('equipment', {
-  id: {
+const Images = sequelize.define('images', {
+  image_id: {
     primaryKey: true,
     autoIncrement: true,
     allowNull: false,
@@ -13,22 +11,14 @@ const Equipment = sequelize.define('equipment', {
   name: {
     type: Sequelize.STRING
   },
-  tagline: {
+  table: {
     type: Sequelize.STRING
   },
-  summary: {
+  type: {
     type: Sequelize.STRING
-  },
-  description: {
-    type: Sequelize.TEXT
-  },
-  cylinder: {
-    type: Sequelize.STRING
-  },
+  }
 }, {
   timestamps: false
 });
 
-Equipment.hasMany(Composition);
-
-module.exports = Equipment;
+module.exports = Images;

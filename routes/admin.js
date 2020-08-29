@@ -13,14 +13,16 @@ const Equipment = require('../models/equipment');
 const Review = require('../models/review');
 const ReviewVk = require('../models/review_vk');
 const Work = require('../models/work');
+const Composition = require('../models/composition');
+const Images = require('../models/images');
 
-const {TOKEN_VK} = require('../keys/index');
+const { TOKEN_VK } = require('../keys/index');
 
 const auth = require('../middleware/auth');
 
 router.get('/', auth, async(req, res) => {
   try {
-    const cityList = await CityList.findAll({raw:true});
+    const cityList = await CityList.findAll({ raw:true });
 
     res.render('admin', {
       isAdmin: true,
@@ -442,18 +444,24 @@ router.delete('/employee/:id', auth, async(req, res) => {
 router.post('/equipment/get', auth, async(req, res) => {  
   try {
     const cityId = req.body.cityId;
-
     const result = await Equipment.findAll({
-      where: {cityListId: cityId}
+      where: { cityListId: cityId },
+      include: [ 
+        { 
+          model: Composition,  
+          include: [Images],
+          order: [ [ 'composition_id', 'ASC' ] ]
+        }
+      ]
     });
 
     if (!result)
       result = [];
 
-    res.status(201).json({result});
+    res.status(201).json({ result });
   } catch(e) {
     console.log('Error! ', e);
-    res.status(500).json({error: 'Произошла ошибка' + e});
+    res.status(500).json({ error: 'Произошла ошибка' + e });
   }
 });
 
@@ -463,19 +471,135 @@ router.post('/equipment', auth, async(req, res) => {
   if (data.id) {
     try {
       Equipment.update({
-        name: data.name,
+        name:        data.name,
+        tagline:     data.tagline,
+        summary:     data.summary,
         description: data.description,
-        cylinder: data.cylinder
+        cylinder:    data.cylinder
       },
       {
         where: {id: data.id}
       })
         .then(async () => {
-          const result = await Equipment.findAll({
-            cityListId: data.city_list_id
+          let compositionMain = data.compositionMain && JSON.parse(data.compositionMain) || [];
+          let compositionAdd = data.compositionAdd && JSON.parse(data.compositionAdd) || [];
+          let compositionDel = data.deleteList && JSON.parse(data.deleteList) || [];
+
+          const compositions = [ ...compositionMain, ...compositionAdd ];
+          const dataSave = [];
+          const dataUpdate = [];
+
+          compositions.map(composition => {
+            if (composition.id && composition.update) {
+              dataUpdate.push({
+                id:               composition.id,
+                name:             composition.name || 'Без названия',
+                price:            composition.price || null,
+                composition_type: composition.composition_type || 'main',
+                equipmentId:      data.id,
+                image:            composition.image
+              });
+            } else if (!composition.id) {
+              dataSave.push({
+                name:             composition.name || 'Без названия',
+                price:            composition.price || null,
+                composition_type: composition.composition_type || 'main',
+                equipmentId:      data.id,
+                image:            composition.image
+              });
+            }            
           });
 
-          res.status(201).json({result});
+          // Сохранение
+          const savePromuseList = dataSave.map(async d => (
+          // dataSave.map(async d => {
+            new Promise(async (resolve, reject) => {
+              let result = await Composition.create({
+                name:             d.name,
+                price:            d.price,
+                composition_type: d.composition_type,
+                equipmentId:      d.equipmentId,
+              });
+
+              // Запись картники
+              if (d.image && !d.image.image_id) {
+                await Images.create({
+                  name:     d.image.name,
+                  item_id:  result.composition_id,
+                  table:    d.table || 'composition',
+                  type:     d.image.type || null
+                });
+              } else if (d.image && d.image.update) {
+                await Images.update({
+                  name:     d.image.name,
+                  item_id:  result.composition_id,
+                  table:    d.table|| 'composition',
+                  type:     d.image.type || null
+                }, { 
+                  where: { item_id: d.id }
+                });
+              }
+
+              resolve();
+            })
+          ))
+
+          // Обновление
+          const updatePromuseList = dataUpdate.map(async d => (
+            // dataUpdate.map(async d => {
+            new Promise(async (resolve, reject) => {
+              await Composition.update({
+                name:             d.name,
+                price:            d.price,
+                composition_type: d.composition_type,
+                equipmentId:      d.equipmentId,
+              },
+              { where: { composition_id: d.id } });
+
+              // Запись картники
+              if (d.image && !d.image.image_id) {
+                await Images.create({
+                  name:     d.image.name,
+                  item_id:  d.id,
+                  table:    d.table || 'composition',
+                  type:     d.image.type || null
+                });
+              } else if (d.image && d.image.update) {
+                await Images.update({
+                  name:     d.image.name,
+                  item_id:  d.id,
+                  table:    d.table || 'composition',
+                  type:     d.image.type || null
+                }, { 
+                  where: { item_id: d.id }
+                });
+              }
+
+              resolve();
+            })
+          ))
+
+          await Promise.all([ ...updatePromuseList, ...savePromuseList ]);
+
+          // Удаление
+          if (compositionDel.length) {        
+            await Composition.destroy({
+              where: { composition_id: compositionDel }
+            });
+          }
+
+          const result = await Equipment.findAll({
+            where: { cityListId: data.cityListId },
+            include: [
+              {
+                model: Composition,
+                include: [Images],
+                order: [ [ 'composition_id', 'ASC' ] ]
+              }
+            ]
+          });
+
+          res.status(201).json({ result });
         });
     } catch(e) {
       console.log('Error! ', e);
@@ -484,17 +608,73 @@ router.post('/equipment', auth, async(req, res) => {
   } else {
     try {
       Equipment.create({
-        name: data.name,
+        name:        data.name,
+        tagline:     data.tagline,
+        summary:     data.summary,
         description: data.description,
-        cylinder: data.cylinder,
-        cityListId: data.city_list_id
-      })
-        .then(async () => {
+        cylinder:    data.cylinder,
+        cityListId:  data.cityListId
+      }, { returning: true })
+        .then(async (equipment) => {
+          let compositionMain = data.compositionMain && JSON.parse(data.compositionMain) || [];
+          let compositionAdd = data.compositionAdd && JSON.parse(data.compositionAdd) || [];
+          const compositions = [ ...compositionMain, ...compositionAdd ];
+
+          const dataSave = compositions.map(composition => ({
+            name:             composition.name || 'Без названия',
+            price:            composition.price || null,
+            composition_type: composition.composition_type || 'main',
+            equipmentId:      equipment.id,
+            image:            composition.image
+          }));
+
+          const savePromuseList = dataSave.map(async d => (
+            new Promise(async (resolve, reject) => {
+              let result = await Composition.create({
+                name:             d.name,
+                price:            d.price,
+                composition_type: d.composition_type,
+                equipmentId:      d.equipmentId,
+              });
+
+              // Запись картники
+              if (d.image && !d.image.image_id) {
+                await Images.create({
+                  name:     d.image.name,
+                  item_id:  result.composition_id,
+                  table:    d.table || 'composition',
+                  type:     d.image.type || null
+                });
+              } else if (d.image && d.image.update) {
+                await Images.update({
+                  name:     d.image.name,
+                  item_id:  result.composition_id,
+                  table:    d.table|| 'composition',
+                  type:     d.image.type || null
+                }, { 
+                  where: { item_id: d.id }
+                });
+              }
+
+              resolve();
+            })
+          ))
+
+          await Promise.all([ ...savePromuseList ]);
+
+
           const result = await Equipment.findAll({
-            where: {cityListId: data.city_list_id}
+            where: { cityListId: data.cityListId },
+            include: [
+              {
+                model: Composition,
+                include: [Images],
+                order: [ [ 'composition_id', 'ASC' ] ]
+              }
+            ]
           });
 
-          res.status(201).json({result});
+          res.status(201).json({ result });
         });
     } catch (e) {
       console.log('Error! ', e);
@@ -506,12 +686,29 @@ router.post('/equipment', auth, async(req, res) => {
 router.delete('/equipment/:id', auth, async(req, res) => {
   try {
     const id = +req.params.id;
-    const result = await Equipment.findOne({
-      where: {id}
-    });
 
-    await result.destroy();
+    await Composition.destroy({ where: { equipmentId: id } });
+    await Equipment.destroy({ where: { id } });
+
     res.status(204).json({});
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({error: 'Произошла ошибка' + e});
+  }
+});
+
+router.post('/equipment/gallery', auth, async(req, res) => {
+  try {
+    const result = await Images.findAll({
+      where: { 
+        table: 'composition', 
+        type:  null
+      },
+      attributes: ['image_id', 'name']
+    });
+    // const result = await Composition.findAll();
+
+    res.status(201).json({ result });
   } catch (e) {
     res.status(500).json({error: 'Произошла ошибка' + e});
   }

@@ -152,11 +152,19 @@ img {
   background-color: rgba(0, 194, 255, .4);
   box-shadow: 0 10px 30px 0 rgba(0, 194, 255, .4);
 }
+.btn--blue-border {
+  color: #004257;
+  border-color: #00c2ff;
+  background-color: transparent;
+  box-shadow: 0 10px 30px 0 rgba(0, 194, 255, .11);
+}
 .btn-2:hover {
   box-shadow: 0 10px 30px 0 rgba(0, 194, 255, 0);
 }
 .btn--blue:active, 
-.btn--blue:focus {
+.btn--blue:focus,
+.btn--blue-border:active,
+.btn--blue-border:focus {
   box-shadow: 0 10px 30px 0 rgba(0, 194, 255, 0);
   outline: none;
 }
@@ -1078,32 +1086,46 @@ input::placeholder {
 .license input:checked~span::after{
   opacity: 1;
 }
-.input__check > input {
+.input__check > input,
+.input__radio > input {
   display: none;
 }
-.input__check > span {
+.input__check > span,
+.input__radio > span {
   position: relative;
   display: block;
   width: 22px;
   min-width: 22px;
   height: 22px;
-  border-radius: 4px;
   border: 1px solid #00c2ff;
 }
-.input__check > span::after {
+.input__check > span {
+  border-radius: 4px;
+}
+.input__radio > span {
+  border-radius: 50%;
+}
+.input__check > span::after,
+.input__radio > span::after {
   content: '';
   position: absolute;
   top: 3px;
   left: 3px;
   width: 16px;
   height: 16px;
-  border-radius: 4px;
   background-color: #00c2ff;
   transform: scale(0);
   opacity: 0;
   transition: all .3s ease;
 }
-.input__check > input:checked~span::after {
+.input__check > span::after {
+  border-radius: 4px;
+}
+.input__radio > span::after {
+  border-radius: 50%;
+}
+.input__check > input:checked~span::after,
+.input__radio > input:checked~span::after {
   transform: scale(1);
   opacity: 1;
 }

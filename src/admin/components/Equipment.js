@@ -5,12 +5,6 @@ import { FormOutlined, DeleteOutlined, QuestionCircleOutlined } from '@ant-desig
 
 import ModalAddEquipment from './ModalAddEquipment';
 
-function RenderCylinder({cylinders}) {
-  let cylinderTxt = cylinders.join(', ');
-
-  return cylinderTxt;
-}
-
 
 class Equipment extends Component {
   constructor(props) {
@@ -54,20 +48,22 @@ class Equipment extends Component {
   }
 
   openModalAddEquipment = (equipment) => {
-    let openEmployee = {};
+    let openEquipment = {};
 
     if (!equipment) {
-      openEmployee = {
-        cityListId: this.props.data.cityListId
+      openEquipment = {
+        cityListId: this.props.data.cityListId,
+        cylinder: ['','','']
       }
     } else {
-      openEmployee = Object.assign({}, equipment);
+      openEquipment = Object.assign({ cylinder: ['','',''] }, equipment);
     }
 
+    // Изображениея подготавливаются при обработке результатов
 
     this.setState(() => {
       return ({
-        openEquipmentData: openEmployee,
+        openEquipmentData: openEquipment,
         visibleAddEquipment: true
       });
     });
@@ -83,7 +79,7 @@ class Equipment extends Component {
     for(let key in obj) {
       Object.assign(openEquipmentData, {[key]: obj[key]})
     }
-    this.setState({openEquipmentData});
+    this.setState({ openEquipmentData });
   }
 
   changeActiveEdit = (type) => {
@@ -109,8 +105,6 @@ class Equipment extends Component {
                     <div className="a-card__equipment__text"
                       dangerouslySetInnerHTML={{__html: eqpm.description}}
                     ></div>
-                    <p className="a-card__equipment__text">
-                      <strong>Кол-во цилиндров</strong>: <RenderCylinder cylinders={eqpm.cylinder}/></p>
                   </div>
                 </div>
                 <Button 

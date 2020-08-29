@@ -23,7 +23,6 @@ import '../../public/style/map.css';
 import '../../public/style/style.css';
 import '../../public/style/main.css';
 
-
 import { message } from 'antd';
 import 'antd/es/message/style/css'; 
 import lozad from 'lozad';
@@ -34,6 +33,28 @@ const container = document.getElementById('page-main');
 const csrf = container.dataset.csrf;
 const infoCity = JSON.parse(container.dataset.info);
 const cityList = JSON.parse(container.dataset.city_list);
+
+// Сортировка списка оборудования
+if (infoCity.equipment && infoCity.equipment.length) {
+  infoCity.equipment.map(eq => {
+    let composition_add = [];
+    let composition_main = [];
+
+    eq.compositions && eq.compositions.map(composition => {
+      if (composition.composition_type === 'main') {
+        composition_main.push(composition);
+      } else if (composition.composition_type === 'additional') {
+        composition_add.push(composition);
+      }
+    });
+
+    eq.composition_main = composition_main;
+    eq.composition_add = composition_add;
+    delete eq.compositions;
+  })
+}
+
+console.log('equipment', infoCity.equipment);
 
 const certificates1 = [
   'img/certificates/certif_1.jpg',
@@ -118,14 +139,14 @@ class Main extends Component {
     this.setState({benefit});
 
     if (!this.state.cityList.length)
-      this.setState({data: false});
+      this.setState({ data: false });
 
     const observer = lozad();
 
     observer.observe();
 
     window.onload = () => {
-      this.setState({loader: false});
+      this.setState({ loader: false });
     }
   }
 
@@ -175,7 +196,7 @@ class Main extends Component {
       pageBrief: 'main'
     };
 
-    this.setState({modalRecord});
+    this.setState({ modalRecord });
   }
 
   closeModalRecord = () => {
@@ -183,7 +204,7 @@ class Main extends Component {
       visible: false,
       title: 'Форма'
     };
-    this.setState({modalRecord});
+    this.setState({ modalRecord });
   }
 
   /*Модальное окно с маркой авто*/
@@ -197,7 +218,7 @@ class Main extends Component {
       page: 'Главная'
     };
 
-    this.setState({modalBrandAuto});
+    this.setState({ modalBrandAuto });
   }
 
   closeModalBrandAuto = () => {
@@ -206,7 +227,7 @@ class Main extends Component {
       title: 'Форма'
     };
 
-    this.setState({modalBrandAuto});
+    this.setState({ modalBrandAuto });
   }
 
   openModalBonus = () => {
@@ -346,8 +367,6 @@ class Main extends Component {
       .then(data => {
         target.disabled = false;
 
-        console.log('dataSend', data);
-
         if (data.success) {
           this.finishSend();
 
@@ -358,7 +377,6 @@ class Main extends Component {
       })
       .catch(e => {
         target.disabled = false;
-        console.log('dataSendError', e);
         if (e.error)
           this.error(e.error);
       })
