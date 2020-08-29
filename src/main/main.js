@@ -54,8 +54,6 @@ if (infoCity.equipment && infoCity.equipment.length) {
   })
 }
 
-console.log('equipment', infoCity.equipment);
-
 const certificates1 = [
   'img/certificates/certif_1.jpg',
   'img/certificates/certif_2.jpg',
