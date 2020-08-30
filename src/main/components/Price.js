@@ -203,7 +203,11 @@ function PriceBlock({ equipment, onPayment, onOrder }) {
                         >
                           {
                             equipment.composition_add.map(composition => (
-                              <div className="composition__item" key={composition.composition_id}>
+                              <div 
+                                className="composition__item" 
+                                key={composition.composition_id}
+                                style={{ width: widthItem + 'px' }}
+                              >
                                 <div>
                                   <div className="composition__img">
                                     <img 
