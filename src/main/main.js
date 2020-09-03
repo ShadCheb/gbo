@@ -127,6 +127,9 @@ class Main extends Component {
     window.onload = () => {
       this.setState({loader: false});
     }
+
+
+    console.log('infoCity.phone', infoCity);
   }
 
   changeDatabenefit = (data) => {
@@ -543,6 +546,27 @@ class Main extends Component {
                       </form>
                       <p className="main__btn__label">Специалист свяжется в течении 5 минут!</p>
                     </div>
+                    {(infoCity.phone && infoCity.phone.whatsup)
+                      ? (
+                        <div className="main__btn-whatsapp">                         
+                          <div className="btn-whatsapp">
+                            <p>Узнать стоимость в WhatsApp</p>
+                            <div className="btn-whatsapp__img">
+                              <div className="circlephone" />
+                              <div className="circle-fill" />
+                              <div className="img-circle">
+                                <div className="img-circleblock">
+                                  <svg>
+                                    <use xlinkHref="/img/sprite-icon.svg#icon-whatsup" />
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                            <a href={`https://wa.me/${infoCity.phone.whatsup}`} />
+                          </div>
+                        </div>
+                      ) : null
+                    }
                   </div>
                   <div className="main__img">
                     <picture className="lozad" data-iesrc="/img/main-1.png" data-alt="Gazoved">
