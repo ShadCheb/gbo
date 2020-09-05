@@ -548,7 +548,7 @@ class Main extends Component {
                     </div>
                     {(infoCity.phone && infoCity.phone.whatsup)
                       ? (
-                        <div className="main__btn-whatsapp">                         
+                        <div className="main__btn-whatsapp">
                           <div className="btn-whatsapp">
                             <p>Узнать стоимость в WhatsApp</p>
                             <div className="btn-whatsapp__img">
@@ -1040,13 +1040,33 @@ class Main extends Component {
               csrf={csrf}
             />
 
-            <button className="btn-menu"
-              onClick={this.toggleMenu}
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <div className="mobile-header">
+              {(infoCity.phone && infoCity.phone.whatsup)
+                ? (
+                  <div className="mobile-header__whatsapp">
+                    <p>Узнать стоимость в WhatsApp</p>
+                    <div className="mobile-header__whatsapp-img">
+                      <svg>
+                        <use xlinkHref="/img/sprite-icon.svg#icon-whatsup" />
+                      </svg>
+                    </div>                      
+                    <a href={`https://wa.me/${infoCity.phone.whatsup}`} />
+                  </div>
+                ) : <div />
+              }
+
+              <button className="btn-menu"
+                onClick={this.toggleMenu}
+              >
+                  <span></span>
+                  <span></span>
+                  <span></span>
+              </button>
+            </div>
+
+
+
+
 
             { (infoCity.phone)
               ? (<FixedBtn 
