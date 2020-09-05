@@ -156,9 +156,6 @@ class Main extends Component {
     window.onload = () => {
       this.setState({ loader: false });
     }
-
-
-    console.log('infoCity.phone', infoCity);
   }
 
   changeDatabenefit = (data) => {
