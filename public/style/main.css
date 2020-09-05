@@ -849,7 +849,7 @@
 }
 .price__body__body {
   position: relative;
-  padding-top: 84px;
+  padding-top: 98px;
 }
 .price__body__block {
   position: relative;
@@ -961,13 +961,14 @@
   font-weight: 500;
   transition: all .3s ease;
 }
-.price__check label:hover {
+.price__check label:hover,
+.price__check.active label {
   opacity: 1;
 }
 .price__check.active p,
 .price__check.active strong {
   font-weight: 600;
-} 
+}
 .price__body__value {
   width: 33.33%;
   min-width: 33.33%;
@@ -995,7 +996,7 @@
   top: 0;
   right: 0;
   display:  flex;
-  padding-top: 12px;
+  padding-top: 26px;
   padding-bottom: 12px;
   margin-left: auto;
   width: calc(75% + 2px);

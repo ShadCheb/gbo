@@ -13,6 +13,8 @@ import Map from './components/Map';
 import ModalRecord from './components/ModalRecord';
 import ModalBrandAuto from './components/ModalBrandAuto';
 import ModalBonus from './components/ModalBonus';
+import ModalPriceRequest from './components/ModalPriceRequest';
+import ModalPriceInstallment from './components/ModalPriceInstallment';
 import Footer from './components/Footer';
 import Stock from './components/Stock';
 import FixedBtn from './components/FixedBtn';
@@ -112,6 +114,14 @@ class Main extends Component {
       visible: false,
       title: 'Форма'
     },
+    modalPriceRequest: {
+      visible: false,
+      title: 'Форма'
+    },
+    modalPriceInstallment: {
+      visible: false,
+      title: 'Форма'
+    },
 
     showMenu: false, // открытие меню
 
@@ -188,15 +198,20 @@ class Main extends Component {
   }
 
   openModalRecord = (e) => {
-    let target = e.target;
-    let title = target.closest('button').textContent;
+    let target = e.target.closest('button');
+    let title = target.textContent;
     let modalRecord = {
-      target,
+      // target,
       visible: true,
       title,
       page: 'Главная',
       pageBrief: 'main'
     };
+
+    if (target.dataset.type)
+      modalRecord['type'] = target.dataset.type;
+    if (target.dataset.description)
+      modalRecord['description'] = target.dataset.description;
 
     this.setState({ modalRecord });
   }
@@ -209,16 +224,77 @@ class Main extends Component {
     this.setState({ modalRecord });
   }
 
+  openModalPriceRequest = (e, data) => {
+    let target = e.target.closest('button');
+    let title = target.dataset.type;
+    let modalPriceRequest = {
+      // target,
+      visible: true,
+      title,
+      page: 'Главная',
+      pageBrief: 'main',
+      ...data
+    };
+
+    if (target.dataset.type)
+      modalPriceRequest['type'] = target.dataset.type;
+    if (data && data.description)
+      modalPriceRequest['description'] = data.description;
+
+    this.setState({ modalPriceRequest });
+  }
+
+  closeModalPriceRequest = () => {
+    let modalPriceRequest = {
+      visible: false,
+      title: 'Форма'
+    };
+    this.setState({ modalPriceRequest });
+  }
+
+  openModalPriceInstallment = (e, data) => {
+    let target = e.target.closest('button');
+    let title = target.dataset.type;
+    let modalPriceInstallment = {
+      // target,
+      visible: true,
+      title,
+      page: 'Главная',
+      pageBrief: 'main',
+    };
+
+    if (target.dataset.type)
+      modalPriceInstallment['type'] = target.dataset.type;
+    if (data && data.description)
+      modalPriceInstallment['description'] = data.description;
+
+    this.setState({ modalPriceInstallment });
+  }
+
+  closeModalPriceInstallment = () => {
+    let modalPriceInstallment = {
+      visible: false,
+      title: 'Форма'
+    };
+
+    this.setState({ modalPriceInstallment });
+  }
+
   /*Модальное окно с маркой авто*/
   openModalBrandAuto = (e) => {
-    let target = e.target;
-    let title = target.closest('button').textContent;
+    let target = e.target.closest('button');
+    let title = target.textContent;
     let modalBrandAuto = {
-      target,
+      // target,
       visible: true,
       title,
       page: 'Главная'
     };
+
+    if (target.dataset.type)
+      modalBrandAuto['type'] = target.dataset.type;
+    if (target.dataset.description)
+      modalBrandAuto['description'] = target.dataset.description;
 
     this.setState({ modalBrandAuto });
   }
@@ -237,10 +313,10 @@ class Main extends Component {
       return;
 
     let modalBonus = {
-      data: {
-        type: 'Скидочное предложение',
-        description: 'Бонус -термопластиковая  магистраль'
-      },
+      //data: {
+      type: 'Скидочное предложение',
+      description: 'Бонус -термопластиковая  магистраль',
+      // },
       visible: true,
       title: 'Скидочное предложение',
       page: 'Главная'
@@ -790,7 +866,8 @@ class Main extends Component {
               (infoCity.equipment && infoCity.equipment.length)
                 ? (<Price 
                     equipment={infoCity.equipment}
-                    openModal={this.openModalRecord.bind(this)}
+                    onOpenOrderModal={this.openModalPriceRequest.bind(this)}
+                    onOpenInstallmentModal={this.openModalPriceInstallment.bind(this)}
                 />) : ('')
             }
 
@@ -1029,6 +1106,20 @@ class Main extends Component {
               data={this.state.modalBonus}
               finishSend={this.finishSend}
               close={this.closeModalBonus.bind(this)}
+              csrf={csrf}
+            />
+
+            <ModalPriceRequest
+              data={this.state.modalPriceRequest}
+              finishSend={this.finishSend}
+              close={this.closeModalPriceRequest.bind(this)}
+              csrf={csrf}
+            />
+
+            <ModalPriceInstallment
+              data={this.state.modalPriceInstallment}
+              finishSend={this.finishSend}
+              close={this.closeModalPriceInstallment.bind(this)}
               csrf={csrf}
             />
 

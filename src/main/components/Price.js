@@ -4,15 +4,18 @@ import Gallery from './Gallery';
 
 const noPhoto = 'not-photo.jpg';
 
-function BlockCheck({ cylinder, selectEquipment, idx, name }) {
+function BlockCheck({ cylinder, selectEquipment, idx, name, selectCylinder }) {
   const count = ['4x', '6x', '8x']
   const separator = (number) => (
     (number.toString()).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
   )
+  const styleBlock = (selectCylinder && selectCylinder.count === count[idx])
+    ?'price__body__value active price__check'
+    : 'price__body__value price__check'
 
   return (cylinder)
     ? (
-      <div className="price__body__value price__check">
+      <div className={styleBlock}>
         <div className="price__count">{count[idx]}</div>
         <label className="input__radio">
           <input type="radio" name={name}
@@ -25,11 +28,11 @@ function BlockCheck({ cylinder, selectEquipment, idx, name }) {
     )
 }
 
-function PriceBlock({ equipment, onPayment, onOrder }) {
+function PriceBlock({ equipment, onOrder, onInstallment }) {
   const [widthItem, setWidthItem] = useState(0);
   const [visible, setVisible] = useState(false);
   const [selectAdd, setSelectAdd] = useState([]);
-  const [selectCylinder, setSelectCylinder] = useState(0);
+  const [selectCylinder, setSelectCylinder] = useState(null);
   const [costComposition, setCostComposition] = useState(0);
   const [sendData, setSendData] = useState('');
 
@@ -47,23 +50,62 @@ function PriceBlock({ equipment, onPayment, onOrder }) {
   )
   // Заказ
   const onOrderEquipment = (e) => {
-    let message = `Выбранное оборудование: ${equipment.name || 'Без названия'}. `
+    let message = null;
+    let data = null;
 
     if (selectCylinder) {
-      `Количество цилиндров ${selectCylinder.count}. Стоимость оборудования ${selectCylinder.cylinder}`;
-    }
-    if (selectAdd && selectAdd.length) {
-      message += `Выбрано дополнительное оборудование: `;
+      data = {
+        name:           equipment.name || 'Без названия',
+        countCylinders: selectCylinder.count || null
+      };
 
-      selectAdd.map((add, idx) => {
-        if (!idx) message += `${add.name} (${add.price} руб)`;
-        else message += `, ${add.name} (${add.price} руб)`;
-      });
+      if (selectCylinder &&  selectCylinder.cylinder) {
+        data['price'] = +selectCylinder.cylinder + costComposition;
+      }
+
+      message = `Выбранное оборудование: ${equipment.name || 'Без названия'}. `;
+      message += `Количество цилиндров ${selectCylinder.count}. Стоимость оборудования ${selectCylinder.cylinder}`;
+
+      if (selectAdd && selectAdd.length) {
+        message += `Выбрано дополнительное оборудование: `;
+  
+        selectAdd.map((add, idx) => {
+          if (!idx) message += `${add.name} (${add.price} руб)`;
+          else message += `, ${add.name} (${add.price} руб)`;
+        });
+      }
+
+      data['description'] = message;
     }
 
     setSendData(message);
-    onOrder(e);
+    onOrder(e, data);
   }
+
+  // Рассрочка
+  const onInstallmentEquipment = (e) => {
+    let message = null;
+    let data = null;
+
+    if (selectCylinder) {
+      message = `Выбранное оборудование: ${equipment.name || 'Без названия'}. `;
+      message += `Количество цилиндров ${selectCylinder.count}. Стоимость оборудования ${selectCylinder.cylinder}`;
+
+      if (selectAdd && selectAdd.length) {
+        message += `Выбрано дополнительное оборудование: `;
+  
+        selectAdd.map((add, idx) => {
+          if (!idx) message += `${add.name} (${add.price} руб)`;
+          else message += `, ${add.name} (${add.price} руб)`;
+        });
+      }
+      data = { description: message };
+    }
+
+    setSendData(message);
+    onInstallment(e, data);
+  }
+
   const onSelectCompositionAdd = (composition, e) => {
     const checked = e.target.checked;
     
@@ -109,6 +151,7 @@ function PriceBlock({ equipment, onPayment, onOrder }) {
                 <BlockCheck 
                   name={equipment.id}
                   selectEquipment={onSelectCylinder}
+                  selectCylinder={selectCylinder}
                   cylinder={cylinder}
                   key={i}
                   idx={i}
@@ -124,9 +167,9 @@ function PriceBlock({ equipment, onPayment, onOrder }) {
             <button 
               className="btn-1 btn--blue-border"
               data-type="Оформить рассрочку"
-              data-description={sendData}
+              // data-description={sendData}
               aria-label="рассрочка"
-              onClick={onOrderEquipment}
+              onClick={onInstallmentEquipment}
             >
               <span className="price--desctop">Оформить рассрочку</span>
               <span className="price--mobile">Рассрочка</span>
@@ -134,7 +177,7 @@ function PriceBlock({ equipment, onPayment, onOrder }) {
             <button 
               className="btn-1 btn--blue"
               data-type="Оформить заявку"
-              data-description={sendData}
+              // data-description={sendData}
               aria-label="заявка"
               onClick={onOrderEquipment}
             >
@@ -237,7 +280,7 @@ function PriceBlock({ equipment, onPayment, onOrder }) {
                     ? (<p>Итого: <span>{separator(+selectCylinder.cylinder + costComposition)} руб</span></p>) 
                     : null }
                   <button className="btn-1"
-                    data-type="Заказать установку оборудования"
+                    data-type="Оформить заявку"
                     data-description={sendData}
                     aria-label="заказать"
                     onClick={onOrderEquipment}
@@ -259,7 +302,8 @@ function PriceBlock({ equipment, onPayment, onOrder }) {
 
 let isDistance = false;
 
-function Price({ openModal, equipment }) {
+
+function Price({ onOpenOrderModal, onOpenInstallmentModal, equipment }) {
   const [isLoadComponent, setIsLoadComponent] = useState(false);
   const header = useRef(null);
   const container = useRef(null);
@@ -315,8 +359,8 @@ function Price({ openModal, equipment }) {
               equipment.map((item, idx) =>
                 (<PriceBlock 
                   equipment={item}
-                  onPayment={onOpenModal}
-                  onOrder={onOpenModal}
+                  onOrder={onOpenOrderModal}
+                  onInstallment={onOpenInstallmentModal}
                   key={idx}
                 />)
               )

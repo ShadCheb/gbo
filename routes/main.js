@@ -71,19 +71,11 @@ router.post('/upload', async (req, res) => {
 });
 
 router.post('/mail', async (req, res) => {
-  const page = req.body.page;
-  const btn = req.body.btn;
-  const name = req.body.name;
-  const phone = req.body.phone;
-  const message = req.body.message;
-  const type = req.body.type;
-  const description = req.body.description;
-  const brand = req.body.brand;
-  const city = req.session.dataGeneral.data.name;
-  const brief = req.session.dataGeneral.data.brief;
+  const { page, btn, name, phone, 
+    message, type, description, brand, issue } = req.body;
+  const { name: city, brief } = req.session.dataGeneral.data;
   let { email } = req.session.dataGeneral.data.city;
   let emailData = emails.default;
-
 
   if (!email)
     email = 'gazoved21@mail.ru';
@@ -105,9 +97,10 @@ router.post('/mail', async (req, res) => {
     output += `<p><b>Тип заявки:</b> ${type}</p>`;
   if (description)
     output += `<p><b>Описание заявки:</b> ${description}</p>`;
-    
   if (brand)
-    output += `<br /><p><b>Марка автомобиля:</b> ${brand}</p>`;
+    output += `<p><b>Марка автомобиля:</b> ${brand}</p>`;
+  if (issue)
+    output += `<p><b>Год выпуска:</b> ${issue}</p>`;
   if (name)
     output += `<br /><p><b>Имя отправителя:</b> ${name}</p>`;
   if (phone)
@@ -116,7 +109,6 @@ router.post('/mail', async (req, res) => {
   if (emails[brief]) {
     emailData = emails[brief];
   }
-
 
   let transporter = nodemailer.createTransport({
     host: emailData.host,
@@ -136,7 +128,7 @@ router.post('/mail', async (req, res) => {
     to: email,
     subject: 'Сообщение с сайта Gazoved',
     html: output // html body
-  };
+  }; 
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {

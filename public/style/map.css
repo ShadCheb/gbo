@@ -21,7 +21,7 @@
   line-height: 1.2em;
 }
 .map__label__phone strong {
-  font-weight: 800;
+  font-weight: 700;
 }
 .map__label__phone > a {
   transition: color .3s ease;
@@ -35,7 +35,7 @@
 }
 .map__label__address > strong {
   display: block;
-  font-weight: 800;
+  font-weight: 700;
 }
 .map__label__address > p {
   margin-left: 30px;

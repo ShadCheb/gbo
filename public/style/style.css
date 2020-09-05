@@ -840,6 +840,9 @@ img {
   line-height: 1.2em;
   color: #002632;
 }
+.modal__p--null {
+  margin-bottom: 0;
+}
 .modal__btn {
   padding-top: 40px;
   margin-top: -5px;
@@ -863,6 +866,9 @@ img {
 .ant-modal-body {
   padding-bottom: 50px;
 }
+.ant-modal-wrap {
+  z-index: 10000;
+}
 .form__text {
   font-size: 14px;
   line-height: 1.15em;
@@ -871,6 +877,17 @@ img {
 }
 .form--up {
   margin-top: -20px;
+}
+.form__description {
+  margin: 10px 0 40px 50px;
+}
+.form__description > p {
+  margin-bottom: 7px;
+  font-size: 16px;
+  line-height: 1.2em;
+}
+.form__description > p strong {
+  font-weight: 600;
 }
 .modal__h2 {
   margin-bottom: 30px;
@@ -919,6 +936,9 @@ img {
     line-height: 22px;
     text-transform: none;
   }
+  .modal__p--null {
+    margin-bottom: 0;
+  }
   .modal__form {
     width: auto;
   }
@@ -938,6 +958,13 @@ img {
   .modal__close > span {
     top: 23px;
     left: 10px;
+  }
+  .form__description {
+    margin: 10px 0 30px 0;
+  }
+  .form__description > p {
+    margin-bottom: 4px;
+    font-size: 14px;
   }
 }
 
