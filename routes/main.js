@@ -72,7 +72,8 @@ router.post('/upload', async (req, res) => {
 
 router.post('/mail', async (req, res) => {
   const { page, btn, name, phone, 
-    message, type, description, brand, issue } = req.body;
+    message, type, description, brand, issue,
+    power, birth, addres, number__passport, from__passport } = req.body;
   const { name: city, brief } = req.session.dataGeneral.data;
   let { email } = req.session.dataGeneral.data.city;
   let emailData = emails.default;
@@ -99,12 +100,23 @@ router.post('/mail', async (req, res) => {
     output += `<p><b>Описание заявки:</b> ${description}</p>`;
   if (brand)
     output += `<p><b>Марка автомобиля:</b> ${brand}</p>`;
+  if (power)
+    output += `<p><b>Мощность:</b> ${power}</p>`;
   if (issue)
     output += `<p><b>Год выпуска:</b> ${issue}</p>`;
   if (name)
     output += `<br /><p><b>Имя отправителя:</b> ${name}</p>`;
   if (phone)
     output += `<p><b>Телефон отправителя:</b> ${phone}</p>`; 
+
+  if (birth)
+    output += `<p><b>Дата рождения:</b> ${birth}</p>`;
+  if (addres)
+    output += `<p><b>Адрес регистрации:</b> ${addres}</p>`;
+  if (number__passport)
+    output += `<p><b>Серия и номер паспорта:</b> ${number__passport}</p>`;
+  if (from__passport)
+    output += `<p><b>Кем и когда выдан:</b> ${from__passport}</p>`;
 
   if (emails[brief]) {
     emailData = emails[brief];

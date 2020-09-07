@@ -2140,3 +2140,7 @@ picture {
   }
 }
 
+.ant-message {
+  z-index: 10002;
+}
+

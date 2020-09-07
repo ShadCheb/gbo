@@ -350,8 +350,8 @@ class Main extends Component {
     const checkFunctionList = (type, value) => {
       if (type == 'required') {
         return (value !== '')
-          ? {result: false, message: 'Введены не все данные'}
-          : {result: true}
+          ? {result: true}
+          : {result: false, message: 'Введены не все данные'}
         
       } else if (type == 'phone') {
         let phone = value.match(/\d/g);
@@ -651,7 +651,7 @@ class Main extends Component {
                                 </div>
                               </div>
                             </div>
-                            <a href={`https://wa.me/${infoCity.phone.whatsup}`} />
+                            <a href={`https://wa.me/${infoCity.phone.whatsup}?text=Рассчитать%20стоимость%20установки%20ГБО!`} />
                           </div>
                         </div>
                       ) : null
@@ -1154,7 +1154,7 @@ class Main extends Component {
                         <use xlinkHref="/img/sprite-icon.svg#icon-whatsup" />
                       </svg>
                     </div>                      
-                    <a href={`https://wa.me/${infoCity.phone.whatsup}`} />
+                    <a className="link__block" href={`https://wa.me/${infoCity.phone.whatsup}?text=Рассчитать%20стоимость%20установки%20ГБО!`} />
                   </div>
                 ) : <div />
               }
