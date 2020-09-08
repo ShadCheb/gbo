@@ -885,14 +885,14 @@ class Main extends Component {
             </section>
 
             {/* Оборудование */}
-            {
+            {/* {
               (infoCity.equipment && infoCity.equipment.length)
                 ? (<Price 
                     equipment={infoCity.equipment}
                     onOpenOrderModal={this.openModalPriceRequest.bind(this)}
                     onOpenInstallmentModal={this.openModalPriceInstallment.bind(this)}
                 />) : ('')
-            }
+            } */}
 
             {/* Сотрудники */}
             <div id="employee">
