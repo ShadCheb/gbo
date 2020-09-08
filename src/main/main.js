@@ -136,7 +136,8 @@ class Main extends Component {
   };
 
   componentDidMount = () => {
-    this.initModalBonus();
+    // Подключение скидочного предложения
+    // this.initModalBonus();
 
     window.addEventListener('scroll', this.eventScrollToMap);
     window.addEventListener('scroll', this.eventScrollToEmployee);
@@ -167,6 +168,7 @@ class Main extends Component {
     this.setState({benefit});
   }
 
+  // Скидочное предложение
   initModalBonus = () => {
     let bonus = localStorage.getItem('bonusGazoved');
 

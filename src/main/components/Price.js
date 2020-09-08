@@ -164,7 +164,8 @@ function PriceBlock({ equipment, onOrder, onInstallment }) {
               onClick={onVisible}
             >Подробнее</a>
             <div />
-            <button 
+            {/* Кнопка оформить рассрочку */}
+            {/* <button 
               className="btn-1 btn--blue-border"
               data-type="Оформить рассрочку"
               // data-description={sendData}
@@ -173,7 +174,7 @@ function PriceBlock({ equipment, onOrder, onInstallment }) {
             >
               <span className="price--desctop">Оформить рассрочку</span>
               <span className="price--mobile">Рассрочка</span>
-            </button>
+            </button> */}
             <button 
               className="btn-1 btn--blue"
               data-type="Оформить заявку"
