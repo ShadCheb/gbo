@@ -83,7 +83,7 @@ class Stock extends Component {
               <h2 className="caption__section">Акции</h2>
             </div>
             <div className="stock__body">
-              <article className="stock__block">
+              {/* <article className="stock__block">
                 <div>
                   <div className="stock__block__img">
                     <img src="/img/stock/present.png" alt="Термопластиковая магистраль" />
@@ -96,7 +96,7 @@ class Stock extends Component {
                     </div>
                   </div>
                 </div>
-              </article>
+              </article> */}
               <article className="stock__block">
                 <div>
                   <div className="stock__block__img">

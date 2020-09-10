@@ -1149,15 +1149,9 @@ class Main extends Component {
             <div className="mobile-header">
               {(infoCity.phone && infoCity.phone.whatsup)
                 ? (
-                  <div className="mobile-header__whatsapp">
-                    <p>Узнать стоимость в WhatsApp</p>
-                    <div className="mobile-header__whatsapp-img">
-                      <svg>
-                        <use xlinkHref="/img/sprite-icon.svg#icon-whatsup" />
-                      </svg>
-                    </div>                      
-                    <a className="link__block" href={`https://wa.me/${infoCity.phone.whatsup}?text=Рассчитать%20стоимость%20установки%20ГБО!`} />
-                  </div>
+                  <button className="mobile-header__whatsapp" onClick={this.openModalBrandAuto}>
+                    <p>Рассчитать стоимость</p>
+                  </button>
                 ) : <div />
               }
 
