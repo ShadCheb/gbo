@@ -653,7 +653,7 @@ class Main extends Component {
                                 </div>
                               </div>
                             </div>
-                            <a href={`https://wa.me/${infoCity.phone.whatsup}?text=Рассчитать%20стоимость%20установки%20ГБО!`} />
+                            <a href={`https://wa.me/${infoCity.phone.whatsup}?text=Хочу%20подобрать%20оптимальное%20ГБО%20на%20свой%20автомобиль`} />
                           </div>
                         </div>
                       ) : null
@@ -1150,7 +1150,9 @@ class Main extends Component {
               {(infoCity.phone && infoCity.phone.whatsup)
                 ? (
                   <button className="mobile-header__whatsapp" onClick={this.openModalBrandAuto}>
-                    <p>Рассчитать стоимость</p>
+                    <div>
+                      <p>Рассчитать стоимость</p>
+                    </div>
                   </button>
                 ) : <div />
               }
