@@ -136,7 +136,7 @@ class Stock extends Component {
                     <div>
                       <p className="stock__header">Акция</p>
                       <h2 className="stock__caption">Приведи друга - <strong>получи бесплатно</strong>
-                        <strong> 50л газа</strong></h2>
+                        <strong> 30л газа</strong></h2>
                       <p className="stock__label">акция распространяется только на установку нового не акционного оборудования</p>
                     </div>
                   </div>

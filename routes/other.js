@@ -18,6 +18,17 @@ router.get('/stock', detaGeneral, async (req, res) => {
   });
 });
 
+router.get('/stock/friend', detaGeneral, async (req, res) => {
+  let {cityList, data} = res.locals.dataGeneral;
+
+  res.render('page', {
+    title: 'Акция приведи друга | Gazoved ' + data.name,
+    isStockItem: true,
+    cityList: JSON.stringify(cityList),
+    data: JSON.stringify(data)
+  });
+});
+
 router.get('/contact', detaGeneral, async (req, res) => {
   let {cityList, data} = res.locals.dataGeneral;
 

@@ -26,6 +26,7 @@ module.exports = {
     register: './src/service/service-register.js',
     variator: './src/service/service-variator.js',
     stock: './src/stock/stock.js',
+    'stock-item': './src/stock/stock-item.js',
     contact: './src/contact/contact.js',
     work: './src/work/work.js',
     'work-item': './src/work/work-item.js',

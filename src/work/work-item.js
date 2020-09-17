@@ -42,19 +42,19 @@ class WorkItem extends Component {
   }
 
   // Меняем город в шапке
-  handleChange = (value) => {
-    let brief = '';
+  // handleChange = (value) => {
+  //   let brief = '';
 
-    this.state.cityList.some(c => {
-      if (c.id == value){
-        brief = c.brief;
+  //   this.state.cityList.some(c => {
+  //     if (c.id == value){
+  //       brief = c.brief;
 
-        return true;
-      }
-    });
+  //       return true;
+  //     }
+  //   });
 
-    location.href = '/?city=' + brief;
-  }
+  //   location.href = '/?city=' + brief;
+  // }
 
   openModalRecord = (e) => {
     let target = e.target;
@@ -99,7 +99,7 @@ class WorkItem extends Component {
             <Header 
               cityList={this.state.cityList}
               activeCity={infoCity}
-              handleChange={this.handleChange}
+              // handleChange={this.handleChange}
             />
             <Nav 
               page="isWork"
