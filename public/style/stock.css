@@ -24,7 +24,8 @@
   margin-bottom: 30px;
   width: calc(50% - 40px);
   height: 400px;
-  background-color: #00c2ff;
+  /* background-color: rgba(0,194,255,.5); */
+  background: linear-gradient(45deg, rgba(0,194,255,.4), rgba(0,194,255,.8));
   box-shadow: 7px 7px 20px 0 rgba(28,28,28,.1);
 }
 .stock__block::after {
@@ -56,6 +57,14 @@
   padding-right: 20px;
   width: calc(100% - 110px);
   text-align: right;
+}
+.stock__block__text a {
+  color: #fff;
+}
+.stock__more {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: underline;
 }
 .stock__header {
   position: relative;
@@ -120,7 +129,7 @@
 @media (max-width: 768px) {
   .stock__block {
     width: calc(100% - 40px);
-    height: 230px;
+    height: 270px;
   }
   .stock__block::after {
     top: -14px;

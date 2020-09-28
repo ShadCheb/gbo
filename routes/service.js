@@ -59,4 +59,15 @@ router.get('/variator', detaGeneral, (req, res) => {
   });
 });
 
+router.get('/propan', detaGeneral, (req, res) => {
+  let {cityList, data} = res.locals.dataGeneral;
+
+  res.render('service-item', {
+    title: 'Пропан | Gazoved ' + data.name,
+    isPropan: true,
+    cityList: JSON.stringify(cityList),
+    data: JSON.stringify(data)
+  });
+});
+
 module.exports = router;

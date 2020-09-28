@@ -25,6 +25,7 @@ module.exports = {
     dizel: './src/service/service-dizel.js',
     register: './src/service/service-register.js',
     variator: './src/service/service-variator.js',
+    propan: './src/service/service-propan.js',
     stock: './src/stock/stock.js',
     'stock-item': './src/stock/stock-item.js',
     contact: './src/contact/contact.js',
