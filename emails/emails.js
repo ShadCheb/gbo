@@ -1,5 +1,5 @@
 const emails ={
-  cheboksary: {
+  /* cheboksary: {
     user: 'cheb@gazoved.com',
     pass: 'Vxnpm2ADzq',
     host: 'smtp.mail.ru',
@@ -28,10 +28,10 @@ const emails ={
     pass: 'Pndp54MqRc',
     host: 'smtp.mail.ru',
     port: 465,
-  },
+  }, */
   default: {
-    user: 't3.t3st@mail.ru',
-    pass: 'sr?Iolr2UTP1',
+    user: 'boom-ik@mail.ru',
+    pass: 'Asdfgh!23',
     host: 'smtp.mail.ru',
     port: 465,
   },
