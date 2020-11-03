@@ -55,6 +55,8 @@
     "react-dom": "^16.12.0",
     "react-input-mask": "^2.0.4",
     "react-lightgallery": "^0.6.3",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
     "sequelize": "^5.21.4",
     "webpack-node-externals": "^2.5.1"
   }

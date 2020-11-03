@@ -2,6 +2,7 @@ const {Router} = require('express');
 const router = Router();
 const nodemailer = require('nodemailer');
 const fs = require("fs");
+var rp = require('request-promise');
 
 const Employee = require('../models/employee');
 const Equipment = require('../models/equipment');
@@ -149,7 +150,37 @@ router.post('/mail', async (req, res) => {
       return;
     }
 
-    res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', info, err: error});
+    // Отправка успешного запроса на стороний сервис
+    const options = {
+      method: 'POST',
+      uri: 'https://hub.6crm.ru/gazoved/site/server.php',
+      body: {
+        page,
+        btn,
+        name,
+        phone,
+        message,
+        type,
+        description,
+        brand,
+      },
+      json: true // Automatically stringifies the body to JSON
+    };
+    let sendRequest = '';
+
+    rp(options)
+      .then(function (parsedBody) {
+        // POST succeeded...
+        console.log('parsedBody', parsedBody);
+        sendRequest = 'success';
+      })
+      .catch(function (err) {
+        // POST failed...
+        console.log('err', err);
+        sendRequest = 'err';
+      });
+
+    res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', info, err: error, sendRequest });
   });
 });
 

@@ -452,14 +452,14 @@ class Main extends Component {
 
           this.success(data.success);
 
-          // Отправка успешного запроса на стороний сервис
-          fetch('https://www.hub.6crm.ru/gazoved/site/server.php', {
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8',
-            },
-            body: JSON.stringify(dataSend)
-          });
+          // // Отправка успешного запроса на стороний сервис
+          // fetch('https://www.hub.6crm.ru/gazoved/site/server.php', {
+          //   method: 'post',
+          //   headers: {
+          //     'Content-Type': 'application/json;charset=utf-8',
+          //   },
+          //   body: JSON.stringify(dataSend)
+          // });
         } else if (data.error) {
           this.error(data.error);
         }

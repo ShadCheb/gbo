@@ -143,13 +143,13 @@ function ModalRecord(props) {
           success(data.success);
 
           // Отправка успешного запроса на стороний сервис
-          fetch('https://hub.6crm.ru/gazoved/site/server.php', {
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8',
-            },
-            body: JSON.stringify(dataSend)
-          });
+          // fetch('https://hub.6crm.ru/gazoved/site/server.php', {
+          //   method: 'post',
+          //   headers: {
+          //     'Content-Type': 'application/json;charset=utf-8',
+          //   },
+          //   body: JSON.stringify(dataSend)
+          // });
         } else if (data.error) {
           error(data.error);
         }
