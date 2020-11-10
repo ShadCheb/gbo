@@ -2,7 +2,7 @@ const {Router} = require('express');
 const router = Router();
 const nodemailer = require('nodemailer');
 const fs = require("fs");
-var rp = require('request-promise');
+const rp = require('request-promise');
 
 const Employee = require('../models/employee');
 const Equipment = require('../models/equipment');
@@ -123,6 +123,49 @@ router.post('/mail', async (req, res) => {
     emailData = emails[brief];
   }
 
+  console.log('=================BODY', {
+    page,
+    btn,
+    name,
+    phone,
+    message,
+    type,
+    description,
+    brand,
+  });
+
+  // // Отправка успешного запроса на стороний сервис
+  // const options = {
+  //   method: 'GET',
+  //   uri: 'https://hub.6crm.ru/gazoved/site/server.php',
+  //   body: {
+  //     page,
+  //     btn,
+  //     name,
+  //     phone,
+  //     message,
+  //     type,
+  //     description,
+  //     brand,
+  //   },
+  //   // json: true // Automatically stringifies the body to JSON
+  // };
+
+  // rp(options)
+  //   .then(function (parsedBody) {
+  //     console.log('parsedBody', parsedBody);
+  //     res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', sendRequest: 'success' });
+  //   })
+  //   .catch(function (err) {
+  //     console.log('err', err);
+  //     res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', sendRequest: 'err' });
+  //   });
+
+
+  // return;
+
+
+
   let transporter = nodemailer.createTransport({
     host: emailData.host,
     port: emailData.port,
@@ -166,21 +209,16 @@ router.post('/mail', async (req, res) => {
       },
       json: true // Automatically stringifies the body to JSON
     };
-    let sendRequest = '';
 
     rp(options)
       .then(function (parsedBody) {
-        // POST succeeded...
         console.log('parsedBody', parsedBody);
-        sendRequest = 'success';
+        res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', info, err: error, sendRequest: 'success' });
       })
       .catch(function (err) {
-        // POST failed...
         console.log('err', err);
-        sendRequest = 'err';
+        res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', info, err: error, sendRequest: 'err' });
       });
-
-    res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', info, err: error, sendRequest });
   });
 });
 
