@@ -134,9 +134,11 @@ router.post('/mail', async (req, res) => {
     brand,
   });
 
-  // // Отправка успешного запроса на стороний сервис
+  // Отправка успешного запроса на стороний сервис
   // const options = {
-  //   method: 'GET',
+  //   console.log('AAAAAA');
+  //
+  //   method: 'POST',
   //   uri: 'https://hub.6crm.ru/gazoved/site/server.php',
   //   body: {
   //     page,
@@ -148,8 +150,10 @@ router.post('/mail', async (req, res) => {
   //     description,
   //     brand,
   //   },
-  //   // json: true // Automatically stringifies the body to JSON
+  //   json: true // Automatically stringifies the body to JSON
   // };
+
+
 
   // rp(options)
   //   .then(function (parsedBody) {
@@ -195,7 +199,7 @@ router.post('/mail', async (req, res) => {
 
     // Отправка успешного запроса на стороний сервис
     const options = {
-      method: 'POST',
+      method: 'GET',
       uri: 'https://hub.6crm.ru/gazoved/site/server.php',
       body: {
         page,
