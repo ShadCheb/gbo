@@ -123,53 +123,6 @@ router.post('/mail', async (req, res) => {
     emailData = emails[brief];
   }
 
-  console.log('=================BODY', {
-    page,
-    btn,
-    name,
-    phone,
-    message,
-    type,
-    description,
-    brand,
-  });
-
-  // Отправка успешного запроса на стороний сервис
-  // const options = {
-  //   console.log('AAAAAA');
-  //
-  //   method: 'POST',
-  //   uri: 'https://hub.6crm.ru/gazoved/site/server.php',
-  //   body: {
-  //     page,
-  //     btn,
-  //     name,
-  //     phone,
-  //     message,
-  //     type,
-  //     description,
-  //     brand,
-  //   },
-  //   json: true // Automatically stringifies the body to JSON
-  // };
-
-
-
-  // rp(options)
-  //   .then(function (parsedBody) {
-  //     console.log('parsedBody', parsedBody);
-  //     res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', sendRequest: 'success' });
-  //   })
-  //   .catch(function (err) {
-  //     console.log('err', err);
-  //     res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', sendRequest: 'err' });
-  //   });
-
-
-  // return;
-
-
-
   let transporter = nodemailer.createTransport({
     host: emailData.host,
     port: emailData.port,
@@ -196,6 +149,31 @@ router.post('/mail', async (req, res) => {
 
       return;
     }
+
+    // Отправка успешного запроса на стороний сервис Calltouch
+    const numberServer = 16;
+    const siteId = 41294;
+    const optionsCall = {
+      method: 'GET',
+      uri: `https://api-node${numberServer}.calltouch.ru/calls-service/RestAPI/requests/${siteId}/register/`,
+      body: {
+        subject: type, // Название формы
+        fio: name || 'NoName',
+        phoneNumber: phone,
+        comment: description,
+        tags: city,
+        requestUrl: `https://gazoved.com/${page}`
+      }
+    };
+    rp(optionsCall)
+      .then(function (parsedBody) {
+        console.log('parsedBody', parsedBody);
+        res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', info, err: error, sendRequest: 'success' });
+      })
+      .catch(function (err) {
+        console.log('err', err);
+        res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', info, err: error, sendRequest: 'err' });
+      });
 
     // Отправка успешного запроса на стороний сервис
     const options = {
