@@ -200,8 +200,8 @@ router.post('/mail', async (req, res) => {
     // Отправка успешного запроса на стороний сервис
     const options = {
       method: 'GET',
-      // uri: 'https://hub.6crm.ru/gazoved/site/server.php',
-      uri: 'https://webhook.site/8657fa9f-3816-4438-b907-3f7842ad37a5',
+      uri: 'https://hub.6crm.ru/gazoved/site/server.php',
+      //uri: 'https://webhook.site/8657fa9f-3816-4438-b907-3f7842ad37a5',
       body: {
         page,
         btn,
