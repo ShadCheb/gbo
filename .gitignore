@@ -1,6 +1,5 @@
 node_modules/
 images/
-src/
 .babelrc
 .webpack.config.js
 public/robots.txt
