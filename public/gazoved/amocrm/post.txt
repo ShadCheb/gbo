@@ -1,0 +1,1789 @@
+Ищем контакт
+604-70-33_
+Ответ пуст
+Добавляем контакт
+Array
+(
+    [0] => Array
+        (
+            [custom_fields_values] => Array
+                (
+                    [0] => Array
+                        (
+                            [field_id] => 183971
+                            [values] => Array
+                                (
+                                    [0] => Array
+                                        (
+                                            [value] => +7 (931) 604-70-33_
+                                            [enum_code] => WORK
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+            [name] => Без имени
+            [responsible_user_id] => 6545914
+            [_embedded] => Array
+                (
+                    [tags] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [name] => сайт
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+Ответ
+6884757
+Добавляем  сделку
+Array
+(
+    [0] => Array
+        (
+            [name] => Заявка с сайта от Без имени
+            [responsible_user_id] => 6545914
+            [status_id] => 36209131
+            [_embedded] => Array
+                (
+                    [tags] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [name] => сайт
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+Ответ
+4659451
+Объединение сделки и контакта
+https://gazovedufa.amocrm.ru/api/v4/leads/4659451/link
+Array
+(
+    [0] => Array
+        (
+            [to_entity_id] => 6884757
+            [to_entity_type] => contacts
+            [metadata] => Array
+                (
+                    [is_main] => 1
+                )
+
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/leads/4659451/links"
+        }
+    },
+    "_embedded": {
+        "links": [
+            {
+                "to_entity_id": 6884757,
+                "to_entity_type": "contacts",
+                "metadata": null
+            }
+        ]
+    }
+}
+Добавление примечания
+Array
+(
+    [0] => Array
+        (
+            [entity_id] => 4659451
+            [note_type] => common
+            [params] => Array
+                (
+                    [text] => Заявка с сайта
+Имя: Без имени
+Телефон: +7 (931) 604-70-33_
+Страница: Главная
+Форма: Узнать цену установки ГБО
+                )
+
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/leads/notes"
+        }
+    },
+    "_embedded": {
+        "notes": [
+            {
+                "id": 20307161,
+                "entity_id": 4659451,
+                "created_by": null,
+                "updated_by": null,
+                "created_at": null,
+                "updated_at": null,
+                "responsible_user_id": null,
+                "group_id": null,
+                "note_type": null,
+                "params": null,
+                "account_id": null,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/leads/4659451/notes/20307161"
+                    }
+                }
+            }
+        ]
+    }
+}
+Добавление задачия
+Array
+(
+    [0] => Array
+        (
+            [responsible_user_id] => 6545914
+            [created_by] => 6545914
+            [entity_id] => 4659451
+            [entity_type] => leads
+            [text] => Обработать заявку от клиента
+            [complete_till] => 1607937014
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/tasks"
+        }
+    },
+    "_embedded": {
+        "tasks": [
+            {
+                "id": 1597301,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/tasks/1597301"
+                    }
+                }
+            }
+        ]
+    }
+}
+Ищем контакт
+604-70-33_
+Ответ
+Array
+(
+    [id] => 6884757
+    [name] => Без имени
+    [first_name] => 
+    [last_name] => 
+    [responsible_user_id] => 6545914
+    [group_id] => 0
+    [created_by] => 0
+    [updated_by] => 0
+    [created_at] => 1607936111
+    [updated_at] => 1607936111
+    [closest_task_at] => 
+    [custom_fields_values] => Array
+        (
+            [0] => Array
+                (
+                    [field_id] => 183971
+                    [field_name] => Телефон
+                    [field_code] => PHONE
+                    [field_type] => multitext
+                    [values] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [value] => +7 (931) 604-70-33_
+                                    [enum_id] => 251869
+                                    [enum_code] => WORK
+                                )
+
+                        )
+
+                )
+
+        )
+
+    [account_id] => 29135494
+    [_links] => Array
+        (
+            [self] => Array
+                (
+                    [href] => https://gazovedufa.amocrm.ru/api/v4/contacts/6884757
+                )
+
+        )
+
+    [_embedded] => Array
+        (
+            [tags] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 84049
+                            [name] => сайт
+                        )
+
+                )
+
+            [leads] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 4659451
+                            [_links] => Array
+                                (
+                                    [self] => Array
+                                        (
+                                            [href] => https://gazovedufa.amocrm.ru/api/v4/leads/4659451
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+            [companies] => Array
+                (
+                )
+
+        )
+
+)
+
+Ищем сделку
+https://gazovedufa.amocrm.ru/api/v4/leads?id[]=4659451
+Ответ
+Array
+(
+    [_page] => 1
+    [_links] => Array
+        (
+            [self] => Array
+                (
+                    [href] => https://gazovedufa.amocrm.ru/api/v4/leads?id%5B0%5D=4659451&page=1&limit=50
+                )
+
+            [next] => Array
+                (
+                    [href] => https://gazovedufa.amocrm.ru/api/v4/leads?id%5B0%5D=4659451&page=2&limit=50
+                )
+
+        )
+
+    [_embedded] => Array
+        (
+            [leads] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 4659451
+                            [name] => Заявка с сайта от Без имени
+                            [price] => 0
+                            [responsible_user_id] => 6545914
+                            [group_id] => 0
+                            [status_id] => 36209131
+                            [pipeline_id] => 3735907
+                            [loss_reason_id] => 
+                            [created_by] => 0
+                            [updated_by] => 0
+                            [created_at] => 1607936113
+                            [updated_at] => 1607936115
+                            [closed_at] => 
+                            [closest_task_at] => 1607937014
+                            [is_deleted] => 
+                            [custom_fields_values] => 
+                            [score] => 
+                            [account_id] => 29135494
+                            [_links] => Array
+                                (
+                                    [self] => Array
+                                        (
+                                            [href] => https://gazovedufa.amocrm.ru/api/v4/leads/4659451
+                                        )
+
+                                )
+
+                            [_embedded] => Array
+                                (
+                                    [tags] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [id] => 84051
+                                                    [name] => сайт
+                                                )
+
+                                        )
+
+                                    [companies] => Array
+                                        (
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+Добавление примечания
+Array
+(
+    [0] => Array
+        (
+            [entity_id] => 4659451
+            [note_type] => common
+            [params] => Array
+                (
+                    [text] => Повторная заявка с сайта
+Имя: Без имени
+Телефон: +7 (931) 604-70-33_
+Страница: Главная
+Форма: Узнать цену установки ГБО
+                )
+
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/leads/notes"
+        }
+    },
+    "_embedded": {
+        "notes": [
+            {
+                "id": 20307407,
+                "entity_id": 4659451,
+                "created_by": null,
+                "updated_by": null,
+                "created_at": null,
+                "updated_at": null,
+                "responsible_user_id": null,
+                "group_id": null,
+                "note_type": null,
+                "params": null,
+                "account_id": null,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/leads/4659451/notes/20307407"
+                    }
+                }
+            }
+        ]
+    }
+}
+Добавление задачия
+Array
+(
+    [0] => Array
+        (
+            [responsible_user_id] => 6545914
+            [created_by] => 6545914
+            [entity_id] => 4659451
+            [entity_type] => leads
+            [text] => Обработать повторную заявку от клиента
+            [complete_till] => 1607937037
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/tasks"
+        }
+    },
+    "_embedded": {
+        "tasks": [
+            {
+                "id": 1597321,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/tasks/1597321"
+                    }
+                }
+            }
+        ]
+    }
+}
+Ищем контакт
+604-70-33_
+Ответ
+Array
+(
+    [id] => 6884757
+    [name] => Без имени
+    [first_name] => 
+    [last_name] => 
+    [responsible_user_id] => 6545914
+    [group_id] => 0
+    [created_by] => 0
+    [updated_by] => 0
+    [created_at] => 1607936111
+    [updated_at] => 1607936111
+    [closest_task_at] => 
+    [custom_fields_values] => Array
+        (
+            [0] => Array
+                (
+                    [field_id] => 183971
+                    [field_name] => Телефон
+                    [field_code] => PHONE
+                    [field_type] => multitext
+                    [values] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [value] => +7 (931) 604-70-33_
+                                    [enum_id] => 251869
+                                    [enum_code] => WORK
+                                )
+
+                        )
+
+                )
+
+        )
+
+    [account_id] => 29135494
+    [_links] => Array
+        (
+            [self] => Array
+                (
+                    [href] => https://gazovedufa.amocrm.ru/api/v4/contacts/6884757
+                )
+
+        )
+
+    [_embedded] => Array
+        (
+            [tags] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 84049
+                            [name] => сайт
+                        )
+
+                )
+
+            [leads] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 4659451
+                            [_links] => Array
+                                (
+                                    [self] => Array
+                                        (
+                                            [href] => https://gazovedufa.amocrm.ru/api/v4/leads/4659451
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+            [companies] => Array
+                (
+                )
+
+        )
+
+)
+
+Ищем сделку
+https://gazovedufa.amocrm.ru/api/v4/leads?id[]=4659451
+Ответ
+Array
+(
+    [_page] => 1
+    [_links] => Array
+        (
+            [self] => Array
+                (
+                    [href] => https://gazovedufa.amocrm.ru/api/v4/leads?id%5B0%5D=4659451&page=1&limit=50
+                )
+
+            [next] => Array
+                (
+                    [href] => https://gazovedufa.amocrm.ru/api/v4/leads?id%5B0%5D=4659451&page=2&limit=50
+                )
+
+        )
+
+    [_embedded] => Array
+        (
+            [leads] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 4659451
+                            [name] => Заявка с сайта от Без имени
+                            [price] => 0
+                            [responsible_user_id] => 6545914
+                            [group_id] => 0
+                            [status_id] => 36209131
+                            [pipeline_id] => 3735907
+                            [loss_reason_id] => 
+                            [created_by] => 0
+                            [updated_by] => 0
+                            [created_at] => 1607936113
+                            [updated_at] => 1607936137
+                            [closed_at] => 
+                            [closest_task_at] => 1607937014
+                            [is_deleted] => 
+                            [custom_fields_values] => 
+                            [score] => 
+                            [account_id] => 29135494
+                            [_links] => Array
+                                (
+                                    [self] => Array
+                                        (
+                                            [href] => https://gazovedufa.amocrm.ru/api/v4/leads/4659451
+                                        )
+
+                                )
+
+                            [_embedded] => Array
+                                (
+                                    [tags] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [id] => 84051
+                                                    [name] => сайт
+                                                )
+
+                                        )
+
+                                    [companies] => Array
+                                        (
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+Добавление примечания
+Array
+(
+    [0] => Array
+        (
+            [entity_id] => 4659451
+            [note_type] => common
+            [params] => Array
+                (
+                    [text] => Повторная заявка с сайта
+Имя: Без имени
+Телефон: +7 (931) 604-70-33_
+Страница: Главная
+Форма: Хочу экономить
+                )
+
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/leads/notes"
+        }
+    },
+    "_embedded": {
+        "notes": [
+            {
+                "id": 20307671,
+                "entity_id": 4659451,
+                "created_by": null,
+                "updated_by": null,
+                "created_at": null,
+                "updated_at": null,
+                "responsible_user_id": null,
+                "group_id": null,
+                "note_type": null,
+                "params": null,
+                "account_id": null,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/leads/4659451/notes/20307671"
+                    }
+                }
+            }
+        ]
+    }
+}
+Добавление задачия
+Array
+(
+    [0] => Array
+        (
+            [responsible_user_id] => 6545914
+            [created_by] => 6545914
+            [entity_id] => 4659451
+            [entity_type] => leads
+            [text] => Обработать повторную заявку от клиента
+            [complete_till] => 1607937059
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/tasks"
+        }
+    },
+    "_embedded": {
+        "tasks": [
+            {
+                "id": 1597341,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/tasks/1597341"
+                    }
+                }
+            }
+        ]
+    }
+}
+Ищем контакт
+604-70-33_
+Ответ
+Array
+(
+    [id] => 6884757
+    [name] => Без имени
+    [first_name] => 
+    [last_name] => 
+    [responsible_user_id] => 6545914
+    [group_id] => 0
+    [created_by] => 0
+    [updated_by] => 0
+    [created_at] => 1607936111
+    [updated_at] => 1607936111
+    [closest_task_at] => 
+    [custom_fields_values] => Array
+        (
+            [0] => Array
+                (
+                    [field_id] => 183971
+                    [field_name] => Телефон
+                    [field_code] => PHONE
+                    [field_type] => multitext
+                    [values] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [value] => +7 (931) 604-70-33_
+                                    [enum_id] => 251869
+                                    [enum_code] => WORK
+                                )
+
+                        )
+
+                )
+
+        )
+
+    [account_id] => 29135494
+    [_links] => Array
+        (
+            [self] => Array
+                (
+                    [href] => https://gazovedufa.amocrm.ru/api/v4/contacts/6884757
+                )
+
+        )
+
+    [_embedded] => Array
+        (
+            [tags] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 84049
+                            [name] => сайт
+                        )
+
+                )
+
+            [leads] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 4659451
+                            [_links] => Array
+                                (
+                                    [self] => Array
+                                        (
+                                            [href] => https://gazovedufa.amocrm.ru/api/v4/leads/4659451
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+            [companies] => Array
+                (
+                )
+
+        )
+
+)
+
+Ищем сделку
+https://gazovedufa.amocrm.ru/api/v4/leads?id[]=4659451
+Ответ
+Array
+(
+    [_page] => 1
+    [_links] => Array
+        (
+            [self] => Array
+                (
+                    [href] => https://gazovedufa.amocrm.ru/api/v4/leads?id%5B0%5D=4659451&page=1&limit=50
+                )
+
+            [next] => Array
+                (
+                    [href] => https://gazovedufa.amocrm.ru/api/v4/leads?id%5B0%5D=4659451&page=2&limit=50
+                )
+
+        )
+
+    [_embedded] => Array
+        (
+            [leads] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 4659451
+                            [name] => Заявка с сайта от Без имени
+                            [price] => 0
+                            [responsible_user_id] => 6545914
+                            [group_id] => 0
+                            [status_id] => 36209131
+                            [pipeline_id] => 3735907
+                            [loss_reason_id] => 
+                            [created_by] => 0
+                            [updated_by] => 0
+                            [created_at] => 1607936113
+                            [updated_at] => 1607936159
+                            [closed_at] => 
+                            [closest_task_at] => 1607937014
+                            [is_deleted] => 
+                            [custom_fields_values] => 
+                            [score] => 
+                            [account_id] => 29135494
+                            [_links] => Array
+                                (
+                                    [self] => Array
+                                        (
+                                            [href] => https://gazovedufa.amocrm.ru/api/v4/leads/4659451
+                                        )
+
+                                )
+
+                            [_embedded] => Array
+                                (
+                                    [tags] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [id] => 84051
+                                                    [name] => сайт
+                                                )
+
+                                        )
+
+                                    [companies] => Array
+                                        (
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+Добавление примечания
+Array
+(
+    [0] => Array
+        (
+            [entity_id] => 4659451
+            [note_type] => common
+            [params] => Array
+                (
+                    [text] => Повторная заявка с сайта
+Имя: Павел
+Телефон: +7 (931) 604-70-33_
+Страница: Главная
+Форма: Установка ГБО
+                )
+
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/leads/notes"
+        }
+    },
+    "_embedded": {
+        "notes": [
+            {
+                "id": 20307961,
+                "entity_id": 4659451,
+                "created_by": null,
+                "updated_by": null,
+                "created_at": null,
+                "updated_at": null,
+                "responsible_user_id": null,
+                "group_id": null,
+                "note_type": null,
+                "params": null,
+                "account_id": null,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/leads/4659451/notes/20307961"
+                    }
+                }
+            }
+        ]
+    }
+}
+Добавление задачия
+Array
+(
+    [0] => Array
+        (
+            [responsible_user_id] => 6545914
+            [created_by] => 6545914
+            [entity_id] => 4659451
+            [entity_type] => leads
+            [text] => Обработать повторную заявку от клиента
+            [complete_till] => 1607937081
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/tasks"
+        }
+    },
+    "_embedded": {
+        "tasks": [
+            {
+                "id": 1597365,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/tasks/1597365"
+                    }
+                }
+            }
+        ]
+    }
+}
+Ищем контакт
+604-70-34_
+Ответ пуст
+Добавляем контакт
+Array
+(
+    [0] => Array
+        (
+            [custom_fields_values] => Array
+                (
+                    [0] => Array
+                        (
+                            [field_id] => 183971
+                            [values] => Array
+                                (
+                                    [0] => Array
+                                        (
+                                            [value] => +7 (931) 604-70-34_
+                                            [enum_code] => WORK
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+            [name] => Без имени
+            [responsible_user_id] => 6545914
+            [_embedded] => Array
+                (
+                    [tags] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [name] => сайт
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+Ответ
+6885607
+Добавляем  сделку
+Array
+(
+    [0] => Array
+        (
+            [name] => Заявка с сайта от Без имени
+            [responsible_user_id] => 6545914
+            [status_id] => 36209131
+            [_embedded] => Array
+                (
+                    [tags] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [name] => сайт
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+Ответ
+4659673
+Объединение сделки и контакта
+https://gazovedufa.amocrm.ru/api/v4/leads/4659673/link
+Array
+(
+    [0] => Array
+        (
+            [to_entity_id] => 6885607
+            [to_entity_type] => contacts
+            [metadata] => Array
+                (
+                    [is_main] => 1
+                )
+
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/leads/4659673/links"
+        }
+    },
+    "_embedded": {
+        "links": [
+            {
+                "to_entity_id": 6885607,
+                "to_entity_type": "contacts",
+                "metadata": null
+            }
+        ]
+    }
+}
+Добавление примечания
+Array
+(
+    [0] => Array
+        (
+            [entity_id] => 4659673
+            [note_type] => common
+            [params] => Array
+                (
+                    [text] => Заявка с сайта
+Имя: Без имени
+Телефон: +7 (931) 604-70-34_
+Страница: Главная
+Форма: Узнать цену установки ГБО
+                )
+
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/leads/notes"
+        }
+    },
+    "_embedded": {
+        "notes": [
+            {
+                "id": 20309039,
+                "entity_id": 4659673,
+                "created_by": null,
+                "updated_by": null,
+                "created_at": null,
+                "updated_at": null,
+                "responsible_user_id": null,
+                "group_id": null,
+                "note_type": null,
+                "params": null,
+                "account_id": null,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/leads/4659673/notes/20309039"
+                    }
+                }
+            }
+        ]
+    }
+}
+Добавление задачия
+Array
+(
+    [0] => Array
+        (
+            [responsible_user_id] => 6545914
+            [created_by] => 6545914
+            [entity_id] => 4659673
+            [entity_type] => leads
+            [text] => Обработать заявку от клиента
+            [complete_till] => 1607937119
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/tasks"
+        }
+    },
+    "_embedded": {
+        "tasks": [
+            {
+                "id": 1597389,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/tasks/1597389"
+                    }
+                }
+            }
+        ]
+    }
+}
+Ищем контакт
+604-70-33_
+Ответ
+Array
+(
+    [id] => 6884757
+    [name] => Без имени
+    [first_name] => 
+    [last_name] => 
+    [responsible_user_id] => 6545914
+    [group_id] => 0
+    [created_by] => 0
+    [updated_by] => 0
+    [created_at] => 1607936111
+    [updated_at] => 1607936111
+    [closest_task_at] => 
+    [custom_fields_values] => Array
+        (
+            [0] => Array
+                (
+                    [field_id] => 183971
+                    [field_name] => Телефон
+                    [field_code] => PHONE
+                    [field_type] => multitext
+                    [values] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [value] => +7 (931) 604-70-33_
+                                    [enum_id] => 251869
+                                    [enum_code] => WORK
+                                )
+
+                        )
+
+                )
+
+        )
+
+    [account_id] => 29135494
+    [_links] => Array
+        (
+            [self] => Array
+                (
+                    [href] => https://gazovedufa.amocrm.ru/api/v4/contacts/6884757
+                )
+
+        )
+
+    [_embedded] => Array
+        (
+            [tags] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 84049
+                            [name] => сайт
+                        )
+
+                )
+
+            [leads] => Array
+                (
+                )
+
+            [companies] => Array
+                (
+                )
+
+        )
+
+)
+
+Добавляем  сделку
+Array
+(
+    [0] => Array
+        (
+            [name] => Заявка с сайта от Без имени
+            [responsible_user_id] => 6545914
+            [status_id] => 36209131
+            [_embedded] => Array
+                (
+                    [tags] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [name] => сайт
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+Ответ
+4660501
+Объединение сделки и контакта
+https://gazovedufa.amocrm.ru/api/v4/leads/4660501/link
+Array
+(
+    [0] => Array
+        (
+            [to_entity_id] => 6884757
+            [to_entity_type] => contacts
+            [metadata] => Array
+                (
+                    [is_main] => 1
+                )
+
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/leads/4660501/links"
+        }
+    },
+    "_embedded": {
+        "links": [
+            {
+                "to_entity_id": 6884757,
+                "to_entity_type": "contacts",
+                "metadata": null
+            }
+        ]
+    }
+}
+Добавление примечания
+Array
+(
+    [0] => Array
+        (
+            [entity_id] => 4660501
+            [note_type] => common
+            [params] => Array
+                (
+                    [text] => Заявка с сайта
+Имя: Без имени
+Телефон: +7 (931) 604-70-33_
+Страница: Главная
+Форма: Рассчитать стоимость
+                )
+
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/leads/notes"
+        }
+    },
+    "_embedded": {
+        "notes": [
+            {
+                "id": 20311481,
+                "entity_id": 4660501,
+                "created_by": null,
+                "updated_by": null,
+                "created_at": null,
+                "updated_at": null,
+                "responsible_user_id": null,
+                "group_id": null,
+                "note_type": null,
+                "params": null,
+                "account_id": null,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/leads/4660501/notes/20311481"
+                    }
+                }
+            }
+        ]
+    }
+}
+Добавление задачия
+Array
+(
+    [0] => Array
+        (
+            [responsible_user_id] => 6545914
+            [created_by] => 6545914
+            [entity_id] => 4660501
+            [entity_type] => leads
+            [text] => Обработать заявку от клиента
+            [complete_till] => 1607937270
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/tasks"
+        }
+    },
+    "_embedded": {
+        "tasks": [
+            {
+                "id": 1597479,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/tasks/1597479"
+                    }
+                }
+            }
+        ]
+    }
+}
+Ищем контакт
+604-70-33_
+Ответ пуст
+Добавляем контакт
+Array
+(
+    [0] => Array
+        (
+            [custom_fields_values] => Array
+                (
+                    [0] => Array
+                        (
+                            [field_id] => 183971
+                            [values] => Array
+                                (
+                                    [0] => Array
+                                        (
+                                            [value] => +7 (931) 604-70-33_
+                                            [enum_code] => WORK
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+            [name] => Без имени
+            [responsible_user_id] => 6545914
+            [_embedded] => Array
+                (
+                    [tags] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [name] => сайт
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+Ответ
+6891659
+Добавляем  сделку
+Array
+(
+    [0] => Array
+        (
+            [name] => Заявка с сайта от Без имени
+            [responsible_user_id] => 6545914
+            [status_id] => 36209131
+            [_embedded] => Array
+                (
+                    [tags] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [name] => сайт
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+Ответ
+4665477
+Объединение сделки и контакта
+https://gazovedufa.amocrm.ru/api/v4/leads/4665477/link
+Array
+(
+    [0] => Array
+        (
+            [to_entity_id] => 6891659
+            [to_entity_type] => contacts
+            [metadata] => Array
+                (
+                    [is_main] => 1
+                )
+
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/leads/4665477/links"
+        }
+    },
+    "_embedded": {
+        "links": [
+            {
+                "to_entity_id": 6891659,
+                "to_entity_type": "contacts",
+                "metadata": null
+            }
+        ]
+    }
+}
+Добавление примечания
+Array
+(
+    [0] => Array
+        (
+            [entity_id] => 4665477
+            [note_type] => common
+            [params] => Array
+                (
+                    [text] => Заявка с сайта
+Имя: Без имени
+Телефон: +7 (931) 604-70-33_
+Страница: Главная
+Форма: Рассчитать стоимость
+                )
+
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/leads/notes"
+        }
+    },
+    "_embedded": {
+        "notes": [
+            {
+                "id": 20340961,
+                "entity_id": 4665477,
+                "created_by": null,
+                "updated_by": null,
+                "created_at": null,
+                "updated_at": null,
+                "responsible_user_id": null,
+                "group_id": null,
+                "note_type": null,
+                "params": null,
+                "account_id": null,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/leads/4665477/notes/20340961"
+                    }
+                }
+            }
+        ]
+    }
+}
+Добавление задачия
+Array
+(
+    [0] => Array
+        (
+            [responsible_user_id] => 6545914
+            [created_by] => 6545914
+            [entity_id] => 4665477
+            [entity_type] => leads
+            [text] => Обработать заявку от клиента
+            [complete_till] => 1607940657
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/tasks"
+        }
+    },
+    "_embedded": {
+        "tasks": [
+            {
+                "id": 1600353,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/tasks/1600353"
+                    }
+                }
+            }
+        ]
+    }
+}
+Ищем контакт
+604-70-33_
+Ответ
+Array
+(
+    [id] => 6891659
+    [name] => Без имени
+    [first_name] => 
+    [last_name] => 
+    [responsible_user_id] => 6545914
+    [group_id] => 0
+    [created_by] => 0
+    [updated_by] => 0
+    [created_at] => 1607939755
+    [updated_at] => 1607939755
+    [closest_task_at] => 
+    [custom_fields_values] => Array
+        (
+            [0] => Array
+                (
+                    [field_id] => 183971
+                    [field_name] => Телефон
+                    [field_code] => PHONE
+                    [field_type] => multitext
+                    [values] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [value] => +7 (931) 604-70-33_
+                                    [enum_id] => 251869
+                                    [enum_code] => WORK
+                                )
+
+                        )
+
+                )
+
+        )
+
+    [account_id] => 29135494
+    [_links] => Array
+        (
+            [self] => Array
+                (
+                    [href] => https://gazovedufa.amocrm.ru/api/v4/contacts/6891659
+                )
+
+        )
+
+    [_embedded] => Array
+        (
+            [tags] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 84049
+                            [name] => сайт
+                        )
+
+                )
+
+            [leads] => Array
+                (
+                )
+
+            [companies] => Array
+                (
+                )
+
+        )
+
+)
+
+Добавляем  сделку
+Array
+(
+    [0] => Array
+        (
+            [name] => Заявка с сайта от Павел
+            [responsible_user_id] => 6545914
+            [status_id] => 36209131
+            [_embedded] => Array
+                (
+                    [tags] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [name] => сайт
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+Ответ
+4665525
+Объединение сделки и контакта
+https://gazovedufa.amocrm.ru/api/v4/leads/4665525/link
+Array
+(
+    [0] => Array
+        (
+            [to_entity_id] => 6891659
+            [to_entity_type] => contacts
+            [metadata] => Array
+                (
+                    [is_main] => 1
+                )
+
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/leads/4665525/links"
+        }
+    },
+    "_embedded": {
+        "links": [
+            {
+                "to_entity_id": 6891659,
+                "to_entity_type": "contacts",
+                "metadata": null
+            }
+        ]
+    }
+}
+Добавление примечания
+Array
+(
+    [0] => Array
+        (
+            [entity_id] => 4665525
+            [note_type] => common
+            [params] => Array
+                (
+                    [text] => Заявка с сайта
+Имя: Павел
+Телефон: +7 (931) 604-70-33_
+Страница: Главная
+Форма: Регистрация в ГИБДД
+                )
+
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/leads/notes"
+        }
+    },
+    "_embedded": {
+        "notes": [
+            {
+                "id": 20341223,
+                "entity_id": 4665525,
+                "created_by": null,
+                "updated_by": null,
+                "created_at": null,
+                "updated_at": null,
+                "responsible_user_id": null,
+                "group_id": null,
+                "note_type": null,
+                "params": null,
+                "account_id": null,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/leads/4665525/notes/20341223"
+                    }
+                }
+            }
+        ]
+    }
+}
+Добавление задачия
+Array
+(
+    [0] => Array
+        (
+            [responsible_user_id] => 6545914
+            [created_by] => 6545914
+            [entity_id] => 4665525
+            [entity_type] => leads
+            [text] => Обработать заявку от клиента
+            [complete_till] => 1607940688
+        )
+
+)
+
+Ответ
+{
+    "_links": {
+        "self": {
+            "href": "https://gazovedufa.amocrm.ru/api/v4/tasks"
+        }
+    },
+    "_embedded": {
+        "tasks": [
+            {
+                "id": 1600397,
+                "request_id": "0",
+                "_links": {
+                    "self": {
+                        "href": "https://gazovedufa.amocrm.ru/api/v4/tasks/1600397"
+                    }
+                }
+            }
+        ]
+    }
+}
