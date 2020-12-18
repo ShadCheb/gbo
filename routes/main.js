@@ -171,11 +171,9 @@ router.post('/mail', async (req, res) => {
       rp(optionsCall)
         .then(function (parsedBody) {
           console.log('Calltouch_Success', parsedBody);
-          // res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', info, err: error, sendRequest: 'success' });
         })
         .catch(function (err) {
           console.log('Calltouch_error', err);
-          // res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', info, err: error, sendRequest: 'err' });
         });
 
       // Отправка успешного запроса на стороний сервис
@@ -193,17 +191,39 @@ router.post('/mail', async (req, res) => {
           description,
           brand,
         },
-        json: true // Automatically stringifies the body to JSON
+        json: true
       };
 
       rp(options)
         .then(function (parsedBody) {
           console.log('parsedBody', parsedBody);
-          // res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', info, err: error, sendRequest: 'success' });
         })
         .catch(function (err) {
           console.log('err', err);
-          // res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', info, err: error, sendRequest: 'err' });
+        });
+
+      
+      // Отправка post amocrm Ufa
+      const optionsAmo = {
+        method: 'GET',
+        uri: 'http://soyuzavto72.ru/gazoved',
+        body: {
+          page,
+          btn,
+          name,
+          phone,
+          type,
+          description
+        },
+        json: true
+      };
+
+      rp(optionsAmo)
+        .then(function (parsedBody) {
+          console.log('SendAmocrmUfa', parsedBody);
+        })
+        .catch(function (err) {
+          console.log('ErrorAmocrmUfa', err);
         });
     });
   } catch (e) {
