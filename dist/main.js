@@ -17856,7 +17856,7 @@
 
 						////New integration
 						c.domen = document.domain;
-						fetch('https://nikweel.ru/gazoved/index.php', {
+						fetch('https://nikweel.ru/ufa/index.php', {
 							method: 'POST',
 							headers: {
 							'Content-Type': 'application/json;charset=utf-8',
@@ -23898,7 +23898,7 @@
 
 					////New integration
 						c.domen = document.domain;
-						fetch('https://nikweel.ru/gazoved/index.php', {
+						fetch('https://nikweel.ru/ufa/index.php', {
 							method: 'POST',
 							headers: {
 							'Content-Type': 'application/json;charset=utf-8',
@@ -24011,7 +24011,7 @@
 
 					////New integration
 						s.domen = document.domain;
-						fetch('https://nikweel.ru/gazoved/index.php', {
+						fetch('https://nikweel.ru/ufa/index.php', {
 							method: 'POST',
 							headers: {
 							'Content-Type': 'application/json;charset=utf-8',
@@ -24136,7 +24136,7 @@
 
 						////New integration
 						c.domen = document.domain;
-						fetch('https://nikweel.ru/gazoved/index.php', {
+						fetch('https://nikweel.ru/ufa/index.php', {
 							method: 'POST',
 							headers: {
 							'Content-Type': 'application/json;charset=utf-8',
@@ -24306,7 +24306,7 @@
 
 						////New integration
 						s.domen = document.domain;
-						fetch('https://nikweel.ru/gazoved/index.php', {
+						fetch('https://nikweel.ru/ufa/index.php', {
 							method: 'POST',
 							headers: {
 							'Content-Type': 'application/json;charset=utf-8',
@@ -24691,21 +24691,9 @@
 						body: JSON.stringify(o)
 					}).then((function(e) {
 
-						/*function get_cookie ( cookie_name )
-					{
-					  var results = document.cookie.match ( '(^|;) ?' + cookie_name + '=([^;]*)(;|$)' );
-					 
-					  if ( results )
-					    return ( unescape ( results[2] ) );
-					  else
-					    return null;
-					}
-
-					var utm_source = get_cookie ('UTM_SOURCE');*/
-
 						////New integration
 						o.domen = document.domain;
-						fetch('https://nikweel.ru/gazoved/index.php', {
+						fetch('https://nikweel.ru/ufa/index.php', {
 							method: 'POST',
 							headers: {
 							'Content-Type': 'application/json;charset=utf-8',

