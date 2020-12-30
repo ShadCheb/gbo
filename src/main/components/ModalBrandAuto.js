@@ -106,6 +106,7 @@ function ModalBrandAuto(props) {
         dataSend['description'] = target.dataset.description;
     }
 
+
     fetch('/mail', {
       method: 'post',
       headers: {

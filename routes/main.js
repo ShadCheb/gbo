@@ -29,11 +29,12 @@ function getUrl(url, params) {
 
     if(params[i]) {
       uri += `${p}${i}=${params[i]}`;
+      count++;
     }
-    count++;
   }
+  count = 0;
 
-  return uri;
+  return encodeURI(uri);
 }
 
 
@@ -98,15 +99,15 @@ router.post('/mail', async (req, res) => {
     const { name: city, brief } = req.session.dataGeneral.data;
     let { email } = req.session.dataGeneral.data.city;
     let emailData = emails.default;
-
+  
     if (!email)
       email = 'gazoved21@mail.ru';
-
+  
     let output = `
       <p>Пришла новая заявка.</p>
       <hr />
     `;
-
+  
     if (city)
       output += `<p><b>Город:</b> ${city}</p>`
     if (page)
@@ -129,7 +130,7 @@ router.post('/mail', async (req, res) => {
       output += `<br /><p><b>Имя отправителя:</b> ${name}</p>`;
     if (phone)
       output += `<p><b>Телефон отправителя:</b> ${phone}</p>`; 
-
+  
     if (birth)
       output += `<p><b>Дата рождения:</b> ${birth}</p>`;
     if (addres)
@@ -138,11 +139,11 @@ router.post('/mail', async (req, res) => {
       output += `<p><b>Серия и номер паспорта:</b> ${number__passport}</p>`;
     if (from__passport)
       output += `<p><b>Кем и когда выдан:</b> ${from__passport}</p>`;
-
+  
     if (emails[brief]) {
       emailData = emails[brief];
     }
-
+  
     let transporter = nodemailer.createTransport({
       host: emailData.host,
       port: emailData.port,
@@ -155,33 +156,33 @@ router.post('/mail', async (req, res) => {
         rejectUnauthorized:false
       }
     });
-
+  
     let mailOptions = {
       from: emailData.user,
       to: email,
       subject: 'Сообщение с сайта Gazoved',
       html: output // html body
     };
-
+  
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         res.status(500).json({error: 'Произошла ошибка. Попробуйте позже', info, err: error}); 
-
+  
         return;
       }
       res.status(201).json({success: 'Сообщение отправлено. Ждите звонка', info, err: error, sendRequest: 'success' });
-
+  
       // Отправка успешного запроса на стороний сервис Calltouch
       const numberServer = 16;
       const siteId = 41294;
       const url1 = `https://api-node${numberServer}.calltouch.ru/calls-service/RestAPI/requests/${siteId}/register/`;
       const params1 = {
-        subject: type, // Название формы
+        subject: type || btn,
         fio: name || 'Без имени',
         phoneNumber: phone,
         comment: description,
         tags: city,
-        requestUrl: `https://gazoved.com/${page}`,
+        requestUrl: page,
         sessionId: 'ei1ijzpa'
       };
       const uri1 = getUrl(url1, params1);
@@ -196,7 +197,7 @@ router.post('/mail', async (req, res) => {
         .catch(function (err) {
           console.log('Calltouch_error', err);
         });
-
+  
       // Отправка успешного запроса на стороний сервис
       const url2 = 'https://hub.6crm.ru/gazoved/site/server.php';
       const params2 = {
@@ -214,7 +215,7 @@ router.post('/mail', async (req, res) => {
         method: 'GET',
         uri: uri2,
       };
-
+  
       rp(options)
         .then(function (parsedBody) {
           console.log('parsedBody', parsedBody);
@@ -222,8 +223,8 @@ router.post('/mail', async (req, res) => {
         .catch(function (err) {
           console.log('err', err);
         });
-
-
+  
+  
       // Отправка post amocrm Ufa
       const optionsAmo = {
         method: 'POST',
@@ -238,7 +239,7 @@ router.post('/mail', async (req, res) => {
         },
         json: true
       };
-
+  
       rp(optionsAmo)
         .then(function (parsedBody) {
           console.log('SendAmocrmUfa', parsedBody);
@@ -247,6 +248,7 @@ router.post('/mail', async (req, res) => {
           console.log('ErrorAmocrmUfa', err);
         });
     });
+    
   } catch (e) {
     console.log('Error.', e.message);
   }
