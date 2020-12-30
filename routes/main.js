@@ -160,11 +160,12 @@ router.post('/mail', async (req, res) => {
         uri: `https://api-node${numberServer}.calltouch.ru/calls-service/RestAPI/requests/${siteId}/register/`,
         body: {
           subject: type, // Название формы
-          fio: name || 'NoName',
+          fio: name || 'Без имени',
           phoneNumber: phone,
           comment: description,
           tags: city,
-          requestUrl: `https://gazoved.com/${page}`
+          requestUrl: `https://gazoved.com/${page}`,
+          sessionId: 'ei1ijzpa'
         },
         json: true
       };
