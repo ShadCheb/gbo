@@ -18,6 +18,25 @@ const emails = require('../emails/emails');
 const detaGeneral = require('../middleware/dataGeneral');
 
 
+function getUrl(url, params) {
+  if (!url || typeof params !== 'object') return;  
+
+  let uri = url;
+  let count = 0;
+
+  for(let i in params) {
+    let p = (count === 0) ? '?' : '&';
+
+    if(params[i]) {
+      uri += `${p}${i}=${params[i]}`;
+    }
+    count++;
+  }
+
+  return uri;
+}
+
+
 router.get('/', detaGeneral,  async (req, res) => {
   try {
     let {cityList, data, subdomains} = res.locals.dataGeneral;
@@ -155,19 +174,20 @@ router.post('/mail', async (req, res) => {
       // Отправка успешного запроса на стороний сервис Calltouch
       const numberServer = 16;
       const siteId = 41294;
+      const url1 = `https://api-node${numberServer}.calltouch.ru/calls-service/RestAPI/requests/${siteId}/register/`;
+      const params1 = {
+        subject: type, // Название формы
+        fio: name || 'Без имени',
+        phoneNumber: phone,
+        comment: description,
+        tags: city,
+        requestUrl: `https://gazoved.com/${page}`,
+        sessionId: 'ei1ijzpa'
+      };
+      const uri1 = getUrl(url1, params1);
       const optionsCall = {
         method: 'GET',
-        uri: `https://api-node${numberServer}.calltouch.ru/calls-service/RestAPI/requests/${siteId}/register/`,
-        body: {
-          subject: type, // Название формы
-          fio: name || 'Без имени',
-          phoneNumber: phone,
-          comment: description,
-          tags: city,
-          requestUrl: `https://gazoved.com/${page}`,
-          sessionId: 'ei1ijzpa'
-        },
-        json: true
+        uri: uri1
       };
       rp(optionsCall)
         .then(function (parsedBody) {
@@ -178,21 +198,21 @@ router.post('/mail', async (req, res) => {
         });
 
       // Отправка успешного запроса на стороний сервис
+      const url2 = 'https://hub.6crm.ru/gazoved/site/server.php';
+      const params2 = {
+        page,
+        btn,
+        name,
+        phone,
+        message,
+        type,
+        description,
+        brand,
+      };
+      const uri2 = getUrl(url2, params2);
       const options = {
         method: 'GET',
-        uri: 'https://hub.6crm.ru/gazoved/site/server.php',
-        //uri: 'https://webhook.site/8657fa9f-3816-4438-b907-3f7842ad37a5',
-        body: {
-          page,
-          btn,
-          name,
-          phone,
-          message,
-          type,
-          description,
-          brand,
-        },
-        json: true
+        uri: uri2,
       };
 
       rp(options)
@@ -203,10 +223,10 @@ router.post('/mail', async (req, res) => {
           console.log('err', err);
         });
 
-      
+
       // Отправка post amocrm Ufa
       const optionsAmo = {
-        method: 'GET',
+        method: 'POST',
         uri: 'http://soyuzavto72.ru/gazoved',
         body: {
           page,
