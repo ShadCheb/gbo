@@ -17,7 +17,7 @@ function Stock(props) {
           <div className="b-stock__text">
             {/* <p className="bs__text-1">Итальянский комплект</p> */}
             <p className="bs__text-1"><strong>OMVL SAVER</strong></p>
-            <p className="bs__text-2">всего за <strong>24 100</strong> рублей</p>
+            <p className="bs__text-2">всего за <strong>25 600</strong> рублей</p>
             <div className="b-stock__btn">
               <button className="btn-1 btn--white" 
                 data-type="Заказать установку ГБО по акции"
