@@ -31,9 +31,18 @@ function YaSprav({cityBrief}){
 
 function Header({activeCity, cityList}) {
   const selectCity = value => {
-    const linkGroup = location.href.match(/(www\.*)*([a-zA-Z0-9-]*.)(\.*gazoved.com){1}(\/*[a-zA-Z0-9-\/]*)/);
-    const link = location.protocol + '//' + (linkGroup[1] || '') + value + '.' + linkGroup[3] + linkGroup[4];
+    // Определяем localhost ли
+    let link = '';
 
+    if (location.href.includes('localhost')) {
+      const linkGroup = location.href.match(/(www\.*)*([a-zA-Z0-9-]*.)(\.*localhost){1}(:[0-9]+){1}(\/*[a-zA-Z0-9-/]*)/);
+
+      link = `${location.protocol}//${(linkGroup[1] || '')}${value}.${linkGroup[3]}${linkGroup[4] || ''}${linkGroup[5]}`;
+    } else {
+      const linkGroup = location.href.match(/(www\.*)*([a-zA-Z0-9-]*.)(\.*gazoved.com){1}(\/*[a-zA-Z0-9-\/]*)/);
+
+      link = location.protocol + '//' + (linkGroup[1] || '') + value + '.' + linkGroup[3] + linkGroup[4];      
+    }
     window.location.href = link;
   }
 

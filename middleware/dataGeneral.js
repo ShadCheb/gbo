@@ -10,25 +10,47 @@ module.exports = async function(req, res, next) {
   try {
     let city = req.query.city;
     let cityList = [];
+    let subdomain = '';
+    const domain = (req.get('host').includes('localhost'))
+      ? 'localhost:8000'
+      : 'gazoved.com';
 
-    // Присутствует данные домена (gazoved.com)
-    // const domain = 'gazoved.com';
-    // const domain = 'localhot\:8000';
-    // const regStr = /(www\.*)*([a-zA-Z0-9-]*)(\.*{gazoved.com}){1}/;
-    // const regStr = new RegExp(`(www\.*)*([a-zA-Z0-9-]*)(\.*${domain}){1}`);
-    const subdomains = (req.get('host')).match(/(www\.*)*([a-zA-Z0-9-]*)(\.*gazoved.com){1}/);
+    res.cookie('city', '', {
+      expires: new Date(0)
+    });
 
-    if (subdomains && subdomains[2]) {
-      let { brief } = await CityList.findOne({where: {subdomain: subdomains[2]}, attributes: ['brief'], raw: true});
+    res.cookie('test', 'test0', {
+      domain: 'test.com',
+      maxAge: 3600 * 365 * 30,
+    });
+    
+    if (req.get('host').includes('localhost')) {
+      const subdomainGroup = (req.get('host')).match(/(www\.*)*([a-zA-Z0-9-]*)(\.*localhost){1}(:[0-9]+){1}/);
+
+      subdomain = subdomainGroup && subdomainGroup[2] || '';
+    } else {
+      const subdomainGroup = (req.get('host')).match(/(www\.*)*([a-zA-Z0-9-]*)(\.*gazoved.com){1}/);
+
+      subdomain = subdomainGroup && subdomainGroup[2] || '';
+    }
+
+    if (subdomain) {
+      const { brief } = await CityList.findOne({ 
+        where: { subdomain },
+        attributes: ['brief'],
+        raw: true
+      });
 
       city = (brief) ? brief : city;
     }
 
-    if (!city && req.session.city) {
-      city = req.session.city;
-    } else if (!city && (req.cookies && req.cookies['city'])) {
-      city = req.cookies['city'];
-      req.session.city = city;
+    if (!city) {
+      if (req.session && req.session.city) {
+        city = req.session.city;
+      } else if (req.cookies && req.cookies.city) {
+        city = req.cookies.city;
+        req.session.city = city;
+      }
     }
 
     if (!city) {
@@ -45,12 +67,13 @@ module.exports = async function(req, res, next) {
       city = cityList[0].brief;
 
       res.cookie('city', city, {
-        maxAge: 3600 * 365 * 30
+        maxAge: 3600 * 365 * 30,
+        domain: `.${domain}`
       });
       req.session.city = city;
     }
 
-    if (city != req.session.city || !req.session.dataGeneral) { 
+    if (city != req.session.city || !req.session.dataGeneral) {
       cityList = await CityList.findAll({attributes: [ 'id', 'name', 'brief', 'subdomain' ], raw: true});
     
       if (!cityList || !cityList.length) {
@@ -63,7 +86,7 @@ module.exports = async function(req, res, next) {
 
       let data = await CityList.findOne(
         {
-          where: {brief: city},
+          where: { brief: city },
           include: [
             { model: City },
             {
@@ -92,12 +115,14 @@ module.exports = async function(req, res, next) {
       res.locals.dataGeneral = {
         data,
         cityList,
-        subdomains
+        subdomain
       };
       req.session.dataGeneral = res.locals.dataGeneral;
       req.session.city = city;
+
       res.cookie('city', city, {
-        maxAge: 3600 * 365 * 30
+        maxAge: 3600 * 365 * 30,
+        domain: `.${domain}`
       });
     } else {
       res.locals.dataGeneral = req.session.dataGeneral;
