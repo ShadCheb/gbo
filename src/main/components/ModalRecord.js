@@ -118,12 +118,12 @@ function ModalRecord(props) {
     }
 
     // Дополнительные данные для отправки
-    if (target && target.dataset) {
-      if (target.dataset.type)
-        dataSend['type'] = target.dataset.type;
-      if (target.dataset.description)
-        dataSend['description'] = target.dataset.description;
-    }
+    if (props.data.type)
+      dataSend['type'] = props.data.type;
+    if (props.data.description)
+      dataSend['description'] = props.data.description;
+
+    dataSend['domen'] = document.domain;
 
     fetch('/mail', {
       method: 'post',
@@ -143,13 +143,14 @@ function ModalRecord(props) {
           success(data.success);
 
           // Отправка успешного запроса на стороний сервис
-          // fetch('https://hub.6crm.ru/gazoved/site/server.php', {
-          //   method: 'post',
-          //   headers: {
-          //     'Content-Type': 'application/json;charset=utf-8',
-          //   },
-          //   body: JSON.stringify(dataSend)
-          // });
+          //// New integration
+          fetch('https://gazoved-amo.ru/amocrm/gazoved/index.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify(dataSend)
+          });
         } else if (data.error) {
           error(data.error);
         }

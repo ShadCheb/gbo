@@ -18,11 +18,6 @@ module.exports = async function(req, res, next) {
     res.cookie('city', '', {
       expires: new Date(0)
     });
-
-    res.cookie('test', 'test0', {
-      domain: 'test.com',
-      maxAge: 3600 * 365 * 30,
-    });
     
     if (req.get('host').includes('localhost')) {
       const subdomainGroup = (req.get('host')).match(/(www\.*)*([a-zA-Z0-9-]*)(\.*localhost){1}(:[0-9]+){1}/);

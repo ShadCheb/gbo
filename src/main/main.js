@@ -435,6 +435,8 @@ class Main extends Component {
         dataSend['description'] = target.dataset.description;
     }
 
+    dataSend['domen'] = document.domain;
+
     fetch('/mail', {
       method: 'post',
       headers: {
@@ -449,17 +451,17 @@ class Main extends Component {
 
         if (data.success) {
           this.finishSend();
-
           this.success(data.success);
 
-          // // Отправка успешного запроса на стороний сервис
-          // fetch('https://www.hub.6crm.ru/gazoved/site/server.php', {
-          //   method: 'post',
-          //   headers: {
-          //     'Content-Type': 'application/json;charset=utf-8',
-          //   },
-          //   body: JSON.stringify(dataSend)
-          // });
+          // Отправка успешного запроса на стороний сервис
+          //// New integration
+          fetch('https://gazoved-amo.ru/amocrm/gazoved/index.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify(dataSend)
+          });
         } else if (data.error) {
           this.error(data.error);
         }
@@ -669,10 +671,10 @@ class Main extends Component {
                     }
                   </div>
                   <div className="main__img">
-                    <picture className="lozad" data-iesrc="/img/main-1.png" data-alt="Gazoved">
-                      <source media="(min-width: 768px)" srcSet="/img/main-1.png" />
-                      <source media="(min-width: 420px)" srcSet="/img/main-1-p.png" />
-                      <source media="(min-width: 300px)" srcSet="/img/main-1-m.png" />
+                    <picture className="lozad" data-iesrc="/img/main-1-2.jpg" data-alt="Gazoved">
+                      <source media="(min-width: 768px)" srcSet="/img/main-1-2.jpg" />
+                      <source media="(min-width: 420px)" srcSet="/img/main-1-2-p.jpg" />
+                      <source media="(min-width: 300px)" srcSet="/img/main-1-2-p.jpg" />
                     </picture>
                   </div>
                 </div>

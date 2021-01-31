@@ -96,8 +96,12 @@ function ModalBrandAuto(props) {
       ym(62691718,'reachGoal','TERMO');
 
     // Дополнительные данные для отправки
-    dataSend['type'] = props.data.type;
-    dataSend['description'] = props.data.description;
+    if (props.data.type)
+      dataSend['type'] = props.data.type;
+    if (props.data.description)
+      dataSend['description'] = props.data.description;
+
+    dataSend['domen'] = document.domain;
 
     fetch('/mail', {
       method: 'post',
@@ -117,13 +121,14 @@ function ModalBrandAuto(props) {
           success(data.success);
 
           // Отправка успешного запроса на стороний сервис
-          // fetch('https://hub.6crm.ru/gazoved/site/server.php', {
-          //   method: 'post',
-          //   headers: {
-          //     'Content-Type': 'application/json;charset=utf-8',
-          //   },
-          //   body: JSON.stringify(dataSend)
-          // });
+          //// New integration
+          fetch('https://gazoved-amo.ru/amocrm/gazoved/index.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify(dataSend)
+          });
         } else if (data.error) {
           error(data.error);
         }
