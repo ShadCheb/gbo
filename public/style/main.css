@@ -3121,3 +3121,167 @@
   }
 }
 
+
+.by-stock {
+  position: relative;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  background: white;
+  overflow: hidden;
+}
+.by-stock__body {
+  margin-left: -20px;
+  margin-right: -20px;
+}
+.by-stock__caption {
+  padding-bottom: 7px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.by-stock__caption span {
+  display: block;
+  color: #e51b29;
+}
+.by-stock__caption span:nth-child(1) {
+  font-size: 45px;
+  line-height: 1.05em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.by-stock__caption span:nth-child(2) {
+  font-size: 27px;
+  line-height: 1.05em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.by-stock__text {
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #fff;
+  background-color: #e51b29;
+}
+.by-stock__text::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../img/stock-yota.jpg') no-repeat center;
+  background-size: cover;
+  opacity: .12;
+}
+.by-stock__bcg {
+  position: absolute;
+  bottom: 10px;
+  right: 50px;
+  font-size: 72px;
+  line-height: 1em;
+  font-weight: 900;
+  color: #fff;
+  opacity: .08;
+}
+.by-stock__text > div {
+  position: relative;
+  z-index: 1;
+}
+.by-stock__description {
+  margin-bottom: 10px;
+  font-size: 20px;
+  line-height: 1.2em;
+}
+.by-stock__price {
+  position: relative;
+  display: inline-block;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  font-size: 32px;
+  line-height: 1.2em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.by-stock__price::after {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: -7px;
+  width: 115px;
+  height: 3px;
+  background-color: #990033;
+}
+.by-stock__price strong {
+  position: absolute;
+  left: 50px;
+  bottom: 100%;
+  font-size: 24px;
+  line-height: 1.1em;
+  font-weight: 600;
+}
+.by-stock__row {
+  display: flex;
+  margin-left: -15px;
+  margin-right: -15px;
+  align-items: flex-start;
+}
+.by-stock__col {
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 50%;
+}
+.by-stock__list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 20px;
+  line-height: 1.2em;
+}
+.by-stock__yota {
+  display: flex;
+  align-items: center;
+  font-size: 42px;
+  line-height: 1.2em;
+  font-weight: 700;
+}
+.by-stock__yota strong {
+  padding: 2px 4px;
+  margin-left: 4px;
+  font-size: 30px;
+  line-height: 1.0em;
+  font-weight: 600;
+  color: #e51b29;
+  background-color: #fff;
+}
+
+@media (max-width: 768px) {
+  .by-stock__row {
+    flex-wrap: wrap;
+  }
+  .by-stock__col {
+    width: 100%;
+  }
+  .by-stock__price {
+    margin-bottom: 20px;
+  }
+  .by-stock__btn {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 576px) {
+  .by-stock {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .by-stock__caption span:first-child {
+    font-size: 36px;
+  }
+  .by-stock__caption span:first-child {
+    font-size: 24px;
+  }
+}
+
+
+

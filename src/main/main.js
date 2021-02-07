@@ -17,6 +17,7 @@ import ModalPriceRequest from './components/ModalPriceRequest';
 import ModalPriceInstallment from './components/ModalPriceInstallment';
 import Footer from './components/Footer';
 import Stock from './components/Stock';
+import StockYota from './components/StockYota';
 import FixedBtn from './components/FixedBtn';
 
 import '../../public/style/antd.css';
@@ -683,6 +684,10 @@ class Main extends Component {
 
             {
               infoCity.brief === 'new.cheb' ? <Stock open={this.openModalRecord.bind(this)}/> : ''
+            }
+
+            {
+              infoCity.brief === 'cheb' ? <StockYota open={this.openModalRecord.bind(this)} /> : ''
             }
 
             <Benefit 
