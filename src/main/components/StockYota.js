@@ -14,7 +14,7 @@ function StockYota(props) {
           <div className="by-stock__text">
             <div>
               <p className="by-stock__yota">YOTA<strong>RED</strong></p>
-              <p className="by-stock__description">самое простое и доступное газоболонное оборудование</p>
+              <p className="by-stock__description">самое простое и доступное газобалонное оборудование</p>
               <div className="by-stock__row">
                 <div className="by-stock__col">
                   <p className="by-stock__price">23 800 рублей<strong>19 800</strong></p>
