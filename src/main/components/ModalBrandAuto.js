@@ -133,7 +133,7 @@ function ModalBrandAuto(props) {
             body: JSON.stringify(dataSend)
           })
             .then(res => console.log('===========RES', res))
-            .catch((err) => console.log('===========ERR', err));;
+            .catch((err) => console.log('===========ERR', err));
         } else if (data.error) {
           error(data.error);
         }

@@ -128,7 +128,9 @@ function ModalPriceRequest(props) {
               'Content-Type': 'application/json;charset=utf-8',
             },
             body: JSON.stringify(dataSend)
-          });
+          })
+          .then(res => console.log('===========RES', res))
+          .catch((err) => console.log('===========ERR', err));
         } else if (data.error) {
           error(data.error);
         }
