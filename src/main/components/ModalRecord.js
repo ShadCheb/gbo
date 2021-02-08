@@ -61,7 +61,7 @@ function ModalRecord(props) {
     return check;
   };
 
-  const send = (e) => {
+  const send = async (e) => {
     e.preventDefault();
 
     let target = props.data.target;
@@ -125,7 +125,7 @@ function ModalRecord(props) {
 
     dataSend['domen'] = document.domain;
 
-    fetch('/mail', {
+    await fetch('/mail', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -134,9 +134,10 @@ function ModalRecord(props) {
       body: JSON.stringify(dataSend)
     })
       .then(res => res.json())
-      .then(data => {
+      .then(async data => {
         btn.disabled = false;
 
+        console.log('=============DATA', data.success);
         if (data.success) {
           props.finishSend();
           afterClose();
@@ -144,13 +145,15 @@ function ModalRecord(props) {
 
           // Отправка успешного запроса на стороний сервис
           //// New integration
-          fetch('https://gazoved-amo.ru/amocrm/gazoved/index.php', {
+          await fetch('https://gazoved-amo.ru/amocrm/gazoved/index.php', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8',
             },
             body: JSON.stringify(dataSend)
-          });
+          })
+            .then(res => console.log('===========RES', res))
+            .catch((err) => console.log('===========ERR', err));
         } else if (data.error) {
           error(data.error);
         }

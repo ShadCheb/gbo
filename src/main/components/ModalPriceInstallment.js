@@ -62,7 +62,7 @@ function ModalPriceInstallment(props) {
     return check;
   };
 
-  const send = (e) => {
+  const send = async (e) => {
     e.preventDefault();
 
     let formSend = formRecord.current;
@@ -105,7 +105,7 @@ function ModalPriceInstallment(props) {
 
     dataSend['domen'] = document.domain;
 
-    fetch('/mail', {
+    await fetch('/mail', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -114,7 +114,7 @@ function ModalPriceInstallment(props) {
       body: JSON.stringify(dataSend)
     })
       .then(res => res.json())
-      .then(data => {
+      .then(async data => {
         btn.disabled = false;
 
         if (data.success) {
@@ -124,13 +124,15 @@ function ModalPriceInstallment(props) {
 
           // Отправка успешного запроса на стороний сервис
           //// New integration
-          fetch('https://gazoved-amo.ru/amocrm/gazoved/index.php', {
+          await fetch('https://gazoved-amo.ru/amocrm/gazoved/index.php', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8',
             },
             body: JSON.stringify(dataSend)
-          });
+          })
+            .then(res => console.log('===========RES', res))
+            .catch((err) => console.log('===========ERR', err));;
         } else if (data.error) {
           error(data.error);
         }

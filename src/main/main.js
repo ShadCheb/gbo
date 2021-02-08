@@ -388,7 +388,7 @@ class Main extends Component {
     return check;
   };
 
-  send = (e) => {
+  send = async (e) => {
     e.preventDefault();
 
     let target = e.target;
@@ -438,7 +438,7 @@ class Main extends Component {
 
     dataSend['domen'] = document.domain;
 
-    fetch('/mail', {
+    await fetch('/mail', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -447,7 +447,7 @@ class Main extends Component {
       body: JSON.stringify(dataSend)
     })
       .then(res => res.json())
-      .then(data => {
+      .then(async data => {
         target.disabled = false;
 
         if (data.success) {
@@ -456,13 +456,15 @@ class Main extends Component {
 
           // Отправка успешного запроса на стороний сервис
           //// New integration
-          fetch('https://gazoved-amo.ru/amocrm/gazoved/index.php', {
+          await fetch('https://gazoved-amo.ru/amocrm/gazoved/index.php', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8',
             },
             body: JSON.stringify(dataSend)
-          });
+          })
+            .then(res => console.log('===========RES', res))
+            .catch((err) => console.log('===========ERR', err));;
         } else if (data.error) {
           this.error(data.error);
         }

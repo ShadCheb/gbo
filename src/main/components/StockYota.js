@@ -7,7 +7,7 @@ function StockYota(props) {
         <div className="by-stock__body">
           <div className="by-stock__caption">
             <h2>
-              <span>Акция</span>
+              <span>Специальная цена</span>
               <span>от компании GAZOVED</span>
             </h2>
           </div>
