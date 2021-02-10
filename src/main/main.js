@@ -697,9 +697,7 @@ class Main extends Component {
                         <source media="(min-width: 420px)" srcSet="/img/main-1-2-p.jpg" />
                         <source media="(min-width: 300px)" srcSet="/img/main-1-2-p.jpg" />
                       </picture>
-                    </div>
-                    <div className="main__img__balon">
-                      <img src="/img/propan-balon.png" alt="Пропан" />
+                      <img className="main__img__balon" src="/img/propan-balon.png" alt="Пропан" />
                     </div>
                   </div>
                 </div>

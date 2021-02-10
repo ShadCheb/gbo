@@ -203,9 +203,9 @@
 }
 .main__img__balon {
   position: absolute;
-  top: 100px;
-  left: -25px;
-  width: 14%;
+  top: 52%;
+  left: 23%;
+  width: 11%;
 }
 
 
@@ -283,8 +283,8 @@
     bottom: auto;
   }
   .main__img__balon {
-    top: 121px;
-    left: -18px;
+    top: 54%;
+    left: 40%;
   }
 }
 
@@ -363,9 +363,9 @@
     z-index: 0;
   }
   .main__img__balon {
-    top: 200px;
-    left: -45px;
-    width: 19%;
+    top: 52%;
+    left: 37%;
+    width: 11%;
   }
   .main__text {
     width: 100%;
@@ -504,11 +504,6 @@
     margin-left: -100px;
     margin-right: -100px;
     width: 330px;
-  }
-  .main__img__balon {
-    top: 157px;
-    left: 5px;
-    width: 40%;
   }
   .main__caption-under {
     margin-left: 10px;
