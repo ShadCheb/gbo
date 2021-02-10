@@ -672,23 +672,6 @@ class Main extends Component {
                         </div>
                       ) : null
                     }
-                      <div className="main__btn-whatsapp">
-                        <div className="btn-whatsapp">
-                          <p>Узнать стоимость в WhatsApp</p>
-                          <div className="btn-whatsapp__img">
-                            <div className="circlephone" />
-                            <div className="circle-fill" />
-                            <div className="img-circle">
-                              <div className="img-circleblock">
-                                <svg>
-                                  <use xlinkHref="/img/sprite-icon.svg#icon-whatsup" />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                          <a href={`https://wa.me/?text=Хочу%20подобрать%20оптимальное%20ГБО%20на%20свой%20автомобиль`} />
-                        </div>
-                      </div>
                   </div>
                   <div className="main__img">
                     <div className="main__img__car">
