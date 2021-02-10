@@ -672,13 +672,35 @@ class Main extends Component {
                         </div>
                       ) : null
                     }
+                      <div className="main__btn-whatsapp">
+                        <div className="btn-whatsapp">
+                          <p>Узнать стоимость в WhatsApp</p>
+                          <div className="btn-whatsapp__img">
+                            <div className="circlephone" />
+                            <div className="circle-fill" />
+                            <div className="img-circle">
+                              <div className="img-circleblock">
+                                <svg>
+                                  <use xlinkHref="/img/sprite-icon.svg#icon-whatsup" />
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                          <a href={`https://wa.me/?text=Хочу%20подобрать%20оптимальное%20ГБО%20на%20свой%20автомобиль`} />
+                        </div>
+                      </div>
                   </div>
                   <div className="main__img">
-                    <picture className="lozad" data-iesrc="/img/main-1-2.jpg" data-alt="Gazoved">
-                      <source media="(min-width: 768px)" srcSet="/img/main-1-2.jpg" />
-                      <source media="(min-width: 420px)" srcSet="/img/main-1-2-p.jpg" />
-                      <source media="(min-width: 300px)" srcSet="/img/main-1-2-p.jpg" />
-                    </picture>
+                    <div className="main__img__car">
+                      <picture className="lozad" data-iesrc="/img/main-1-2.jpg" data-alt="Gazoved">
+                        <source media="(min-width: 768px)" srcSet="/img/main-1-2.jpg" />
+                        <source media="(min-width: 420px)" srcSet="/img/main-1-2-p.jpg" />
+                        <source media="(min-width: 300px)" srcSet="/img/main-1-2-p.jpg" />
+                      </picture>
+                    </div>
+                    <div className="main__img__balon">
+                      <img src="/img/propan-balon.png" alt="Пропан" />
+                    </div>
                   </div>
                 </div>
               </div>
