@@ -692,7 +692,9 @@ class Main extends Component {
             }
 
             {
-              infoCity.brief === 'cheboksary' ? <StockYota open={this.openModalRecord.bind(this)} /> : ''
+              infoCity.brief === 'cheboksary' || infoCity.brief === 'ufa'
+                ? <StockYota open={this.openModalRecord.bind(this)} />
+                : ''
             }
 
             <Benefit 
