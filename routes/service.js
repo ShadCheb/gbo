@@ -11,7 +11,8 @@ router.get('/', detaGeneral, (req, res) => {
     title: 'Услуги | Gazoved ' + data.name,
     isServices: true,
     cityList: JSON.stringify(cityList),
-    data: JSON.stringify(data)
+    data: JSON.stringify(data),
+    city: data.brief
   });
 });
 
@@ -22,7 +23,8 @@ router.get('/metan', detaGeneral, (req, res) => {
     title: 'ГБО Метан | Gazoved ' + data.name,
     isMetan: true,
     cityList: JSON.stringify(cityList),
-    data: JSON.stringify(data)
+    data: JSON.stringify(data),
+    city: data.brief
   });
 });
 
@@ -33,7 +35,8 @@ router.get('/dizel', detaGeneral, (req, res) => {
     title: 'Газодизель | Gazoved ' + data.name,
     isDizel: true,
     cityList: JSON.stringify(cityList),
-    data: JSON.stringify(data)
+    data: JSON.stringify(data),
+    city: data.brief
   });
 });
 
@@ -44,7 +47,8 @@ router.get('/registration', detaGeneral, (req, res) => {
     title: 'Регистрация ГБО | Gazoved ' + data.name,
     isRegister: true,
     cityList: JSON.stringify(cityList),
-    data: JSON.stringify(data)
+    data: JSON.stringify(data),
+    city: data.brief
   });
 });
 
@@ -55,7 +59,8 @@ router.get('/variator', detaGeneral, (req, res) => {
     title: 'Вариатор | Gazoved ' + data.name,
     isVariator: true,
     cityList: JSON.stringify(cityList),
-    data: JSON.stringify(data)
+    data: JSON.stringify(data),
+    city: data.brief
   });
 });
 
@@ -66,7 +71,8 @@ router.get('/propan', detaGeneral, (req, res) => {
     title: 'Пропан | Gazoved ' + data.name,
     isPropan: true,
     cityList: JSON.stringify(cityList),
-    data: JSON.stringify(data)
+    data: JSON.stringify(data),
+    city: data.brief
   });
 });
 

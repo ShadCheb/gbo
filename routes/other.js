@@ -14,7 +14,8 @@ router.get('/stock', detaGeneral, async (req, res) => {
     title: 'Акции | Gazoved ' + data.name,
     isStock: true,
     cityList: JSON.stringify(cityList),
-    data: JSON.stringify(data)
+    data: JSON.stringify(data),
+    city: data.brief,
   });
 });
 
@@ -25,7 +26,8 @@ router.get('/stock/friend', detaGeneral, async (req, res) => {
     title: 'Акция приведи друга | Gazoved ' + data.name,
     isStockItem: true,
     cityList: JSON.stringify(cityList),
-    data: JSON.stringify(data)
+    data: JSON.stringify(data),
+    city: data.brief,
   });
 });
 
@@ -36,7 +38,8 @@ router.get('/contact', detaGeneral, async (req, res) => {
     title: 'Контакты | Gazoved ' + data.name,
     isContact: true,
     cityList: JSON.stringify(cityList),
-    data: JSON.stringify(data)
+    data: JSON.stringify(data),
+    city: data.brief,
   });
 });
 
@@ -46,21 +49,6 @@ router.get('/work', detaGeneral, async (req, res) => {
     : 1;
   const countPage = 8;
   let {cityList, data} = res.locals.dataGeneral;
-  /* let dataPage = await CityList.findOne(
-    {
-      where: {brief: data.brief},
-      include: [
-        { model: Work, 
-          order: [[ 'id', 'DESC']],
-          offset: (page - 1) * countPage,
-          limit: countPage 
-        }
-      ]
-    }
-  )
-    .then(result => {
-      return result.get({plain:true})
-    }); */
   const dataPage = await Work.findAll({
     order: [[ 'id', 'DESC']],
     offset: (page - 1) * countPage,
@@ -74,10 +62,6 @@ router.get('/work', detaGeneral, async (req, res) => {
     countAll = res.locals.countWork;
   } else {
     await Work.count()
-      // {
-      //   where: {cityListId: data.id}
-      // }
-    // )
       .then(result => {
         countAll = result;
         res.locals.countWork = result;
@@ -94,7 +78,8 @@ router.get('/work', detaGeneral, async (req, res) => {
     title: 'Наши работы | Gazoved ' + data.name,
     isWork: true,
     cityList: JSON.stringify(cityList),
-    data: JSON.stringify(data)
+    data: JSON.stringify(data),
+    city: data.brief,
   });
 });
 
@@ -142,7 +127,8 @@ router.get('/work/:id', detaGeneral, async (req, res) => {
     title: (dataPage.nameWork || 'Без названия') + ' | Gazoved ' + data.name, // Подставить название машины
     isWorkItem: true,
     cityList: JSON.stringify(cityList),
-    data: JSON.stringify(data)
+    data: JSON.stringify(data),
+    city: data.brief,
   });
 });
 
