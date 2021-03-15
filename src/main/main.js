@@ -18,6 +18,7 @@ import ModalPriceInstallment from './components/ModalPriceInstallment';
 import Footer from './components/Footer';
 import Stock from './components/Stock';
 import StockYota from './components/StockYota';
+import StockGbo4 from './components/StockGbo4';
 import FixedBtn from './components/FixedBtn';
 
 import '../../public/style/antd.css';
@@ -692,8 +693,14 @@ class Main extends Component {
             }
 
             {
-              infoCity.brief === 'cheboksary' || infoCity.brief === 'ufa'
+              infoCity.brief === 'ufa'
                 ? <StockYota open={this.openModalRecord.bind(this)} />
+                : ''
+            }
+
+            {
+              infoCity.brief === 'cheboksary'
+                ? <StockGbo4 open={this.openModalRecord.bind(this)} />
                 : ''
             }
 
