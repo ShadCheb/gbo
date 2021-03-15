@@ -71,7 +71,8 @@ router.get('/', detaGeneral,  async (req, res) => {
       isHome: true,
       cityList: JSON.stringify(cityList),
       data: JSON.stringify(data),
-      subdomains: subdomains && JSON.stringify(subdomains)
+      subdomains: subdomains && JSON.stringify(subdomains),
+      city: data.brief
     });
   } catch (e) {
     console.log(e);
