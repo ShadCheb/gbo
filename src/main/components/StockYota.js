@@ -13,11 +13,11 @@ function StockYota(props) {
           </div>
           <div className="by-stock__text">
             <div>
-              <p className="by-stock__yota">YOTA<strong>RED</strong></p>
+              <p className="by-stock__name">ГБО 4 поколения</p>
               <p className="by-stock__description">самое простое и доступное газобалонное оборудование</p>
               <div className="by-stock__row">
                 <div className="by-stock__col">
-                  <p className="by-stock__price">23 800 рублей<strong>19 800</strong></p>
+                  <p className="by-stock__price">19 800 рублей</p>
                 </div>
                 <div className="by-stock__col">
                   <ul className="by-stock__list">
@@ -29,10 +29,10 @@ function StockYota(props) {
               </div>
               <div className="by-stock__btn">
                 <button className="btn-1 btn--white" 
-                  data-type="Заказать установку ГБО по акции"
-                  aria-label="Заказать установку"
+                  data-type="Узнать подробнее про ГБО по акции"
+                  aria-label="Узнать подробнее"
                   onClick={props.open}
-                >Заказать установку</button>
+                >Узнать подробнее</button>
               </div>
             </div>
             <p className="by-stock__bcg">YOUTA RED</p>
