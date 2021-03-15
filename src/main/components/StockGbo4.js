@@ -43,6 +43,6 @@ function StockGbo4(props) {
   );
 }
 
-export default StockYota;
+export default StockGbo4;
 
 
