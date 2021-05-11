@@ -698,11 +698,11 @@ class Main extends Component {
                 : ''
             }
 
-            {
+            {/* {
               infoCity.brief === 'cheboksary'
                 ? <StockGbo4 open={this.openModalRecord.bind(this)} />
                 : ''
-            }
+            } */}
 
             <Benefit 
               data={this.state.benefit}
