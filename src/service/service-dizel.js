@@ -187,7 +187,7 @@ class Dizel extends Component {
             <div className="sd-save__body">
               <div className="caption2__container">
                 <h2 className="caption2__caption">Как экономить 
-                  <strong>1&nbsp;000&nbsp;000 рублей в год</strong> на топливе</h2>
+                  <strong>600&nbsp;000 рублей в год</strong> на топливе</h2>
               </div>
               <div className="sd-save__list">
                 <div className="sd-save__list__item">
@@ -203,8 +203,8 @@ class Dizel extends Component {
                   <div className="sd-save__list__caption">
                     <h3 className="caption__h2">Расходы на топливо газодизеля</h3>
                   </div>
-                  <p className="sd-save__description">Совмещение топлива метан и дизель: (14л * 14руб. + 
-                    21л * 45руб) * 5 * 350дней = <strong>1&nbsp;996&nbsp;750&nbsp;руб/год</strong></p>
+                  <p className="sd-save__description">Совмещение топлива метан и дизель: (14л * 19.5руб. + 
+                    21л * 48руб) * 5 * 320дней = <strong>2&nbsp;049&nbsp;600&nbsp;руб</strong></p>
                 </div>
                 <div className="sd-save__list__item">
                   <span>3</span>
@@ -213,18 +213,18 @@ class Dizel extends Component {
                   </div>
                   <p className="sd-save__description">Расходы на дизельное топливо 
                     <strong>500&nbsp;км/день</strong> * 
-                    350 дней в году: 35л * 45руб * 5 * 350дней = 
-                    <strong>2&nbsp;756&nbsp;250&nbsp;руб</strong></p>
+                    320 дней: 35л * 48руб * 5 * 320дней = 
+                    <strong>2&nbsp;688&nbsp;000&nbsp;руб</strong></p>
                 </div>
                 <div className="sd-save__list__item">
                   <span>4</span>
                   <div className="sd-save__list__caption">
                     <h3 className="caption__h2">Экономия на топливе за 1 год</h3>
                   </div>
-                  <p className="sd-save__description">2&nbsp;756&nbsp;250&nbsp;руб. - 
-                    1&nbsp;996&nbsp;750&nbsp;руб. = <strong>759&nbsp;500&nbsp;руб/год </strong> 
+                  <p className="sd-save__description">2&nbsp;688&nbsp;000&nbsp;руб. - 
+                    2&nbsp;049&nbsp;600&nbsp;руб. = <strong>638&nbsp;400&nbsp;руб/год </strong>
                     на 1 машине автопарка</p>
-                </div>                
+                </div>
               </div>
             </div>
           </div>
@@ -498,6 +498,8 @@ class Dizel extends Component {
           </div>
         </section>
 
+        {/*
+        Скрыть наши работы
         <section className="sd-job">
           <div className="container">
             <div className="sd-conclusion__bcg bcg--1"></div>
@@ -531,7 +533,7 @@ class Dizel extends Component {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section className="sd-conclusion">
           <div className="sd-conclusion__bcg"></div>
@@ -545,8 +547,8 @@ class Dizel extends Component {
                   <h2 className="sd-conclusion__caption">Таким образом, <strong>модификация</strong> дизельного 
                     двигателя в газодизель <strong>позволяет одновременно решить следующие задачи:</strong></h2>
                   <ul className="text__list">
-                    <li>Снизить расходы <strong>на 10-30%</strong></li>
-                    <li>Увеличить мощность и крутящий момент <strong>на 20-30%</strong></li>
+                    <li>Снизить расходы <strong>на 20-30%</strong></li>
+                    <li>Увеличить мощность и крутящий момент <strong>на 15%</strong></li>
                     <li>Увеличить <strong>срок службы</strong> элементов системы подачи 
                       топлива (прежде всего систем Common Rail) и ресурс двигателя в целом</li>
                     <li>Снизить содержание СО, СН и твердых частиц в выхлопе</li>
